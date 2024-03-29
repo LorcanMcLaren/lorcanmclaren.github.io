@@ -18,7 +18,7 @@ My tool provides the following benefits at **zero** cost:
 - Low-latency, reproducible workflows 
 - Multiple common annotation types, including binary, dropdown or Likert scale
 - Fully customisable, with functionality to develop your own annotation schema and instructions
-- No more messy codebooks that require annotators to switch between windows
+- No more messy codebooks that force annotators to switch windows
 - CSV input and output for interoperability
 
 

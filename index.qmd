@@ -38,7 +38,7 @@ I am a PhD researcher in computational social science at the [UCD School of Poli
 
 My research examines political communication using text-as-data approaches, with a focus on the climate crisis. 
 
-Previously, I completed a BA in Computer Science, Linguistics and French at Trinity College Dublin and an MSc in Politics and Data Science at University College Dublin. I also worked in industry for two years. 
+Previously, I completed a BA in Computer Science, Linguistics and French at Trinity College Dublin and an MSc in Politics and Data Science at University College Dublin. I also worked in industry for two years as a data analyst. 
 
 ### Research
 <!-- #### Working Papers 

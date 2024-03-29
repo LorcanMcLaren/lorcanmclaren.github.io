@@ -28,4 +28,4 @@ coauthors:
 
 ### Abstract
 
-This paper studies an interesting research question. 
+We describe a heuristic-based approach to determining gaze allocation automatically in a multi-modal task oriented dialogue corpus. We present the development of the system and the evaluation of its performance and discuss the findings, including the shortcomings and the perspectives of the implemented approach. 
