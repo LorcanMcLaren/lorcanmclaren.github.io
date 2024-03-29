@@ -30,6 +30,7 @@ listing: # this determines different lists with respective options. These are ac
   <span class="prof-icon">[{{< iconify ant-design linkedin-outline >}}](https://www.linkedin.com/in/lorcanmclaren/)</span>
   <span class="prof-icon">[{{< iconify mingcute github-line >}}](https://github.com/LorcanMcLaren)</span>
   <span class="prof-icon">[{{< iconify academicons google-scholar >}}](https://scholar.google.com/citations?user=vnNon38AAAAJ&hl=en&oi=ao)</span>
+  <span class="prof-icon">[{{< iconify academicons semantic-scholar >}}](https://www.semanticscholar.org/author/Lorcan-McLaren/2008212827)</span>
   <span class="prof-icon">[{{<iconify material-symbols mail-outline >}}](mailto:lorcan.mclaren@ucdconnect.ie)</span>
 </div>
 

@@ -7,6 +7,10 @@ project:
 website:
   title: "Lorcan McLaren" # website title, this is what's displayed on the top
   favicon: "images/icon.png"
+  twitter-card: 
+    creator: "@LorcanMcLaren"
+  open-graph: true
+  site-url: https://lorcanmclaren.com
   navbar: # Options for website navigation (including bar). For alternatives see https://quarto.org/docs/websites/website-navigation.html
     background: black
     right: # links displayed in navigation bar
