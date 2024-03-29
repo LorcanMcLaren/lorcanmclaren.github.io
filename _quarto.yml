@@ -2,16 +2,30 @@ project:
   type: website
 
 website:
-  title: "academic-website"
+  title: "Lorcan McLaren"
   navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+    background: black
+    right:
+      - text: "Welcome"
+        href: "#welcome"
+      - text: "Research Interests"
+        href: "#research-interests"
+      - text: "Publications"
+        href: "#publications"
+      - text: "Projects"
+        href: "#projects"
+      - text: "Contact"
+        href: "#contact"
+  search: false
+  back-to-top-navigation: true
+  page-footer: © Lorcan McLaren
 
 format:
   html:
-    theme: cosmo
+    theme: 
+      - darkly
+      - custom.scss
+    backgroundcolor: black
     css: styles.css
     toc: true
 

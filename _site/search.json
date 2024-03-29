@@ -1,16 +1,51 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "academic-website",
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "In the heart of the 21st century, the digital age has blossomed, offering unparalleled opportunities for innovation and connection. Yet, with these opportunities come significant challenges that spark debates among technologists, ethicists, and the public at large.\n\n\nAs we integrate artificial intelligence (AI) into various sectors, ethical questions surface. How do we ensure AI respects privacy and autonomy? The exploration of AI ethics is crucial as we tread into a future where machines make decisions previously reserved for humans.\n\n\n\nBlockchain technology, known for its role in cryptocurrencies and secure transactions, also carries a hefty environmental footprint due to its energy-intensive processes. This section delves into the sustainability concerns surrounding blockchain and potential green alternatives.\n\n\n\nThe digital realm is fraught with cybersecurity threats and privacy concerns. This segment explores the ongoing battle between safeguarding personal information and the ever-evolving tactics of cybercriminals.\n\n\n\nHere, personal anecdotes highlight how digital technologies have reshaped everyday life, from the way we work to how we connect with loved ones. It’s a reflection on the profound, often personal impact of digital innovation.\n\n\n\nThe concluding section emphasizes the importance of mindful innovation. It advocates for a balanced approach that considers the ethical, environmental, and social implications of technology, urging for a collaborative effort to forge a path that benefits humanity as a whole.\n\nThis structure offers a comprehensive overview of the complexities and considerations in the digital age, weaving in professional insights with personal reflections to engage readers."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "blog.html#ethical-implications-of-artificial-intelligence",
+    "href": "blog.html#ethical-implications-of-artificial-intelligence",
+    "title": "Blog",
     "section": "",
-    "text": "About this site"
+    "text": "As we integrate artificial intelligence (AI) into various sectors, ethical questions surface. How do we ensure AI respects privacy and autonomy? The exploration of AI ethics is crucial as we tread into a future where machines make decisions previously reserved for humans."
+  },
+  {
+    "objectID": "blog.html#the-environmental-footprint-of-blockchain",
+    "href": "blog.html#the-environmental-footprint-of-blockchain",
+    "title": "Blog",
+    "section": "",
+    "text": "Blockchain technology, known for its role in cryptocurrencies and secure transactions, also carries a hefty environmental footprint due to its energy-intensive processes. This section delves into the sustainability concerns surrounding blockchain and potential green alternatives."
+  },
+  {
+    "objectID": "blog.html#navigating-cybersecurity-and-data-privacy",
+    "href": "blog.html#navigating-cybersecurity-and-data-privacy",
+    "title": "Blog",
+    "section": "",
+    "text": "The digital realm is fraught with cybersecurity threats and privacy concerns. This segment explores the ongoing battle between safeguarding personal information and the ever-evolving tactics of cybercriminals."
+  },
+  {
+    "objectID": "blog.html#personal-reflections-the-digital-transformation",
+    "href": "blog.html#personal-reflections-the-digital-transformation",
+    "title": "Blog",
+    "section": "",
+    "text": "Here, personal anecdotes highlight how digital technologies have reshaped everyday life, from the way we work to how we connect with loved ones. It’s a reflection on the profound, often personal impact of digital innovation."
+  },
+  {
+    "objectID": "blog.html#towards-a-sustainable-digital-future",
+    "href": "blog.html#towards-a-sustainable-digital-future",
+    "title": "Blog",
+    "section": "",
+    "text": "The concluding section emphasizes the importance of mindful innovation. It advocates for a balanced approach that considers the ethical, environmental, and social implications of technology, urging for a collaborative effort to forge a path that benefits humanity as a whole.\n\nThis structure offers a comprehensive overview of the complexities and considerations in the digital age, weaving in professional insights with personal reflections to engage readers."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Lorcan McLaren",
+    "section": "",
+    "text": "Welcome\nWelcome to my academic portal, where my journey through the intricate world of computational social science unfolds. As a PhD student, I delve into the dynamics of political communication, particularly through the lens of climate change discourse, leveraging text-as-data methodologies.\n\n\nResearch Interests\nMy research interests are centered around understanding the narratives in political communication, with a special emphasis on climate change. Utilizing computational tools, I analyze large datasets of textual information to uncover patterns, sentiments, and framing techniques used in political discourse related to environmental issues.\n\n\nPublications\n\n“Decoding Political Sentiment in Climate Change Discourse: A Text-as-Data Approach,” Journal of Computational Social Science, 2023.\n“Framing the Future: The Narrative Battle in Climate Policy Debates,” Environmental Communication Quarterly, 2024.\n\n\n\nProjects\n\nClimateSpeak Analysis: An extensive project that uses natural language processing to examine the rhetoric used by policymakers in climate change debates, aiming to identify key influencers and sentiment trends.\nEcoNarratives: A collaborative effort focusing on the portrayal of climate change in media across different political spectrums, assessing the impact on public perception and policy engagement.\n\n\n\nContact\nFor inquiries, collaborations, or discussions about my work, feel free to reach me at: climate_comms_phd@university.edu.\n\n\n\n\n Back to top"
   }
 ]
