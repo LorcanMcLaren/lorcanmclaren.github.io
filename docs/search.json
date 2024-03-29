@@ -1,52 +1,10 @@
 [
   {
-    "objectID": "wip/project3.html",
-    "href": "wip/project3.html",
-    "title": "New Project",
+    "objectID": "pub/mclaren_gaze_2020.html",
+    "href": "pub/mclaren_gaze_2020.html",
+    "title": "Gaze, dominance and dialogue role in the MULTISIMO corpus",
     "section": "",
-    "text": "Abstract\nWe will do interesting research."
-  },
-  {
-    "objectID": "pub/mclaren_heuristic_2020.html",
-    "href": "pub/mclaren_heuristic_2020.html",
-    "title": "A heuristic method for automatic gaze detection in constrained multi-modal dialogue corpora",
-    "section": "",
-    "text": "Abstract\nThis paper studies an interesting research question."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Lorcan McLaren",
-    "section": "",
-    "text": "Lorcan McLaren PhD researcher University College Dublin\n   \n\nI am a PhD student affiliated with the Connected_Politics Lab at the UCD School of Politics and International Relations. My research focuses on political communication . Currently, I am\n\nResearch\n\n\nPublications\n\n\n\n\n    \n    \n        Gaze, dominance and dialogue role in the MULTISIMO corpus\n    \n        \n             Joint with \n             \n            \n                Maria Koutsombogera\n            \n            \n                and Carl Vogel.\n            \n        \n    \n    Proceedings of the 11th IEEE International Conference on Cognitive Infocommunications (CogInfoCom), 2020.\n     \n         \n             \n        \n    \n    \n     \n         \n             \n        \n    \n\n    \n    \n    \n    \n    \n    \n    \n    \n     \n    \n    \n     \n\n    \n\n    \n    \n        A heuristic method for automatic gaze detection in constrained multi-modal dialogue corpora\n    \n        \n             Joint with \n             \n            \n                Maria Koutsombogera\n            \n            \n                and Carl Vogel.\n            \n        \n    \n    Proceedings of the 11th IEEE International Conference on Cognitive Infocommunications (CogInfoCom), 2020.\n     \n         \n             \n        \n    \n    \n     \n         \n             \n        \n    \n\n    \n    \n     \n         \n             \n        \n    \n    \n    \n    \n    \n    \n     \n    \n    \n     \n\n    \n\n\nNo matching items\n\n\n\n\nWork in Progress\n\n\n    \n        \n        New Project\n        \n    \n    \n    \n    \n    \n    \n     \n        \n    \n     \n\n    \n\n\nNo matching items\n\n\n\n\n\nTeaching\n\nCurrent\n\nCourse 1\nCourse 2\n\n\n\nPast\n\nCourse 3\nCourse 4\n\n\n\n\nContact\nFor inquiries, collaborations, or discussions about my work, feel free to reach me at: climate_comms_phd@university.edu."
-  },
-  {
-    "objectID": "code.html",
-    "href": "code.html",
-    "title": "Code",
-    "section": "",
-    "text": "example-make-workflow\n        \n\n        \n    \n    \n    \n\n    \n\n\nNo matching items"
-  },
-  {
-    "objectID": "teaching.html",
-    "href": "teaching.html",
-    "title": "Teaching",
-    "section": "",
-    "text": "Current\n\nCourse 1\nCourse 2\n\n\n\nPast\n\nCourse 3\nCourse 4"
-  },
-  {
-    "objectID": "research.html",
-    "href": "research.html",
-    "title": "Research",
-    "section": "",
-    "text": "Publications\n\n\n\n\n    \n    \n        Gaze, dominance and dialogue role in the MULTISIMO corpus\n    \n        \n             Joint with \n             \n            \n                Maria Koutsombogera\n            \n            \n                and Carl Vogel.\n            \n        \n    \n    Proceedings of the 11th IEEE International Conference on Cognitive Infocommunications (CogInfoCom), 2020.\n     \n         \n             \n        \n    \n    \n     \n         \n             \n        \n    \n\n    \n    \n    \n    \n    \n    \n    \n    \n     \n    \n    \n     \n\n    \n\n    \n    \n        A heuristic method for automatic gaze detection in constrained multi-modal dialogue corpora\n    \n        \n             Joint with \n             \n            \n                Maria Koutsombogera\n            \n            \n                and Carl Vogel.\n            \n        \n    \n    Proceedings of the 11th IEEE International Conference on Cognitive Infocommunications (CogInfoCom), 2020.\n     \n         \n             \n        \n    \n    \n     \n         \n             \n        \n    \n\n    \n    \n     \n         \n             \n        \n    \n    \n    \n    \n    \n    \n     \n    \n    \n     \n\n    \n\n\nNo matching items\n\n\n\n\nWork in Progress\n\n\n    \n        \n        New Project\n        \n    \n    \n    \n    \n    \n    \n     \n        \n    \n     \n\n    \n\n\nNo matching items"
-  },
-  {
-    "objectID": "code/example_make_workflow.html",
-    "href": "code/example_make_workflow.html",
-    "title": "example-make-workflow",
-    "section": "",
-    "text": "Github repository providing a basic example for a Gnu make pipeline to implement a reproducible research workflow."
+    "text": "Abstract\nAnalysis of human interactions benefits from understanding patterns of gaze in dialogue. Using a multi-modal task oriented dialogue corpus, we evaluate relations between gaze behaviours, conversational dominance and dialogue role. Dominant players spend more time looking at their co-player than their less dominant fellows; the facilitator spends more time gazing at the dominant player than at the less dominant; dominant players spend longer averting their gaze than their less dominant fellows. When aligned with dialogue roles, gaze behaviour differences between players are demonstrated when occupying the role of speaker but not of listener. Less dominant speakers gaze longer at a facilitator, while effects on averted gaze and co-player directed gaze remain present for dominant speakers but not for dominant listeners. Finally, where dominance is not balanced among players, mutual gaze involving players only is less than mutual gaze involving facilitators."
   },
   {
     "objectID": "wp/project2.html",
@@ -56,10 +14,45 @@
     "text": "Abstract\nWe study an interesting research question."
   },
   {
-    "objectID": "pub/mclaren_gaze_2020.html",
-    "href": "pub/mclaren_gaze_2020.html",
-    "title": "Gaze, dominance and dialogue role in the MULTISIMO corpus",
+    "objectID": "code/example_make_workflow.html",
+    "href": "code/example_make_workflow.html",
+    "title": "example-make-workflow",
     "section": "",
-    "text": "Abstract\nAnalysis of human interactions benefits from understanding patterns of gaze in dialogue. Using a multi-modal task oriented dialogue corpus, we evaluate relations between gaze behaviours, conversational dominance and dialogue role. Dominant players spend more time looking at their co-player than their less dominant fellows; the facilitator spends more time gazing at the dominant player than at the less dominant; dominant players spend longer averting their gaze than their less dominant fellows. When aligned with dialogue roles, gaze behaviour differences between players are demonstrated when occupying the role of speaker but not of listener. Less dominant speakers gaze longer at a facilitator, while effects on averted gaze and co-player directed gaze remain present for dominant speakers but not for dominant listeners. Finally, where dominance is not balanced among players, mutual gaze involving players only is less than mutual gaze involving facilitators."
+    "text": "Github repository providing a basic example for a Gnu make pipeline to implement a reproducible research workflow."
+  },
+  {
+    "objectID": "research.html",
+    "href": "research.html",
+    "title": "Research",
+    "section": "",
+    "text": "Publications\n\n\n\n\n    \n    \n        Gaze, dominance and dialogue role in the MULTISIMO corpus\n    \n        \n             Joint with \n             \n            \n                Maria Koutsombogera\n            \n            \n                and Carl Vogel.\n            \n        \n    \n    Proceedings of the 11th IEEE International Conference on Cognitive Infocommunications (CogInfoCom), 2020.\n     \n         \n             \n        \n    \n    \n     \n         \n             \n        \n    \n\n    \n    \n    \n    \n    \n    \n    \n    \n     \n    \n    \n     \n\n    \n\n    \n    \n        A heuristic method for automatic gaze detection in constrained multi-modal dialogue corpora\n    \n        \n             Joint with \n             \n            \n                Maria Koutsombogera\n            \n            \n                and Carl Vogel.\n            \n        \n    \n    Proceedings of the 11th IEEE International Conference on Cognitive Infocommunications (CogInfoCom), 2020.\n     \n         \n             \n        \n    \n    \n     \n         \n             \n        \n    \n\n    \n    \n     \n         \n             \n        \n    \n    \n    \n    \n    \n    \n     \n    \n    \n     \n\n    \n\n\nNo matching items\n\n\n\n\nWork in Progress\n\n\n    \n        \n        The Green Pill Project 🧪\n        \n    \n    \n    \n    \n    \n    \n     \n        \n    \n     \n\n    \n\n    \n        \n        Text Annotation Tooling\n        \n    \n    \n    \n    \n    \n    \n     \n        \n    \n     \n\n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "teaching.html",
+    "href": "teaching.html",
+    "title": "Teaching",
+    "section": "",
+    "text": "Current\n\nCourse 1\nCourse 2\n\n\n\nPast\n\nCourse 3\nCourse 4"
+  },
+  {
+    "objectID": "code.html",
+    "href": "code.html",
+    "title": "Code",
+    "section": "",
+    "text": "example-make-workflow\n        \n\n        \n    \n    \n    \n\n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Lorcan McLaren",
+    "section": "",
+    "text": "Lorcan McLaren PhD Researcher University College Dublin\n   \n\nI am a PhD researcher in computational social science at the UCD School of Politics and International Relations. I am a member of the Connected_Politics Lab, and advised by James P. Cross.\nMy research examines political communication using text-as-data approaches, with a focus on the climate crisis.\nPreviously, I completed a BA in Computer Science, Linguistics and French at Trinity College Dublin and an MSc in Politics and Data Science at University College Dublin. I also worked in industry for two years.\n\nResearch\n\n\nPublications\n\n\n\n\n    \n    \n        A heuristic method for automatic gaze detection in constrained multi-modal dialogue corpora\n    \n        \n             Joint with \n             \n            \n                Maria Koutsombogera\n            \n            \n                and Carl Vogel.\n            \n        \n    \n    Proceedings of the 11th IEEE International Conference on Cognitive Infocommunications (CogInfoCom), 2020.\n     \n         \n             \n        \n    \n    \n     \n         \n             \n        \n    \n\n    \n    \n     \n         \n             \n        \n    \n    \n    \n    \n    \n    \n     \n    \n    \n     \n\n    \n\n    \n    \n        Gaze, dominance and dialogue role in the MULTISIMO corpus\n    \n        \n             Joint with \n             \n            \n                Maria Koutsombogera\n            \n            \n                and Carl Vogel.\n            \n        \n    \n    Proceedings of the 11th IEEE International Conference on Cognitive Infocommunications (CogInfoCom), 2020.\n     \n         \n             \n        \n    \n    \n     \n         \n             \n        \n    \n\n    \n    \n    \n    \n    \n    \n    \n    \n     \n    \n    \n     \n\n    \n\n\nNo matching items\n\n\n\n\nCurrent Work\n\n\n    \n        \n        Text Annotation Tooling\n        \n    \n    \n    \n    \n    \n    \n     \n        \n    \n     \n\n    \n\n    \n        \n        The Green Pill Project 🧪\n        \n    \n    \n    \n    \n    \n    \n     \n        \n    \n     \n\n    \n\n\nNo matching items\n\n\n\n\n\nTeaching\n\nTutor\n\nResearch Methods in Political Science, Undergraduate (Spring 2024)\n\n\n\nTeaching Assistant\n\nIntroduction to EU Politics, Undergraduate (Autumn 2023)\n\n\n\n\nContact\nFor inquiries, collaboration opportunities, or to discuss my work, feel free to reach out to me via email."
+  },
+  {
+    "objectID": "pub/mclaren_heuristic_2020.html",
+    "href": "pub/mclaren_heuristic_2020.html",
+    "title": "A heuristic method for automatic gaze detection in constrained multi-modal dialogue corpora",
+    "section": "",
+    "text": "Abstract\nThis paper studies an interesting research question."
   }
 ]

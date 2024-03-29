@@ -1,10 +1,11 @@
 [
   {
-    "listing": "/index.html",
+    "listing": "/research.html",
     "items": [
       "/pub/mclaren_gaze_2020.html",
       "/pub/mclaren_heuristic_2020.html",
-      "/wip/project3.html"
+      "/wip/green-pill.html",
+      "/wip/text-annotator.html"
     ]
   },
   {
@@ -14,11 +15,12 @@
     ]
   },
   {
-    "listing": "/research.html",
+    "listing": "/index.html",
     "items": [
-      "/pub/mclaren_gaze_2020.html",
       "/pub/mclaren_heuristic_2020.html",
-      "/wip/project3.html"
+      "/pub/mclaren_gaze_2020.html",
+      "/wip/text-annotator.html",
+      "/wip/green-pill.html"
     ]
   }
 ]

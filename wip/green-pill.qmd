@@ -1,5 +1,5 @@
 ---
-title: "New Project"
+title: "The Green Pill Project 🧪"
 date: "2024"
 date-format: "YYYY"
 
@@ -9,8 +9,3 @@ format:
     template-partials: 
       - "../partials/title-block.html"
 ---
-
-
-### Abstract 
-
-We will do interesting research. 

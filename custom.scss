@@ -1,4 +1,9 @@
 /*-- scss:defaults --*/
+$font-family-sans-serif: "Raleway", sans-serif;
+
+.navbar {
+    font-family: "Open Sans", sans-serif !important; /* Replace 'YourFontFamily' with your chosen font */
+}
 $primary: #008000;
 $link-color: #008000;
 

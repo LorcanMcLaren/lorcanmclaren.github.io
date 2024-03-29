@@ -7,11 +7,15 @@ listing: # this determines different lists with respective options. These are ac
   #   sort: "date desc" # how to sort the contents.
   #   template: ejs/wp.ejs  # how to display contents. Here, use the customized wp.ejs in the ejs folder.
   - id: pub
-    sort: "date desc"
+    sort: 
+      - "date desc"
+      - "title"
     contents: "pub/*.qmd"
     template: ejs/pub.ejs
   - id: wip
-    sort: "date desc"
+    sort: 
+      - "date desc"
+      - "title"
     contents: "wip/*.qmd"
     template: ejs/wp.ejs
 
@@ -20,17 +24,21 @@ listing: # this determines different lists with respective options. These are ac
 ![](images/profile.jpg){.round-image .centre width=250 height=250}
 <div style="text-align: center;">
   <b>Lorcan McLaren</b><br>
-  PhD researcher<br>
+  PhD Researcher<br>
   [University College Dublin](https://www.ucd.ie/)
 
-  <span class="prof-icon">[{{< iconify mdi linkedin >}}](https://www.linkedin.com/in/lorcanmclaren/)</span>
-  <span class="prof-icon">[{{< iconify mdi github >}}](https://github.com/LorcanMcLaren)</span>
+  <span class="prof-icon">[{{< iconify ant-design linkedin-outline >}}](https://www.linkedin.com/in/lorcanmclaren/)</span>
+  <span class="prof-icon">[{{< iconify mingcute github-line >}}](https://github.com/LorcanMcLaren)</span>
   <span class="prof-icon">[{{< iconify academicons google-scholar >}}](https://scholar.google.com/citations?user=vnNon38AAAAJ&hl=en&oi=ao)</span>
-  <span class="prof-icon">[{{<iconify academicons google-scholar >}}](https://scholar.google.com/citations?user=vnNon38AAAAJ&hl=en&oi=ao)</span>
+  <span class="prof-icon">[{{<iconify material-symbols mail-outline >}}](mailto:lorcan.mclaren@ucdconnect.ie)</span>
 </div>
 
 
-I am a PhD student affiliated with the Connected_Politics Lab at the UCD School of Politics and International Relations. My research focuses on political communication . Currently, I am 
+I am a PhD researcher in computational social science at the [UCD School of Politics and International Relations](https://www.ucd.ie/spire/). I am a member of the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/), and advised by [James P. Cross](https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&hl=en&oi=ao). 
+
+My research examines political communication using text-as-data approaches, with a focus on the climate crisis. 
+
+Previously, I completed a BA in Computer Science, Linguistics and French at Trinity College Dublin and an MSc in Politics and Data Science at University College Dublin. I also worked in industry for two years. 
 
 ### Research
 <!-- #### Working Papers 
@@ -43,22 +51,18 @@ I am a PhD student affiliated with the Connected_Politics Lab at the UCD School 
 :::{#pub}
 :::
 
-#### Work in Progress 
+#### Current Work
 
 :::{#wip}
 :::
 
 ### Teaching
-#### Current
+#### Tutor
+- Research Methods in Political Science, Undergraduate (Spring 2024)
 
-- Course 1 
-- Course 2 
-
-#### Past 
-
-- Course 3 
-- Course 4 
+#### Teaching Assistant
+- Introduction to EU Politics, Undergraduate (Autumn 2023)
 
 ### Contact
 
-For inquiries, collaborations, or discussions about my work, feel free to reach me at: climate_comms_phd\@university.edu.
+For inquiries, collaboration opportunities, or to discuss my work, feel free to reach out to me via [email](mailto:lorcan.mclaren@ucdconnect.ie).

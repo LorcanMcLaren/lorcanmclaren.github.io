@@ -1,0 +1,11 @@
+---
+title: "Text Annotation Tooling"
+date: "2024"
+date-format: "YYYY"
+
+format: 
+  html:
+    page-layout: article
+    template-partials: 
+      - "../partials/title-block.html"
+---
