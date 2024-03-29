@@ -1,0 +1,31 @@
+---
+title: "A heuristic method for automatic gaze detection in constrained multi-modal dialogue corpora" 
+date: "01-01-2020"
+date-format: "YYYY" # only display year 
+# Below add respective buttons to the list in the research page. To remove buttons that are not needed, just remove the respective link here. 
+publink: "https://ieeexplore.ieee.org/abstract/document/9237883" # "Paper" button 
+openlink: "http://www.tara.tcd.ie/bitstream/handle/2262/94040/28.pdf"
+wplink: ""  # "Working Paper" button
+codelink: "https://github.com/LorcanMcLaren/gaze-direction-detection" # "Code" button
+videolink: "" # "Video" button
+# Publication information, which appears . 
+journ: "Proceedings of the 11th IEEE International Conference on Cognitive Infocommunications (CogInfoCom)" 
+issue: ""
+# Link to the image that will appear in the research list and on the project page. If no image should appear, just remove the link here. 
+# image: "../images/project1.png"
+format: 
+  html:
+    page-layout: article
+    template-partials: 
+      - "../partials/title-block.html" # custom HTML partial that determines how the title block is displayed (with image, author and journal information). 
+# Coauthor information that will be displayed on the research list and on the project page. 
+coauthors:
+  - name: "Maria Koutsombogera"
+    link: "https://www.tcd.ie/research/profiles/?profile=koutsomm" # add link to co-author's website here. If no link should appear, just remove the link here.
+  - name: "Carl Vogel"
+    link: "https://www.tcd.ie/research/profiles/?profile=vogel"
+---
+
+### Abstract
+
+This paper studies an interesting research question. 

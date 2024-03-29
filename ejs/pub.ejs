@@ -1,0 +1,80 @@
+```{=html}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<% for (const item of items) { %>
+    <div class="list grid" style="column-gap: 0px;">
+    <div class="g-col-12 g-col-lg-8 g-col-md-9 g-col-sm-9">
+        <b><a href="<%- item.path %>"><%= item.title %></a></b><br/>
+    <% if (item.coauthors) { %>
+        <% if (item.coauthors.length == 1) { %>
+            Joint with <a href="<%- item.coauthors[0].link %>"><%= item.coauthors[0].name %></a>.<br/>
+        <% } else { %>
+             Joint with 
+             <% for (const coauthor of item.coauthors.slice(0, -2)) { %>
+                <% if (coauthor.link) { %>
+                    <a href="<%- coauthor.link %>"><%= coauthor.name %></a>,
+                <% } else { %>
+                    <%= coauthor.name %>,
+                <% } %>
+            <% } %>
+            <% if (item.coauthors[item.coauthors.length - 2].link) { %>
+                <a href="<%- item.coauthors[item.coauthors.length - 2].link %>"><%= item.coauthors[item.coauthors.length - 2].name %></a>
+            <% } else { %>
+                <%= item.coauthors[item.coauthors.length - 2].name %>
+            <% } %>
+            <% if (item.coauthors[item.coauthors.length - 1].link) { %>
+                and <a href="<%- item.coauthors[item.coauthors.length - 1].link %>"><%= item.coauthors[item.coauthors.length - 1].name %></a>.<br/>
+            <% } else { %>
+                and <%= item.coauthors[item.coauthors.length - 1].name %>.<br/>
+            <% } %>
+        <% } %>
+    <% } %>
+    <em><%= item.journ %></em>, <%= new Date(item.date).getFullYear() %><% if (item.issue) { %>, <%= item.issue %><% } %>.<br/>
+    <% if (item.publink) { %> 
+        <a href="<%- item.publink %>"> 
+            <i class="ai ai-archive"></i> <!-- Book icon for publink -->
+        </a>
+    <% } %>
+    
+    <% if (item.openlink) { %> 
+        <a href="<%- item.openlink %>"> 
+            <i class="ai ai-open-access"></i> 
+        </a>
+    <% } %>
+
+    <% if (item.videolink) { %> 
+        <a href="<%- item.videolink %>"> 
+            <i class="fas fa-video"></i> <!-- Camera icon for videolink -->
+        </a>
+    <% } %>
+    
+    <% if (item.codelink) { %> 
+        <a href="<%- item.codelink %>"> 
+            <i class="fa-solid fa-code-branch"></i> <!-- Code icon for codelink -->
+        </a>
+    <% } %>
+    
+    <% if (item.slideslink) { %> 
+        <a href="<%- item.slideslink %>"> 
+            <i class="fas fa-file-powerpoint"></i> <!-- Slides icon for slideslink -->
+        </a>
+    <% } %>
+    
+    <% if (item.wplink) { %> 
+        <a href="<%- item.wplink %>"> 
+            <i class="fas fa-scroll"></i> <!-- Working paper icon for wplink -->
+        </a>
+    <% } %>
+    </div>
+    <div class="image_list g-col-8 g-col-lg-4 g-col-md-3 g-col-sm-3"> 
+    <% if (item.image) { %>
+            <a href="<%- item.path %>">
+                <img src="<%- item.image %>" alt="image" width="100%">
+            </a>
+    <% } %>
+    </div>
+    <br> 
+
+    </div>
+<% } %>
+```

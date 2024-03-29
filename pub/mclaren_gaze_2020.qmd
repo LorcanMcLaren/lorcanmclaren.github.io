@@ -1,0 +1,31 @@
+---
+title: "Gaze, dominance and dialogue role in the MULTISIMO corpus" 
+date: "01-01-2020"
+date-format: "YYYY" # only display year 
+# Below add respective buttons to the list in the research page. To remove buttons that are not needed, just remove the respective link here. 
+publink: "https://ieeexplore.ieee.org/abstract/document/9237833" # "Paper" button
+openlink: "http://www.tara.tcd.ie/bitstream/handle/2262/94047/MLKMVC_Cog2020.pdf" 
+# wplink: ""  # "Working Paper" button
+# codelink: "" # "Code" button
+# videolink: "" # "Video" button
+# Publication information, which appears . 
+journ: "Proceedings of the 11th IEEE International Conference on Cognitive Infocommunications (CogInfoCom)" 
+issue: ""
+# Link to the image that will appear in the research list and on the project page. If no image should appear, just remove the link here. 
+# image: "../images/project1.png"
+format: 
+  html:
+    page-layout: article
+    template-partials: 
+      - "../partials/title-block.html" # custom HTML partial that determines how the title block is displayed (with image, author and journal information). 
+# Coauthor information that will be displayed on the research list and on the project page. 
+coauthors:
+  - name: "Maria Koutsombogera"
+    link: "https://www.tcd.ie/research/profiles/?profile=koutsomm" # add link to co-author's website here. If no link should appear, just remove the link here.
+  - name: "Carl Vogel"
+    link: "https://www.tcd.ie/research/profiles/?profile=vogel"
+---
+
+### Abstract
+
+Analysis of human interactions benefits from understanding patterns of gaze in dialogue. Using a multi-modal task oriented dialogue corpus, we evaluate relations between gaze behaviours, conversational dominance and dialogue role. Dominant players spend more time looking at their co-player than their less dominant fellows; the facilitator spends more time gazing at the dominant player than at the less dominant; dominant players spend longer averting their gaze than their less dominant fellows. When aligned with dialogue roles, gaze behaviour differences between players are demonstrated when occupying the role of speaker but not of listener. Less dominant speakers gaze longer at a facilitator, while effects on averted gaze and co-player directed gaze remain present for dominant speakers but not for dominant listeners. Finally, where dominance is not balanced among players, mutual gaze involving players only is less than mutual gaze involving facilitators.

@@ -1,32 +1,36 @@
 project:
   type: website
+  output-dir: docs
+  resources: # here we need to add any files that users should be able to download
+    - files/cv.pdf
 
 website:
-  title: "Lorcan McLaren"
-  navbar:
+  title: "Lorcan McLaren" # website title, this is what's displayed on the top
+  navbar: # Options for website navigation (including bar). For alternatives see https://quarto.org/docs/websites/website-navigation.html
     background: black
-    right:
-      - text: "Welcome"
-        href: "#welcome"
-      - text: "Research Interests"
-        href: "#research-interests"
-      - text: "Publications"
-        href: "#publications"
-      - text: "Projects"
-        href: "#projects"
-      - text: "Contact"
-        href: "#contact"
+    right: # links displayed in navigation bar
+      - href: index.qmd
+        text: About
+      - href: "#research"
+        text: Research 
+      - href: "#teaching"
+        text: Teaching
+      - href: "#contact"
+        text: Contact
   search: false
-  back-to-top-navigation: true
-  page-footer: © Lorcan McLaren
+  page-footer: 
+    center: © Lorcan McLaren
 
+
+# Formatting. For more options see https://quarto.org/docs/output-formats/html-basics.html 
 format:
   html:
+    fontsize: 100%
+    linestretch: 1.5
     theme: 
       - darkly
       - custom.scss
-    backgroundcolor: black
-    css: styles.css
+    css: styles.css # custom file to adjust some css options 
     toc: true
 
 

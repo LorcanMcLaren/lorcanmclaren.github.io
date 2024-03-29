@@ -1,25 +1,63 @@
 ---
-# title: "academic-website"
 toc: false
+# bibliography: assets/publications/publications.bib
+listing: # this determines different lists with respective options. These are accessed in the below with the :::{#id}::: syntax.
+  # - id: wp 
+  #   contents: "wp/*.qmd" # from which folder to take the contents. Here, take all .qmd files from the wp folder. 
+  #   sort: "date desc" # how to sort the contents.
+  #   template: ejs/wp.ejs  # how to display contents. Here, use the customized wp.ejs in the ejs folder.
+  - id: pub
+    sort: "date desc"
+    contents: "pub/*.qmd"
+    template: ejs/pub.ejs
+  - id: wip
+    sort: "date desc"
+    contents: "wip/*.qmd"
+    template: ejs/wp.ejs
+
 ---
 
-### Welcome
+![](images/profile.jpg){.round-image .centre width=250 height=250}
+<div style="text-align: center;">
+  <b>Lorcan McLaren</b><br>
+  PhD researcher<br>
+  [University College Dublin](https://www.ucd.ie/)
 
-Welcome to my academic portal, where my journey through the intricate world of computational social science unfolds. As a PhD student, I delve into the dynamics of political communication, particularly through the lens of climate change discourse, leveraging text-as-data methodologies.
+  <span class="prof-icon">[{{< iconify mdi linkedin >}}](https://www.linkedin.com/in/lorcanmclaren/)</span>
+  <span class="prof-icon">[{{< iconify mdi github >}}](https://github.com/LorcanMcLaren)</span>
+  <span class="prof-icon">[{{< iconify academicons google-scholar >}}](https://scholar.google.com/citations?user=vnNon38AAAAJ&hl=en&oi=ao)</span>
+  <span class="prof-icon">[{{<iconify academicons google-scholar >}}](https://scholar.google.com/citations?user=vnNon38AAAAJ&hl=en&oi=ao)</span>
+</div>
 
-### Research Interests
 
-My research interests are centered around understanding the narratives in political communication, with a special emphasis on climate change. Utilizing computational tools, I analyze large datasets of textual information to uncover patterns, sentiments, and framing techniques used in political discourse related to environmental issues.
+I am a PhD student affiliated with the Connected_Politics Lab at the UCD School of Politics and International Relations. My research focuses on political communication . Currently, I am 
 
-### Publications
+### Research
+<!-- #### Working Papers 
 
--   "Decoding Political Sentiment in Climate Change Discourse: A Text-as-Data Approach," Journal of Computational Social Science, 2023.
--   "Framing the Future: The Narrative Battle in Climate Policy Debates," Environmental Communication Quarterly, 2024.
+:::{#wp}
+::: -->
 
-### Projects
+#### Publications 
 
--   **ClimateSpeak Analysis**: An extensive project that uses natural language processing to examine the rhetoric used by policymakers in climate change debates, aiming to identify key influencers and sentiment trends.
--   **EcoNarratives**: A collaborative effort focusing on the portrayal of climate change in media across different political spectrums, assessing the impact on public perception and policy engagement.
+:::{#pub}
+:::
+
+#### Work in Progress 
+
+:::{#wip}
+:::
+
+### Teaching
+#### Current
+
+- Course 1 
+- Course 2 
+
+#### Past 
+
+- Course 3 
+- Course 4 
 
 ### Contact
 
