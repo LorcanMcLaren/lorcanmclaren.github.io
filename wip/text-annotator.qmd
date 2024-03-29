@@ -2,10 +2,26 @@
 title: "Text Annotation Tooling"
 date: "2024"
 date-format: "YYYY"
-
+# image: "../images/green-pill-annotator.png"
 format: 
   html:
     page-layout: article
     template-partials: 
       - "../partials/title-block.html"
 ---
+
+I am currently developing a customisable tool to provide an improved text annotation workflow to researchers. Creating large sets of annotated text is a common task in many text-as-data approaches. Recent advancements in LLMs have accelerated this trend, as domain-specific ground truth is important for validating zero- and few-shot models, or for fine-tuning. 
+
+My tool provides the following benefits at **zero** cost:
+
+- Consistent experience for teams of annotators
+- Low-latency, reproducible workflows 
+- Multiple common annotation types, including binary, dropdown or Likert scale
+- Fully customisable, with functionality to develop your own annotation schema and instructions
+- No more messy codebooks that require annotators to switch between windows
+- CSV input and output for interoperability
+
+
+![A custom annotation workflow for discrete emotions](../images/green-pill-annotator.png)
+
+Try out a beta version of the tool [here](https://green-pill.streamlit.app/). Feel free to reach out if you encounter any bugs or need additional features for your annotation task
