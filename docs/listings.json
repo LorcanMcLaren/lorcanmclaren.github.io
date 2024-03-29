@@ -1,6 +1,6 @@
 [
   {
-    "listing": "/research.html",
+    "listing": "/index.html",
     "items": [
       "/pub/mclaren_gaze_2020.html",
       "/pub/mclaren_heuristic_2020.html",
@@ -14,7 +14,7 @@
     ]
   },
   {
-    "listing": "/index.html",
+    "listing": "/research.html",
     "items": [
       "/pub/mclaren_gaze_2020.html",
       "/pub/mclaren_heuristic_2020.html",
