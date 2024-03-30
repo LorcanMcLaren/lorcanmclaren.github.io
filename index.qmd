@@ -23,9 +23,9 @@ listing: # this determines different lists with respective options. These are ac
 
 ![](images/profile.jpg){.round-image .centre width=250 height=250}
 <div style="text-align: center;">
-  <b>Lorcan McLaren</b><br>
-  PhD Researcher<br>
-  [University College Dublin](https://www.ucd.ie/)
+  <span style="font-weight: 800">Lorcan McLaren</span><br>
+  <span style="font-weight: 200">PhD Researcher</span><br>
+  <span style="font-weight: 200">[University College Dublin](https://www.ucd.ie/)</span>
 
   <span class="prof-icon">[{{< iconify ant-design linkedin-outline >}}](https://www.linkedin.com/in/lorcanmclaren/)</span>
   <span class="prof-icon">[{{< iconify mingcute github-line >}}](https://github.com/LorcanMcLaren)</span>
@@ -41,29 +41,29 @@ My research examines political communication using text-as-data approaches, with
 
 Previously, I completed a BA in Computer Science, Linguistics and French at Trinity College Dublin and an MSc in Politics and Data Science at University College Dublin. I also worked in industry for two years as a data analyst. 
 
-### Research
+## Research
 <!-- #### Working Papers 
 
 :::{#wp}
 ::: -->
 
-#### Publications 
+### Publications 
 
 :::{#pub}
 :::
 
-#### Current Work
+### Current Work
 
 :::{#wip}
 :::
 
-### Teaching
-#### Tutor
+## Teaching
+### Tutor
 - Research Methods in Political Science, Undergraduate (Spring 2024)
 
-#### Teaching Assistant
+### Teaching Assistant
 - Introduction to EU Politics, Undergraduate (Autumn 2023)
 
-### Contact
+## Contact
 
 For inquiries, collaboration opportunities, or to discuss my work, feel free to reach out via [email](mailto:lorcan.mclaren@ucdconnect.ie).

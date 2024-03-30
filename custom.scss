@@ -2,8 +2,11 @@
 $font-family-sans-serif: "Raleway", sans-serif;
 
 .navbar {
-    font-family: "Roboto Condensed", sans-serif !important; /* Replace 'YourFontFamily' with your chosen font */
+    font-family: "Raleway", sans-serif !important; /* Replace 'YourFontFamily' with your chosen font */
+    font-weight: 800;
 }
+
+$navbar-fg: white;
 $primary: #008000;
 $link-color: #008000;
 
