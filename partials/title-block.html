@@ -4,7 +4,7 @@
     $if(title)$<h1 class="title">$title$</h1>$endif$
     <p>
     $if(coauthors)$
-        Joint work with
+        With
         $if(coauthors/allbutlast)$
             $for(coauthors/allbutlast)$
                 $if(coauthors.link)$<a href="$coauthors.link$">$coauthors.name$</a>$else$$coauthors.name$$endif$$sep$,
