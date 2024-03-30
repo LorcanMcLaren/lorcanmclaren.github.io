@@ -22,7 +22,7 @@ website:
         text: Teaching
       - href: "#contact"
         text: Contact
-      - href: /cv
+      - href: ./cv
         text: CV
   search: false
   page-footer: 
