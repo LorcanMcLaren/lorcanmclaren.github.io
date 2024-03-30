@@ -22,6 +22,8 @@ website:
         text: Teaching
       - href: "#contact"
         text: Contact
+      - href: /cv
+        text: CV
   search: false
   page-footer: 
     center: © Lorcan McLaren
