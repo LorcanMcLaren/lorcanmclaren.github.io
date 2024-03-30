@@ -7,9 +7,9 @@
         <b><a href="<%- item.path %>"><%= item.title %></a></b><br/>
     <% if (item.coauthors) { %>
         <% if (item.coauthors.length == 1) { %>
-            With <a href="<%- item.coauthors[0].link %>"><%= item.coauthors[0].name %></a>.<br/>
+            with <a href="<%- item.coauthors[0].link %>"><%= item.coauthors[0].name %></a>.<br/>
         <% } else { %>
-            With 
+            with 
              <% for (const coauthor of item.coauthors.slice(0, -2)) { %>
                 <% if (coauthor.link) { %>
                     <a href="<%- coauthor.link %>"><%= coauthor.name %></a>,
