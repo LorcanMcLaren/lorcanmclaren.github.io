@@ -32,7 +32,7 @@
     "href": "index.html#teaching",
     "title": "Lorcan McLaren",
     "section": "Teaching",
-    "text": "Teaching\n\nTutor\n\nResearch Methods in Political Science, Undergraduate (Spring 2024)\n\n\n\nTeaching Assistant\n\nIntroduction to EU Politics, Undergraduate (Autumn 2023)"
+    "text": "Teaching\n\nTeaching Assistant\n\nResearch Methods in Political Science, Undergraduate (Spring 2024)\nIntroduction to EU Politics, Undergraduate (Autumn 2023)"
   },
   {
     "objectID": "index.html#contact",
@@ -40,6 +40,13 @@
     "title": "Lorcan McLaren",
     "section": "Contact",
     "text": "Contact\nFor inquiries, collaboration opportunities, or to discuss my work, feel free to reach out via email."
+  },
+  {
+    "objectID": "code.html",
+    "href": "code.html",
+    "title": "Code",
+    "section": "",
+    "text": "example-make-workflow\n        \n\n        \n    \n    \n    \n\n    \n\n\nNo matching items"
   },
   {
     "objectID": "teaching.html",
