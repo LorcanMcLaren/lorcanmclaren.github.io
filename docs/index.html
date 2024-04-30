@@ -57,6 +57,34 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-wp .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-date','listing-date-format','listing-wplink','listing-image','listing-coauthors','listing-path','listing-outputHref','listing-date-modified','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-date","listing-date-format","listing-wplink","listing-image","listing-coauthors","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-wp'] = new List('listing-wp', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
     const listingTargetEl = window.document.querySelector('#listing-pub .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
@@ -92,9 +120,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-date','listing-date-format','listing-path','listing-outputHref','listing-date-modified','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-date','listing-date-format','listing-image','listing-path','listing-outputHref','listing-date-modified','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-date","listing-date-format","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-date","listing-date-format","listing-image","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -219,12 +247,42 @@ window.Quarto = {
 <p>Previously, I completed a BA in Computer Science, Linguistics and French at Trinity College Dublin and an MSc in Politics and Data Science at University College Dublin. I also worked in industry for two years as a data analyst.</p>
 <section id="research" class="level2">
 <h2 class="anchored" data-anchor-id="research">Research</h2>
-<!-- #### Working Papers 
+<section id="working-papers" class="level4">
+<h4 class="anchored" data-anchor-id="working-papers">Working Papers</h4>
+<div id="listing-wp" class="quarto-listing quarto-listing-container-custom">
 
-:::{#wp}
-::: -->
-<section id="publications" class="level3">
-<h3 class="anchored" data-anchor-id="publications">Publications</h3>
+    <div class="list grid" style="column-gap: 5px;">
+        <div class="g-col-12 g-col-lg-8 g-col-md-9 g-col-sm-9">
+        <b><a href="./wp/taking-the-green-pill.html">Taking the green pill: Psychological distance and the climate crisis in the European Parliament</a></b><br>
+        
+    
+     
+        <a href="../files/taking-the-green-pill.pdf"> 
+            <i class="fa-regular fa-pen-to-square"></i>
+        </a>
+    
+    
+    
+    
+    </div>
+    <div class="image_list g-col-8 g-col-lg-4 g-col-md-3 g-col-sm-3"> 
+        
+            <a href="./wp/taking-the-green-pill.html">
+                <img src="./images/green-pill.png" alt="image" width="100%">
+            </a>
+    
+    </div>
+    <br> 
+
+    </div>
+
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="publications" class="level4">
+<h4 class="anchored" data-anchor-id="publications">Publications</h4>
 <div id="listing-pub" class="quarto-listing quarto-listing-container-custom">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
@@ -324,8 +382,8 @@ No matching items
 </div>
 </div>
 </section>
-<section id="current-work" class="level3">
-<h3 class="anchored" data-anchor-id="current-work">Current Work</h3>
+<section id="projects" class="level4">
+<h4 class="anchored" data-anchor-id="projects">Projects</h4>
 <div id="listing-wip" class="quarto-listing quarto-listing-container-custom">
 
     <div class="list grid" style="column-gap: 5px;">
@@ -340,23 +398,10 @@ No matching items
     </div>
     <div class="image_list g-col-8 g-col-lg-4 g-col-md-3 g-col-sm-3"> 
         
-    </div>
-    <br> 
-
-    </div>
-
-    <div class="list grid" style="column-gap: 5px;">
-        <div class="g-col-12 g-col-lg-8 g-col-md-9 g-col-sm-9">
-        <b><a href="./wip/green-pill.html">The Green Pill Project 🧪</a></b><br>
-        
+            <a href="./wip/text-annotator.html">
+                <img src="./images/green-pill-annotator.png" alt="image" width="100%">
+            </a>
     
-    
-    
-    
-    
-    </div>
-    <div class="image_list g-col-8 g-col-lg-4 g-col-md-3 g-col-sm-3"> 
-        
     </div>
     <br> 
 
@@ -370,8 +415,8 @@ No matching items
 </section>
 <section id="teaching" class="level2">
 <h2 class="anchored" data-anchor-id="teaching">Teaching</h2>
-<section id="teaching-assistant" class="level3">
-<h3 class="anchored" data-anchor-id="teaching-assistant">Teaching Assistant</h3>
+<section id="teaching-assistant" class="level4">
+<h4 class="anchored" data-anchor-id="teaching-assistant">Teaching Assistant</h4>
 <ul>
 <li>Research Methods in Political Science, Undergraduate (Spring 2024)</li>
 <li>Introduction to EU Politics, Undergraduate (Autumn 2023)</li>

@@ -2,7 +2,7 @@
 title: "Text Annotation Tooling"
 date: "2024"
 date-format: "YYYY"
-# image: "../images/green-pill-annotator.png"
+image: "../images/green-pill-annotator.png"
 format: 
   html:
     page-layout: article
@@ -22,6 +22,6 @@ My tool provides the following benefits at **zero** cost:
 - CSV input and output for interoperability
 
 
-![A custom annotation workflow for discrete emotions](../images/green-pill-annotator.png)
+<!-- ![A custom annotation workflow for discrete emotions](../images/green-pill-annotator.png) -->
 
 Try out a beta version of the tool [here](https://green-pill.streamlit.app/). Feel free to reach out if you encounter any bugs or need additional features for your annotation task

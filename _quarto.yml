@@ -3,6 +3,7 @@ project:
   output-dir: docs
   resources: # here we need to add any files that users should be able to download
     - files/cv.pdf
+    - files/taking-the-green-pill.pdf
 
 website:
   title: "Lorcan McLaren" # website title, this is what's displayed on the top

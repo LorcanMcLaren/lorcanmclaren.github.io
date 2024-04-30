@@ -2,24 +2,9 @@
   {
     "listing": "/index.html",
     "items": [
+      "/wp/taking-the-green-pill.html",
       "/pub/mclaren_heuristic_2020.html",
       "/pub/mclaren_gaze_2020.html",
-      "/wip/text-annotator.html",
-      "/wip/green-pill.html"
-    ]
-  },
-  {
-    "listing": "/code.html",
-    "items": [
-      "/code/example_make_workflow.html"
-    ]
-  },
-  {
-    "listing": "/research.html",
-    "items": [
-      "/pub/mclaren_gaze_2020.html",
-      "/pub/mclaren_heuristic_2020.html",
-      "/wip/green-pill.html",
       "/wip/text-annotator.html"
     ]
   }

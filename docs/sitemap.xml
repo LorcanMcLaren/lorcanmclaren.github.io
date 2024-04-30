@@ -1,31 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lorcanmclaren.com/wip/green-pill.html</loc>
-    <lastmod>2024-03-29T20:33:00.154Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lorcanmclaren.com/cv/index.html</loc>
-    <lastmod>2024-03-30T00:44:15.899Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lorcanmclaren.com/pub/mclaren_heuristic_2020.html</loc>
-    <lastmod>2024-03-29T22:12:12.166Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lorcanmclaren.com/index.html</loc>
-    <lastmod>2024-04-19T14:57:32.045Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lorcanmclaren.com/research.html</loc>
-    <lastmod>2024-03-29T16:06:11.496Z</lastmod>
+    <loc>https://lorcanmclaren.com/wip/text-annotator.html</loc>
+    <lastmod>2024-04-30T21:00:26.275Z</lastmod>
   </url>
   <url>
     <loc>https://lorcanmclaren.com/pub/mclaren_gaze_2020.html</loc>
     <lastmod>2024-03-29T16:06:11.496Z</lastmod>
   </url>
   <url>
-    <loc>https://lorcanmclaren.com/wip/text-annotator.html</loc>
-    <lastmod>2024-03-29T22:04:38.408Z</lastmod>
+    <loc>https://lorcanmclaren.com/wp/taking-the-green-pill.html</loc>
+    <lastmod>2024-04-30T20:59:09.739Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lorcanmclaren.com/index.html</loc>
+    <lastmod>2024-04-30T21:03:07.872Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lorcanmclaren.com/pub/mclaren_heuristic_2020.html</loc>
+    <lastmod>2024-03-29T22:12:12.166Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lorcanmclaren.com/cv/index.html</loc>
+    <lastmod>2024-03-30T00:44:15.899Z</lastmod>
   </url>
 </urlset>

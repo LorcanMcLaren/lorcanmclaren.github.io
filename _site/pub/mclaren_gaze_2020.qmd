@@ -11,7 +11,7 @@ videolink: "https://www.youtube.com/" # "Video" button
 journ: "Journal of Interesting Research" 
 issue: "1(1):1-30"
 # Link to the image that will appear in the research list and on the project page. If no image should appear, just remove the link here. 
-image: "../images/project1.png"
+image: ""
 format: 
   html:
     page-layout: article

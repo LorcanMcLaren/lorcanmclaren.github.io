@@ -2,10 +2,10 @@
 toc: false
 # bibliography: assets/publications/publications.bib
 listing: # this determines different lists with respective options. These are accessed in the below with the :::{#id}::: syntax.
-  # - id: wp 
-  #   contents: "wp/*.qmd" # from which folder to take the contents. Here, take all .qmd files from the wp folder. 
-  #   sort: "date desc" # how to sort the contents.
-  #   template: ejs/wp.ejs  # how to display contents. Here, use the customized wp.ejs in the ejs folder.
+  - id: wp 
+    contents: "wp/*.qmd" # from which folder to take the contents. Here, take all .qmd files from the wp folder. 
+    sort: "date desc" # how to sort the contents.
+    template: ejs/wp.ejs  # how to display contents. Here, use the customized wp.ejs in the ejs folder.
   - id: pub
     sort: 
       - "date desc"
@@ -42,23 +42,23 @@ My research examines political communication using text-as-data approaches, with
 Previously, I completed a BA in Computer Science, Linguistics and French at Trinity College Dublin and an MSc in Politics and Data Science at University College Dublin. I also worked in industry for two years as a data analyst. 
 
 ## Research
-<!-- #### Working Papers 
+#### Working Papers 
 
 :::{#wp}
-::: -->
+:::
 
-### Publications 
+#### Publications 
 
 :::{#pub}
 :::
 
-### Current Work
+#### Projects
 
 :::{#wip}
 :::
 
 ## Teaching
-### Teaching Assistant
+#### Teaching Assistant
 - Research Methods in Political Science, Undergraduate (Spring 2024)
 - Introduction to EU Politics, Undergraduate (Autumn 2023)
 
