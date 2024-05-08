@@ -35,7 +35,7 @@ listing: # this determines different lists with respective options. These are ac
 </div>
 
 
-I am a PhD researcher and Iseult Honohan scholar in computational social science at the [UCD School of Politics and International Relations](https://www.ucd.ie/spire/). I am also a member of the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/), and am advised by [James P. Cross](https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&hl=en&oi=ao). 
+I am a PhD researcher and Iseult Honohan scholar in computational social science at the [UCD School of Politics and International Relations](https://www.ucd.ie/spire/). I am also a member of the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/), where I am advised by [James P. Cross](https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&hl=en&oi=ao). 
 
 My research examines political communication using text-as-data approaches, with a focus on the climate crisis. 
 
