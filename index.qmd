@@ -34,12 +34,9 @@ listing: # this determines different lists with respective options. These are ac
   <span class="prof-icon">[{{<iconify material-symbols mail-outline >}}](mailto:lorcan.mclaren@ucdconnect.ie)</span>
 </div>
 
+I am a PhD researcher and Iseult Honohan scholar in computational social science at [University College Dublin](https://www.ucd.ie/spire/). Based in the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/) under the supervision of [James P. Cross](https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&hl=en&oi=ao), I also serve as a Climate Fellow at the UCD Earth Institute. My research employs text-as-data approaches to examine political communication, with a particular focus on the climate crisis.
 
-I am a PhD researcher and Iseult Honohan scholar in computational social science at the [UCD School of Politics and International Relations](https://www.ucd.ie/spire/). I am also a member of the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/), where I am advised by [James P. Cross](https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&hl=en&oi=ao). 
-
-My research examines political communication using text-as-data approaches, with a focus on the climate crisis. 
-
-Previously, I completed a BA in Computer Science, Linguistics and French at Trinity College Dublin and an MSc in Politics and Data Science at University College Dublin. I also worked in industry for two years as a data analyst. 
+Prior to my doctoral studies, I completed a BA in Computer Science, Linguistics and French at Trinity College Dublin and an MSc in Politics and Data Science at University College Dublin, complemented by two years of industry experience as a data analyst.
 
 ## Research
 #### Working Papers 
