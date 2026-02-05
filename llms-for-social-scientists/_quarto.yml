@@ -18,7 +18,6 @@ book:
       <a href="https://lorcanmclaren.com">Lorcan McLaren</a> · © <script>document.write(new Date().getFullYear())</script>
   sidebar:
     style: docked
-    background: "#f9f6f1"
   chapters:
     - index.qmd
     - part: "Course Information"
@@ -49,10 +48,13 @@ format:
     documentclass: scrreprt
   html:
     theme:
-      - simplex
-      - custom.scss
+      light:
+        - simplex
+        - custom-light.scss
+      dark:
+        - simplex
+        - custom-dark.scss
     fontsize: 110%
-    fontcolor: "#333333"
     linestretch: 1.5
     link-external-newwindow: true
     header-includes:

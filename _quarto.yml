@@ -16,7 +16,6 @@ website:
   open-graph: true
   site-url: https://lorcanmclaren.com
   navbar: # Options for website navigation (including bar). For alternatives see https://quarto.org/docs/websites/website-navigation.html
-    background: light
     right: # links displayed in navigation bar
       - href: index.qmd
         text: About
@@ -38,11 +37,14 @@ website:
 format:
   html:
     fontsize: 110%
-    fontcolor: "#333333"
     linestretch: 1.5
-    theme: 
-      - simplex
-      - custom.scss
+    theme:
+      light:
+        - simplex
+        - custom-light.scss
+      dark:
+        - simplex
+        - custom-dark.scss
     css: styles.css # custom file to adjust some css options 
     toc: true
     link-external-newwindow: true

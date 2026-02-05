@@ -106,6 +106,27 @@ i {
     }
   }
 
+/* dark mode overrides */
+.quarto-dark .coauthors {
+  color: #aaa;
+}
+
+.quarto-dark .journal {
+  color: #aaa;
+}
+
+.quarto-dark .paper-links-auto a + a::before {
+  color: #aaa;
+}
+
+.quarto-dark .abstract-content {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.quarto-dark .abstract-text {
+  color: #bbb;
+}
+
 /* adjust font size for smaller screen */
 /* @media all and (max-width: 600px) {
     body {

@@ -2,11 +2,6 @@
 $font-family-sans-serif: "Libre Franklin", sans-serif;
 $headings-font-family: "Lora", serif;
 
-.navbar {
-    font-family: "Lora", serif !important;
-    font-weight: 600;
-}
-
 $body-bg: #f9f6f1;
 $body-color: #333333;
 $primary: #7a4a5d;
@@ -17,6 +12,8 @@ $navbar-fg: #333333;
 
 /*-- scss:rules --*/
 .navbar {
+    font-family: "Lora", serif !important;
+    font-weight: 600;
     border-bottom: 1px solid #333333;
 }
 
