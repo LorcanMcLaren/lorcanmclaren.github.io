@@ -21,7 +21,7 @@ format:
 # Coauthor information that will be displayed on the research list and on the project page. 
 coauthors:
   - name: "Maria Koutsombogera"
-    link: "https://www.tcd.ie/research/profiles/?profile=koutsomm" # add link to co-author's website here. If no link should appear, just remove the link here.
+    link: "https://scholar.google.com/citations?user=cv3DJe4AAAAJ&hl=en" # add link to co-author's website here. If no link should appear, just remove the link here.
   - name: "Carl Vogel"
     link: "https://www.tcd.ie/research/profiles/?profile=vogel"
 ---
