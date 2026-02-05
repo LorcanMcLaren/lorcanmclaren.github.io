@@ -1,17 +1,17 @@
 project:
   type: book
-  output-dir: ../docs/course
+  output-dir: ../docs/llms-for-social-scientists
 
 book:
-  title: "AI and Large Language Models"
-  subtitle: "POL42560 -- Spring 2026"
+  title: "LLMs for Social Scientists"
+  subtitle: "POL42560 AI and Large Language Models"
   author: "Lorcan McLaren"
   date: last-modified
   date-format: "MMMM YYYY"
-  site-url: https://lorcanmclaren.com/course
-  repo-url: https://github.com/lorcanmclaren/ai-llms-course
-  repo-actions: [issue]
-  sharing: [twitter, linkedin]
+  site-url: https://lorcanmclaren.com/llms-for-social-scientists
+  # repo-url: https://github.com/lorcanmclaren/llms-for-social-scientists
+  # repo-actions: [issue]
+  # sharing: [twitter, linkedin]
   sidebar:
     style: docked
     background: "#f9f6f1"

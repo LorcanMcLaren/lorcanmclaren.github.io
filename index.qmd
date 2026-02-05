@@ -53,7 +53,7 @@ Prior to my doctoral studies, I completed a BA in Computer Science, Linguistics 
 
 ## Teaching
 #### Module Instructor
-- AI and Large Language Models, Postgraduate (Spring 2025, 2026) — [Course Website](course/) | [Syllabus](files/ai-llms-syllabus.pdf)
+- AI and Large Language Models, Postgraduate (Spring 2025, 2026) <br/><span class="paper-links"><a href="llms-for-social-scientists/">Course Website</a> | <a href="files/ai-llms-syllabus.pdf">Syllabus</a></span>
 
 #### Teaching Assistant
 - Introduction to EU Politics, Undergraduate (Autumn 2023, 2024)

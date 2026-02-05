@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Software – AI and Large Language Models</title>
+<title>Assessment – LLMs for Social Scientists</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./policies.html" rel="next">
-<link href="./assessment.html" rel="prev">
+<link href="./software.html" rel="next">
+<link href="./syllabus.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -85,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./syllabus.html">Course Information</a></li><li class="breadcrumb-item"><a href="./software.html">Software</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./syllabus.html">Course Information</a></li><li class="breadcrumb-item"><a href="./assessment.html">Assessment</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -100,27 +100,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">AI and Large Language Models</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/lorcanmclaren/ai-llms-course" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-linkedin pe-1"></i>
-            LinkedIn
-            </a>
-          </li>
-      </ul>
-    </div>
-</div>
+      <a href="./">LLMs for Social Scientists</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -153,13 +133,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assessment.html" class="sidebar-item-text sidebar-link">
+  <a href="./assessment.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Assessment</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./software.html" class="sidebar-item-text sidebar-link active">
+  <a href="./software.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Software</span></a>
   </div>
 </li>
@@ -281,18 +261,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#development-environment" id="toc-development-environment" class="nav-link active" data-scroll-target="#development-environment">Development Environment</a></li>
-  <li><a href="#package-management" id="toc-package-management" class="nav-link" data-scroll-target="#package-management">Package Management</a></li>
-  <li><a href="#useful-python-packages" id="toc-useful-python-packages" class="nav-link" data-scroll-target="#useful-python-packages">Useful Python Packages</a></li>
+  <li><a href="#components" id="toc-components" class="nav-link active" data-scroll-target="#components">Components</a></li>
+  <li><a href="#lab-participation" id="toc-lab-participation" class="nav-link" data-scroll-target="#lab-participation">Lab Participation</a></li>
+  <li><a href="#group-presentation" id="toc-group-presentation" class="nav-link" data-scroll-target="#group-presentation">Group Presentation</a></li>
+  <li><a href="#group-project" id="toc-group-project" class="nav-link" data-scroll-target="#group-project">Group Project</a>
+  <ul class="collapse">
+  <li><a href="#submission-format" id="toc-submission-format" class="nav-link" data-scroll-target="#submission-format">Submission Format</a></li>
+  <li><a href="#research-paper-structure" id="toc-research-paper-structure" class="nav-link" data-scroll-target="#research-paper-structure">Research Paper Structure</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lorcanmclaren/ai-llms-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./syllabus.html">Course Information</a></li><li class="breadcrumb-item"><a href="./software.html">Software</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./syllabus.html">Course Information</a></li><li class="breadcrumb-item"><a href="./assessment.html">Assessment</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Software</h1>
+<h1 class="title">Assessment</h1>
 </div>
 
 
@@ -309,58 +294,79 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>All code for this course should be written in <strong>Python</strong>. For those who haven’t worked with this language previously, POL42340 Programming for Social Scientists runs in parallel to this course and provides a comprehensive introduction to Python.</p>
-<section id="development-environment" class="level2">
-<h2 class="anchored" data-anchor-id="development-environment">Development Environment</h2>
-<p>We will use <strong>VS Code</strong> to write and execute code locally. For some lab sessions and the group project, where your personal device may not be powerful enough or where long execution times are expected, <strong>Google Colab</strong> should be used. Colab provides limited free access to T4 GPUs, which will enable you to run code that cannot be executed locally without a GPU.</p>
-</section>
-<section id="package-management" class="level2">
-<h2 class="anchored" data-anchor-id="package-management">Package Management</h2>
-<p>We will use <code>venv</code> and <code>pip</code> to manage our Python environment and install packages (though feel free to use Anaconda if you are more familiar with this platform). I strongly encourage the use of <strong>Git</strong> for version control, particularly when working on your group project; however, we will not cover this extensively in class.</p>
-</section>
-<section id="useful-python-packages" class="level2">
-<h2 class="anchored" data-anchor-id="useful-python-packages">Useful Python Packages</h2>
-<p>The following packages are particularly useful for dealing with textual data:</p>
+<section id="components" class="level2">
+<h2 class="anchored" data-anchor-id="components">Components</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Package</th>
-<th>Description</th>
+<th>Component</th>
+<th>Deadline</th>
+<th>Grade %</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>spaCy</code></td>
-<td>Industrial-strength NLP library</td>
+<td>Lab participation</td>
+<td>Continuous</td>
+<td>20</td>
 </tr>
 <tr class="even">
-<td><code>NLTK</code></td>
-<td>Classic NLP toolkit</td>
+<td>Group presentations</td>
+<td>April 24</td>
+<td>20</td>
 </tr>
 <tr class="odd">
-<td><code>Gensim</code></td>
-<td>Topic modelling and word embeddings</td>
-</tr>
-<tr class="even">
-<td><code>sentence-transformers</code></td>
-<td>Sentence and document embeddings</td>
-</tr>
-<tr class="odd">
-<td><code>transformers</code></td>
-<td>HuggingFace model hub and pipelines</td>
-</tr>
-<tr class="even">
-<td><code>langchain</code></td>
-<td>Framework for building LLM applications</td>
-</tr>
-<tr class="odd">
-<td><code>scikit-learn</code></td>
-<td>Machine learning and evaluation metrics</td>
+<td>Group project</td>
+<td>May 1</td>
+<td>60</td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="lab-participation" class="level2">
+<h2 class="anchored" data-anchor-id="lab-participation">Lab Participation</h2>
+<p>Each lab session includes a Jupyter notebook that must be submitted through Brightspace for participation credit. While your solutions don’t need to be perfect, they should demonstrate a genuine attempt at completing all exercises. Include clear comments throughout your code to show your understanding of the concepts.</p>
+<p>You should <strong>execute all code cells prior to saving</strong>, so that the output for each cell is visible in the submitted version.</p>
+<p>You will have <strong>one week to submit the notebook</strong> from each lab session, up to the start of the subsequent class (e.g., the notebook for Week 2 must be submitted by 08:59 on Friday in Week 3). You may miss up to one submission without prior approval. Late submissions will not be accepted unless an extension has been granted, as exercise solutions may be discussed in class.</p>
+</section>
+<section id="group-presentation" class="level2">
+<h2 class="anchored" data-anchor-id="group-presentation">Group Presentation</h2>
+<p>Each group must deliver a presentation lasting <strong>no more than 12 minutes</strong>, using either LaTeX Beamer, PowerPoint or Google Slides. Submit your slides on Brightspace by <strong>23:59 on Wednesday, April 22</strong>. Groups should divide the presentation between 2–3 speakers, with non-presenting members taking responsibility for answering questions from peers and the instructor during the Q&amp;A session.</p>
+<p>You should prepare together by practising the presentation and anticipating potential questions. The same grade will be awarded to all group members, unless one or more members fail to participate in both the presentation and Q&amp;A.</p>
+<p>Your presentation should cover:</p>
+<ol type="1">
+<li>Research question and importance</li>
+<li>Theoretical expectations and main hypothesis</li>
+<li>Data description</li>
+<li>Methodology for hypothesis testing</li>
+<li>Initial results (if available)</li>
+<li>Challenges encountered and potential risks for next steps (if applicable)</li>
+</ol>
+</section>
+<section id="group-project" class="level2">
+<h2 class="anchored" data-anchor-id="group-project">Group Project</h2>
+<p>Each group must submit a <strong>4,000–5,000 word</strong> research paper (<strong>excluding references and appendices</strong>) as well as the code used to conduct the analysis. All students in a group will be awarded the same grade, but you may be asked to indicate who contributed to which parts of the project.</p>
+<p>You have free choice in selecting your research question, but you must justify why it is relevant and important for understanding or addressing a meaningful social science question. You may either collect original data appropriate for your research question or identify and use existing datasets (see <a href="datasets.html" class="quarto-xref"><span>Appendix A — Datasets</span></a>), clearly explaining your data source selection. Your analysis must incorporate <strong>at least one</strong> of the methods covered in this course – embeddings, transformers, or generative models – in a way that meaningfully advances your research objectives.</p>
+<section id="submission-format" class="level3">
+<h3 class="anchored" data-anchor-id="submission-format">Submission Format</h3>
+<ol type="1">
+<li>A research paper in PDF format. The paper must be written in LaTeX using the collaborative Overleaf document that will be created for each group.</li>
+<li>A GitHub repository containing all code needed to reproduce your analysis.</li>
+</ol>
+</section>
+<section id="research-paper-structure" class="level3">
+<h3 class="anchored" data-anchor-id="research-paper-structure">Research Paper Structure</h3>
+<p>The paper should contain the following sections:</p>
+<ol type="1">
+<li><strong>Introduction</strong> – Research question/puzzle, significance, main hypothesis</li>
+<li><strong>Theory</strong> – Theoretical framework, prior findings on DV-IV relationship, expected effects</li>
+<li><strong>Data &amp; Methods</strong> – Dataset overview, unit of analysis, sample size &amp; missing data, analysis approach</li>
+<li><strong>Results</strong> – Empirical findings, statistical tests, key patterns</li>
+<li><strong>Conclusion</strong> – Link to research question, main insights, limitations, broader implications</li>
+</ol>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -436,7 +442,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/lorcanmclaren\.com\/course");
+        var filterRegex = new RegExp("https:\/\/lorcanmclaren\.com\/llms-for-social-scientists");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -770,13 +776,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./assessment.html" class="pagination-link" aria-label="Assessment">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assessment</span>
+      <a href="./syllabus.html" class="pagination-link" aria-label="Syllabus">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Syllabus</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./policies.html" class="pagination-link" aria-label="Policies">
-        <span class="nav-page-text">Policies</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./software.html" class="pagination-link" aria-label="Software">
+        <span class="nav-page-text">Software</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -785,4 +791,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lorcanmclaren/ai-llms-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+</body></html>

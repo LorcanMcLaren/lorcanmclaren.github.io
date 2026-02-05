@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Interpretability, Explainability and Bias – AI and Large Language Models</title>
+<title>1&nbsp; Introduction – LLMs for Social Scientists</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../weeks/week-10.html" rel="next">
-<link href="../weeks/week-07.html" rel="prev">
+<link href="../weeks/week-02.html" rel="next">
+<link href="../policies.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -85,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-08.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-01.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -100,27 +100,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">AI and Large Language Models</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/lorcanmclaren/ai-llms-course" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-linkedin pe-1"></i>
-            LinkedIn
-            </a>
-          </li>
-      </ul>
-    </div>
-</div>
+      <a href="../">LLMs for Social Scientists</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -182,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-01.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week-01.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -224,7 +204,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-08.html" class="sidebar-item-text sidebar-link active">
+  <a href="../weeks/week-08.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></span></a>
   </div>
 </li>
@@ -281,18 +261,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">8.1</span> Lecture</a></li>
-  <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">8.2</span> Lab</a></li>
-  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">8.3</span> Readings</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">1.1</span> Lecture</a>
+  <ul class="collapse">
+  <li><a href="#module-overview" id="toc-module-overview" class="nav-link" data-scroll-target="#module-overview"><span class="header-section-number">1.1.1</span> Module overview</a></li>
+  <li><a href="#a-brief-overview-of-ai" id="toc-a-brief-overview-of-ai" class="nav-link" data-scroll-target="#a-brief-overview-of-ai"><span class="header-section-number">1.1.2</span> A brief overview of AI</a></li>
+  <li><a href="#large-language-models" id="toc-large-language-models" class="nav-link" data-scroll-target="#large-language-models"><span class="header-section-number">1.1.3</span> Large language models</a></li>
+  <li><a href="#why-should-political-or-social-scientists-care" id="toc-why-should-political-or-social-scientists-care" class="nav-link" data-scroll-target="#why-should-political-or-social-scientists-care"><span class="header-section-number">1.1.4</span> Why should political (or social) scientists care?</a></li>
+  </ul></li>
+  <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">1.2</span> Lab</a></li>
+  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">1.3</span> Readings</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lorcanmclaren/ai-llms-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-08.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-01.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-week8" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></span></h1>
+<h1 class="title"><span id="sec-week1" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></h1>
 </div>
 
 
@@ -315,27 +301,85 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Week 8
+Week 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Lecture:</strong> Techniques for interpretability in text classification; sources of bias and implications<br>
-<strong>Lab:</strong> Applying <code>transformers-interpret</code> and <code>ferret</code> for interpreting model predictions; visualising bias</p>
+<p><strong>Lecture:</strong> Module overview and organisation<br>
+<strong>Lab:</strong> Setting up a Python development environment</p>
 </div>
 </div>
-<section id="lecture" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="lecture"><span class="header-section-number">8.1</span> Lecture</h2>
-<p><em>Content to be added.</em></p>
+<section id="lecture" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="lecture"><span class="header-section-number">1.1</span> Lecture</h2>
+<section id="module-overview" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="module-overview"><span class="header-section-number">1.1.1</span> Module overview</h3>
+<p>This module takes a utilitarian approach to AI and large language models (LLMs): how can we maximise the utility of LLMs and generative AI for us as political and social scientists, while minimising the harms? The module is research-led and driven by readings from current scholarship, with an emphasis on active and collaborative learning and transparent and reproducible practices.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Companion modules
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>POL42340 Programming for Social Scientists</strong> runs in parallel and provides an introduction to Python that is highly useful if you do not have prior Python experience. <strong>POL42050 Quantitative Text Analysis</strong> provides a broader overview of text-as-data approaches that is complementary to this course.</p>
+</div>
+</div>
+<p>The primary focus of the module is on LLMs and their applications in social science research, particularly using text-as-data. We will not focus extensively on other AI technologies such as speech-to-text, text-to-speech, or music/image/audio generation, as these are less practically relevant to social science research at present. Image recognition and multimodality may be touched upon, but these remain new tools for social science and are not yet in widespread use in scholarship. The module also considers the implications of these technologies for politics and society.</p>
 </section>
-<section id="lab" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">8.2</span> Lab</h2>
-<p><em>Content to be added.</em></p>
+<section id="a-brief-overview-of-ai" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="a-brief-overview-of-ai"><span class="header-section-number">1.1.2</span> A brief overview of AI</h3>
+<section id="what-is-artificial-intelligence" class="level4" data-number="1.1.2.1">
+<h4 data-number="1.1.2.1" class="anchored" data-anchor-id="what-is-artificial-intelligence"><span class="header-section-number">1.1.2.1</span> What is artificial intelligence?</h4>
+<p>Artificial intelligence can be defined as a rational agent: an automated system that does the “right thing”, based on its objective, given its environment <span class="citation" data-cites="russell2020artificial">(<a href="../references.html#ref-russell2020artificial" role="doc-biblioref"><strong>russell2020artificial?</strong></a>)</span>. In the past, attempts at creating AI were dominated by a rules-based approach (or “expert systems”), in which knowledge and logic are encoded as a set of rules and a system makes decisions based on these. More recently, machine learning approaches have come to predominate. While machine learning and neural networks have existed since the 1960s and saw key innovations in the 1980s, it was increases in computational power and the rise of big data in the 2000s that led to a shift away from rules-based systems. Machine learning systems are able to handle uncertainty by learning patterns from a large training dataset in a way that often surpasses the performance of more brittle, handwritten rules.</p>
+<p>AI, machine learning, and deep learning are nested concepts. AI is the broadest category, machine learning is a subset of AI, and deep learning is a subset of machine learning.</p>
 </section>
-<section id="readings" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="readings"><span class="header-section-number">8.3</span> Readings</h2>
+<section id="types-of-machine-learning" class="level4" data-number="1.1.2.2">
+<h4 data-number="1.1.2.2" class="anchored" data-anchor-id="types-of-machine-learning"><span class="header-section-number">1.1.2.2</span> Types of machine learning</h4>
+<p>Machine learning can be divided into three broad categories:</p>
 <ul>
-<li>Wan, Y. et al.&nbsp;(2023) ‘“Kelly is a Warm Person, Joseph is a Role Model”: Gender Biases in LLM-Generated Reference Letters’. <em>arXiv</em>. <a href="https://doi.org/10.48550/arXiv.2310.09219" class="uri">https://doi.org/10.48550/arXiv.2310.09219</a></li>
-<li>Rossi, L., Harrison, K. and Shklovski, I. (2024) ‘The Problems of LLM-generated Data in Social Science Research’, <em>Sociologica</em>, 18(2), pp.&nbsp;145–168. <a href="https://doi.org/10.6092/issn.1971-8853/19576" class="uri">https://doi.org/10.6092/issn.1971-8853/19576</a></li>
+<li><p><strong>Supervised learning</strong> is when we have a training dataset for which we know the outcomes or “labels”, and use this to train a model for unseen data. <em>Classification</em> is when we wish to train a model to place observations into discrete categories (e.g.&nbsp;categorising images as containing cats or dogs). <em>Regression</em> models have continuous rather than discrete outcomes (e.g.&nbsp;predicting property prices).</p></li>
+<li><p><strong>Unsupervised learning</strong> is when the outcomes or “labels” are not known for our dataset. For example, we might group similar images into clusters, without explicitly knowing how these clusters are defined. We might later find that these clusters correspond to discrete categories (e.g.&nbsp;animals), but we do not know this beforehand.</p></li>
+<li><p><strong>Reinforcement learning</strong> is where a model is trained to make a series of decisions sequentially, such that each outcome is dependent on the previous, rather than being independent as in supervised learning. The goal is to find the optimal set of actions that maximise expected rewards (e.g.&nbsp;AI models that learn to play games).</p></li>
+</ul>
+</section>
+<section id="neural-networks-and-deep-learning" class="level4" data-number="1.1.2.3">
+<h4 data-number="1.1.2.3" class="anchored" data-anchor-id="neural-networks-and-deep-learning"><span class="header-section-number">1.1.2.3</span> Neural networks and deep learning</h4>
+<p>One well-known family of machine learning architecture is the neural network. These are networks of nodes (or “neurons”) connected to each other by weighted edges. Each node is an individual mathematical function. Input data passes through layers to generate predictions or classifications. Neural networks can be used for both supervised and unsupervised learning.</p>
+<p>Deep learning refers to the use of “deep” neural networks with one or more hidden layers. Each layer extracts increasingly complex features from the data. Deep neural networks learn useful feature representations automatically, allowing them to handle various types of data from text to image to audio.</p>
+</section>
+</section>
+<section id="large-language-models" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="large-language-models"><span class="header-section-number">1.1.3</span> Large language models</h3>
+<p>LLMs are fundamentally prediction machines — they predict the next token (word or part of word) based on the previous context. Through this simple objective and massive training data, they appear to learn complex language understanding. Key characteristics include:</p>
+<ul>
+<li>Training on internet-scale datasets</li>
+<li>The ability to handle multiple tasks without task-specific training</li>
+<li>Learning patterns of language and knowledge during pre-training</li>
+</ul>
+<p>The hype around LLMs stems from their apparent ability to perform tasks previously thought to require human intelligence, including the emergence of “reasoning” capabilities through chain-of-thought prompting, the ability to follow instructions and adapt to new tasks, and integration into research workflows. However, it is important to maintain perspective: despite the module’s name, we should avoid the use of “artificial intelligence” in favour of more specific terminology. LLMs are fundamentally statistical pattern matching systems, with significant limitations. They do not “think” or “reason” — they predict patterns. They can be confidently wrong and require careful human oversight.</p>
+</section>
+<section id="why-should-political-or-social-scientists-care" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4" class="anchored" data-anchor-id="why-should-political-or-social-scientists-care"><span class="header-section-number">1.1.4</span> Why should political (or social) scientists care?</h3>
+<p>Political scientists need to engage with LLMs in order to understand:</p>
+<ol type="1">
+<li><strong>Policy implications and governance challenges</strong> posed by these technologies</li>
+<li><strong>How to use these tools responsibly in research</strong></li>
+<li><strong>Their impact on information environments</strong></li>
+</ol>
+</section>
+</section>
+<section id="lab" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">1.2</span> Lab</h2>
+<p><em>Setting up a Python development environment.</em></p>
+</section>
+<section id="readings" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="readings"><span class="header-section-number">1.3</span> Readings</h2>
+<ul>
+<li>Grossmann, I. et al.&nbsp;(2023) ‘AI and the transformation of social science research’, <em>Science</em>, 380(6650), pp.&nbsp;1108–1109. <a href="https://doi.org/10.1126/science.adi1778" class="uri">https://doi.org/10.1126/science.adi1778</a></li>
+<li>Ziems, C. et al.&nbsp;(2023) ‘Can Large Language Models Transform Computational Social Science?’ <em>arXiv</em>. <a href="http://arxiv.org/abs/2305.03514" class="uri">http://arxiv.org/abs/2305.03514</a></li>
 </ul>
 
 
@@ -414,7 +458,7 @@ Week 8
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/lorcanmclaren\.com\/course");
+        var filterRegex = new RegExp("https:\/\/lorcanmclaren\.com\/llms-for-social-scientists");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -748,13 +792,13 @@ Week 8
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/week-07.html" class="pagination-link" aria-label="Generative Language Models II">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Generative Language Models II</span></span>
+      <a href="../policies.html" class="pagination-link" aria-label="Policies">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Policies</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/week-10.html" class="pagination-link" aria-label="Ethical Use of LLMs?">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Ethical Use of LLMs?</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../weeks/week-02.html" class="pagination-link" aria-label="Text-as-Data">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Text-as-Data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -763,4 +807,4 @@ Week 8
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lorcanmclaren/ai-llms-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+</body></html>

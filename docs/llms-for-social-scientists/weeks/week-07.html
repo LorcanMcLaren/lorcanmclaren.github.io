@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Validation and Performance Measurement – AI and Large Language Models</title>
+<title>7&nbsp; Generative Language Models II – LLMs for Social Scientists</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../weeks/week-06.html" rel="next">
-<link href="../weeks/week-04.html" rel="prev">
+<link href="../weeks/week-08.html" rel="next">
+<link href="../weeks/week-06.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -85,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-05.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Validation and Performance Measurement</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-07.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Generative Language Models II</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -100,27 +100,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">AI and Large Language Models</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/lorcanmclaren/ai-llms-course" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-linkedin pe-1"></i>
-            LinkedIn
-            </a>
-          </li>
-      </ul>
-    </div>
-</div>
+      <a href="../">LLMs for Social Scientists</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -206,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-05.html" class="sidebar-item-text sidebar-link active">
+  <a href="../weeks/week-05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Validation and Performance Measurement</span></span></a>
   </div>
 </li>
@@ -218,7 +198,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-07.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week-07.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Generative Language Models II</span></span></a>
   </div>
 </li>
@@ -281,18 +261,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">5.1</span> Lecture</a></li>
-  <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">5.2</span> Lab</a></li>
-  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">5.3</span> Readings</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">7.1</span> Lecture</a></li>
+  <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">7.2</span> Lab</a></li>
+  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">7.3</span> Readings</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lorcanmclaren/ai-llms-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-05.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Validation and Performance Measurement</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-07.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Generative Language Models II</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-week5" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Validation and Performance Measurement</span></span></h1>
+<h1 class="title"><span id="sec-week7" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Generative Language Models II</span></span></h1>
 </div>
 
 
@@ -315,26 +295,27 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Week 5
+Week 7
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Lecture:</strong> Performance metrics, human coding, and cross-validation<br>
-<strong>Lab:</strong> Measuring model performance with <code>scikit-learn</code></p>
+<p><strong>Lecture:</strong> Advanced prompting<br>
+<strong>Lab:</strong> Introduction to <code>langchain</code></p>
 </div>
 </div>
-<section id="lecture" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="lecture"><span class="header-section-number">5.1</span> Lecture</h2>
+<section id="lecture" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="lecture"><span class="header-section-number">7.1</span> Lecture</h2>
 <p><em>Content to be added.</em></p>
 </section>
-<section id="lab" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">5.2</span> Lab</h2>
+<section id="lab" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">7.2</span> Lab</h2>
 <p><em>Content to be added.</em></p>
 </section>
-<section id="readings" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="readings"><span class="header-section-number">5.3</span> Readings</h2>
+<section id="readings" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="readings"><span class="header-section-number">7.3</span> Readings</h2>
 <ul>
-<li>Birkenmaier, L., Lechner, C.M. and Wagner, C. (2024) ‘The Search for Solid Ground in Text as Data: A Systematic Review of Validation Practices and Practical Recommendations for Validation’, <em>Communication Methods and Measures</em>, 18(3), pp.&nbsp;249–277. <a href="https://doi.org/10.1080/19312458.2023.2285765" class="uri">https://doi.org/10.1080/19312458.2023.2285765</a></li>
+<li>Abdurahman, S. et al.&nbsp;(2024) ‘Perils and opportunities in using large language models in psychological research’, <em>PNAS Nexus</em>, 3(7), p.&nbsp;245. <a href="https://doi.org/10.1093/pnasnexus/pgae245" class="uri">https://doi.org/10.1093/pnasnexus/pgae245</a></li>
+<li>Barrie, C., Palmer, A. and Spirling, A. (2024) ‘Replication for Language Models’. <a href="https://arthurspirling.org/documents/BarriePalmerSpirling_TrustMeBro.pdf" class="uri">https://arthurspirling.org/documents/BarriePalmerSpirling_TrustMeBro.pdf</a></li>
 </ul>
 
 
@@ -413,7 +394,7 @@ Week 5
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/lorcanmclaren\.com\/course");
+        var filterRegex = new RegExp("https:\/\/lorcanmclaren\.com\/llms-for-social-scientists");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -747,13 +728,13 @@ Week 5
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/week-04.html" class="pagination-link" aria-label="Transformers">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Transformers</span></span>
+      <a href="../weeks/week-06.html" class="pagination-link" aria-label="Generative Language Models I">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Generative Language Models I</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/week-06.html" class="pagination-link" aria-label="Generative Language Models I">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Generative Language Models I</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../weeks/week-08.html" class="pagination-link" aria-label="Interpretability, Explainability and Bias">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -762,4 +743,4 @@ Week 5
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lorcanmclaren/ai-llms-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+</body></html>

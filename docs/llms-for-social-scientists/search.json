@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "AI and Large Language Models",
+    "title": "LLMs for Social Scientists",
     "section": "",
     "text": "Welcome\nThis is the course website for POL42560 AI and Large Language Models, taught at University College Dublin in the Spring Trimester 2026.",
     "crumbs": [
@@ -12,7 +12,7 @@
   {
     "objectID": "index.html#overview",
     "href": "index.html#overview",
-    "title": "AI and Large Language Models",
+    "title": "LLMs for Social Scientists",
     "section": "Overview",
     "text": "Overview\nLarge language models (LLMs), such as those behind tools like ChatGPT, have garnered significant attention for their ability to generate human-like text, sparking both enthusiasm and debate about their implications for various fields. For social scientists, LLMs offer a potentially useful approach to processing and interpreting vast amounts of data, enhancing our ability to study complex societal issues.\nThis course offers an interdisciplinary approach to understanding and applying LLMs in social and political science, with a focus on text analysis. It combines theoretical foundations with practical, hands-on experience in applying LLMs to address substantive social science questions. Students will explore the capabilities and limitations of LLMs and engage critically with issues such as bias, environmental impact, misinformation, and intellectual property rights. They will also become familiar with essential research practices including documentation, reproducibility, and validation.",
     "crumbs": [
@@ -22,7 +22,7 @@
   {
     "objectID": "index.html#learning-outcomes",
     "href": "index.html#learning-outcomes",
-    "title": "AI and Large Language Models",
+    "title": "LLMs for Social Scientists",
     "section": "Learning Outcomes",
     "text": "Learning Outcomes\nBy the end of the course, students will be able to:\n\nUnderstand the fundamentals of large language models and their applications in social sciences.\nImplement LLMs for various tasks relevant to political and social science research using Python.\nCritically evaluate the ethical and societal implications of AI technologies, particularly LLMs, in the context of social science.\nApply best practices in research documentation, reproducibility, and validation when using AI tools.\nEngage in informed discussions about the impact of AI on society, including issues of bias, sustainability, and concentration of power.",
     "crumbs": [
@@ -32,7 +32,7 @@
   {
     "objectID": "index.html#prerequisites",
     "href": "index.html#prerequisites",
-    "title": "AI and Large Language Models",
+    "title": "LLMs for Social Scientists",
     "section": "Prerequisites",
     "text": "Prerequisites\nThis course is designed for students with or without experience in Python, but a willingness to learn quickly and engage with technical content is essential. Students without prior programming experience would benefit from taking POL42340 Programming for Social Scientists alongside this course to familiarise themselves with Python fundamentals.\nPOL42050 Quantitative Text Analysis provides a broader overview of text-as-data approaches, complementary to the content of this course.",
     "crumbs": [
@@ -42,7 +42,7 @@
   {
     "objectID": "index.html#course-details",
     "href": "index.html#course-details",
-    "title": "AI and Large Language Models",
+    "title": "LLMs for Social Scientists",
     "section": "Course Details",
     "text": "Course Details\n\n\n\nTime\nFri, 11:00 – 12:50\n\n\nFormat\nIn-person lectures and labs\n\n\nCredits\n10, Level 4\n\n\nInstructor\nLorcan McLaren\n\n\nEmail\nlorcan.mclaren@ucdconnect.ie\n\n\nOffice Hours\nWed, 15:00 – 16:00 (sign up)",
     "crumbs": [

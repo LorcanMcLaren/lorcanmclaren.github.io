@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Text-as-Data – AI and Large Language Models</title>
+<title>5&nbsp; Validation and Performance Measurement – LLMs for Social Scientists</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../weeks/week-03.html" rel="next">
-<link href="../weeks/week-01.html" rel="prev">
+<link href="../weeks/week-06.html" rel="next">
+<link href="../weeks/week-04.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -85,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-02.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Text-as-Data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-05.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Validation and Performance Measurement</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -100,27 +100,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">AI and Large Language Models</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/lorcanmclaren/ai-llms-course" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-linkedin pe-1"></i>
-            LinkedIn
-            </a>
-          </li>
-      </ul>
-    </div>
-</div>
+      <a href="../">LLMs for Social Scientists</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -188,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-02.html" class="sidebar-item-text sidebar-link active">
+  <a href="../weeks/week-02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Text-as-Data</span></span></a>
   </div>
 </li>
@@ -206,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-05.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week-05.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Validation and Performance Measurement</span></span></a>
   </div>
 </li>
@@ -281,24 +261,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">2.1</span> Lecture</a>
-  <ul class="collapse">
-  <li><a href="#content-analysis" id="toc-content-analysis" class="nav-link" data-scroll-target="#content-analysis"><span class="header-section-number">2.1.1</span> Content analysis</a></li>
-  <li><a href="#quantitative-text-analysis" id="toc-quantitative-text-analysis" class="nav-link" data-scroll-target="#quantitative-text-analysis"><span class="header-section-number">2.1.2</span> Quantitative text analysis</a></li>
-  <li><a href="#process" id="toc-process" class="nav-link" data-scroll-target="#process"><span class="header-section-number">2.1.3</span> Process</a></li>
-  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications"><span class="header-section-number">2.1.4</span> Applications</a></li>
-  </ul></li>
-  <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">2.2</span> Lab</a></li>
-  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">2.3</span> Readings</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">5.1</span> Lecture</a></li>
+  <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">5.2</span> Lab</a></li>
+  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">5.3</span> Readings</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lorcanmclaren/ai-llms-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-02.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Text-as-Data</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-05.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Validation and Performance Measurement</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-week2" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Text-as-Data</span></span></h1>
+<h1 class="title"><span id="sec-week5" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Validation and Performance Measurement</span></span></h1>
 </div>
 
 
@@ -321,95 +295,26 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Week 2
+Week 5
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Lecture:</strong> Tasks in text-as-data (scaling, topic modelling, classification, clustering, keyword extraction, NER, sentiment analysis)<br>
-<strong>Lab:</strong> Dealing with textual data in Python</p>
+<p><strong>Lecture:</strong> Performance metrics, human coding, and cross-validation<br>
+<strong>Lab:</strong> Measuring model performance with <code>scikit-learn</code></p>
 </div>
 </div>
-<section id="lecture" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="lecture"><span class="header-section-number">2.1</span> Lecture</h2>
-<p>Text is one of the main ways we study politics. Most features of politics that we might be interested in have been or can be encoded as textual data in some way: opinion, motivation, actions, framing, outcomes. Opinion polling and experiments are distinct, but almost all other research approaches, whether qualitative or quantitative, attempt to analyse text in one form or another.</p>
-<section id="content-analysis" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="content-analysis"><span class="header-section-number">2.1.1</span> Content analysis</h3>
-<p>Content analysis is used to understand the (self-)presentation of political actors and policy content. It uses human judgement not to make sense of each text directly, but instead to apply a scheme to convert the text into data by recording labels or ratings for each unit of text. Text reflects how politicians seek to project an image of themselves, their actions, and others. For example, we might review a series of speeches from MPs on budgetary measures and annotate or “code” them as fiscally right-wing or left-wing. Content analysis can also be applied to legal texts and policy documents.</p>
-<section id="human-vs.-automated-content-analysis" class="level4" data-number="2.1.1.1">
-<h4 data-number="2.1.1.1" class="anchored" data-anchor-id="human-vs.-automated-content-analysis"><span class="header-section-number">2.1.1.1</span> Human vs.&nbsp;automated content analysis</h4>
-<p>Humans are flexible and able to handle nuance and ambiguity, but are vulnerable to subjectivity and performance variability over time. Even trained expert coders — the “gold standard” — are not failure-proof. The Manifesto Project, a major dataset of political texts annotated at the sentence-level with labels for policy area, has been found to have levels of inter-rater agreement and reliability so low that, had the coders been oncologists, their levels of tumour misdiagnosis would have been medically and financially catastrophic <span class="citation" data-cites="mikhaylov2012coder">(<a href="../references.html#ref-mikhaylov2012coder" role="doc-biblioref"><strong>mikhaylov2012coder?</strong></a>)</span>. Automated methods are more consistent, cost- and time-efficient, but they may be consistently wrong. Humans are still typically used as the point of reference (“ground truth”) against which we compare other approaches.</p>
+<section id="lecture" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="lecture"><span class="header-section-number">5.1</span> Lecture</h2>
+<p><em>Content to be added.</em></p>
 </section>
+<section id="lab" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">5.2</span> Lab</h2>
+<p><em>Content to be added.</em></p>
 </section>
-<section id="quantitative-text-analysis" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="quantitative-text-analysis"><span class="header-section-number">2.1.2</span> Quantitative text analysis</h3>
-<p>In quantitative text analysis, we convert each document into some kind of numeric representation which we can work with more easily. The document-feature matrix (DFM) is one widely used representation that records the frequency of each feature (typically a word) across each document. From even a simple DFM, we can make initial observations — for instance, comparing how frequently different US presidents mention terms like “economy”, “crime”, or “climate” in their State of the Union addresses.</p>
-<p>Four key principles guide quantitative text analysis <span class="citation" data-cites="grimmer2013text">(<a href="../references.html#ref-grimmer2013text" role="doc-biblioref"><strong>grimmer2013text?</strong></a>)</span>:</p>
-<ol type="1">
-<li>All quantitative models of language are wrong — but some are useful.</li>
-<li>Quantitative methods for text amplify resources and augment humans.</li>
-<li>There is no globally best method for automated text analysis.</li>
-<li>Validate, validate, validate.</li>
-</ol>
-</section>
-<section id="process" class="level3" data-number="2.1.3">
-<h3 data-number="2.1.3" class="anchored" data-anchor-id="process"><span class="header-section-number">2.1.3</span> Process</h3>
-<p>The typical text-as-data workflow follows seven steps <span class="citation" data-cites="benoit2020text">(<a href="../references.html#ref-benoit2020text" role="doc-biblioref"><strong>benoit2020text?</strong></a>)</span>:</p>
-<ol type="1">
-<li><p><strong>Selecting texts and defining the corpus.</strong> Identify the corpus of texts relevant to the research question. Texts are generally distinguished from one another by attributes relating to the author, speaker, time, or topic. Be aware of selection issues and data gaps (e.g.&nbsp;coalition manifestos tend to disappear after a coalition collapses, leading to a bias in the dataset towards more stable coalitions).</p></li>
-<li><p><strong>Converting texts into a common electronic format.</strong> This involves converting PDFs and image formats to text via OCR, standardising file types (HTML, XML, JSON, Word, Excel, TXT, TSV, CSV), handling character encoding issues (e.g.&nbsp;accents or special characters), and text cleaning (whitespace, page numbers). This step is often glossed over, but getting or creating a clean, organised dataset can be one of the most time-consuming components of any text-as-data project.</p></li>
-<li><p><strong>Defining documents and choosing the unit of analysis.</strong> Documents could be individual social media posts, newspaper articles, parliamentary speeches, and so on. Consider what level of granularity is needed to answer the research question. Texts are often analysed at the sentence level and then aggregated afterwards.</p></li>
-<li><p><strong>Defining and refining features.</strong> A “type” refers to the abstract category of a word or concept, while a “token” is a specific instance of that type as it appears in text. Preprocessing steps include tokenisation, casefolding, stemming, lemmatisation, stopword removal, and the identification of multi-word expressions (n-grams). Tokenisation can be more challenging in languages such as Chinese (with no spaces between words) or in morphologically rich languages like Finnish or Turkish.</p></li>
-<li><p><strong>Converting textual features into a quantitative matrix.</strong> This yields an N×M matrix, where N is the number of documents and M is the number of features. Values typically start as raw frequency counts but may be re-weighted via normalisation or tf-idf (a measure of importance of a word to a document in a collection, adjusted for the fact that some words appear more frequently in general). Trimming may be applied to overcome sparsity by filtering based on term frequency.</p></li>
-<li><p><strong>Analysing the matrix data using an appropriate statistical procedure.</strong></p></li>
-<li><p><strong>Interpreting and reporting the results.</strong></p></li>
-</ol>
-</section>
-<section id="applications" class="level3" data-number="2.1.4">
-<h3 data-number="2.1.4" class="anchored" data-anchor-id="applications"><span class="header-section-number">2.1.4</span> Applications</h3>
-<section id="characterising-text" class="level4" data-number="2.1.4.1">
-<h4 data-number="2.1.4.1" class="anchored" data-anchor-id="characterising-text"><span class="header-section-number">2.1.4.1</span> Characterising text</h4>
-<p><strong>Keyword extraction and analysis</strong> involves identifying the most frequent or distinctive terms in a corpus. For example, keyword datasets have been used to track how European political parties on Facebook discuss the migration crisis, with variation across countries and ideological groups <span class="citation" data-cites="caravaca2025european">(<a href="../references.html#ref-caravaca2025european" role="doc-biblioref"><strong>caravaca2025european?</strong></a>)</span>.</p>
-<p><strong>Named entity recognition (NER)</strong> identifies people, organisations, and other entities mentioned in text. <span class="citation" data-cites="jaros2018china">(<a href="../references.html#ref-jaros2018china" role="doc-biblioref"><strong>jaros2018china?</strong></a>)</span> used NER in Chinese official provincial newspapers to recognise all people and organisations named in Party newspapers, using the frequency of mentions as a measure of power. They found that Xi Jinping was much more frequently mentioned in Party newspapers than his predecessor.</p>
-<p><strong>Sentiment analysis</strong> measures the emotional tone of text. <span class="citation" data-cites="rheault2016measuring">(<a href="../references.html#ref-rheault2016measuring" role="doc-biblioref"><strong>rheault2016measuring?</strong></a>)</span> tracked the emotional polarity of government and opposition speeches in Britain from 1946 to 2013.</p>
-<p><strong>Readability analysis</strong> assesses how easy texts are to understand. <span class="citation" data-cites="benoit2019measuring">(<a href="../references.html#ref-benoit2019measuring" role="doc-biblioref"><strong>benoit2019measuring?</strong></a>)</span> examined the readability of US State of the Union addresses over time, finding a trend towards simpler language.</p>
-</section>
-<section id="classifying-into-known-categories" class="level4" data-number="2.1.4.2">
-<h4 data-number="2.1.4.2" class="anchored" data-anchor-id="classifying-into-known-categories"><span class="header-section-number">2.1.4.2</span> Classifying into known categories</h4>
-<p><strong>Dictionary analysis</strong> uses predefined lists of words to classify text. Dictionaries are interpretable but brittle: they do not generalise well to other datasets and are vulnerable to polysemy (e.g.&nbsp;the word “kind” can mean both “type” and “generous”).</p>
-<p><strong>Supervised machine learning</strong> is less interpretable but more flexible. A model is trained on labelled examples and then applied to classify unseen documents. For example, <span class="citation" data-cites="muller2024nostalgia">(<a href="../references.html#ref-muller2024nostalgia" role="doc-biblioref"><strong>muller2024nostalgia?</strong></a>)</span> used DistilBERT to measure party-level nostalgia across European democracies.</p>
-</section>
-<section id="discovering-categories" class="level4" data-number="2.1.4.3">
-<h4 data-number="2.1.4.3" class="anchored" data-anchor-id="discovering-categories"><span class="header-section-number">2.1.4.3</span> Discovering categories</h4>
-<p><strong>Topic modelling</strong> is an unsupervised method in which clusters of co-occurring words represent “topics” and documents contain them in relative proportion. Estimated topics are unlabelled, so a human must assign labels by interpreting the content of the words most highly associated with each topic. Choosing the correct number of topics involves balancing statistical measures and interpretability.</p>
-</section>
-<section id="measuring-latent-features" class="level4" data-number="2.1.4.4">
-<h4 data-number="2.1.4.4" class="anchored" data-anchor-id="measuring-latent-features"><span class="header-section-number">2.1.4.4</span> Measuring latent features</h4>
-<p><strong>Supervised scaling</strong> methods such as Wordscores <span class="citation" data-cites="laver2003extracting">(<a href="../references.html#ref-laver2003extracting" role="doc-biblioref"><strong>laver2003extracting?</strong></a>)</span> require some reference texts for which a score (e.g.&nbsp;left–right position) is known, from which the model learns to score new texts.</p>
-<p><strong>Unsupervised scaling</strong> methods such as Wordfish <span class="citation" data-cites="slapin2008scaling">(<a href="../references.html#ref-slapin2008scaling" role="doc-biblioref"><strong>slapin2008scaling?</strong></a>)</span> run without reference texts. It is up to the researcher to interpret what the estimated dimensions actually represent. A risk is that the model might capture thematic differences (e.g.&nbsp;talking about the economy vs.&nbsp;foreign policy) rather than ideological differences.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The techniques discussed this week rely on document-feature matrices as the numeric representation of text. Next week, we will introduce another representation — embeddings — which underpin many modern text analysis methods and are fundamental to large language models.</p>
-</div>
-</div>
-</section>
-</section>
-</section>
-<section id="lab" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">2.2</span> Lab</h2>
-<p><em>Text preprocessing and document-feature matrices in Python.</em></p>
-</section>
-<section id="readings" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="readings"><span class="header-section-number">2.3</span> Readings</h2>
+<section id="readings" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="readings"><span class="header-section-number">5.3</span> Readings</h2>
 <ul>
-<li>Grimmer, J. and Stewart, B.M. (2013) ‘Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts’, <em>Political Analysis</em>, 21(3), pp.&nbsp;267–297. <a href="https://doi.org/10.1093/pan/mps028" class="uri">https://doi.org/10.1093/pan/mps028</a></li>
+<li>Birkenmaier, L., Lechner, C.M. and Wagner, C. (2024) ‘The Search for Solid Ground in Text as Data: A Systematic Review of Validation Practices and Practical Recommendations for Validation’, <em>Communication Methods and Measures</em>, 18(3), pp.&nbsp;249–277. <a href="https://doi.org/10.1080/19312458.2023.2285765" class="uri">https://doi.org/10.1080/19312458.2023.2285765</a></li>
 </ul>
 
 
@@ -488,7 +393,7 @@ Note
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/lorcanmclaren\.com\/course");
+        var filterRegex = new RegExp("https:\/\/lorcanmclaren\.com\/llms-for-social-scientists");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -822,13 +727,13 @@ Note
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/week-01.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      <a href="../weeks/week-04.html" class="pagination-link" aria-label="Transformers">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Transformers</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/week-03.html" class="pagination-link" aria-label="Embeddings">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Embeddings</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../weeks/week-06.html" class="pagination-link" aria-label="Generative Language Models I">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Generative Language Models I</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -837,4 +742,4 @@ Note
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lorcanmclaren/ai-llms-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+</body></html>

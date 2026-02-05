@@ -3,7 +3,7 @@ project:
   output-dir: docs
   render:
     - "*.qmd"
-    - "!course/"  # course is a separate Quarto book project, rendered independently
+    - "!llms-for-social-scientists/"  # course is a separate Quarto book project, rendered independently
   resources: # here we need to add any files that users should be able to download
     - files/cv.pdf
     - files/taking-the-green-pill.pdf
