@@ -1,0 +1,20 @@
+# Generative Language Models II {#sec-week7}
+
+::: {.callout-note}
+## Week 7
+**Lecture:** Advanced prompting\
+**Lab:** Introduction to `langchain`
+:::
+
+## Lecture
+
+*Content to be added.*
+
+## Lab
+
+*Content to be added.*
+
+## Readings
+
+- Abdurahman, S. et al. (2024) 'Perils and opportunities in using large language models in psychological research', *PNAS Nexus*, 3(7), p. 245. <https://doi.org/10.1093/pnasnexus/pgae245>
+- Barrie, C., Palmer, A. and Spirling, A. (2024) 'Replication for Language Models'. <https://arthurspirling.org/documents/BarriePalmerSpirling_TrustMeBro.pdf>

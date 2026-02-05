@@ -1,0 +1,32 @@
+# Datasets {#sec-datasets}
+
+Explore the following datasets for use in your group project. These datasets vary in format and accessibility -- some are readily available in CSV format while others may require additional wrangling or scraping. You are also welcome to find other datasets to work with or to scrape your own data from news sites or other sources. While extra effort in data collection will be considered in grading, remember that the main focus is applying the methods covered in this module.
+
+## Party Manifestos and Political Programs
+
+- [Manifesto Project](https://manifesto-project.wzb.eu/)
+- [The American Presidency Project](https://www.presidency.ucsb.edu/)
+
+## Parliamentary Speeches
+
+- **ParlEE** (European Parliament speeches)
+- [UN General Debate Corpus](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0TJX8Y)
+- US Congressional Record
+- Irish Oireachtas Record
+
+## Political Advertising
+
+- Meta Ads Library API
+
+## News and Legal Documents
+
+- LexisNexis (available through UCD Library)
+
+## Collections
+
+The following links collect multiple datasets for you to explore. Some of these are textual data, while others may be useful to augment your analysis (e.g., data on party ideology, vote share, government/opposition status and more).
+
+- Irish Politics Data
+- PolData
+- NLP Datasets
+- Google Dataset Search -- Political Science

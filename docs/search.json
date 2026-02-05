@@ -1,17 +1,10 @@
 [
   {
-    "objectID": "wip/text-annotator.html",
-    "href": "wip/text-annotator.html",
-    "title": "Text Annotation Tooling",
+    "objectID": "wp/magic-words.html",
+    "href": "wp/magic-words.html",
+    "title": "Magic Words or Methodical Work? Challenging Conventional Wisdom in LLM-Based Political Text Annotation",
     "section": "",
-    "text": "Text Annotation Tooling\n    \n        \n    \n    \n    \n        \n    \n    \n\n\nI am currently developing a customisable tool to provide an improved text annotation workflow to researchers. Creating large sets of annotated text is a common task in many text-as-data approaches. Recent advancements in LLMs have accelerated this trend, as domain-specific ground truth is important for validating zero- and few-shot models, or for fine-tuning.\nMy tool provides the following benefits at zero cost:\n\nConsistent experience for teams of annotators\nLow-latency, reproducible workflows\nMultiple common annotation types, including binary, dropdown or Likert scale\nFully customisable, with functionality to develop your own annotation schema and instructions\nNo more messy codebooks that force annotators to switch windows\nCSV input and output for interoperability\n\n\nTry out a beta version of the tool here. Feel free to reach out if you encounter any bugs or need additional features for your annotation task"
-  },
-  {
-    "objectID": "pub/mclaren_gaze_2020.html",
-    "href": "pub/mclaren_gaze_2020.html",
-    "title": "Gaze, Dominance and Dialogue Role in the MULTISIMO Corpus",
-    "section": "",
-    "text": "Gaze, Dominance and Dialogue Role in the MULTISIMO Corpus\n    \n            with\n                                    Maria Koutsombogera                                                and Carl Vogel\n                                            \n        \n    PaperOpen Access\n    \n    \n        \n    \n    \n\n\n\nAbstract\nAnalysis of human interactions benefits from understanding patterns of gaze in dialogue. Using a multi-modal task oriented dialogue corpus, we evaluate relations between gaze behaviours, conversational dominance and dialogue role. Dominant players spend more time looking at their co-player than their less dominant fellows; the facilitator spends more time gazing at the dominant player than at the less dominant; dominant players spend longer averting their gaze than their less dominant fellows. When aligned with dialogue roles, gaze behaviour differences between players are demonstrated when occupying the role of speaker but not of listener. Less dominant speakers gaze longer at a facilitator, while effects on averted gaze and co-player directed gaze remain present for dominant speakers but not for dominant listeners. Finally, where dominance is not balanced among players, mutual gaze involving players only is less than mutual gaze involving facilitators."
+    "text": "Magic Words or Methodical Work? Challenging Conventional Wisdom in LLM-Based Political Text Annotation\n    \n            with\n                                    James P. Cross,\n                            Zuzanna Krakowska,\n                            Robin Rauner                                                and Martijn Schoonvelde\n                                            \n        \n    \n    \n    \n        \n    \n        \n        Abstract\n        Generative large language models (LLMs) have been embraced by the research community as a low-cost, quick, and consistent way to classify textual data. Prior scholarship has demonstrated the accuracy of LLMs across a variety of social science classification tasks. However, there has been little systematic investigation of the effect of model choice. model size, prompt style and hyperparameter settings on classification performance. This paper evaluates the importance of these choices across four distinct annotation tasks from the field of political science, using human-annotated texts as a benchmark. Our findings reveal significant tradeoffs between annotation performance and computational efficiency, with larger models and more complex prompts yielding inconsistent performance gains while substantially increasing inference time, energy consumption, and carbon emissions. Contrary to widely-held assumptions, popular prompt engineering techniques such as persona and chain-of-thought prompting demonstrate highly task- and model-dependent effects, sometimes degrading rather than improving performance. We also find that model size does not consistently correlate with better outcomes. These results underscore the necessity of task-specific empirical validation rather than universal best practices when designing LLM-based annotation workflows."
   },
   {
     "objectID": "wp/climate-disasters.html",
@@ -21,11 +14,11 @@
     "text": "When Climate Change Hits Home: Natural Disasters and Climate Rhetoric in the European Parliament\n    \n        \n    \n    \n    \n        \n    \n        \n        Abstract\n        Climate change is increasing the frequency and severity of natural disasters. While extreme weather events may heighten public awareness of environmental changes, their influence on political rhetoric remains understudied. This paper examines whether natural disaster incidence shapes how Members of the European Parliament (MEPs) discuss climate change, with particular attention to the sense of proximity or distance from climate impacts created by their speech—whether climate change is presented as spatially and temporally urgent or as a distant problem, to be dealt with by faraway people or future generations. || While prior research shows that natural disasters do not increase environmental issue salience in party press releases, their impact on parliamentary speech remains unexplored. Moreover, disasters may alter qualitative aspects of climate discourse even without increasing its frequency. || Analysing European Parliament debates from 2014-2024 using large language models (LLMs), this study investigates how disaster incidence affects climate rhetoric, examining whether disaster characteristics—including proximity, type, number of people affected, and cost of damage—shape MEPs’ representation of the climate crisis."
   },
   {
-    "objectID": "wp/magic-words.html",
-    "href": "wp/magic-words.html",
-    "title": "Magic Words or Methodical Work? Challenging Conventional Wisdom in LLM-Based Political Text Annotation",
+    "objectID": "pub/mclaren_heuristic_2020.html",
+    "href": "pub/mclaren_heuristic_2020.html",
+    "title": "A Heuristic Method for Automatic Gaze Detection in Constrained Multi-Modal Dialogue Corpora",
     "section": "",
-    "text": "Magic Words or Methodical Work? Challenging Conventional Wisdom in LLM-Based Political Text Annotation\n    \n            with\n                                    James P. Cross,\n                            Zuzanna Krakowska,\n                            Robin Rauner                                                and Martijn Schoonvelde\n                                            \n        \n    \n    \n    \n        \n    \n        \n        Abstract\n        Generative large language models (LLMs) have been embraced by the research community as a low-cost, quick, and consistent way to classify textual data. Prior scholarship has demonstrated the accuracy of LLMs across a variety of social science classification tasks. However, there has been little systematic investigation of the effect of model choice. model size, prompt style and hyperparameter settings on classification performance. This paper evaluates the importance of these choices across four distinct annotation tasks from the field of political science, using human-annotated texts as a benchmark. Our findings reveal significant tradeoffs between annotation performance and computational efficiency, with larger models and more complex prompts yielding inconsistent performance gains while substantially increasing inference time, energy consumption, and carbon emissions. Contrary to widely-held assumptions, popular prompt engineering techniques such as persona and chain-of-thought prompting demonstrate highly task- and model-dependent effects, sometimes degrading rather than improving performance. We also find that model size does not consistently correlate with better outcomes. These results underscore the necessity of task-specific empirical validation rather than universal best practices when designing LLM-based annotation workflows."
+    "text": "A Heuristic Method for Automatic Gaze Detection in Constrained Multi-Modal Dialogue Corpora\n    \n            with\n                                    Maria Koutsombogera                                                and Carl Vogel\n                                            \n        \n    PaperOpen AccessCode\n    \n    \n        \n    \n    \n\n\n\nAbstract\nWe describe a heuristic-based approach to determining gaze allocation automatically in a multi-modal task oriented dialogue corpus. We present the development of the system and the evaluation of its performance and discuss the findings, including the shortcomings and the perspectives of the implemented approach."
   },
   {
     "objectID": "index.html",
@@ -46,7 +39,7 @@
     "href": "index.html#teaching",
     "title": "Lorcan McLaren",
     "section": "Teaching",
-    "text": "Teaching\n\nModule Instructor\n\nAI and Large Language Models, Postgraduate (Spring 2025, 2026) — Syllabus\n\n\n\nTeaching Assistant\n\nIntroduction to EU Politics, Undergraduate (Autumn 2023, 2024)\nResearch Methods in Political Science, Undergraduate (Spring 2024)"
+    "text": "Teaching\n\nModule Instructor\n\nAI and Large Language Models, Postgraduate (Spring 2025, 2026) — Course Website | Syllabus\n\n\n\nTeaching Assistant\n\nIntroduction to EU Politics, Undergraduate (Autumn 2023, 2024)\nResearch Methods in Political Science, Undergraduate (Spring 2024)"
   },
   {
     "objectID": "index.html#contact",
@@ -56,17 +49,24 @@
     "text": "Contact\nFor inquiries, collaboration opportunities, or to discuss my work, feel free to reach out via email."
   },
   {
+    "objectID": "pub/mclaren_gaze_2020.html",
+    "href": "pub/mclaren_gaze_2020.html",
+    "title": "Gaze, Dominance and Dialogue Role in the MULTISIMO Corpus",
+    "section": "",
+    "text": "Gaze, Dominance and Dialogue Role in the MULTISIMO Corpus\n    \n            with\n                                    Maria Koutsombogera                                                and Carl Vogel\n                                            \n        \n    PaperOpen Access\n    \n    \n        \n    \n    \n\n\n\nAbstract\nAnalysis of human interactions benefits from understanding patterns of gaze in dialogue. Using a multi-modal task oriented dialogue corpus, we evaluate relations between gaze behaviours, conversational dominance and dialogue role. Dominant players spend more time looking at their co-player than their less dominant fellows; the facilitator spends more time gazing at the dominant player than at the less dominant; dominant players spend longer averting their gaze than their less dominant fellows. When aligned with dialogue roles, gaze behaviour differences between players are demonstrated when occupying the role of speaker but not of listener. Less dominant speakers gaze longer at a facilitator, while effects on averted gaze and co-player directed gaze remain present for dominant speakers but not for dominant listeners. Finally, where dominance is not balanced among players, mutual gaze involving players only is less than mutual gaze involving facilitators."
+  },
+  {
+    "objectID": "wip/text-annotator.html",
+    "href": "wip/text-annotator.html",
+    "title": "Text Annotation Tooling",
+    "section": "",
+    "text": "Text Annotation Tooling\n    \n        \n    \n    \n    \n        \n    \n    \n\n\nI am currently developing a customisable tool to provide an improved text annotation workflow to researchers. Creating large sets of annotated text is a common task in many text-as-data approaches. Recent advancements in LLMs have accelerated this trend, as domain-specific ground truth is important for validating zero- and few-shot models, or for fine-tuning.\nMy tool provides the following benefits at zero cost:\n\nConsistent experience for teams of annotators\nLow-latency, reproducible workflows\nMultiple common annotation types, including binary, dropdown or Likert scale\nFully customisable, with functionality to develop your own annotation schema and instructions\nNo more messy codebooks that force annotators to switch windows\nCSV input and output for interoperability\n\n\nTry out a beta version of the tool here. Feel free to reach out if you encounter any bugs or need additional features for your annotation task"
+  },
+  {
     "objectID": "wp/here-and-now.html",
     "href": "wp/here-and-now.html",
     "title": "Here and Now or There and Then? The Psychological Distance of Climate Change in Parliamentary Speech",
     "section": "",
     "text": "Here and Now or There and Then? The Psychological Distance of Climate Change in Parliamentary Speech\n    \n        \n    \n    \n    \n        \n    \n        \n        Abstract\n        Climate change represents an existential risk to global society, yet public engagement has not fully risen to meet the challenge. Political speech can change citizens’ support for climate action and willingness to modify their behaviour. One feature that matters – including when speaking to oppositional audiences about climate – is psychological distance: the sense of proximity or distance from the impacts of climate change created by the speech. While extensive research demonstrates its importance for persuasion, it is unclear whether politicians employ this feature strategically. This paper addresses that gap by developing and validating automated methods to measure psychological distance in political speech. I introduce a translated dataset of 35,000 European Parliament speeches on climate-related topics (2014-2024). I explore and validate the use of generative language models to label training data for fine-tuning encoder classifiers, in order to identify this feature. Subsequent analysis sheds light on the internal and external motivators of climate communication, including the demographic characteristics of legislators and their ideological positions. Future avenues for research on the drivers of European climate politics are discussed, as are the implications for communication practitioners."
-  },
-  {
-    "objectID": "pub/mclaren_heuristic_2020.html",
-    "href": "pub/mclaren_heuristic_2020.html",
-    "title": "A Heuristic Method for Automatic Gaze Detection in Constrained Multi-Modal Dialogue Corpora",
-    "section": "",
-    "text": "A Heuristic Method for Automatic Gaze Detection in Constrained Multi-Modal Dialogue Corpora\n    \n            with\n                                    Maria Koutsombogera                                                and Carl Vogel\n                                            \n        \n    PaperOpen AccessCode\n    \n    \n        \n    \n    \n\n\n\nAbstract\nWe describe a heuristic-based approach to determining gaze allocation automatically in a multi-modal task oriented dialogue corpus. We present the development of the system and the evaluation of its performance and discuss the findings, including the shortcomings and the perspectives of the implemented approach."
   }
 ]

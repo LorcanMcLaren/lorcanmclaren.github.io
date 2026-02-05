@@ -1,0 +1,646 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "AI and Large Language Models",
+    "section": "",
+    "text": "Welcome\nThis is the course website for POL42560 AI and Large Language Models, taught at University College Dublin in the Spring Trimester 2026.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#overview",
+    "href": "index.html#overview",
+    "title": "AI and Large Language Models",
+    "section": "Overview",
+    "text": "Overview\nLarge language models (LLMs), such as those behind tools like ChatGPT, have garnered significant attention for their ability to generate human-like text, sparking both enthusiasm and debate about their implications for various fields. For social scientists, LLMs offer a potentially useful approach to processing and interpreting vast amounts of data, enhancing our ability to study complex societal issues.\nThis course offers an interdisciplinary approach to understanding and applying LLMs in social and political science, with a focus on text analysis. It combines theoretical foundations with practical, hands-on experience in applying LLMs to address substantive social science questions. Students will explore the capabilities and limitations of LLMs and engage critically with issues such as bias, environmental impact, misinformation, and intellectual property rights. They will also become familiar with essential research practices including documentation, reproducibility, and validation.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#learning-outcomes",
+    "href": "index.html#learning-outcomes",
+    "title": "AI and Large Language Models",
+    "section": "Learning Outcomes",
+    "text": "Learning Outcomes\nBy the end of the course, students will be able to:\n\nUnderstand the fundamentals of large language models and their applications in social sciences.\nImplement LLMs for various tasks relevant to political and social science research using Python.\nCritically evaluate the ethical and societal implications of AI technologies, particularly LLMs, in the context of social science.\nApply best practices in research documentation, reproducibility, and validation when using AI tools.\nEngage in informed discussions about the impact of AI on society, including issues of bias, sustainability, and concentration of power.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#prerequisites",
+    "href": "index.html#prerequisites",
+    "title": "AI and Large Language Models",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nThis course is designed for students with or without experience in Python, but a willingness to learn quickly and engage with technical content is essential. Students without prior programming experience would benefit from taking POL42340 Programming for Social Scientists alongside this course to familiarise themselves with Python fundamentals.\nPOL42050 Quantitative Text Analysis provides a broader overview of text-as-data approaches, complementary to the content of this course.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#course-details",
+    "href": "index.html#course-details",
+    "title": "AI and Large Language Models",
+    "section": "Course Details",
+    "text": "Course Details\n\n\n\nTime\nFri, 11:00 – 12:50\n\n\nFormat\nIn-person lectures and labs\n\n\nCredits\n10, Level 4\n\n\nInstructor\nLorcan McLaren\n\n\nEmail\nlorcan.mclaren@ucdconnect.ie\n\n\nOffice Hours\nWed, 15:00 – 16:00 (sign up)",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Course Structure\nEach class involves a lecture introducing the topic, followed by a hands-on lab session where we work on exercises related to the lecture content. Students are expected to complete the readings before class each week, and to submit their lab work via Brightspace.\nSee the Weekly Content chapters for detailed content for each session.",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "syllabus.html#schedule-at-a-glance",
+    "href": "syllabus.html#schedule-at-a-glance",
+    "title": "Syllabus",
+    "section": "Schedule at a Glance",
+    "text": "Schedule at a Glance\n\n\n\n\n\n\n\n\nWeek\nTopic\nLab\n\n\n\n\n1\nIntroduction\nSetting up a Python development environment\n\n\n2\nText-as-Data\nDealing with textual data in Python\n\n\n3\nEmbeddings\nMeasuring text similarity using embeddings\n\n\n4\nTransformers\nFine tuning transformers for text classification\n\n\n5\nValidation and Performance Measurement\nMeasuring model performance with scikit-learn\n\n\n6\nGenerative Language Models I\nIntroduction to HuggingFace transformers\n\n\n7\nGenerative Language Models II\nIntroduction to langchain\n\n\n–\nStudy Break\n\n\n\n8\nInterpretability, Explainability and Bias\nApplying interpretability tools; visualising bias\n\n\n–\nGood Friday\n\n\n\n10\nEthical Use of LLMs?\nMeasuring environmental costs of LLM use\n\n\n11\nBeyond Text\nWorking with images, audio and video in Python\n\n\n12\nProject Presentations",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "syllabus.html#textbooks-and-readings",
+    "href": "syllabus.html#textbooks-and-readings",
+    "title": "Syllabus",
+    "section": "Textbooks and Readings",
+    "text": "Textbooks and Readings\nAll mandatory readings are indicated in the weekly chapters and are open access or available through the UCD Library. Readings should be completed ahead of class each week.\n\nApproachable\n\nAlammar, J. and Grootendorst, M. (2024) Hands-On Large Language Models: Language Understanding and Generation. 1st edition. O’Reilly Media.\nGrimmer, J., Roberts, M.E. and Stewart, B.M. (2022) Text as Data: A New Framework for Machine Learning and the Social Sciences. Princeton University Press.\n\n\n\nDeeper Dive\n\nRaschka, S. (2024) Build a Large Language Model (From Scratch). Manning.\nKamath, U. et al. (2024) Large Language Models: A Deep Dive: Bridging Theory and Practice. Springer.",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "assessment.html",
+    "href": "assessment.html",
+    "title": "Assessment",
+    "section": "",
+    "text": "Components",
+    "crumbs": [
+      "Course Information",
+      "Assessment"
+    ]
+  },
+  {
+    "objectID": "assessment.html#components",
+    "href": "assessment.html#components",
+    "title": "Assessment",
+    "section": "",
+    "text": "Component\nDeadline\nGrade %\n\n\n\n\nLab participation\nContinuous\n20\n\n\nGroup presentations\nApril 24\n20\n\n\nGroup project\nMay 1\n60",
+    "crumbs": [
+      "Course Information",
+      "Assessment"
+    ]
+  },
+  {
+    "objectID": "assessment.html#lab-participation",
+    "href": "assessment.html#lab-participation",
+    "title": "Assessment",
+    "section": "Lab Participation",
+    "text": "Lab Participation\nEach lab session includes a Jupyter notebook that must be submitted through Brightspace for participation credit. While your solutions don’t need to be perfect, they should demonstrate a genuine attempt at completing all exercises. Include clear comments throughout your code to show your understanding of the concepts.\nYou should execute all code cells prior to saving, so that the output for each cell is visible in the submitted version.\nYou will have one week to submit the notebook from each lab session, up to the start of the subsequent class (e.g., the notebook for Week 2 must be submitted by 08:59 on Friday in Week 3). You may miss up to one submission without prior approval. Late submissions will not be accepted unless an extension has been granted, as exercise solutions may be discussed in class.",
+    "crumbs": [
+      "Course Information",
+      "Assessment"
+    ]
+  },
+  {
+    "objectID": "assessment.html#group-presentation",
+    "href": "assessment.html#group-presentation",
+    "title": "Assessment",
+    "section": "Group Presentation",
+    "text": "Group Presentation\nEach group must deliver a presentation lasting no more than 12 minutes, using either LaTeX Beamer, PowerPoint or Google Slides. Submit your slides on Brightspace by 23:59 on Wednesday, April 22. Groups should divide the presentation between 2–3 speakers, with non-presenting members taking responsibility for answering questions from peers and the instructor during the Q&A session.\nYou should prepare together by practising the presentation and anticipating potential questions. The same grade will be awarded to all group members, unless one or more members fail to participate in both the presentation and Q&A.\nYour presentation should cover:\n\nResearch question and importance\nTheoretical expectations and main hypothesis\nData description\nMethodology for hypothesis testing\nInitial results (if available)\nChallenges encountered and potential risks for next steps (if applicable)",
+    "crumbs": [
+      "Course Information",
+      "Assessment"
+    ]
+  },
+  {
+    "objectID": "assessment.html#group-project",
+    "href": "assessment.html#group-project",
+    "title": "Assessment",
+    "section": "Group Project",
+    "text": "Group Project\nEach group must submit a 4,000–5,000 word research paper (excluding references and appendices) as well as the code used to conduct the analysis. All students in a group will be awarded the same grade, but you may be asked to indicate who contributed to which parts of the project.\nYou have free choice in selecting your research question, but you must justify why it is relevant and important for understanding or addressing a meaningful social science question. You may either collect original data appropriate for your research question or identify and use existing datasets (see Appendix A — Datasets), clearly explaining your data source selection. Your analysis must incorporate at least one of the methods covered in this course – embeddings, transformers, or generative models – in a way that meaningfully advances your research objectives.\n\nSubmission Format\n\nA research paper in PDF format. The paper must be written in LaTeX using the collaborative Overleaf document that will be created for each group.\nA GitHub repository containing all code needed to reproduce your analysis.\n\n\n\nResearch Paper Structure\nThe paper should contain the following sections:\n\nIntroduction – Research question/puzzle, significance, main hypothesis\nTheory – Theoretical framework, prior findings on DV-IV relationship, expected effects\nData & Methods – Dataset overview, unit of analysis, sample size & missing data, analysis approach\nResults – Empirical findings, statistical tests, key patterns\nConclusion – Link to research question, main insights, limitations, broader implications",
+    "crumbs": [
+      "Course Information",
+      "Assessment"
+    ]
+  },
+  {
+    "objectID": "software.html",
+    "href": "software.html",
+    "title": "Software",
+    "section": "",
+    "text": "Development Environment\nAll code for this course should be written in Python. For those who haven’t worked with this language previously, POL42340 Programming for Social Scientists runs in parallel to this course and provides a comprehensive introduction to Python.\nWe will use VS Code to write and execute code locally. For some lab sessions and the group project, where your personal device may not be powerful enough or where long execution times are expected, Google Colab should be used. Colab provides limited free access to T4 GPUs, which will enable you to run code that cannot be executed locally without a GPU.",
+    "crumbs": [
+      "Course Information",
+      "Software"
+    ]
+  },
+  {
+    "objectID": "software.html#package-management",
+    "href": "software.html#package-management",
+    "title": "Software",
+    "section": "Package Management",
+    "text": "Package Management\nWe will use venv and pip to manage our Python environment and install packages (though feel free to use Anaconda if you are more familiar with this platform). I strongly encourage the use of Git for version control, particularly when working on your group project; however, we will not cover this extensively in class.",
+    "crumbs": [
+      "Course Information",
+      "Software"
+    ]
+  },
+  {
+    "objectID": "software.html#useful-python-packages",
+    "href": "software.html#useful-python-packages",
+    "title": "Software",
+    "section": "Useful Python Packages",
+    "text": "Useful Python Packages\nThe following packages are particularly useful for dealing with textual data:\n\n\n\nPackage\nDescription\n\n\n\n\nspaCy\nIndustrial-strength NLP library\n\n\nNLTK\nClassic NLP toolkit\n\n\nGensim\nTopic modelling and word embeddings\n\n\nsentence-transformers\nSentence and document embeddings\n\n\ntransformers\nHuggingFace model hub and pipelines\n\n\nlangchain\nFramework for building LLM applications\n\n\nscikit-learn\nMachine learning and evaluation metrics",
+    "crumbs": [
+      "Course Information",
+      "Software"
+    ]
+  },
+  {
+    "objectID": "policies.html",
+    "href": "policies.html",
+    "title": "Policies",
+    "section": "",
+    "text": "AI Use\nI encourage the use of generative AI tools when completing the assignments for this module, but all work relying on AI-generated content must adhere to the highest academic standards. Users of this technology must be aware of what it can and, more importantly, what it cannot do well. It is crucial for you to exercise judgement when evaluating the quality and reliability of content generated through AI platforms.\nAI is not a panacea for all writing challenges; it will not automatically generate a flawless, logically coherent, and factually correct assignment. Instead, use AI as a tool to tackle specific issues such as brainstorming and idea formation, literature discovery, and text drafting. View your preferred AI platform(s) as useful but imperfect tools that can offer inspiration, new perspectives, and supplementary areas for research for your own work. In-depth research on your part remains essential to ensure coherent, factual, and scientifically informed perspectives in your assignment. Always cross-reference the information AI offers against other independent and reliable sources.\nAI use must be in line with UCD’s policies on academic integrity.",
+    "crumbs": [
+      "Course Information",
+      "Policies"
+    ]
+  },
+  {
+    "objectID": "policies.html#ai-use",
+    "href": "policies.html#ai-use",
+    "title": "Policies",
+    "section": "",
+    "text": "Documenting AI Use\nYou are expected to provide an account of the tools used and how they were used in a mandatory appendix to your group project. This appendix will be assessed as part of each assignment, with grade points awarded for effective communication of the methods used to generate content.\nFor each instance where a generative AI tool is used, you need to provide:\n\nAn in-text citation or footnote\nA bibliographic reference to the tool used and the date of access\nAn entry in the mandatory AI appendix detailing how the tool was used\n\nFor code, while I do not expect you to keep a log of all prompts used, I do expect you to add comments indicating where code has fully or partially been generated by a tool such as ChatGPT or GitHub Copilot.\n\n\nSuggested AI Tools\n\nChatGPT – good at writing code\nClaude – better than ChatGPT at writing text\nGemini – fast and useful integrations\nPerplexity – great for finding relevant web pages and documents\nHuggingChat – open source, flexible, and free",
+    "crumbs": [
+      "Course Information",
+      "Policies"
+    ]
+  },
+  {
+    "objectID": "policies.html#plagiarism",
+    "href": "policies.html#plagiarism",
+    "title": "Policies",
+    "section": "Plagiarism",
+    "text": "Plagiarism\nAcademic integrity is one of the core values of the UCD Education Strategy. Plagiarism is the inclusion, in any form of assessment, of material without due acknowledgement of its original source. See UCD’s Academic Integrity Policy for full details.",
+    "crumbs": [
+      "Course Information",
+      "Policies"
+    ]
+  },
+  {
+    "objectID": "policies.html#late-submission",
+    "href": "policies.html#late-submission",
+    "title": "Policies",
+    "section": "Late Submission",
+    "text": "Late Submission\nLab notebooks submitted late will not be accepted unless an extension has been granted. For group projects submitted past the due date:\n\nCoursework received within 5 working days after the due date will have the grade reduced by one grade point.\nCoursework received between 5 and 10 working days after the due date will have the grade reduced by two grade points.\nCoursework received more than 10 working days after the due date will not be accepted.",
+    "crumbs": [
+      "Course Information",
+      "Policies"
+    ]
+  },
+  {
+    "objectID": "policies.html#office-hours",
+    "href": "policies.html#office-hours",
+    "title": "Policies",
+    "section": "Office Hours",
+    "text": "Office Hours\nWeekly office hours during the teaching term: Wednesdays, 15:00–16:00. Book a slot via Calendly if you wish to attend, either in person or online.",
+    "crumbs": [
+      "Course Information",
+      "Policies"
+    ]
+  },
+  {
+    "objectID": "policies.html#syllabus-modification-rights",
+    "href": "policies.html#syllabus-modification-rights",
+    "title": "Policies",
+    "section": "Syllabus Modification Rights",
+    "text": "Syllabus Modification Rights\nI reserve the right to reasonably alter the elements of the syllabus at any time to keep pace with the course schedule. If adjustments are made, the revised syllabus will be uploaded to Brightspace.",
+    "crumbs": [
+      "Course Information",
+      "Policies"
+    ]
+  },
+  {
+    "objectID": "weeks/week-01.html",
+    "href": "weeks/week-01.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "1.1 Lecture\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-01.html#lab",
+    "href": "weeks/week-01.html#lab",
+    "title": "1  Introduction",
+    "section": "1.2 Lab",
+    "text": "1.2 Lab\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-01.html#readings",
+    "href": "weeks/week-01.html#readings",
+    "title": "1  Introduction",
+    "section": "1.3 Readings",
+    "text": "1.3 Readings\n\nGrossmann, I. et al. (2023) ‘AI and the transformation of social science research’, Science, 380(6650), pp. 1108–1109. https://doi.org/10.1126/science.adi1778\nZiems, C. et al. (2023) ‘Can Large Language Models Transform Computational Social Science?’ arXiv. http://arxiv.org/abs/2305.03514",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-02.html",
+    "href": "weeks/week-02.html",
+    "title": "2  Text-as-Data",
+    "section": "",
+    "text": "2.1 Lecture\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Text-as-Data</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-02.html#lab",
+    "href": "weeks/week-02.html#lab",
+    "title": "2  Text-as-Data",
+    "section": "2.2 Lab",
+    "text": "2.2 Lab\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Text-as-Data</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-02.html#readings",
+    "href": "weeks/week-02.html#readings",
+    "title": "2  Text-as-Data",
+    "section": "2.3 Readings",
+    "text": "2.3 Readings\n\nGrimmer, J. and Stewart, B.M. (2013) ‘Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts’, Political Analysis, 21(3), pp. 267–297. https://doi.org/10.1093/pan/mps028",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Text-as-Data</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-03.html",
+    "href": "weeks/week-03.html",
+    "title": "3  Embeddings",
+    "section": "",
+    "text": "3.1 Lecture\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Embeddings</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-03.html#lab",
+    "href": "weeks/week-03.html#lab",
+    "title": "3  Embeddings",
+    "section": "3.2 Lab",
+    "text": "3.2 Lab\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Embeddings</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-03.html#readings",
+    "href": "weeks/week-03.html#readings",
+    "title": "3  Embeddings",
+    "section": "3.3 Readings",
+    "text": "3.3 Readings\n\nRheault, L. and Cochrane, C. (2020) ‘Word Embeddings for the Analysis of Ideological Placement in Parliamentary Corpora’, Political Analysis, 28(1), pp. 112–133. https://doi.org/10.1017/pan.2019.26\nRodriguez, P.L. and Spirling, A. (2022) ‘Word Embeddings: What Works, What Doesn’t, and How to Tell the Difference for Applied Research’, Journal of Politics, 84(1), pp. 101–115. https://doi.org/10.1086/715162",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Embeddings</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-04.html",
+    "href": "weeks/week-04.html",
+    "title": "4  Transformers",
+    "section": "",
+    "text": "4.1 Lecture\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Transformers</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-04.html#lab",
+    "href": "weeks/week-04.html#lab",
+    "title": "4  Transformers",
+    "section": "4.2 Lab",
+    "text": "4.2 Lab\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Transformers</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-04.html#readings",
+    "href": "weeks/week-04.html#readings",
+    "title": "4  Transformers",
+    "section": "4.3 Readings",
+    "text": "4.3 Readings\n\nWidmann, T. and Wich, M. (2023) ‘Creating and Comparing Dictionary, Word Embedding, and Transformer-Based Models to Measure Discrete Emotions in German Political Text’, Political Analysis, 31(4), pp. 626–641. https://doi.org/10.1017/pan.2022.15\nLaurer, M. et al. (2024) ‘Less Annotating, More Classifying: Addressing the Data Scarcity Issue of Supervised Machine Learning with Deep Transfer Learning and BERT-NLI’, Political Analysis, 32(1), pp. 84–100. https://doi.org/10.1017/pan.2023.20",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Transformers</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-05.html",
+    "href": "weeks/week-05.html",
+    "title": "5  Validation and Performance Measurement",
+    "section": "",
+    "text": "5.1 Lecture\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Validation and Performance Measurement</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-05.html#lab",
+    "href": "weeks/week-05.html#lab",
+    "title": "5  Validation and Performance Measurement",
+    "section": "5.2 Lab",
+    "text": "5.2 Lab\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Validation and Performance Measurement</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-05.html#readings",
+    "href": "weeks/week-05.html#readings",
+    "title": "5  Validation and Performance Measurement",
+    "section": "5.3 Readings",
+    "text": "5.3 Readings\n\nBirkenmaier, L., Lechner, C.M. and Wagner, C. (2024) ‘The Search for Solid Ground in Text as Data: A Systematic Review of Validation Practices and Practical Recommendations for Validation’, Communication Methods and Measures, 18(3), pp. 249–277. https://doi.org/10.1080/19312458.2023.2285765",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Validation and Performance Measurement</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-06.html",
+    "href": "weeks/week-06.html",
+    "title": "6  Generative Language Models I",
+    "section": "",
+    "text": "6.1 Lecture\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Generative Language Models I</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-06.html#lab",
+    "href": "weeks/week-06.html#lab",
+    "title": "6  Generative Language Models I",
+    "section": "6.2 Lab",
+    "text": "6.2 Lab\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Generative Language Models I</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-06.html#readings",
+    "href": "weeks/week-06.html#readings",
+    "title": "6  Generative Language Models I",
+    "section": "6.3 Readings",
+    "text": "6.3 Readings\n\nHeseltine, M. and Hohenberg, B.C. von (2024) ‘Large language models as a substitute for human experts in annotating political text’, Research & Politics. https://doi.org/10.1177/20531680241236239\nGilardi, F., Alizadeh, M. and Kubli, M. (2023) ‘ChatGPT outperforms crowd workers for text-annotation tasks’, Proceedings of the National Academy of Sciences, 120(30), p. e2305016120. https://doi.org/10.1073/pnas.2305016120",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Generative Language Models I</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-07.html",
+    "href": "weeks/week-07.html",
+    "title": "7  Generative Language Models II",
+    "section": "",
+    "text": "7.1 Lecture\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Generative Language Models II</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-07.html#lab",
+    "href": "weeks/week-07.html#lab",
+    "title": "7  Generative Language Models II",
+    "section": "7.2 Lab",
+    "text": "7.2 Lab\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Generative Language Models II</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-07.html#readings",
+    "href": "weeks/week-07.html#readings",
+    "title": "7  Generative Language Models II",
+    "section": "7.3 Readings",
+    "text": "7.3 Readings\n\nAbdurahman, S. et al. (2024) ‘Perils and opportunities in using large language models in psychological research’, PNAS Nexus, 3(7), p. 245. https://doi.org/10.1093/pnasnexus/pgae245\nBarrie, C., Palmer, A. and Spirling, A. (2024) ‘Replication for Language Models’. https://arthurspirling.org/documents/BarriePalmerSpirling_TrustMeBro.pdf",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Generative Language Models II</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-08.html",
+    "href": "weeks/week-08.html",
+    "title": "8  Interpretability, Explainability and Bias",
+    "section": "",
+    "text": "8.1 Lecture\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Interpretability, Explainability and Bias</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-08.html#lab",
+    "href": "weeks/week-08.html#lab",
+    "title": "8  Interpretability, Explainability and Bias",
+    "section": "8.2 Lab",
+    "text": "8.2 Lab\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Interpretability, Explainability and Bias</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-08.html#readings",
+    "href": "weeks/week-08.html#readings",
+    "title": "8  Interpretability, Explainability and Bias",
+    "section": "8.3 Readings",
+    "text": "8.3 Readings\n\nWan, Y. et al. (2023) ‘“Kelly is a Warm Person, Joseph is a Role Model”: Gender Biases in LLM-Generated Reference Letters’. arXiv. https://doi.org/10.48550/arXiv.2310.09219\nRossi, L., Harrison, K. and Shklovski, I. (2024) ‘The Problems of LLM-generated Data in Social Science Research’, Sociologica, 18(2), pp. 145–168. https://doi.org/10.6092/issn.1971-8853/19576",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Interpretability, Explainability and Bias</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-10.html",
+    "href": "weeks/week-10.html",
+    "title": "9  Ethical Use of LLMs?",
+    "section": "",
+    "text": "9.1 Lecture\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Ethical Use of LLMs?</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-10.html#lab",
+    "href": "weeks/week-10.html#lab",
+    "title": "9  Ethical Use of LLMs?",
+    "section": "9.2 Lab",
+    "text": "9.2 Lab\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Ethical Use of LLMs?</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-10.html#readings",
+    "href": "weeks/week-10.html#readings",
+    "title": "9  Ethical Use of LLMs?",
+    "section": "9.3 Readings",
+    "text": "9.3 Readings\n\nWilliams, A., Miceli, M. and Gebru, T. (2022) ‘The Exploited Labor Behind Artificial Intelligence’, Noema, 13 October.\nBender, E.M. et al. (2021) ‘On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?’, in Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency. New York, NY, USA: Association for Computing Machinery (FAccT ’21), pp. 610–623. https://doi.org/10.1145/3442188.3445922\nBucher, M.J.J. and Martini, M. (2024) ‘Fine-Tuned “Small” LLMs (Still) Significantly Outperform Zero-Shot Generative AI Models in Text Classification’. arXiv. https://doi.org/10.48550/arXiv.2406.08660",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Ethical Use of LLMs?</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-11.html",
+    "href": "weeks/week-11.html",
+    "title": "10  Beyond Text",
+    "section": "",
+    "text": "10.1 Lecture\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Beyond Text</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-11.html#lab",
+    "href": "weeks/week-11.html#lab",
+    "title": "10  Beyond Text",
+    "section": "10.2 Lab",
+    "text": "10.2 Lab\nContent to be added.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Beyond Text</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-11.html#readings",
+    "href": "weeks/week-11.html#readings",
+    "title": "10  Beyond Text",
+    "section": "10.3 Readings",
+    "text": "10.3 Readings\n\nLuken, M. et al. (2024) ‘MEXCA - A Simple and Robust Pipeline for Capturing Emotion Expressions in Faces, Vocalization, and Speech’. OSF. https://doi.org/10.31234/osf.io/56svb",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Beyond Text</span>"
+    ]
+  },
+  {
+    "objectID": "weeks/week-12.html",
+    "href": "weeks/week-12.html",
+    "title": "11  Project Presentations",
+    "section": "",
+    "text": "Week 12\n\n\n\nGroup presentations\n\n\nThis session is dedicated to group presentations. See the Assessment chapter for presentation requirements and grading criteria.",
+    "crumbs": [
+      "Weekly Content",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Project Presentations</span>"
+    ]
+  },
+  {
+    "objectID": "datasets.html",
+    "href": "datasets.html",
+    "title": "Appendix A — Datasets",
+    "section": "",
+    "text": "A.1 Party Manifestos and Political Programs\nExplore the following datasets for use in your group project. These datasets vary in format and accessibility – some are readily available in CSV format while others may require additional wrangling or scraping. You are also welcome to find other datasets to work with or to scrape your own data from news sites or other sources. While extra effort in data collection will be considered in grading, remember that the main focus is applying the methods covered in this module.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Datasets</span>"
+    ]
+  },
+  {
+    "objectID": "datasets.html#party-manifestos-and-political-programs",
+    "href": "datasets.html#party-manifestos-and-political-programs",
+    "title": "Appendix A — Datasets",
+    "section": "",
+    "text": "Manifesto Project\nThe American Presidency Project",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Datasets</span>"
+    ]
+  },
+  {
+    "objectID": "datasets.html#parliamentary-speeches",
+    "href": "datasets.html#parliamentary-speeches",
+    "title": "Appendix A — Datasets",
+    "section": "A.2 Parliamentary Speeches",
+    "text": "A.2 Parliamentary Speeches\n\nParlEE (European Parliament speeches)\nUN General Debate Corpus\nUS Congressional Record\nIrish Oireachtas Record",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Datasets</span>"
+    ]
+  },
+  {
+    "objectID": "datasets.html#political-advertising",
+    "href": "datasets.html#political-advertising",
+    "title": "Appendix A — Datasets",
+    "section": "A.3 Political Advertising",
+    "text": "A.3 Political Advertising\n\nMeta Ads Library API",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Datasets</span>"
+    ]
+  },
+  {
+    "objectID": "datasets.html#news-and-legal-documents",
+    "href": "datasets.html#news-and-legal-documents",
+    "title": "Appendix A — Datasets",
+    "section": "A.4 News and Legal Documents",
+    "text": "A.4 News and Legal Documents\n\nLexisNexis (available through UCD Library)",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Datasets</span>"
+    ]
+  },
+  {
+    "objectID": "datasets.html#collections",
+    "href": "datasets.html#collections",
+    "title": "Appendix A — Datasets",
+    "section": "A.5 Collections",
+    "text": "A.5 Collections\nThe following links collect multiple datasets for you to explore. Some of these are textual data, while others may be useful to augment your analysis (e.g., data on party ideology, vote share, government/opposition status and more).\n\nIrish Politics Data\nPolData\nNLP Datasets\nGoogle Dataset Search – Political Science",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Datasets</span>"
+    ]
+  }
+]

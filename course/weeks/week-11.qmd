@@ -1,0 +1,19 @@
+# Beyond Text {#sec-week11}
+
+::: {.callout-note}
+## Week 11
+**Lecture:** Social science applications for multimodal data\
+**Lab:** Working with images, audio and video in Python
+:::
+
+## Lecture
+
+*Content to be added.*
+
+## Lab
+
+*Content to be added.*
+
+## Readings
+
+- Luken, M. et al. (2024) 'MEXCA - A Simple and Robust Pipeline for Capturing Emotion Expressions in Faces, Vocalization, and Speech'. *OSF*. <https://doi.org/10.31234/osf.io/56svb>

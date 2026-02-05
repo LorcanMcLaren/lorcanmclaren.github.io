@@ -1,0 +1,57 @@
+project:
+  type: book
+  output-dir: ../docs/course
+
+book:
+  title: "AI and Large Language Models"
+  subtitle: "POL42560 -- Spring 2026"
+  author: "Lorcan McLaren"
+  date: last-modified
+  date-format: "MMMM YYYY"
+  site-url: https://lorcanmclaren.com/course
+  repo-url: https://github.com/lorcanmclaren/ai-llms-course
+  repo-actions: [issue]
+  sharing: [twitter, linkedin]
+  sidebar:
+    style: docked
+    background: "#f9f6f1"
+  chapters:
+    - index.qmd
+    - part: "Course Information"
+      chapters:
+        - syllabus.qmd
+        - assessment.qmd
+        - software.qmd
+        - policies.qmd
+    - part: "Weekly Content"
+      chapters:
+        - weeks/week-01.qmd
+        - weeks/week-02.qmd
+        - weeks/week-03.qmd
+        - weeks/week-04.qmd
+        - weeks/week-05.qmd
+        - weeks/week-06.qmd
+        - weeks/week-07.qmd
+        - weeks/week-08.qmd
+        - weeks/week-10.qmd
+        - weeks/week-11.qmd
+        - weeks/week-12.qmd
+  appendices:
+    - datasets.qmd
+    - references.qmd
+
+format:
+  html:
+    theme:
+      - simplex
+      - custom.scss
+    fontsize: 110%
+    fontcolor: "#333333"
+    linestretch: 1.5
+    link-external-newwindow: true
+    header-includes:
+      - <link rel="preconnect" href="https://fonts.googleapis.com">
+      - <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      - <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+bibliography: references.bib

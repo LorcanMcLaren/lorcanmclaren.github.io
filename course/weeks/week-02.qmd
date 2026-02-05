@@ -1,0 +1,19 @@
+# Text-as-Data {#sec-week2}
+
+::: {.callout-note}
+## Week 2
+**Lecture:** Tasks in text-as-data (scaling, topic modelling, classification, clustering, keyword extraction, NER, sentiment analysis)\
+**Lab:** Dealing with textual data in Python
+:::
+
+## Lecture
+
+*Content to be added.*
+
+## Lab
+
+*Content to be added.*
+
+## Readings
+
+- Grimmer, J. and Stewart, B.M. (2013) 'Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts', *Political Analysis*, 21(3), pp. 267--297. <https://doi.org/10.1093/pan/mps028>

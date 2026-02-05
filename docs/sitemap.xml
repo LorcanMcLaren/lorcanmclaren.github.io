@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lorcanmclaren.com/wip/text-annotator.html</loc>
-    <lastmod>2024-04-30T21:00:26.275Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lorcanmclaren.com/pub/mclaren_gaze_2020.html</loc>
-    <lastmod>2026-02-05T18:01:28.312Z</lastmod>
+    <loc>https://lorcanmclaren.com/wp/magic-words.html</loc>
+    <lastmod>2026-02-05T17:40:17.870Z</lastmod>
   </url>
   <url>
     <loc>https://lorcanmclaren.com/wp/climate-disasters.html</loc>
     <lastmod>2026-02-05T17:37:48.359Z</lastmod>
   </url>
   <url>
-    <loc>https://lorcanmclaren.com/wp/magic-words.html</loc>
-    <lastmod>2026-02-05T17:40:17.870Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lorcanmclaren.com/index.html</loc>
-    <lastmod>2026-02-05T20:26:35.517Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lorcanmclaren.com/wp/here-and-now.html</loc>
-    <lastmod>2026-02-05T17:13:57.262Z</lastmod>
-  </url>
-  <url>
     <loc>https://lorcanmclaren.com/pub/mclaren_heuristic_2020.html</loc>
     <lastmod>2026-02-05T18:01:35.959Z</lastmod>
   </url>
   <url>
+    <loc>https://lorcanmclaren.com/index.html</loc>
+    <lastmod>2026-02-05T21:05:46.191Z</lastmod>
+  </url>
+  <url>
     <loc>https://lorcanmclaren.com/cv/index.html</loc>
     <lastmod>2024-03-30T00:44:15.899Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lorcanmclaren.com/pub/mclaren_gaze_2020.html</loc>
+    <lastmod>2026-02-05T18:01:28.312Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lorcanmclaren.com/wip/text-annotator.html</loc>
+    <lastmod>2024-04-30T21:00:26.275Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lorcanmclaren.com/wp/here-and-now.html</loc>
+    <lastmod>2026-02-05T17:13:57.262Z</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,53 @@
+# Assessment {.unnumbered}
+
+## Components
+
+| Component | Deadline | Grade % |
+|-----------|----------|---------|
+| Lab participation | Continuous | 20 |
+| Group presentations | April 24 | 20 |
+| Group project | May 1 | 60 |
+
+## Lab Participation
+
+Each lab session includes a Jupyter notebook that must be submitted through Brightspace for participation credit. While your solutions don't need to be perfect, they should demonstrate a genuine attempt at completing all exercises. Include clear comments throughout your code to show your understanding of the concepts.
+
+You should **execute all code cells prior to saving**, so that the output for each cell is visible in the submitted version.
+
+You will have **one week to submit the notebook** from each lab session, up to the start of the subsequent class (e.g., the notebook for Week 2 must be submitted by 08:59 on Friday in Week 3). You may miss up to one submission without prior approval. Late submissions will not be accepted unless an extension has been granted, as exercise solutions may be discussed in class.
+
+## Group Presentation
+
+Each group must deliver a presentation lasting **no more than 12 minutes**, using either LaTeX Beamer, PowerPoint or Google Slides. Submit your slides on Brightspace by **23:59 on Wednesday, April 22**. Groups should divide the presentation between 2--3 speakers, with non-presenting members taking responsibility for answering questions from peers and the instructor during the Q&A session.
+
+You should prepare together by practising the presentation and anticipating potential questions. The same grade will be awarded to all group members, unless one or more members fail to participate in both the presentation and Q&A.
+
+Your presentation should cover:
+
+1. Research question and importance
+2. Theoretical expectations and main hypothesis
+3. Data description
+4. Methodology for hypothesis testing
+5. Initial results (if available)
+6. Challenges encountered and potential risks for next steps (if applicable)
+
+## Group Project
+
+Each group must submit a **4,000--5,000 word** research paper (**excluding references and appendices**) as well as the code used to conduct the analysis. All students in a group will be awarded the same grade, but you may be asked to indicate who contributed to which parts of the project.
+
+You have free choice in selecting your research question, but you must justify why it is relevant and important for understanding or addressing a meaningful social science question. You may either collect original data appropriate for your research question or identify and use existing datasets (see @sec-datasets), clearly explaining your data source selection. Your analysis must incorporate **at least one** of the methods covered in this course -- embeddings, transformers, or generative models -- in a way that meaningfully advances your research objectives.
+
+### Submission Format
+
+1. A research paper in PDF format. The paper must be written in LaTeX using the collaborative Overleaf document that will be created for each group.
+2. A GitHub repository containing all code needed to reproduce your analysis.
+
+### Research Paper Structure
+
+The paper should contain the following sections:
+
+1. **Introduction** -- Research question/puzzle, significance, main hypothesis
+2. **Theory** -- Theoretical framework, prior findings on DV-IV relationship, expected effects
+3. **Data & Methods** -- Dataset overview, unit of analysis, sample size & missing data, analysis approach
+4. **Results** -- Empirical findings, statistical tests, key patterns
+5. **Conclusion** -- Link to research question, main insights, limitations, broader implications

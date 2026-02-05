@@ -1,0 +1,36 @@
+# Welcome {.unnumbered}
+
+This is the course website for **POL42560 AI and Large Language Models**, taught at University College Dublin in the Spring Trimester 2026.
+
+## Overview
+
+Large language models (LLMs), such as those behind tools like ChatGPT, have garnered significant attention for their ability to generate human-like text, sparking both enthusiasm and debate about their implications for various fields. For social scientists, LLMs offer a potentially useful approach to processing and interpreting vast amounts of data, enhancing our ability to study complex societal issues.
+
+This course offers an interdisciplinary approach to understanding and applying LLMs in social and political science, with a focus on text analysis. It combines theoretical foundations with practical, hands-on experience in applying LLMs to address substantive social science questions. Students will explore the capabilities and limitations of LLMs and engage critically with issues such as bias, environmental impact, misinformation, and intellectual property rights. They will also become familiar with essential research practices including documentation, reproducibility, and validation.
+
+## Learning Outcomes
+
+By the end of the course, students will be able to:
+
+1. Understand the fundamentals of large language models and their applications in social sciences.
+2. Implement LLMs for various tasks relevant to political and social science research using Python.
+3. Critically evaluate the ethical and societal implications of AI technologies, particularly LLMs, in the context of social science.
+4. Apply best practices in research documentation, reproducibility, and validation when using AI tools.
+5. Engage in informed discussions about the impact of AI on society, including issues of bias, sustainability, and concentration of power.
+
+## Prerequisites
+
+This course is designed for students with or without experience in Python, but a willingness to learn quickly and engage with technical content is essential. Students without prior programming experience would benefit from taking **POL42340 Programming for Social Scientists** alongside this course to familiarise themselves with Python fundamentals.
+
+**POL42050 Quantitative Text Analysis** provides a broader overview of text-as-data approaches, complementary to the content of this course.
+
+## Course Details
+
+| | |
+|---|---|
+| **Time** | Fri, 11:00 -- 12:50 |
+| **Format** | In-person lectures and labs |
+| **Credits** | 10, Level 4 |
+| **Instructor** | Lorcan McLaren |
+| **Email** | lorcan.mclaren@ucdconnect.ie |
+| **Office Hours** | Wed, 15:00 -- 16:00 ([sign up](https://calendly.com)) |

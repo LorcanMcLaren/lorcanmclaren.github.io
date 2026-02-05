@@ -1,0 +1,20 @@
+# Generative Language Models I {#sec-week6}
+
+::: {.callout-note}
+## Week 6
+**Lecture:** Basics of decoder-only models\
+**Lab:** Introduction to HuggingFace `transformers`
+:::
+
+## Lecture
+
+*Content to be added.*
+
+## Lab
+
+*Content to be added.*
+
+## Readings
+
+- Heseltine, M. and Hohenberg, B.C. von (2024) 'Large language models as a substitute for human experts in annotating political text', *Research & Politics*. <https://doi.org/10.1177/20531680241236239>
+- Gilardi, F., Alizadeh, M. and Kubli, M. (2023) 'ChatGPT outperforms crowd workers for text-annotation tasks', *Proceedings of the National Academy of Sciences*, 120(30), p. e2305016120. <https://doi.org/10.1073/pnas.2305016120>

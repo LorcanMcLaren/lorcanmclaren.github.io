@@ -1,0 +1,19 @@
+# Validation and Performance Measurement {#sec-week5}
+
+::: {.callout-note}
+## Week 5
+**Lecture:** Performance metrics, human coding, and cross-validation\
+**Lab:** Measuring model performance with `scikit-learn`
+:::
+
+## Lecture
+
+*Content to be added.*
+
+## Lab
+
+*Content to be added.*
+
+## Readings
+
+- Birkenmaier, L., Lechner, C.M. and Wagner, C. (2024) 'The Search for Solid Ground in Text as Data: A Systematic Review of Validation Practices and Practical Recommendations for Validation', *Communication Methods and Measures*, 18(3), pp. 249--277. <https://doi.org/10.1080/19312458.2023.2285765>

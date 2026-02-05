@@ -1,0 +1,8 @@
+# Project Presentations {#sec-week12}
+
+::: {.callout-note}
+## Week 12
+**Group presentations**
+:::
+
+This session is dedicated to group presentations. See the [Assessment](../assessment.qmd) chapter for presentation requirements and grading criteria.

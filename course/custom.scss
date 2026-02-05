@@ -1,0 +1,16 @@
+/*-- scss:defaults --*/
+$font-family-sans-serif: "Libre Franklin", sans-serif;
+$headings-font-family: "Lora", serif;
+
+$body-bg: #f9f6f1;
+$body-color: #333333;
+$primary: #7a4a5d;
+$link-color: #7a4a5d;
+
+$sidebar-bg: #f9f6f1;
+
+/*-- scss:rules --*/
+.sidebar-title {
+    font-family: "Lora", serif;
+    font-weight: 700;
+}

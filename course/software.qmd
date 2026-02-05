@@ -1,0 +1,25 @@
+# Software {.unnumbered}
+
+All code for this course should be written in **Python**. For those who haven't worked with this language previously, POL42340 Programming for Social Scientists runs in parallel to this course and provides a comprehensive introduction to Python.
+
+## Development Environment
+
+We will use **VS Code** to write and execute code locally. For some lab sessions and the group project, where your personal device may not be powerful enough or where long execution times are expected, **Google Colab** should be used. Colab provides limited free access to T4 GPUs, which will enable you to run code that cannot be executed locally without a GPU.
+
+## Package Management
+
+We will use `venv` and `pip` to manage our Python environment and install packages (though feel free to use Anaconda if you are more familiar with this platform). I strongly encourage the use of **Git** for version control, particularly when working on your group project; however, we will not cover this extensively in class.
+
+## Useful Python Packages
+
+The following packages are particularly useful for dealing with textual data:
+
+| Package | Description |
+|---------|-------------|
+| `spaCy` | Industrial-strength NLP library |
+| `NLTK` | Classic NLP toolkit |
+| `Gensim` | Topic modelling and word embeddings |
+| `sentence-transformers` | Sentence and document embeddings |
+| `transformers` | HuggingFace model hub and pipelines |
+| `langchain` | Framework for building LLM applications |
+| `scikit-learn` | Machine learning and evaluation metrics |

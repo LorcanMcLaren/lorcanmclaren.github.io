@@ -1,0 +1,39 @@
+# Syllabus {.unnumbered}
+
+## Course Structure
+
+Each class involves a lecture introducing the topic, followed by a hands-on lab session where we work on exercises related to the lecture content. Students are expected to complete the readings before class each week, and to submit their lab work via Brightspace.
+
+See the [Weekly Content](weeks/week-01.qmd) chapters for detailed content for each session.
+
+## Schedule at a Glance
+
+| Week | Topic | Lab |
+|------|-------|-----|
+| 1 | Introduction | Setting up a Python development environment |
+| 2 | Text-as-Data | Dealing with textual data in Python |
+| 3 | Embeddings | Measuring text similarity using embeddings |
+| 4 | Transformers | Fine tuning transformers for text classification |
+| 5 | Validation and Performance Measurement | Measuring model performance with `scikit-learn` |
+| 6 | Generative Language Models I | Introduction to HuggingFace `transformers` |
+| 7 | Generative Language Models II | Introduction to `langchain` |
+| -- | *Study Break* | |
+| 8 | Interpretability, Explainability and Bias | Applying interpretability tools; visualising bias |
+| -- | *Good Friday* | |
+| 10 | Ethical Use of LLMs? | Measuring environmental costs of LLM use |
+| 11 | Beyond Text | Working with images, audio and video in Python |
+| 12 | Project Presentations | |
+
+## Textbooks and Readings
+
+All mandatory readings are indicated in the weekly chapters and are open access or available through the UCD Library. Readings should be completed ahead of class each week.
+
+### Approachable
+
+- Alammar, J. and Grootendorst, M. (2024) *Hands-On Large Language Models: Language Understanding and Generation*. 1st edition. O'Reilly Media.
+- Grimmer, J., Roberts, M.E. and Stewart, B.M. (2022) *Text as Data: A New Framework for Machine Learning and the Social Sciences*. Princeton University Press.
+
+### Deeper Dive
+
+- Raschka, S. (2024) *Build a Large Language Model (From Scratch)*. Manning.
+- Kamath, U. et al. (2024) *Large Language Models: A Deep Dive: Bridging Theory and Practice*. Springer.

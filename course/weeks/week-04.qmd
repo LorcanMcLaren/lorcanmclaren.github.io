@@ -1,0 +1,20 @@
+# Transformers {#sec-week4}
+
+::: {.callout-note}
+## Week 4
+**Lecture:** Basics of transformer models\
+**Lab:** Fine tuning transformers for text classification
+:::
+
+## Lecture
+
+*Content to be added.*
+
+## Lab
+
+*Content to be added.*
+
+## Readings
+
+- Widmann, T. and Wich, M. (2023) 'Creating and Comparing Dictionary, Word Embedding, and Transformer-Based Models to Measure Discrete Emotions in German Political Text', *Political Analysis*, 31(4), pp. 626--641. <https://doi.org/10.1017/pan.2022.15>
+- Laurer, M. et al. (2024) 'Less Annotating, More Classifying: Addressing the Data Scarcity Issue of Supervised Machine Learning with Deep Transfer Learning and BERT-NLI', *Political Analysis*, 32(1), pp. 84--100. <https://doi.org/10.1017/pan.2023.20>

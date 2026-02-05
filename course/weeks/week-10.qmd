@@ -1,0 +1,21 @@
+# Ethical Use of LLMs? {#sec-week10}
+
+::: {.callout-note}
+## Week 10
+**Lecture:** Ethical concerns in developing and deploying LLMs\
+**Lab:** Measuring environmental costs of LLM use
+:::
+
+## Lecture
+
+*Content to be added.*
+
+## Lab
+
+*Content to be added.*
+
+## Readings
+
+- Williams, A., Miceli, M. and Gebru, T. (2022) 'The Exploited Labor Behind Artificial Intelligence', *Noema*, 13 October.
+- Bender, E.M. et al. (2021) 'On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?', in *Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency*. New York, NY, USA: Association for Computing Machinery (FAccT '21), pp. 610--623. <https://doi.org/10.1145/3442188.3445922>
+- Bucher, M.J.J. and Martini, M. (2024) 'Fine-Tuned "Small" LLMs (Still) Significantly Outperform Zero-Shot Generative AI Models in Text Classification'. *arXiv*. <https://doi.org/10.48550/arXiv.2406.08660>

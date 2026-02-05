@@ -1,0 +1,20 @@
+# Introduction {#sec-week1}
+
+::: {.callout-note}
+## Week 1
+**Lecture:** Module overview and organisation\
+**Lab:** Setting up a Python development environment
+:::
+
+## Lecture
+
+*Content to be added.*
+
+## Lab
+
+*Content to be added.*
+
+## Readings
+
+- Grossmann, I. et al. (2023) 'AI and the transformation of social science research', *Science*, 380(6650), pp. 1108--1109. <https://doi.org/10.1126/science.adi1778>
+- Ziems, C. et al. (2023) 'Can Large Language Models Transform Computational Social Science?' *arXiv*. <http://arxiv.org/abs/2305.03514>
