@@ -24,36 +24,7 @@
         <br/>
     $endif$
     $if(journ)$$if(issue)$<i>$journ$</i>, $date$, $issue$.<br/>$endif$$endif$
-    $if(publink)$
-        <a href="$publink$">
-            <i class="ai ai-archive"></i>
-        </a>
-    $endif$
-    $if(openlink)$
-        <a href="$openlink$">
-            <i class="ai ai-open-access"></i>
-        </a>
-    $endif$
-    $if(videolink)$
-        <a href="$videolink$">
-            <i class="fas fa-video"></i>
-        </a>
-    $endif$
-    $if(codelink)$
-        <a href="$codelink$">
-            <i class="fa-solid fa-code-branch"></i>
-        </a>
-    $endif$
-    $if(slideslink)$
-        <a href="$slideslink$">
-            <i class="fas fa-file-powerpoint"></i>
-        </a>
-    $endif$
-    $if(wplink)$
-        <a href="$wplink$">
-            <i class="fa-regular fa-pen-to-square"></i>
-        </a>
-    $endif$
+    <span class="paper-links paper-links-auto">$if(publink)$<a href="$publink$">Paper</a>$endif$$if(openlink)$<a href="$openlink$">Open Access</a>$endif$$if(videolink)$<a href="$videolink$">Video</a>$endif$$if(codelink)$<a href="$codelink$">Code</a>$endif$$if(slideslink)$<a href="$slideslink$">Slides</a>$endif$$if(wplink)$<a href="$wplink$">Draft Paper</a>$endif$</span>
     </p>
     <p>
         $if(image)$<img src="$image$" alt="image" class="img-fluid" style="max-width: 80%; height: auto;"/>$endif$
@@ -61,7 +32,19 @@
     $if(abstract)$
     <div class="abstract">
         <div class="abstract-title">$abstract-title$</div>
-        $abstract$
+        <div class="abstract-text">$abstract$</div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var abstractText = document.querySelector('.abstract .abstract-text');
+            if (abstractText) {
+                var html = abstractText.innerHTML;
+                if (html.includes(' || ')) {
+                    var paragraphs = html.split(' || ');
+                    abstractText.innerHTML = paragraphs.map(function(p) { return '<p>' + p + '</p>'; }).join('');
+                }
+            }
+        });
+    </script>
     $endif$
 </header>

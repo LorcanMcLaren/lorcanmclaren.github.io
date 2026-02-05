@@ -1,0 +1,21 @@
+---
+title: "Magic Words or Methodical Work? Challenging Conventional Wisdom in LLM-Based Political Text Annotation"
+date: "2025"
+date-format: "YYYY"
+# wplink: "../files/magic-words.pdf"
+# codelink: "https://github.com/"
+coauthors:
+  - name: "James P. Cross"
+    link: "https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&hl=en"
+  - name: "Zuzanna Krakowska"
+  - name: "Robin Rauner"
+  - name: "Martijn Schoonvelde"
+    link: "https://mschoonvelde.com/"
+abstract: "Generative large language models (LLMs) have been embraced by the research community as a low-cost, quick, and consistent way to classify textual data. Prior scholarship has demonstrated the accuracy of LLMs across a variety of social science classification tasks. However, there has been little systematic investigation of the effect of model choice. model size, prompt style and hyperparameter settings on classification performance. This paper evaluates the importance of these choices across four distinct annotation tasks from the field of political science, using human-annotated texts as a benchmark. Our findings reveal significant tradeoffs between annotation performance and computational efficiency, with larger models and more complex prompts yielding inconsistent performance gains while substantially increasing inference time, energy consumption, and carbon emissions. Contrary to widely-held assumptions, popular prompt engineering techniques such as persona and chain-of-thought prompting demonstrate highly task- and model-dependent effects, sometimes degrading rather than improving performance. We also find that model size does not consistently correlate with better outcomes. These results underscore the necessity of task-specific empirical validation rather than universal best practices when designing LLM-based annotation workflows."
+
+format:
+  html:
+    page-layout: article
+    template-partials:
+      - "../partials/title-block.html"
+---

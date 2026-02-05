@@ -1,5 +1,5 @@
 ---
-title: "A heuristic method for automatic gaze detection in constrained multi-modal dialogue corpora" 
+title: "A Heuristic Method for Automatic Gaze Detection in Constrained Multi-Modal Dialogue Corpora" 
 date: "01-01-2020"
 date-format: "YYYY" # only display year 
 # Below add respective buttons to the list in the research page. To remove buttons that are not needed, just remove the respective link here. 

@@ -1,0 +1,19 @@
+---
+title: "Here and Now or There and Then? The Psychological Distance of Climate Change in Parliamentary Speech"
+date: "2024"
+date-format: "YYYY"
+# wplink: "../files/taking-the-green-pill.pdf"
+# image: "../images/green-pill.png"
+# codelink: "https://github.com/"
+coauthors:
+  # - name: "Jane Doe"
+  #   link: "https://link.to.website/"
+abstract: "Climate change represents an existential risk to global society, yet public engagement has not fully risen to meet the challenge. Political speech can change citizens' support for climate action and willingness to modify their behaviour. One feature that matters – including when speaking to oppositional audiences about climate – is psychological distance: the sense of proximity or distance from the impacts of climate change created by the speech. While extensive research demonstrates its importance for persuasion, it is unclear whether politicians employ this feature strategically. This paper addresses that gap by developing and validating automated methods to measure psychological distance in political speech. I introduce a translated dataset of 35,000 European Parliament speeches on climate-related topics (2014-2024). I explore and validate the use of generative language models to label training data for fine-tuning encoder classifiers, in order to identify this feature. Subsequent analysis sheds light on the internal and external motivators of climate communication, including the demographic characteristics of legislators and their ideological positions. Future avenues for research on the drivers of European climate politics are discussed, as are the implications for communication practitioners."
+
+format:
+  html:
+    page-layout: article
+    template-partials:
+      - "../partials/title-block.html"
+
+---

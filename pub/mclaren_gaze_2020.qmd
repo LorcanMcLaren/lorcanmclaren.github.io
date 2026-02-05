@@ -1,5 +1,5 @@
 ---
-title: "Gaze, dominance and dialogue role in the MULTISIMO corpus" 
+title: "Gaze, Dominance and Dialogue Role in the MULTISIMO Corpus" 
 date: "01-01-2020"
 date-format: "YYYY" # only display year 
 # Below add respective buttons to the list in the research page. To remove buttons that are not needed, just remove the respective link here. 

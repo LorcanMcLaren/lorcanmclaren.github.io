@@ -1,0 +1,17 @@
+---
+title: "When Climate Change Hits Home: Natural Disasters and Climate Rhetoric in the European Parliament"
+date: "2025"
+date-format: "YYYY"
+# wplink: "../files/climate-disasters.pdf"
+# codelink: "https://github.com/"
+coauthors:
+  # - name: "Jane Doe"
+  #   link: "https://link.to.website/"
+abstract: "Climate change is increasing the frequency and severity of natural disasters. While extreme weather events may heighten public awareness of environmental changes, their influence on political rhetoric remains understudied. This paper examines whether natural disaster incidence shapes how Members of the European Parliament (MEPs) discuss climate change, with particular attention to the sense of proximity or distance from climate impacts created by their speech—whether climate change is presented as spatially and temporally urgent or as a distant problem, to be dealt with by faraway people or future generations. || While prior research shows that natural disasters do not increase environmental issue salience in party press releases, their impact on parliamentary speech remains unexplored. Moreover, disasters may alter qualitative aspects of climate discourse even without increasing its frequency. || Analysing European Parliament debates from 2014-2024 using large language models (LLMs), this study investigates how disaster incidence affects climate rhetoric, examining whether disaster characteristics—including proximity, type, number of people affected, and cost of damage—shape MEPs' representation of the climate crisis."
+
+format:
+  html:
+    page-layout: article
+    template-partials:
+      - "../partials/title-block.html"
+---

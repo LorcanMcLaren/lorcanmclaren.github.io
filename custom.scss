@@ -1,13 +1,29 @@
 /*-- scss:defaults --*/
-$font-family-sans-serif: "Raleway", sans-serif;
+$font-family-sans-serif: "Libre Franklin", sans-serif;
+$headings-font-family: "Lora", serif;
 
 .navbar {
-    font-family: "Raleway", sans-serif !important; /* Replace 'YourFontFamily' with your chosen font */
-    font-weight: 800;
+    font-family: "Lora", serif !important;
+    font-weight: 600;
 }
 
-$navbar-fg: white;
-$primary: #008000;
-$link-color: #008000;
+$body-bg: #f9f6f1;
+$body-color: #333333;
+$primary: #7a4a5d;
+$link-color: #7a4a5d;
 
-$body-bg: black;
+$navbar-bg: #f9f6f1;
+$navbar-fg: #333333;
+
+/*-- scss:rules --*/
+.navbar {
+    border-bottom: 1px solid #333333;
+}
+
+.navbar-brand {
+    font-weight: 700 !important;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 400 !important;
+}

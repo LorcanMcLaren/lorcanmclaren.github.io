@@ -2,10 +2,11 @@
 toc: false
 # bibliography: assets/publications/publications.bib
 listing: # this determines different lists with respective options. These are accessed in the below with the :::{#id}::: syntax.
-  - id: wp 
-    contents: "wp/*.qmd" # from which folder to take the contents. Here, take all .qmd files from the wp folder. 
+  - id: wp
+    contents: "wp/*.qmd" # from which folder to take the contents. Here, take all .qmd files from the wp folder.
     sort: "date desc" # how to sort the contents.
     template: ejs/wp.ejs  # how to display contents. Here, use the customized wp.ejs in the ejs folder.
+    fields: [title, date, abstract, coauthors, wplink, slideslink, videolink, codelink, image, note]
   - id: pub
     sort: 
       - "date desc"
@@ -21,20 +22,16 @@ listing: # this determines different lists with respective options. These are ac
 
 ---
 
-![](images/profile.jpg){.round-image .centre width=250 height=250}
-<div style="text-align: center;">
-  <span style="font-weight: 800">Lorcan McLaren</span><br>
-  <span style="font-weight: 200">PhD Researcher</span><br>
-  <span style="font-weight: 200">[University College Dublin](https://www.ucd.ie/)</span>
+![](images/profile.jpg){.round-image .centre width=250}
+<div style="text-align: center; font-family: 'Lora', serif;">
+  <span style="font-weight: 600">Lorcan McLaren</span><br>
+  <span style="font-weight: 400">PhD Researcher</span><br>
+  <span style="font-weight: 400">[University College Dublin](https://www.ucd.ie/)</span>
 
-  <span class="prof-icon">[{{< iconify ant-design linkedin-outline >}}](https://www.linkedin.com/in/lorcanmclaren/)</span>
-  <span class="prof-icon">[{{< iconify mingcute github-line >}}](https://github.com/LorcanMcLaren)</span>
-  <span class="prof-icon">[{{< iconify academicons google-scholar >}}](https://scholar.google.com/citations?user=vnNon38AAAAJ&hl=en&oi=ao)</span>
-  <span class="prof-icon">[{{< iconify academicons semantic-scholar >}}](https://www.semanticscholar.org/author/Lorcan-McLaren/2008212827)</span>
-  <span class="prof-icon">[{{<iconify material-symbols mail-outline >}}](mailto:lorcan.mclaren@ucdconnect.ie)</span>
+[LinkedIn](https://www.linkedin.com/in/lorcanmclaren/) | [GitHub](https://github.com/LorcanMcLaren) | [Scholar](https://scholar.google.com/citations?user=vnNon38AAAAJ&hl=en&oi=ao) | [Email](mailto:lorcan.mclaren@ucdconnect.ie)
 </div>
 
-I am a PhD researcher and Iseult Honohan scholar in computational social science at [University College Dublin](https://www.ucd.ie/spire/). Based in the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/) under the supervision of [James P. Cross](https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&hl=en&oi=ao), I also serve as a Climate Fellow at the UCD Earth Institute. My research employs text-as-data approaches to examine political communication, with a particular focus on the climate crisis.
+I am a PhD researcher in computational social science at [University College Dublin](https://www.ucd.ie/spire/), funded by a Taighde Éireann - Research Ireland Government of Ireland scholarship. Based in the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/) under the supervision of [James P. Cross](https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&hl=en&oi=ao), my research employs text-as-data approaches to examine political communication, with a particular focus on the climate crisis. Previously, I was supported by the Iseult Honohan scholarship and served as a Climate Fellow at the UCD Earth Institute.
 
 Prior to my doctoral studies, I completed a BA in Computer Science, Linguistics and French at Trinity College Dublin and an MSc in Politics and Data Science at University College Dublin, complemented by two years of industry experience as a data analyst.
 
@@ -55,8 +52,8 @@ Prior to my doctoral studies, I completed a BA in Computer Science, Linguistics 
 :::
 
 ## Teaching
-#### Module Instructuctor
-- AI and Large Language Models, Postgraduate (Spring 2025)
+#### Module Instructor
+- AI and Large Language Models, Postgraduate (Spring 2025, 2026) — [Syllabus](files/ai-llms-syllabus.pdf)
 
 #### Teaching Assistant
 - Introduction to EU Politics, Undergraduate (Autumn 2023, 2024)
