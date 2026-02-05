@@ -4,7 +4,7 @@
     <div class="list grid" style="column-gap: 5px;">
         <div class="g-col-12<% if (item.image) { %> g-col-lg-8 g-col-md-9 g-col-sm-9<% } %>">
         <b><a href="<%- item.path %>"><%= item.title %></a></b><br/>
-        <% if (item.coauthors && item.coauthors.length > 0) { %><span class="coauthors">with <% for (var i = 0; i < item.coauthors.length; i++) { %><%= item.coauthors[i].name %><% if (i < item.coauthors.length - 2) { %>, <% } else if (i === item.coauthors.length - 2) { %> and <% } %><% } %>.</span><br/><% } %>
+        <% if (item.coauthors && item.coauthors.length > 0) { %><span class="coauthors">with <% for (var i = 0; i < item.coauthors.length; i++) { %><% if (item.coauthors[i].link) { %><a href="<%- item.coauthors[i].link %>"><%= item.coauthors[i].name %></a><% } else { %><%= item.coauthors[i].name %><% } %><% if (i < item.coauthors.length - 2) { %>, <% } else if (i === item.coauthors.length - 2) { %> and <% } %><% } %>.</span><br/><% } %>
     <% if (item.note) { %>
         <i><%= item.note %></i><br/>
     <% } %>
