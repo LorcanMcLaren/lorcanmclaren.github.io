@@ -8,11 +8,62 @@
 
 ## Lecture
 
-*Content to be added.*
+### Module overview
+
+This module takes a utilitarian approach to AI and large language models (LLMs): how can we maximise the utility of LLMs and generative AI for us as political and social scientists, while minimising the harms? The module is research-led and driven by readings from current scholarship, with an emphasis on active and collaborative learning and transparent and reproducible practices.
+
+::: {.callout-tip}
+## Companion modules
+**POL42340 Programming for Social Scientists** runs in parallel and provides an introduction to Python that is highly useful if you do not have prior Python experience. **POL42050 Quantitative Text Analysis** provides a broader overview of text-as-data approaches that is complementary to this course.
+:::
+
+The primary focus of the module is on LLMs and their applications in social science research, particularly using text-as-data. We will not focus extensively on other AI technologies such as speech-to-text, text-to-speech, or music/image/audio generation, as these are less practically relevant to social science research at present. Image recognition and multimodality may be touched upon, but these remain new tools for social science and are not yet in widespread use in scholarship. The module also considers the implications of these technologies for politics and society.
+
+### A brief overview of AI
+
+#### What is artificial intelligence?
+
+Artificial intelligence can be defined as a rational agent: an automated system that does the "right thing", based on its objective, given its environment [@russell2020artificial]. In the past, attempts at creating AI were dominated by a rules-based approach (or "expert systems"), in which knowledge and logic are encoded as a set of rules and a system makes decisions based on these. More recently, machine learning approaches have come to predominate. While machine learning and neural networks have existed since the 1960s and saw key innovations in the 1980s, it was increases in computational power and the rise of big data in the 2000s that led to a shift away from rules-based systems. Machine learning systems are able to handle uncertainty by learning patterns from a large training dataset in a way that often surpasses the performance of more brittle, handwritten rules.
+
+AI, machine learning, and deep learning are nested concepts. AI is the broadest category, machine learning is a subset of AI, and deep learning is a subset of machine learning.
+
+#### Types of machine learning
+
+Machine learning can be divided into three broad categories:
+
+- **Supervised learning** is when we have a training dataset for which we know the outcomes or "labels", and use this to train a model for unseen data. *Classification* is when we wish to train a model to place observations into discrete categories (e.g. categorising images as containing cats or dogs). *Regression* models have continuous rather than discrete outcomes (e.g. predicting property prices).
+
+- **Unsupervised learning** is when the outcomes or "labels" are not known for our dataset. For example, we might group similar images into clusters, without explicitly knowing how these clusters are defined. We might later find that these clusters correspond to discrete categories (e.g. animals), but we do not know this beforehand.
+
+- **Reinforcement learning** is where a model is trained to make a series of decisions sequentially, such that each outcome is dependent on the previous, rather than being independent as in supervised learning. The goal is to find the optimal set of actions that maximise expected rewards (e.g. AI models that learn to play games).
+
+#### Neural networks and deep learning
+
+One well-known family of machine learning architecture is the neural network. These are networks of nodes (or "neurons") connected to each other by weighted edges. Each node is an individual mathematical function. Input data passes through layers to generate predictions or classifications. Neural networks can be used for both supervised and unsupervised learning.
+
+Deep learning refers to the use of "deep" neural networks with one or more hidden layers. Each layer extracts increasingly complex features from the data. Deep neural networks learn useful feature representations automatically, allowing them to handle various types of data from text to image to audio.
+
+### Large language models
+
+LLMs are fundamentally prediction machines --- they predict the next token (word or part of word) based on the previous context. Through this simple objective and massive training data, they appear to learn complex language understanding. Key characteristics include:
+
+- Training on internet-scale datasets
+- The ability to handle multiple tasks without task-specific training
+- Learning patterns of language and knowledge during pre-training
+
+The hype around LLMs stems from their apparent ability to perform tasks previously thought to require human intelligence, including the emergence of "reasoning" capabilities through chain-of-thought prompting, the ability to follow instructions and adapt to new tasks, and integration into research workflows. However, it is important to maintain perspective: despite the module's name, we should avoid the use of "artificial intelligence" in favour of more specific terminology. LLMs are fundamentally statistical pattern matching systems, with significant limitations. They do not "think" or "reason" --- they predict patterns. They can be confidently wrong and require careful human oversight.
+
+### Why should political (or social) scientists care?
+
+Political scientists need to engage with LLMs in order to understand:
+
+1. **Policy implications and governance challenges** posed by these technologies
+2. **How to use these tools responsibly in research**
+3. **Their impact on information environments**
 
 ## Lab
 
-*Content to be added.*
+*Setting up a Python development environment.*
 
 ## Readings
 

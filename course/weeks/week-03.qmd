@@ -8,11 +8,98 @@
 
 ## Lecture
 
-*Content to be added.*
+Last week, we discussed document-feature matrices as one way of representing words and documents numerically. This week, we introduce another approach --- embeddings --- which are used for many modern text analysis methods and are also fundamental to large language models.
+
+### From bag-of-words to embeddings
+
+#### The bag-of-words model
+
+The bag-of-words (BoW) model is one of the simplest ways to represent text numerically. A sentence such as "The cat sat on the mat" would be represented as a vector of word counts: *the*: 2, *cat*: 1, *sat*: 1, *on*: 1, *mat*: 1. This approach has several important limitations: it loses word order ("the cat sat" and "sat the cat" would be identical), it cannot capture semantic relationships between words, and it creates very sparse, high-dimensional vectors since most words in a vocabulary will not appear in any given document.
+
+#### Distributional semantics
+
+Embeddings are grounded in the principle of distributional semantics, often summarised by the phrase: "you shall know a word by the company it keeps." The idea is that meaning is learned and defined by context --- we learn to associate a particular word with a particular object or referent by encountering it repeatedly in different contexts.
+
+### What are embeddings?
+
+Embeddings represent a fundamental shift from counting words to understanding their meaning through context. Unlike bag-of-words representations, embeddings are:
+
+- **Dense vectors** (most values are non-zero)
+- **Semantic** (similar words have similar vectors)
+- **Compact** (typically 100--300 dimensions, compared to vocabulary-sized vectors)
+
+Each word is mapped to a fixed-length vector. Words that appear in similar contexts have similar vector representations, and the distance between vectors corresponds to semantic distance (measured by Euclidean distance, cosine similarity, Manhattan distance, or other metrics).
+
+#### Understanding vector dimensions
+
+A 2-dimensional embedding is like coordinates on an X/Y axis. In 3D, we add a Z axis. Beyond three dimensions, it becomes difficult to visualise the space, but higher-dimensional representations are mathematically useful and capture richer semantic relationships. There are methods (such as PCA or t-SNE) that allow us to reduce this space back down to 2D or 3D for visualisation and interpretation.
+
+### Geometric properties of embeddings
+
+Visualising embeddings reveals patterns in how words relate to each other. Semantically similar words cluster together: "cat" and "kitten" have high similarity (near synonyms), "cat" and "dog" have moderate similarity (same category), while "cat" and "house" have low similarity (unrelated concepts). This mirrors human intuition about word relationships.
+
+#### Vector arithmetic
+
+One striking property of embeddings is that vector arithmetic can be used to illustrate semantic relationships. The famous example is:
+
+$$\text{king} - \text{man} + \text{woman} \approx \text{queen}$$
+
+This shows that embeddings capture gender relationships as a consistent directional offset. Other examples include: Paris − France + Italy ≈ Rome, and terrible − bad + good ≈ great.
+
+These patterns hold even across languages: when words from different languages are embedded in the same space, semantically similar words cluster together regardless of language.
+
+### Training word embeddings
+
+Word embeddings can be trained using prediction-based or count-based methods.
+
+**Prediction-based models** include:
+
+- **Word2Vec** (Google, 2013), which has two architectures: *Skip-gram*, which predicts context words from a target word (e.g. given "cat", predict "The \_\_ sat"), and *CBOW* (Continuous Bag of Words), which predicts a target word from its context (e.g. given "The \_\_ sat", predict "cat"). Skip-gram works better for rare words, while CBOW is faster and better for frequent words. The training objective is to maximise the probability of actual context words while minimising the probability of unrelated words.
+- **GloVe**, which combines the strengths of count-based and prediction-based methods.
+- **FastText**, which handles out-of-vocabulary words by using subword information.
+
+**Count-based models** create large matrices counting how often words co-occur, then use singular value decomposition (SVD) to reduce dimensionality while preserving important relationships. These are computationally expensive but theoretically well-understood.
+
+In both cases, the embedding vectors are gradually adjusted during training (via backpropagation, similar to neural network training) to minimise prediction errors.
+
+### Bias in word embeddings
+
+Word embeddings do not create bias, but they inherit it from the training data. For example, early embeddings trained on news corpora placed "doctor" closer to "man" and "nurse" closer to "woman" in the embedding space.
+
+Debiasing methods have been proposed, but these can result in other kinds of distortion and will inevitably attend to some types of bias more than others. Training data in general disproportionately reflects the WEIRD demographic (Western, Educated, Industrialised, Rich, Democratic).
+
+As social scientists, we generally do not apply debiasing methods because those differences in how social groups are discussed are often interesting to us and are frequently the object of study. However, we must be conscious of these biases and how they impact our results. We will discuss bias more extensively in Week 8.
+
+### Applications of embeddings
+
+Embeddings serve two main purposes in research:
+
+1. **As feature representations for machine learning tasks** such as text classification, sentiment analysis, and machine translation.
+2. **As objects of direct study**, enabling researchers to analyse how language and meaning vary across groups, contexts, and time.
+
+#### Case study: Gender and party differences in the US House
+
+@rodriguez2023embedding used word embeddings trained separately on speeches by different groups of US legislators to examine how the same words are used with different meanings or connotations. While male and female legislators, and Republicans and Democrats, tend to use common words like "also" and "but" in similar ways, they diverge when it comes to more politically charged terms. In particular, male legislators use "marriage" in very different ways to female legislators, while Republicans refer to "immigration" in very different contexts to Democrats. Looking at nearest-neighbour terms in the embedding space, Democrats tend to use terms related to "reform" when discussing immigration, while Republicans tend to focus on "enforcement."
+
+#### Case study: Gender in school textbooks
+
+@lucy2020content examined how different populations are discussed in K--12 textbooks in Texas using word embeddings. They found that words related to power and achievement are more associated with terms referring to men, while words related to home life and labour are more associated with women (the labour association likely reflecting historical discussion of women entering the workplace).
+
+### Sentence, paragraph, and document embeddings
+
+While word embeddings represent individual words, we can also compute embeddings for longer text sequences --- sentences, paragraphs, or entire documents. These are used for clustering, topic modelling, classification, legislative text comparison, policy area classification, speaker comparison, and ideological scaling.
+
+#### Case study: Party positions in UK Parliament
+
+@rheault2020word calculated party embeddings from parliamentary debates and applied PCA. The first principal component (x-axis) captured the left--right divide, while the second (y-axis) captured the government--opposition divide. The resulting plot shows how parties shifted over time, with the Thatcher years being furthest to the right and Labour moving rightward during the Blair years under New Labour. The authors also calculated embeddings for individual legislators, allowing comparisons between individual MPs rather than just between parties.
+
+### Embeddings beyond text
+
+Embedding techniques are not limited to text. Audio embeddings can be used for speaker verification and song recommendations. CLIP embeddings allow text and images to be embedded in the same vector space, so that images and their descriptions appear close together in the space. Multimodal models build on this principle to process and generate across different data types.
 
 ## Lab
 
-*Content to be added.*
+*Working with word embeddings in Python.*
 
 ## Readings
 

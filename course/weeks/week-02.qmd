@@ -8,11 +8,80 @@
 
 ## Lecture
 
-*Content to be added.*
+Text is one of the main ways we study politics. Most features of politics that we might be interested in have been or can be encoded as textual data in some way: opinion, motivation, actions, framing, outcomes. Opinion polling and experiments are distinct, but almost all other research approaches, whether qualitative or quantitative, attempt to analyse text in one form or another.
+
+### Content analysis
+
+Content analysis is used to understand the (self-)presentation of political actors and policy content. It uses human judgement not to make sense of each text directly, but instead to apply a scheme to convert the text into data by recording labels or ratings for each unit of text. Text reflects how politicians seek to project an image of themselves, their actions, and others. For example, we might review a series of speeches from MPs on budgetary measures and annotate or "code" them as fiscally right-wing or left-wing. Content analysis can also be applied to legal texts and policy documents.
+
+#### Human vs. automated content analysis
+
+Humans are flexible and able to handle nuance and ambiguity, but are vulnerable to subjectivity and performance variability over time. Even trained expert coders --- the "gold standard" --- are not failure-proof. The Manifesto Project, a major dataset of political texts annotated at the sentence-level with labels for policy area, has been found to have levels of inter-rater agreement and reliability so low that, had the coders been oncologists, their levels of tumour misdiagnosis would have been medically and financially catastrophic [@mikhaylov2012coder]. Automated methods are more consistent, cost- and time-efficient, but they may be consistently wrong. Humans are still typically used as the point of reference ("ground truth") against which we compare other approaches.
+
+### Quantitative text analysis
+
+In quantitative text analysis, we convert each document into some kind of numeric representation which we can work with more easily. The document-feature matrix (DFM) is one widely used representation that records the frequency of each feature (typically a word) across each document. From even a simple DFM, we can make initial observations --- for instance, comparing how frequently different US presidents mention terms like "economy", "crime", or "climate" in their State of the Union addresses.
+
+Four key principles guide quantitative text analysis [@grimmer2013text]:
+
+1. All quantitative models of language are wrong --- but some are useful.
+2. Quantitative methods for text amplify resources and augment humans.
+3. There is no globally best method for automated text analysis.
+4. Validate, validate, validate.
+
+### Process
+
+The typical text-as-data workflow follows seven steps [@benoit2020text]:
+
+1. **Selecting texts and defining the corpus.** Identify the corpus of texts relevant to the research question. Texts are generally distinguished from one another by attributes relating to the author, speaker, time, or topic. Be aware of selection issues and data gaps (e.g. coalition manifestos tend to disappear after a coalition collapses, leading to a bias in the dataset towards more stable coalitions).
+
+2. **Converting texts into a common electronic format.** This involves converting PDFs and image formats to text via OCR, standardising file types (HTML, XML, JSON, Word, Excel, TXT, TSV, CSV), handling character encoding issues (e.g. accents or special characters), and text cleaning (whitespace, page numbers). This step is often glossed over, but getting or creating a clean, organised dataset can be one of the most time-consuming components of any text-as-data project.
+
+3. **Defining documents and choosing the unit of analysis.** Documents could be individual social media posts, newspaper articles, parliamentary speeches, and so on. Consider what level of granularity is needed to answer the research question. Texts are often analysed at the sentence level and then aggregated afterwards.
+
+4. **Defining and refining features.** A "type" refers to the abstract category of a word or concept, while a "token" is a specific instance of that type as it appears in text. Preprocessing steps include tokenisation, casefolding, stemming, lemmatisation, stopword removal, and the identification of multi-word expressions (n-grams). Tokenisation can be more challenging in languages such as Chinese (with no spaces between words) or in morphologically rich languages like Finnish or Turkish.
+
+5. **Converting textual features into a quantitative matrix.** This yields an N×M matrix, where N is the number of documents and M is the number of features. Values typically start as raw frequency counts but may be re-weighted via normalisation or tf-idf (a measure of importance of a word to a document in a collection, adjusted for the fact that some words appear more frequently in general). Trimming may be applied to overcome sparsity by filtering based on term frequency.
+
+6. **Analysing the matrix data using an appropriate statistical procedure.**
+
+7. **Interpreting and reporting the results.**
+
+### Applications
+
+#### Characterising text
+
+**Keyword extraction and analysis** involves identifying the most frequent or distinctive terms in a corpus. For example, keyword datasets have been used to track how European political parties on Facebook discuss the migration crisis, with variation across countries and ideological groups [@caravaca2025european].
+
+**Named entity recognition (NER)** identifies people, organisations, and other entities mentioned in text. @jaros2018china used NER in Chinese official provincial newspapers to recognise all people and organisations named in Party newspapers, using the frequency of mentions as a measure of power. They found that Xi Jinping was much more frequently mentioned in Party newspapers than his predecessor.
+
+**Sentiment analysis** measures the emotional tone of text. @rheault2016measuring tracked the emotional polarity of government and opposition speeches in Britain from 1946 to 2013.
+
+**Readability analysis** assesses how easy texts are to understand. @benoit2019measuring examined the readability of US State of the Union addresses over time, finding a trend towards simpler language.
+
+#### Classifying into known categories
+
+**Dictionary analysis** uses predefined lists of words to classify text. Dictionaries are interpretable but brittle: they do not generalise well to other datasets and are vulnerable to polysemy (e.g. the word "kind" can mean both "type" and "generous").
+
+**Supervised machine learning** is less interpretable but more flexible. A model is trained on labelled examples and then applied to classify unseen documents. For example, @muller2024nostalgia used DistilBERT to measure party-level nostalgia across European democracies.
+
+#### Discovering categories
+
+**Topic modelling** is an unsupervised method in which clusters of co-occurring words represent "topics" and documents contain them in relative proportion. Estimated topics are unlabelled, so a human must assign labels by interpreting the content of the words most highly associated with each topic. Choosing the correct number of topics involves balancing statistical measures and interpretability.
+
+#### Measuring latent features
+
+**Supervised scaling** methods such as Wordscores [@laver2003extracting] require some reference texts for which a score (e.g. left--right position) is known, from which the model learns to score new texts.
+
+**Unsupervised scaling** methods such as Wordfish [@slapin2008scaling] run without reference texts. It is up to the researcher to interpret what the estimated dimensions actually represent. A risk is that the model might capture thematic differences (e.g. talking about the economy vs. foreign policy) rather than ideological differences.
+
+::: {.callout-note}
+The techniques discussed this week rely on document-feature matrices as the numeric representation of text. Next week, we will introduce another representation --- embeddings --- which underpin many modern text analysis methods and are fundamental to large language models.
+:::
 
 ## Lab
 
-*Content to be added.*
+*Text preprocessing and document-feature matrices in Python.*
 
 ## Readings
 
