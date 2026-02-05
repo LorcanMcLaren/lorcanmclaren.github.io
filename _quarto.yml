@@ -31,7 +31,7 @@ website:
   search: false
   page-footer:
     center: |
-      © <script>document.write(new Date().getFullYear())</script> Lorcan McLaren
+      <a href="https://lorcanmclaren.com">Lorcan McLaren</a> · © <script>document.write(new Date().getFullYear())</script>
 
 
 # Formatting. For more options see https://quarto.org/docs/output-formats/html-basics.html 

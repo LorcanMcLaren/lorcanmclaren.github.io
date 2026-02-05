@@ -12,6 +12,10 @@ book:
   # repo-url: https://github.com/lorcanmclaren/llms-for-social-scientists
   # repo-actions: [issue]
   # sharing: [twitter, linkedin]
+  downloads: [pdf]
+  page-footer:
+    center: |
+      <a href="https://lorcanmclaren.com">Lorcan McLaren</a> · © <script>document.write(new Date().getFullYear())</script>
   sidebar:
     style: docked
     background: "#f9f6f1"
@@ -41,6 +45,8 @@ book:
     - references.qmd
 
 format:
+  pdf:
+    documentclass: scrreprt
   html:
     theme:
       - simplex
