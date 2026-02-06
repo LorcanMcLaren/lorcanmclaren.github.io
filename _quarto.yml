@@ -5,8 +5,8 @@ project:
     - "*.qmd"
     - "!llms-for-social-scientists/"  # course is a separate Quarto book project, rendered independently
   resources: # here we need to add any files that users should be able to download
-    - files/cv.pdf
     - files/taking-the-green-pill.pdf
+    - docs/cv/index.pdf
 
 website:
   title: "Lorcan McLaren" # website title, this is what's displayed on the top
@@ -52,6 +52,7 @@ format:
       - <link rel="preconnect" href="https://fonts.googleapis.com">
       - <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       - <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+      - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 # mainfont: Montserrat
 
 

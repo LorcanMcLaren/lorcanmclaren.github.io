@@ -127,6 +127,202 @@ i {
   color: #bbb;
 }
 
+/* ---- CV page styles ---- */
+
+.cv-header {
+  text-align: center;
+  margin-bottom: 1.5em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #ccc;
+}
+
+.cv-name {
+  font-family: "Lora", serif;
+  font-weight: 700;
+  font-size: 2em;
+  margin-bottom: 0.1em;
+}
+
+.cv-position {
+  font-size: 1.05em;
+  color: #555;
+  margin: 0.2em 0;
+}
+
+.cv-affiliation {
+  font-size: 0.95em;
+  font-style: italic;
+  color: #555;
+  margin: 0.2em 0;
+}
+
+.cv-links {
+  font-size: 0.9em;
+  margin: 0.6em 0 0.3em 0;
+}
+
+.cv-links a {
+  text-decoration: none;
+}
+
+.cv-sep {
+  color: #999;
+  margin: 0 0.3em;
+}
+
+.cv-download {
+  margin-top: 0.5em;
+}
+
+.cv-download a {
+  font-size: 0.9em;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* CV entries (education, experience) */
+.cv-entry {
+  margin-bottom: 1em;
+}
+
+.cv-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.3em;
+}
+
+.cv-entry-left {
+  flex: 1;
+}
+
+.cv-entry-right {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.cv-entry-title {
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.cv-entry-position {
+  font-size: 0.95em;
+  color: #555;
+}
+
+.cv-entry-date {
+  font-size: 0.9em;
+  color: #555;
+  font-style: italic;
+}
+
+.cv-items {
+  margin: 0.3em 0 0 1.2em;
+  padding: 0;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.cv-items li {
+  margin-bottom: 0.15em;
+}
+
+/* CV publications / presentations */
+.cv-pubs {
+  padding-left: 1.2em;
+}
+
+.cv-pub {
+  text-indent: -1.2em;
+  padding-left: 1.2em;
+  font-size: 0.95em;
+  line-height: 1.6;
+  margin-bottom: 0.6em;
+}
+
+/* CV honors / awards / teaching rows */
+.cv-honors {
+  display: table;
+  width: 100%;
+}
+
+.cv-honor-row {
+  display: table-row;
+}
+
+.cv-honor-date {
+  display: table-cell;
+  width: 9em;
+  font-size: 0.9em;
+  color: #555;
+  padding: 0.3em 1em 0.3em 0;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.cv-honor-detail {
+  display: table-cell;
+  font-size: 0.95em;
+  padding: 0.3em 0.5em 0.3em 0;
+  vertical-align: top;
+}
+
+.cv-honor-amount {
+  display: table-cell;
+  font-size: 0.9em;
+  color: #555;
+  text-align: right;
+  padding: 0.3em 0;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+/* CV dark mode overrides */
+.quarto-dark .cv-header {
+  border-bottom-color: #555;
+}
+
+.quarto-dark .cv-position,
+.quarto-dark .cv-affiliation,
+.quarto-dark .cv-entry-position,
+.quarto-dark .cv-entry-date,
+.quarto-dark .cv-honor-date,
+.quarto-dark .cv-honor-amount {
+  color: #aaa;
+}
+
+.quarto-dark .cv-sep {
+  color: #666;
+}
+
+/* CV responsive: stack date below on small screens */
+@media screen and (max-width: 600px) {
+  .cv-entry-header {
+    flex-direction: column;
+  }
+  .cv-entry-right {
+    text-align: left;
+  }
+  .cv-honor-date {
+    width: auto;
+    display: block;
+    padding-bottom: 0;
+  }
+  .cv-honor-detail,
+  .cv-honor-amount {
+    display: block;
+  }
+  .cv-honor-row {
+    display: block;
+    margin-bottom: 0.6em;
+  }
+  .cv-honors {
+    display: block;
+  }
+}
+
 /* adjust font size for smaller screen */
 /* @media all and (max-width: 600px) {
     body {
