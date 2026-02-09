@@ -294,7 +294,7 @@ format:
 <div class="cv-honors cv-presentations">
   <div class="cv-honor-row">
     <span class="cv-honor-date">2026</span>
-    <span class="cv-honor-detail">EU Climate Politics and Policy Workshop, Dublin; European Consortium for Political Research Joint Sessions of Workshops, Innsbruck; European Political Science Society Conference, Belfast</span>
+    <span class="cv-honor-detail">EU Climate Politics and Policy Workshop, Dublin; European Consortium for Political Research Joint Sessions of Workshops, Innsbruck; European Political Science Society Conference, Belfast; European Consortium for Political Research General Conference, Krakow</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2025</span>
@@ -310,7 +310,7 @@ format:
 
 ::: {.content-visible when-format="pdf"}
 \begin{tabularx}{\textwidth}{@{}lX@{}}
-2026 & EU Climate Politics and Policy Workshop, Dublin; European Consortium for Political Research Joint Sessions of Workshops, Innsbruck; European Political Science Society Conference, Belfast \\[0.4em]
+2026 & EU Climate Politics and Policy Workshop, Dublin; European Consortium for Political Research Joint Sessions of Workshops, Innsbruck; European Political Science Society Conference, Belfast; European Consortium for Political Research General Conference, Krakow \\[0.4em]
 2025 & COMPTEXT Conference, Vienna; European Consortium for Political Research Joint Sessions of Workshops, Prague; Una Europa PhD Summer School on Artificial Intelligence and Creativity, Paris; Political Studies Association of Ireland Annual Conference, Galway \\[0.4em]
 2024 & COMPTEXT Conference, Amsterdam; Political Studies Association of Ireland Annual Conference, Dublin; SPIRe PhD Workshop, Dublin; Political Studies Association of Ireland Postgraduate Conference, Dublin \\
 \end{tabularx}
