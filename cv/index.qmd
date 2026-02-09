@@ -437,7 +437,7 @@ format:
 ```{=html}
 <div class="cv-honors">
   <div class="cv-honor-row">
-    <span class="cv-honor-date">2024 – 2026</span>
+    <span class="cv-honor-date">since 2024</span>
     <span class="cv-honor-detail"><strong>Convenor</strong>, PSAI Computational Methods Specialist Group</span>
   </div>
   <div class="cv-honor-row">
@@ -459,7 +459,7 @@ format:
 ::: {.content-visible when-format="pdf"}
 | | |
 |:---|:---|
-| 2024 – 2026 | **Convenor**, PSAI Computational Methods Specialist Group |
+| since 2024 | **Convenor**, PSAI Computational Methods Specialist Group |
 | 2017 – 2018 | **Student Convenor**, TCD School of Computer Science & Statistics |
 | | **Deputy Chair**, TCD Students' Union Lobby Group |
 | 2016 – 2017 | **Student Convenor**, TCD School of Linguistic, Speech & Communication Sciences |
