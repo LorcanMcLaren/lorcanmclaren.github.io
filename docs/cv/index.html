@@ -64,8 +64,10 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="../styles.css">
 <meta property="og:title" content="Curriculum Vitae – Lorcan McLaren">
+<meta property="og:description" content="">
 <meta property="og:site_name" content="Lorcan McLaren">
 <meta name="twitter:title" content="Curriculum Vitae – Lorcan McLaren">
+<meta name="twitter:description" content="">
 <meta name="twitter:creator" content="@LorcanMcLaren">
 <meta name="twitter:card" content="summary">
 </head>
@@ -345,7 +347,7 @@ ul.task-list li input[type="checkbox"] {
       <span class="cv-entry-position">PhD Quantitative &amp; Computational Social Science</span>
     </div>
     <div class="cv-entry-right">
-      <span class="cv-entry-date">September 2023 – Present</span>
+      <span class="cv-entry-date">since September 2023</span>
     </div>
   </div>
   <ul class="cv-items">
@@ -395,7 +397,7 @@ ul.task-list li input[type="checkbox"] {
       <span class="cv-entry-position">Research Assistant</span>
     </div>
     <div class="cv-entry-right">
-      <span class="cv-entry-date">November 2024 – Present</span>
+      <span class="cv-entry-date">since November 2024</span>
     </div>
   </div>
 </div>
@@ -477,11 +479,23 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="presentations" class="level2">
 <h2 class="anchored" data-anchor-id="presentations">Presentations</h2>
-<div class="cv-pubs">
-  <p class="cv-pub"><strong>McLaren, L</strong>. October 2024. Taking the green pill: Moral language, psychological distance and the climate crisis in the European Parliament. Oral presentation: PSAI general conference, Trinity College Dublin, Ireland.</p>
-  <p class="cv-pub"><strong>McLaren, L</strong>. May 2024. Psychological distance and the climate crisis in the European Parliament. Oral presentation: COMPTEXT conference, Vrije Universiteit Amsterdam, Netherlands.</p>
-  <p class="cv-pub"><strong>McLaren, L</strong>. December 2023. Measuring, mapping, and assessing the impact of emotional appeals in European politics. Oral presentation: Connected_Politics Lab, University College Dublin, Ireland.</p>
+<section id="conferences-workshops" class="level3">
+<h3 class="anchored" data-anchor-id="conferences-workshops">Conferences &amp; Workshops</h3>
+<div class="cv-honors cv-presentations">
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">2026</span>
+    <span class="cv-honor-detail">EU Climate Politics and Policy Workshop, Dublin; European Consortium for Political Research Joint Sessions of Workshops, Innsbruck; European Political Science Society Conference, Belfast</span>
+  </div>
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">2025</span>
+    <span class="cv-honor-detail">COMPTEXT Conference, Vienna; European Consortium for Political Research Joint Sessions of Workshops, Prague; Una Europa PhD Summer School on Artificial Intelligence and Creativity, Paris; Political Studies Association of Ireland Annual Conference, Galway</span>
+  </div>
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">2024</span>
+    <span class="cv-honor-detail">COMPTEXT Conference, Amsterdam; Political Studies Association of Ireland Annual Conference, Dublin; SPIRe PhD Workshop, Dublin; Political Studies Association of Ireland Postgraduate Conference, Dublin</span>
+  </div>
 </div>
+</section>
 </section>
 <section id="teaching" class="level2">
 <h2 class="anchored" data-anchor-id="teaching">Teaching</h2>
@@ -502,38 +516,49 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="scholarships-grants" class="level2">
 <h2 class="anchored" data-anchor-id="scholarships-grants">Scholarships &amp; Grants</h2>
-<div class="cv-honors">
+<p class="cv-funding-total">Total funding attracted: <strong id="cv-funding-total"></strong></p>
+<div class="cv-honors" id="cv-grants">
   <div class="cv-honor-row">
     <span class="cv-honor-date">2025 – 2027</span>
     <span class="cv-honor-detail"><strong>Government of Ireland Scholarship</strong>, Research Ireland</span>
-    <span class="cv-honor-amount">€68,000</span>
+    <span class="cv-honor-amount" data-amount="68000">€68,000</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2025</span>
     <span class="cv-honor-detail"><strong>PEC Travel Funding</strong>, Political Studies Association of Ireland</span>
-    <span class="cv-honor-amount">€400</span>
+    <span class="cv-honor-amount" data-amount="400">€400</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2024 – 2025</span>
     <span class="cv-honor-detail"><strong>Climate Fellowship</strong>, UCD Earth Institute</span>
-    <span class="cv-honor-amount">€1,000</span>
+    <span class="cv-honor-amount" data-amount="1000">€1,000</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2023 – 2025</span>
     <span class="cv-honor-detail"><strong>SPIRe Research Committee Funding</strong>, UCD School of Politics &amp; International Relations</span>
-    <span class="cv-honor-amount">€3,000</span>
+    <span class="cv-honor-amount" data-amount="3000">€3,000</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2023 – 2027</span>
     <span class="cv-honor-detail"><strong>Iseult Honohan Scholarship</strong>, UCD School of Politics &amp; International Relations</span>
-    <span class="cv-honor-amount">€124,190</span>
+    <span class="cv-honor-amount" data-amount="124190">€124,190</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2020</span>
     <span class="cv-honor-detail"><strong>Erasmus Mundus Scholarship</strong>, European Commission</span>
-    <span class="cv-honor-amount">€17,250</span>
+    <span class="cv-honor-amount" data-amount="17250">€17,250</span>
   </div>
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var total = 0;
+    document.querySelectorAll("#cv-grants .cv-honor-amount[data-amount]").forEach(function(el) {
+      total += parseInt(el.getAttribute("data-amount"), 10);
+    });
+    document.getElementById("cv-funding-total").textContent =
+      "€" + total.toLocaleString("en-IE");
+  });
+</script>
 </section>
 <section id="awards" class="level2">
 <h2 class="anchored" data-anchor-id="awards">Awards</h2>
@@ -569,7 +594,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="professional-memberships" class="level3">
 <h3 class="anchored" data-anchor-id="professional-memberships">Professional Memberships</h3>
-<p>Political Studies Association of Ireland · American Political Science Association · European Consortium for Political Research</p>
+<p>Political Studies Association of Ireland · American Political Science Association · European Consortium for Political Research · European Political Science Society</p>
 
 
 </section>

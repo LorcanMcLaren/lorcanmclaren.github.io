@@ -76,7 +76,7 @@ format:
       <span class="cv-entry-position">PhD Quantitative & Computational Social Science</span>
     </div>
     <div class="cv-entry-right">
-      <span class="cv-entry-date">September 2023 – Present</span>
+      <span class="cv-entry-date">since September 2023</span>
     </div>
   </div>
   <ul class="cv-items">
@@ -120,7 +120,7 @@ format:
 :::
 
 ::: {.content-visible when-format="pdf"}
-**University College Dublin** \hfill September 2023 – Present\
+**University College Dublin** \hfill since September 2023\
 *PhD Quantitative & Computational Social Science*
 
 - **Thesis:** Taking the Green Pill – Moral Language, Emotion, and Persuasion in the Climate Crisis
@@ -150,7 +150,7 @@ format:
       <span class="cv-entry-position">Research Assistant</span>
     </div>
     <div class="cv-entry-right">
-      <span class="cv-entry-date">November 2024 – Present</span>
+      <span class="cv-entry-date">since November 2024</span>
     </div>
   </div>
 </div>
@@ -182,7 +182,7 @@ format:
 :::
 
 ::: {.content-visible when-format="pdf"}
-**Connected\_Politics Lab, University College Dublin** \hfill November 2024 – Present\
+**Connected\_Politics Lab, University College Dublin** \hfill since November 2024\
 *Research Assistant*
 
 **University College Dublin, with Swiss National Science Foundation** \hfill July 2023 – February 2024\
@@ -287,22 +287,33 @@ format:
 
 ## Presentations
 
+### Conferences & Workshops
+
 ::: {.content-visible when-format="html"}
 ```{=html}
-<div class="cv-pubs">
-  <p class="cv-pub"><strong>McLaren, L</strong>. October 2024. Taking the green pill: Moral language, psychological distance and the climate crisis in the European Parliament. Oral presentation: PSAI general conference, Trinity College Dublin, Ireland.</p>
-  <p class="cv-pub"><strong>McLaren, L</strong>. May 2024. Psychological distance and the climate crisis in the European Parliament. Oral presentation: COMPTEXT conference, Vrije Universiteit Amsterdam, Netherlands.</p>
-  <p class="cv-pub"><strong>McLaren, L</strong>. December 2023. Measuring, mapping, and assessing the impact of emotional appeals in European politics. Oral presentation: Connected_Politics Lab, University College Dublin, Ireland.</p>
+<div class="cv-honors cv-presentations">
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">2026</span>
+    <span class="cv-honor-detail">EU Climate Politics and Policy Workshop, Dublin; European Consortium for Political Research Joint Sessions of Workshops, Innsbruck; European Political Science Society Conference, Belfast</span>
+  </div>
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">2025</span>
+    <span class="cv-honor-detail">COMPTEXT Conference, Vienna; European Consortium for Political Research Joint Sessions of Workshops, Prague; Una Europa PhD Summer School on Artificial Intelligence and Creativity, Paris; Political Studies Association of Ireland Annual Conference, Galway</span>
+  </div>
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">2024</span>
+    <span class="cv-honor-detail">COMPTEXT Conference, Amsterdam; Political Studies Association of Ireland Annual Conference, Dublin; SPIRe PhD Workshop, Dublin; Political Studies Association of Ireland Postgraduate Conference, Dublin</span>
+  </div>
 </div>
 ```
 :::
 
 ::: {.content-visible when-format="pdf"}
-\hangindent=0.7cm **McLaren, L**. October 2024. Taking the green pill: Moral language, psychological distance and the climate crisis in the European Parliament. Oral presentation: PSAI general conference, Trinity College Dublin, Ireland.
-
-\hangindent=0.7cm **McLaren, L**. May 2024. Psychological distance and the climate crisis in the European Parliament. Oral presentation: COMPTEXT conference, Vrije Universiteit Amsterdam, Netherlands.
-
-\hangindent=0.7cm **McLaren, L**. December 2023. Measuring, mapping, and assessing the impact of emotional appeals in European politics. Oral presentation: Connected\_Politics Lab, University College Dublin, Ireland.
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+2026 & EU Climate Politics and Policy Workshop, Dublin; European Consortium for Political Research Joint Sessions of Workshops, Innsbruck; European Political Science Society Conference, Belfast \\[0.4em]
+2025 & COMPTEXT Conference, Vienna; European Consortium for Political Research Joint Sessions of Workshops, Prague; Una Europa PhD Summer School on Artificial Intelligence and Creativity, Paris; Political Studies Association of Ireland Annual Conference, Galway \\[0.4em]
+2024 & COMPTEXT Conference, Amsterdam; Political Studies Association of Ireland Annual Conference, Dublin; SPIRe PhD Workshop, Dublin; Political Studies Association of Ireland Postgraduate Conference, Dublin \\
+\end{tabularx}
 :::
 
 ## Teaching
@@ -338,42 +349,57 @@ format:
 
 ::: {.content-visible when-format="html"}
 ```{=html}
-<div class="cv-honors">
+<p class="cv-funding-total">Total funding attracted: <strong id="cv-funding-total"></strong></p>
+<div class="cv-honors" id="cv-grants">
   <div class="cv-honor-row">
     <span class="cv-honor-date">2025 – 2027</span>
     <span class="cv-honor-detail"><strong>Government of Ireland Scholarship</strong>, Research Ireland</span>
-    <span class="cv-honor-amount">€68,000</span>
+    <span class="cv-honor-amount" data-amount="68000">€68,000</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2025</span>
     <span class="cv-honor-detail"><strong>PEC Travel Funding</strong>, Political Studies Association of Ireland</span>
-    <span class="cv-honor-amount">€400</span>
+    <span class="cv-honor-amount" data-amount="400">€400</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2024 – 2025</span>
     <span class="cv-honor-detail"><strong>Climate Fellowship</strong>, UCD Earth Institute</span>
-    <span class="cv-honor-amount">€1,000</span>
+    <span class="cv-honor-amount" data-amount="1000">€1,000</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2023 – 2025</span>
     <span class="cv-honor-detail"><strong>SPIRe Research Committee Funding</strong>, UCD School of Politics & International Relations</span>
-    <span class="cv-honor-amount">€3,000</span>
+    <span class="cv-honor-amount" data-amount="3000">€3,000</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2023 – 2027</span>
     <span class="cv-honor-detail"><strong>Iseult Honohan Scholarship</strong>, UCD School of Politics & International Relations</span>
-    <span class="cv-honor-amount">€124,190</span>
+    <span class="cv-honor-amount" data-amount="124190">€124,190</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2020</span>
     <span class="cv-honor-detail"><strong>Erasmus Mundus Scholarship</strong>, European Commission</span>
-    <span class="cv-honor-amount">€17,250</span>
+    <span class="cv-honor-amount" data-amount="17250">€17,250</span>
   </div>
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var total = 0;
+    document.querySelectorAll("#cv-grants .cv-honor-amount[data-amount]").forEach(function(el) {
+      total += parseInt(el.getAttribute("data-amount"), 10);
+    });
+    document.getElementById("cv-funding-total").textContent =
+      "€" + total.toLocaleString("en-IE");
+  });
+</script>
 ```
 :::
 
 ::: {.content-visible when-format="pdf"}
+\begin{center}
+\textit{Total funding attracted: €213,840}
+\end{center}
+
 | | | |
 |:---|:---|---:|
 | 2025 – 2027 | **Government of Ireland Scholarship**, Research Ireland | €68,000 |
@@ -441,4 +467,4 @@ format:
 
 ### Professional Memberships
 
-Political Studies Association of Ireland · American Political Science Association · European Consortium for Political Research
+Political Studies Association of Ireland · American Political Science Association · European Consortium for Political Research · European Political Science Society

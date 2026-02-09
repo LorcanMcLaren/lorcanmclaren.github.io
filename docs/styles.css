@@ -242,6 +242,19 @@ i {
   margin-bottom: 0.6em;
 }
 
+/* CV funding total */
+.cv-funding-total {
+  font-size: 0.95em;
+  color: #555;
+  font-style: italic;
+  margin-bottom: 0.6em;
+  text-align: center;
+}
+
+.quarto-dark .cv-funding-total {
+  color: #aaa;
+}
+
 /* CV honors / awards / teaching rows */
 .cv-honors {
   display: table;
@@ -277,6 +290,11 @@ i {
   padding: 0.3em 0;
   vertical-align: top;
   white-space: nowrap;
+}
+
+/* CV presentations: narrower year column */
+.cv-presentations .cv-honor-date {
+  width: 3.5em;
 }
 
 /* CV dark mode overrides */
