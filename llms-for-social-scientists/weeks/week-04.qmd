@@ -8,7 +8,79 @@
 
 ## Lecture
 
-*Content to be added.*
+Last week, we discussed embeddings --- the fundamental numeric representations that underlie what we turn to this week: transformers. Transformers are the neural network architecture used in all major modern language models and chatbots.
+
+### The transformer revolution
+
+The transformer architecture was introduced in the landmark paper "Attention Is All You Need" [@vaswani2017attention]. It represented a revolutionary departure from previous sequential architectures such as recurrent neural networks (RNNs). Where an RNN processes a sentence like "The cat sat" one word at a time --- first "the", then "cat", then "sat" --- a transformer processes the entire sequence simultaneously. This parallel processing makes transformers much faster to train and run, enables them to handle much longer texts, and makes the architecture far more scalable. The original transformer is made up of two main components: an encoder (on the left of the architecture diagram) and a decoder (on the right). Together, these characteristics lead to much better performance on tasks we care about, such as text classification.
+
+For political science, transformers offer improved understanding of complex political texts, cross-lingual capabilities for comparative analysis, and the ability to handle long documents such as legislation and treaties.
+
+### Attention
+
+The key innovation of the transformer is the attention mechanism. Each word in a sequence calculates attention scores with all other words. These scores determine how much information to gather from each other word. Multiple attention "heads" can learn different types of relationships simultaneously --- some might focus on grammar, others on topic relationships or semantic meaning. Crucially, this happens for all words at once, and each word can directly access information from any other word regardless of distance in the sentence.
+
+Consider the sentence: "The bill was passed despite fierce opposition." Self-attention helps the model connect "bill" with "passed" (subject--verb), "fierce" with "opposition" (modifier--noun), and "passed" with "opposition" (action--reaction).
+
+#### Self-attention
+
+Self-attention captures relationships within a single sequence. For example, in the sentence "The animal didn't cross the street because it was too tired", the model must determine what the pronoun "it" refers to. Slight modifications to the sentence --- changing "tired" to "wide", for instance --- alter the attention scores for "it", shifting its reference from "animal" to "street". The intensity of the attention scores reflects how strongly the model connects each pair of words.
+
+#### Cross-attention
+
+Cross-attention captures relationships between two sequences, and is particularly important for tasks like translation. When translating "Economic growth has slowed" into German or French, the model must not only translate individual words but also attend to differences in word order and grammatical structure between languages. The attention weights (visualised as lines of varying thickness between source and target words) indicate how much attention each word in the output pays to each word in the input.
+
+### Embeddings in transformers
+
+Building on what we know about embeddings from the previous week, transformers incorporate three separate types of embeddings:
+
+- **Token embeddings** convert discrete words into continuous vectors.
+- **Position embeddings** encode the location of each word in the sequence, providing information about word order. This is a critical component that gives transformers much better language understanding than previous approaches. Consider the difference between "Party A opposes Party B" and "Party B opposes Party A", or between "Increased spending and reduced taxes" and "Reduced spending and increased taxes" --- position embeddings allow the model to distinguish between these.
+- **Segment embeddings** help the model handle multiple-sentence tasks by marking sentence boundaries.
+
+All three types of embedding are learned during training.
+
+### Transformers and LLMs
+
+The terms "transformer" and "LLM" are often used interchangeably, but their relationship is not one-to-one. Modern LLMs generally use the transformer architecture, but transformers extend beyond language to computer vision and audio processing. Alternative LLM architectures also exist (including RNN- and CNN-based models), though these remain largely experimental and focus primarily on computational efficiency. At present, transformer-based LLMs dominate and the capabilities gap remains significant.
+
+### Model architectures
+
+There are three main categories of transformer-based model, each suited to different tasks:
+
+**Encoder-only models** (e.g. BERT, RoBERTa) use bidirectional context --- they can attend to words both before and after a given position. They are best suited for classification, text understanding, and analysis tasks.
+
+**Decoder-only models** (e.g. GPT, LLaMA) process text from left to right and are best suited for text generation, completion, and chat.
+
+**Encoder-decoder models** (e.g. T5, BART) incorporate both components and are best suited for translation, summarisation, and question answering.
+
+The way these models are trained gives them different competencies. Encoder models like BERT are trained by randomly masking words in the input and learning to fill in the blanks, which builds a deep understanding of language structure. Decoder models like GPT are trained on incomplete texts and learn to generate one word at a time, which develops strong generative capabilities.
+
+### Pre-training and fine-tuning
+
+Models are first pre-trained on large-scale general datasets to create foundation models. Pre-training involves learning broad language patterns from massive corpora through objectives like masked language modelling. These foundation models can then be worked with directly in some cases, but in most cases will require some level of fine-tuning.
+
+Fine-tuning adapts a pre-trained model for a specific task or domain using a smaller, task-specific dataset. "Domain" here refers to a specific type of text --- for example, a model may be pre-trained on all the text on the internet and then fine-tuned on social media posts. Fine-tuning is much faster and requires far less data than training from scratch, because the model has already learned general language representations. A foundation model can be fine-tuned for different purposes: for instance, a base BERT model might be fine-tuned for classification or to generate general-purpose embeddings.
+
+### Zero-shot classification
+
+Zero-shot classification is when a model performs a task without any fine-tuning, relying instead on the understanding of language that it acquired during pre-training. Given a piece of text and a set of candidate labels that the model has never been explicitly trained on, it determines how the input relates to each label and outputs probability scores. Encoder-decoder models can be used for zero-shot classification, and generative (decoder-only) models can also serve this purpose --- we will return to generative models in Weeks 6 and 7.
+
+### Applications in political science
+
+Transformers enable a range of applications in political science, including automated classification of political texts (categorising legislation by policy area, identifying key issues in parliamentary speeches), cross-lingual comparative analysis (comparing policy positions across party manifestos, analysing framing of issues in international media), and extracting structured data from unstructured text (identifying political actors and their relationships, tracking mentions of bills and policies in debates).
+
+#### Case study: Calls to action and protest attendance
+
+@rogers2019calls used a BERT model fine-tuned on Russian (RuBERT) to identify calls to action in tweets. They found that increases in calls to action showed a moderate correlation with increases in protest attendance, suggesting that transformer-based text classification may be useful as a predictor of protest movements.
+
+#### Case study: Framing of migration on Twitter
+
+@mendelsohn2021modeling used a RoBERTa model (an improvement on the original BERT) to classify immigration-related tweets according to how they are "framed." They found that tweets from US users about migration tended to focus on law-and-order implications and economic threat, while tweets from EU users tended to frame migrants as victims of war and globalisation, but also discussed migration in the context of cultural identity and threats to national cohesion.
+
+### Considerations
+
+There are several important considerations when working with transformer models. Computational requirements are significant: these models demand high processing power and substantial memory. Training data biases carry over into the model, and domain adaptation remains a challenge. Interpretability is also a concern --- the complex attention patterns within these models give them something of a "black box" nature. We will discuss parameter-efficient fine-tuning (PEFT) and adapters in Week 9, and interpretability in more depth in Week 10.
 
 ## Lab
 

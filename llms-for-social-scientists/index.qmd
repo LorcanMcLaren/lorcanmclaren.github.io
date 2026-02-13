@@ -34,3 +34,7 @@ This course is designed for students with or without experience in Python, but a
 | **Instructor** | Lorcan McLaren |
 | **Email** | lorcan.mclaren@ucdconnect.ie |
 | **Office Hours** | Wed, 15:00 -- 16:00 ([sign up](https://calendly.com/lorcan-mclaren/pol42560-ai-llms-office-hours)) |
+
+## License
+
+This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).

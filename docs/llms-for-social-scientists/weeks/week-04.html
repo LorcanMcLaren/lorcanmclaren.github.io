@@ -431,7 +431,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">4.1</span> Lecture</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">4.1</span> Lecture</a>
+  <ul class="collapse">
+  <li><a href="#the-transformer-revolution" id="toc-the-transformer-revolution" class="nav-link" data-scroll-target="#the-transformer-revolution"><span class="header-section-number">4.1.1</span> The transformer revolution</a></li>
+  <li><a href="#attention" id="toc-attention" class="nav-link" data-scroll-target="#attention"><span class="header-section-number">4.1.2</span> Attention</a></li>
+  <li><a href="#embeddings-in-transformers" id="toc-embeddings-in-transformers" class="nav-link" data-scroll-target="#embeddings-in-transformers"><span class="header-section-number">4.1.3</span> Embeddings in transformers</a></li>
+  <li><a href="#transformers-and-llms" id="toc-transformers-and-llms" class="nav-link" data-scroll-target="#transformers-and-llms"><span class="header-section-number">4.1.4</span> Transformers and LLMs</a></li>
+  <li><a href="#model-architectures" id="toc-model-architectures" class="nav-link" data-scroll-target="#model-architectures"><span class="header-section-number">4.1.5</span> Model architectures</a></li>
+  <li><a href="#pre-training-and-fine-tuning" id="toc-pre-training-and-fine-tuning" class="nav-link" data-scroll-target="#pre-training-and-fine-tuning"><span class="header-section-number">4.1.6</span> Pre-training and fine-tuning</a></li>
+  <li><a href="#zero-shot-classification" id="toc-zero-shot-classification" class="nav-link" data-scroll-target="#zero-shot-classification"><span class="header-section-number">4.1.7</span> Zero-shot classification</a></li>
+  <li><a href="#applications-in-political-science" id="toc-applications-in-political-science" class="nav-link" data-scroll-target="#applications-in-political-science"><span class="header-section-number">4.1.8</span> Applications in political science</a></li>
+  <li><a href="#considerations" id="toc-considerations" class="nav-link" data-scroll-target="#considerations"><span class="header-section-number">4.1.9</span> Considerations</a></li>
+  </ul></li>
   <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">4.2</span> Lab</a></li>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">4.3</span> Readings</a></li>
   </ul>
@@ -476,7 +487,72 @@ Week 4
 </div>
 <section id="lecture" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="lecture"><span class="header-section-number">4.1</span> Lecture</h2>
-<p><em>Content to be added.</em></p>
+<p>Last week, we discussed embeddings — the fundamental numeric representations that underlie what we turn to this week: transformers. Transformers are the neural network architecture used in all major modern language models and chatbots.</p>
+<section id="the-transformer-revolution" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="the-transformer-revolution"><span class="header-section-number">4.1.1</span> The transformer revolution</h3>
+<p>The transformer architecture was introduced in the landmark paper “Attention Is All You Need” <span class="citation" data-cites="vaswani2017attention">(<a href="../references.html#ref-vaswani2017attention" role="doc-biblioref"><strong>vaswani2017attention?</strong></a>)</span>. It represented a revolutionary departure from previous sequential architectures such as recurrent neural networks (RNNs). Where an RNN processes a sentence like “The cat sat” one word at a time — first “the”, then “cat”, then “sat” — a transformer processes the entire sequence simultaneously. This parallel processing makes transformers much faster to train and run, enables them to handle much longer texts, and makes the architecture far more scalable. The original transformer is made up of two main components: an encoder (on the left of the architecture diagram) and a decoder (on the right). Together, these characteristics lead to much better performance on tasks we care about, such as text classification.</p>
+<p>For political science, transformers offer improved understanding of complex political texts, cross-lingual capabilities for comparative analysis, and the ability to handle long documents such as legislation and treaties.</p>
+</section>
+<section id="attention" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="attention"><span class="header-section-number">4.1.2</span> Attention</h3>
+<p>The key innovation of the transformer is the attention mechanism. Each word in a sequence calculates attention scores with all other words. These scores determine how much information to gather from each other word. Multiple attention “heads” can learn different types of relationships simultaneously — some might focus on grammar, others on topic relationships or semantic meaning. Crucially, this happens for all words at once, and each word can directly access information from any other word regardless of distance in the sentence.</p>
+<p>Consider the sentence: “The bill was passed despite fierce opposition.” Self-attention helps the model connect “bill” with “passed” (subject–verb), “fierce” with “opposition” (modifier–noun), and “passed” with “opposition” (action–reaction).</p>
+<section id="self-attention" class="level4" data-number="4.1.2.1">
+<h4 data-number="4.1.2.1" class="anchored" data-anchor-id="self-attention"><span class="header-section-number">4.1.2.1</span> Self-attention</h4>
+<p>Self-attention captures relationships within a single sequence. For example, in the sentence “The animal didn’t cross the street because it was too tired”, the model must determine what the pronoun “it” refers to. Slight modifications to the sentence — changing “tired” to “wide”, for instance — alter the attention scores for “it”, shifting its reference from “animal” to “street”. The intensity of the attention scores reflects how strongly the model connects each pair of words.</p>
+</section>
+<section id="cross-attention" class="level4" data-number="4.1.2.2">
+<h4 data-number="4.1.2.2" class="anchored" data-anchor-id="cross-attention"><span class="header-section-number">4.1.2.2</span> Cross-attention</h4>
+<p>Cross-attention captures relationships between two sequences, and is particularly important for tasks like translation. When translating “Economic growth has slowed” into German or French, the model must not only translate individual words but also attend to differences in word order and grammatical structure between languages. The attention weights (visualised as lines of varying thickness between source and target words) indicate how much attention each word in the output pays to each word in the input.</p>
+</section>
+</section>
+<section id="embeddings-in-transformers" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="embeddings-in-transformers"><span class="header-section-number">4.1.3</span> Embeddings in transformers</h3>
+<p>Building on what we know about embeddings from the previous week, transformers incorporate three separate types of embeddings:</p>
+<ul>
+<li><strong>Token embeddings</strong> convert discrete words into continuous vectors.</li>
+<li><strong>Position embeddings</strong> encode the location of each word in the sequence, providing information about word order. This is a critical component that gives transformers much better language understanding than previous approaches. Consider the difference between “Party A opposes Party B” and “Party B opposes Party A”, or between “Increased spending and reduced taxes” and “Reduced spending and increased taxes” — position embeddings allow the model to distinguish between these.</li>
+<li><strong>Segment embeddings</strong> help the model handle multiple-sentence tasks by marking sentence boundaries.</li>
+</ul>
+<p>All three types of embedding are learned during training.</p>
+</section>
+<section id="transformers-and-llms" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="transformers-and-llms"><span class="header-section-number">4.1.4</span> Transformers and LLMs</h3>
+<p>The terms “transformer” and “LLM” are often used interchangeably, but their relationship is not one-to-one. Modern LLMs generally use the transformer architecture, but transformers extend beyond language to computer vision and audio processing. Alternative LLM architectures also exist (including RNN- and CNN-based models), though these remain largely experimental and focus primarily on computational efficiency. At present, transformer-based LLMs dominate and the capabilities gap remains significant.</p>
+</section>
+<section id="model-architectures" class="level3" data-number="4.1.5">
+<h3 data-number="4.1.5" class="anchored" data-anchor-id="model-architectures"><span class="header-section-number">4.1.5</span> Model architectures</h3>
+<p>There are three main categories of transformer-based model, each suited to different tasks:</p>
+<p><strong>Encoder-only models</strong> (e.g.&nbsp;BERT, RoBERTa) use bidirectional context — they can attend to words both before and after a given position. They are best suited for classification, text understanding, and analysis tasks.</p>
+<p><strong>Decoder-only models</strong> (e.g.&nbsp;GPT, LLaMA) process text from left to right and are best suited for text generation, completion, and chat.</p>
+<p><strong>Encoder-decoder models</strong> (e.g.&nbsp;T5, BART) incorporate both components and are best suited for translation, summarisation, and question answering.</p>
+<p>The way these models are trained gives them different competencies. Encoder models like BERT are trained by randomly masking words in the input and learning to fill in the blanks, which builds a deep understanding of language structure. Decoder models like GPT are trained on incomplete texts and learn to generate one word at a time, which develops strong generative capabilities.</p>
+</section>
+<section id="pre-training-and-fine-tuning" class="level3" data-number="4.1.6">
+<h3 data-number="4.1.6" class="anchored" data-anchor-id="pre-training-and-fine-tuning"><span class="header-section-number">4.1.6</span> Pre-training and fine-tuning</h3>
+<p>Models are first pre-trained on large-scale general datasets to create foundation models. Pre-training involves learning broad language patterns from massive corpora through objectives like masked language modelling. These foundation models can then be worked with directly in some cases, but in most cases will require some level of fine-tuning.</p>
+<p>Fine-tuning adapts a pre-trained model for a specific task or domain using a smaller, task-specific dataset. “Domain” here refers to a specific type of text — for example, a model may be pre-trained on all the text on the internet and then fine-tuned on social media posts. Fine-tuning is much faster and requires far less data than training from scratch, because the model has already learned general language representations. A foundation model can be fine-tuned for different purposes: for instance, a base BERT model might be fine-tuned for classification or to generate general-purpose embeddings.</p>
+</section>
+<section id="zero-shot-classification" class="level3" data-number="4.1.7">
+<h3 data-number="4.1.7" class="anchored" data-anchor-id="zero-shot-classification"><span class="header-section-number">4.1.7</span> Zero-shot classification</h3>
+<p>Zero-shot classification is when a model performs a task without any fine-tuning, relying instead on the understanding of language that it acquired during pre-training. Given a piece of text and a set of candidate labels that the model has never been explicitly trained on, it determines how the input relates to each label and outputs probability scores. Encoder-decoder models can be used for zero-shot classification, and generative (decoder-only) models can also serve this purpose — we will return to generative models in Weeks 6 and 7.</p>
+</section>
+<section id="applications-in-political-science" class="level3" data-number="4.1.8">
+<h3 data-number="4.1.8" class="anchored" data-anchor-id="applications-in-political-science"><span class="header-section-number">4.1.8</span> Applications in political science</h3>
+<p>Transformers enable a range of applications in political science, including automated classification of political texts (categorising legislation by policy area, identifying key issues in parliamentary speeches), cross-lingual comparative analysis (comparing policy positions across party manifestos, analysing framing of issues in international media), and extracting structured data from unstructured text (identifying political actors and their relationships, tracking mentions of bills and policies in debates).</p>
+<section id="case-study-calls-to-action-and-protest-attendance" class="level4" data-number="4.1.8.1">
+<h4 data-number="4.1.8.1" class="anchored" data-anchor-id="case-study-calls-to-action-and-protest-attendance"><span class="header-section-number">4.1.8.1</span> Case study: Calls to action and protest attendance</h4>
+<p><span class="citation" data-cites="rogers2019calls">(<a href="../references.html#ref-rogers2019calls" role="doc-biblioref"><strong>rogers2019calls?</strong></a>)</span> used a BERT model fine-tuned on Russian (RuBERT) to identify calls to action in tweets. They found that increases in calls to action showed a moderate correlation with increases in protest attendance, suggesting that transformer-based text classification may be useful as a predictor of protest movements.</p>
+</section>
+<section id="case-study-framing-of-migration-on-twitter" class="level4" data-number="4.1.8.2">
+<h4 data-number="4.1.8.2" class="anchored" data-anchor-id="case-study-framing-of-migration-on-twitter"><span class="header-section-number">4.1.8.2</span> Case study: Framing of migration on Twitter</h4>
+<p><span class="citation" data-cites="mendelsohn2021modeling">(<a href="../references.html#ref-mendelsohn2021modeling" role="doc-biblioref"><strong>mendelsohn2021modeling?</strong></a>)</span> used a RoBERTa model (an improvement on the original BERT) to classify immigration-related tweets according to how they are “framed.” They found that tweets from US users about migration tended to focus on law-and-order implications and economic threat, while tweets from EU users tended to frame migrants as victims of war and globalisation, but also discussed migration in the context of cultural identity and threats to national cohesion.</p>
+</section>
+</section>
+<section id="considerations" class="level3" data-number="4.1.9">
+<h3 data-number="4.1.9" class="anchored" data-anchor-id="considerations"><span class="header-section-number">4.1.9</span> Considerations</h3>
+<p>There are several important considerations when working with transformer models. Computational requirements are significant: these models demand high processing power and substantial memory. Training data biases carry over into the model, and domain adaptation remains a challenge. Interpretability is also a concern — the complex attention patterns within these models give them something of a “black box” nature. We will discuss parameter-efficient fine-tuning (PEFT) and adapters in Week 9, and interpretability in more depth in Week 10.</p>
+</section>
 </section>
 <section id="lab" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">4.2</span> Lab</h2>
@@ -931,6 +1007,7 @@ Week 4
     <div class="nav-footer-center">
 <a href="https://lorcanmclaren.com">Lorcan McLaren</a> · ©
 <script>document.write(new Date().getFullYear())</script>
+<p>· <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

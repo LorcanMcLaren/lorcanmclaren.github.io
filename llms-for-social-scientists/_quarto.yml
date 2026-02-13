@@ -9,13 +9,14 @@ book:
   date: last-modified
   date-format: "MMMM YYYY"
   site-url: https://lorcanmclaren.com/llms-for-social-scientists
+  license: "CC BY-NC-SA"
   # repo-url: https://github.com/lorcanmclaren/llms-for-social-scientists
   # repo-actions: [issue]
   # sharing: [twitter, linkedin]
   downloads: [pdf]
   page-footer:
     center: |
-      <a href="https://lorcanmclaren.com">Lorcan McLaren</a> · © <script>document.write(new Date().getFullYear())</script>
+      <a href="https://lorcanmclaren.com">Lorcan McLaren</a> · © <script>document.write(new Date().getFullYear())</script> · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
   sidebar:
     style: docked
   chapters:
