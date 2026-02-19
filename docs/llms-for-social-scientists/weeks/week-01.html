@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -504,7 +524,7 @@ Companion modules
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="a-brief-overview-of-ai"><span class="header-section-number">1.1.2</span> A brief overview of AI</h3>
 <section id="what-is-artificial-intelligence" class="level4" data-number="1.1.2.1">
 <h4 data-number="1.1.2.1" class="anchored" data-anchor-id="what-is-artificial-intelligence"><span class="header-section-number">1.1.2.1</span> What is artificial intelligence?</h4>
-<p>Artificial intelligence can be defined as a rational agent: an automated system that does the “right thing”, based on its objective, given its environment <span class="citation" data-cites="russell2020artificial">(<a href="../references.html#ref-russell2020artificial" role="doc-biblioref"><strong>russell2020artificial?</strong></a>)</span>. In the past, attempts at creating AI were dominated by a rules-based approach (or “expert systems”), in which knowledge and logic are encoded as a set of rules and a system makes decisions based on these. More recently, machine learning approaches have come to predominate. While machine learning and neural networks have existed since the 1960s and saw key innovations in the 1980s, it was increases in computational power and the rise of big data in the 2000s that led to a shift away from rules-based systems. Machine learning systems are able to handle uncertainty by learning patterns from a large training dataset in a way that often surpasses the performance of more brittle, handwritten rules.</p>
+<p>Artificial intelligence can be defined as a rational agent: an automated system that does the “right thing”, based on its objective, given its environment <span class="citation" data-cites="russell_artificial_2020">(<a href="../references.html#ref-russell_artificial_2020" role="doc-biblioref">Russell and Norvig 2020</a>)</span>. In the past, attempts at creating AI were dominated by a rules-based approach (or “expert systems”), in which knowledge and logic are encoded as a set of rules and a system makes decisions based on these. More recently, machine learning approaches have come to predominate. While machine learning and neural networks have existed since the 1960s and saw key innovations in the 1980s, it was increases in computational power and the rise of big data in the 2000s that led to a shift away from rules-based systems. Machine learning systems are able to handle uncertainty by learning patterns from a large training dataset in a way that often surpasses the performance of more brittle, handwritten rules.</p>
 <p>AI, machine learning, and deep learning are nested concepts. AI is the broadest category, machine learning is a subset of AI, and deep learning is a subset of machine learning.</p>
 </section>
 <section id="types-of-machine-learning" class="level4" data-number="1.1.2.2">
@@ -554,6 +574,11 @@ Companion modules
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-russell_artificial_2020" class="csl-entry" role="listitem">
+Russell, Stuart, and Peter Norvig. 2020. <em>Artificial <span>Intelligence</span>: <span>A</span> <span>Modern</span> <span>Approach</span></em>. Pearson.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

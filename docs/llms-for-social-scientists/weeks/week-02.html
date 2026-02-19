@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -488,13 +508,13 @@ Week 2
 <p>Content analysis is used to understand the (self-)presentation of political actors and policy content. It uses human judgement not to make sense of each text directly, but instead to apply a scheme to convert the text into data by recording labels or ratings for each unit of text. Text reflects how politicians seek to project an image of themselves, their actions, and others. For example, we might review a series of speeches from MPs on budgetary measures and annotate or “code” them as fiscally right-wing or left-wing. Content analysis can also be applied to legal texts and policy documents.</p>
 <section id="human-vs.-automated-content-analysis" class="level4" data-number="2.1.1.1">
 <h4 data-number="2.1.1.1" class="anchored" data-anchor-id="human-vs.-automated-content-analysis"><span class="header-section-number">2.1.1.1</span> Human vs.&nbsp;automated content analysis</h4>
-<p>Humans are flexible and able to handle nuance and ambiguity, but are vulnerable to subjectivity and performance variability over time. Even trained expert coders — the “gold standard” — are not failure-proof. The Manifesto Project, a major dataset of political texts annotated at the sentence-level with labels for policy area, has been found to have levels of inter-rater agreement and reliability so low that, had the coders been oncologists, their levels of tumour misdiagnosis would have been medically and financially catastrophic <span class="citation" data-cites="mikhaylov2012coder">(<a href="../references.html#ref-mikhaylov2012coder" role="doc-biblioref"><strong>mikhaylov2012coder?</strong></a>)</span>. Automated methods are more consistent, cost- and time-efficient, but they may be consistently wrong. Humans are still typically used as the point of reference (“ground truth”) against which we compare other approaches.</p>
+<p>Humans are flexible and able to handle nuance and ambiguity, but are vulnerable to subjectivity and performance variability over time. Even trained expert coders — the “gold standard” — are not failure-proof. The Manifesto Project, a major dataset of political texts annotated at the sentence-level with labels for policy area, has been found to have levels of inter-rater agreement and reliability so low that, had the coders been oncologists, their levels of tumour misdiagnosis would have been medically and financially catastrophic <span class="citation" data-cites="mikhaylov_coder_2012">(<a href="../references.html#ref-mikhaylov_coder_2012" role="doc-biblioref">Mikhaylov, Laver, and Benoit 2012</a>)</span>. Automated methods are more consistent, cost- and time-efficient, but they may be consistently wrong. Humans are still typically used as the point of reference (“ground truth”) against which we compare other approaches.</p>
 </section>
 </section>
 <section id="quantitative-text-analysis" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="quantitative-text-analysis"><span class="header-section-number">2.1.2</span> Quantitative text analysis</h3>
 <p>In quantitative text analysis, we convert each document into some kind of numeric representation which we can work with more easily. The document-feature matrix (DFM) is one widely used representation that records the frequency of each feature (typically a word) across each document. From even a simple DFM, we can make initial observations — for instance, comparing how frequently different US presidents mention terms like “economy”, “crime”, or “climate” in their State of the Union addresses.</p>
-<p>Four key principles guide quantitative text analysis <span class="citation" data-cites="grimmer2013text">(<a href="../references.html#ref-grimmer2013text" role="doc-biblioref"><strong>grimmer2013text?</strong></a>)</span>:</p>
+<p>Four key principles guide quantitative text analysis <span class="citation" data-cites="grimmer_text_2013">(<a href="../references.html#ref-grimmer_text_2013" role="doc-biblioref">Grimmer and Stewart 2013</a>)</span>:</p>
 <ol type="1">
 <li>All quantitative models of language are wrong — but some are useful.</li>
 <li>Quantitative methods for text amplify resources and augment humans.</li>
@@ -504,7 +524,7 @@ Week 2
 </section>
 <section id="process" class="level3" data-number="2.1.3">
 <h3 data-number="2.1.3" class="anchored" data-anchor-id="process"><span class="header-section-number">2.1.3</span> Process</h3>
-<p>The typical text-as-data workflow follows seven steps <span class="citation" data-cites="benoit2020text">(<a href="../references.html#ref-benoit2020text" role="doc-biblioref"><strong>benoit2020text?</strong></a>)</span>:</p>
+<p>The typical text-as-data workflow follows seven steps <span class="citation" data-cites="benoit_text_2020">(<a href="../references.html#ref-benoit_text_2020" role="doc-biblioref">Benoit 2020</a>)</span>:</p>
 <ol type="1">
 <li><p><strong>Selecting texts and defining the corpus.</strong> Identify the corpus of texts relevant to the research question. Texts are generally distinguished from one another by attributes relating to the author, speaker, time, or topic. Be aware of selection issues and data gaps (e.g.&nbsp;coalition manifestos tend to disappear after a coalition collapses, leading to a bias in the dataset towards more stable coalitions).</p></li>
 <li><p><strong>Converting texts into a common electronic format.</strong> This involves converting PDFs and image formats to text via OCR, standardising file types (HTML, XML, JSON, Word, Excel, TXT, TSV, CSV), handling character encoding issues (e.g.&nbsp;accents or special characters), and text cleaning (whitespace, page numbers). This step is often glossed over, but getting or creating a clean, organised dataset can be one of the most time-consuming components of any text-as-data project.</p></li>
@@ -519,15 +539,15 @@ Week 2
 <h3 data-number="2.1.4" class="anchored" data-anchor-id="applications"><span class="header-section-number">2.1.4</span> Applications</h3>
 <section id="characterising-text" class="level4" data-number="2.1.4.1">
 <h4 data-number="2.1.4.1" class="anchored" data-anchor-id="characterising-text"><span class="header-section-number">2.1.4.1</span> Characterising text</h4>
-<p><strong>Keyword extraction and analysis</strong> involves identifying the most frequent or distinctive terms in a corpus. For example, keyword datasets have been used to track how European political parties on Facebook discuss the migration crisis, with variation across countries and ideological groups <span class="citation" data-cites="caravaca2025european">(<a href="../references.html#ref-caravaca2025european" role="doc-biblioref"><strong>caravaca2025european?</strong></a>)</span>.</p>
-<p><strong>Named entity recognition (NER)</strong> identifies people, organisations, and other entities mentioned in text. <span class="citation" data-cites="jaros2018china">(<a href="../references.html#ref-jaros2018china" role="doc-biblioref"><strong>jaros2018china?</strong></a>)</span> used NER in Chinese official provincial newspapers to recognise all people and organisations named in Party newspapers, using the frequency of mentions as a measure of power. They found that Xi Jinping was much more frequently mentioned in Party newspapers than his predecessor.</p>
-<p><strong>Sentiment analysis</strong> measures the emotional tone of text. <span class="citation" data-cites="rheault2016measuring">(<a href="../references.html#ref-rheault2016measuring" role="doc-biblioref"><strong>rheault2016measuring?</strong></a>)</span> tracked the emotional polarity of government and opposition speeches in Britain from 1946 to 2013.</p>
-<p><strong>Readability analysis</strong> assesses how easy texts are to understand. <span class="citation" data-cites="benoit2019measuring">(<a href="../references.html#ref-benoit2019measuring" role="doc-biblioref"><strong>benoit2019measuring?</strong></a>)</span> examined the readability of US State of the Union addresses over time, finding a trend towards simpler language.</p>
+<p><strong>Keyword extraction and analysis</strong> involves identifying the most frequent or distinctive terms in a corpus. For example, keyword datasets have been used to track how European political parties on Facebook discuss the migration crisis, with variation across countries and ideological groups <span class="citation" data-cites="caravaca_dataset_2025">(<a href="../references.html#ref-caravaca_dataset_2025" role="doc-biblioref">Caravaca, Cuevas, and Cuevas 2025</a>)</span>.</p>
+<p><strong>Named entity recognition (NER)</strong> identifies people, organisations, and other entities mentioned in text. <span class="citation" data-cites="jinping_chinas_2018">Jaros and Pan (<a href="../references.html#ref-jinping_chinas_2018" role="doc-biblioref">2018</a>)</span> used NER in Chinese official provincial newspapers to recognise all people and organisations named in Party newspapers, using the frequency of mentions as a measure of power. They found that Xi Jinping was much more frequently mentioned in Party newspapers than his predecessor.</p>
+<p><strong>Sentiment analysis</strong> measures the emotional tone of text. <span class="citation" data-cites="rheault_measuring_2016">Rheault et al. (<a href="../references.html#ref-rheault_measuring_2016" role="doc-biblioref">2016</a>)</span> tracked the emotional polarity of government and opposition speeches in Britain from 1946 to 2013.</p>
+<p><strong>Readability analysis</strong> assesses how easy texts are to understand. <span class="citation" data-cites="benoit_measuring_2019">Benoit, Munger, and Spirling (<a href="../references.html#ref-benoit_measuring_2019" role="doc-biblioref">2019</a>)</span> examined the readability of US State of the Union addresses over time, finding a trend towards simpler language.</p>
 </section>
 <section id="classifying-into-known-categories" class="level4" data-number="2.1.4.2">
 <h4 data-number="2.1.4.2" class="anchored" data-anchor-id="classifying-into-known-categories"><span class="header-section-number">2.1.4.2</span> Classifying into known categories</h4>
 <p><strong>Dictionary analysis</strong> uses predefined lists of words to classify text. Dictionaries are interpretable but brittle: they do not generalise well to other datasets and are vulnerable to polysemy (e.g.&nbsp;the word “kind” can mean both “type” and “generous”).</p>
-<p><strong>Supervised machine learning</strong> is less interpretable but more flexible. A model is trained on labelled examples and then applied to classify unseen documents. For example, <span class="citation" data-cites="muller2024nostalgia">(<a href="../references.html#ref-muller2024nostalgia" role="doc-biblioref"><strong>muller2024nostalgia?</strong></a>)</span> used DistilBERT to measure party-level nostalgia across European democracies.</p>
+<p><strong>Supervised machine learning</strong> is less interpretable but more flexible. A model is trained on labelled examples and then applied to classify unseen documents. For example, <span class="citation" data-cites="muller_nostalgia_2024">Müller and Proksch (<a href="../references.html#ref-muller_nostalgia_2024" role="doc-biblioref">2024</a>)</span> used DistilBERT to measure party-level nostalgia across European democracies.</p>
 </section>
 <section id="discovering-categories" class="level4" data-number="2.1.4.3">
 <h4 data-number="2.1.4.3" class="anchored" data-anchor-id="discovering-categories"><span class="header-section-number">2.1.4.3</span> Discovering categories</h4>
@@ -535,8 +555,8 @@ Week 2
 </section>
 <section id="measuring-latent-features" class="level4" data-number="2.1.4.4">
 <h4 data-number="2.1.4.4" class="anchored" data-anchor-id="measuring-latent-features"><span class="header-section-number">2.1.4.4</span> Measuring latent features</h4>
-<p><strong>Supervised scaling</strong> methods such as Wordscores <span class="citation" data-cites="laver2003extracting">(<a href="../references.html#ref-laver2003extracting" role="doc-biblioref"><strong>laver2003extracting?</strong></a>)</span> require some reference texts for which a score (e.g.&nbsp;left–right position) is known, from which the model learns to score new texts.</p>
-<p><strong>Unsupervised scaling</strong> methods such as Wordfish <span class="citation" data-cites="slapin2008scaling">(<a href="../references.html#ref-slapin2008scaling" role="doc-biblioref"><strong>slapin2008scaling?</strong></a>)</span> run without reference texts. It is up to the researcher to interpret what the estimated dimensions actually represent. A risk is that the model might capture thematic differences (e.g.&nbsp;talking about the economy vs.&nbsp;foreign policy) rather than ideological differences.</p>
+<p><strong>Supervised scaling</strong> methods such as Wordscores <span class="citation" data-cites="laver_extracting_2003">(<a href="../references.html#ref-laver_extracting_2003" role="doc-biblioref">Laver, Benoit, and Garry 2003</a>)</span> require some reference texts for which a score (e.g.&nbsp;left–right position) is known, from which the model learns to score new texts.</p>
+<p><strong>Unsupervised scaling</strong> methods such as Wordfish <span class="citation" data-cites="slapin_scaling_2008">(<a href="../references.html#ref-slapin_scaling_2008" role="doc-biblioref">Slapin and Proksch 2008</a>)</span> run without reference texts. It is up to the researcher to interpret what the estimated dimensions actually represent. A risk is that the model might capture thematic differences (e.g.&nbsp;talking about the economy vs.&nbsp;foreign policy) rather than ideological differences.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -564,6 +584,38 @@ Note
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-benoit_text_2020" class="csl-entry" role="listitem">
+Benoit, Kenneth. 2020. <span>“Text as <span>Data</span>: <span>An</span> <span>Overview</span>.”</span> In <em>The <span>SAGE</span> <span>Handbook</span> of <span>Research</span> <span>Methods</span> in <span>Political</span> <span>Science</span> and <span>International</span> <span>Relations</span></em>, 461–97. Sage London.
+</div>
+<div id="ref-benoit_measuring_2019" class="csl-entry" role="listitem">
+Benoit, Kenneth, Kevin Munger, and Arthur Spirling. 2019. <span>“Measuring and <span>Explaining</span> <span>Political</span> <span>Sophistication</span> Through <span>Textual</span> <span>Complexity</span>.”</span> <em>American Journal of Political Science</em> 63 (2): 491–508. <a href="https://doi.org/10.1111/ajps.12423">https://doi.org/10.1111/ajps.12423</a>.
+</div>
+<div id="ref-caravaca_dataset_2025" class="csl-entry" role="listitem">
+Caravaca, Francisco, Ángel Cuevas, and Rubén Cuevas. 2025. <span>“Dataset of Keywords Used by <span>European</span> Political Parties on <span>Facebook</span>.”</span> <em>Data in Brief</em> 58 (February): 111280. <a href="https://doi.org/10.1016/j.dib.2025.111280">https://doi.org/10.1016/j.dib.2025.111280</a>.
+</div>
+<div id="ref-grimmer_text_2013" class="csl-entry" role="listitem">
+Grimmer, Justin, and Brandon M. Stewart. 2013. <span>“Text as <span>Data</span>: <span>The</span> <span>Promise</span> and <span>Pitfalls</span> of <span>Automatic</span> <span>Content</span> <span>Analysis</span> <span>Methods</span> for <span>Political</span> <span>Texts</span>.”</span> <em>Political Analysis</em> 21 (3): 267–97. <a href="https://doi.org/10.1093/pan/mps028">https://doi.org/10.1093/pan/mps028</a>.
+</div>
+<div id="ref-jinping_chinas_2018" class="csl-entry" role="listitem">
+Jaros, Kyle, and Jennifer Pan. 2018. <span>“China’s <span>Newsmakers</span>: <span>Official</span> <span>Media</span> <span>Coverage</span> and <span>Political</span> <span>Shifts</span> in the <span>Xi</span> <span>Jinping</span> <span>Era</span>.”</span> <em>The China Quarterly</em> 233 (March): 111–36. <a href="https://doi.org/10.1017/S0305741017001679">https://doi.org/10.1017/S0305741017001679</a>.
+</div>
+<div id="ref-laver_extracting_2003" class="csl-entry" role="listitem">
+Laver, Michael, Kenneth Benoit, and John Garry. 2003. <span>“Extracting <span>Policy</span> <span>Positions</span> from <span>Political</span> <span>Texts</span> <span>Using</span> <span>Words</span> as <span>Data</span>.”</span> <em>American Political Science Review</em> 97 (02). <a href="https://doi.org/10.1017/S0003055403000698">https://doi.org/10.1017/S0003055403000698</a>.
+</div>
+<div id="ref-mikhaylov_coder_2012" class="csl-entry" role="listitem">
+Mikhaylov, Slava, Michael Laver, and Kenneth R. Benoit. 2012. <span>“Coder <span>Reliability</span> and <span>Misclassification</span> in the <span>Human</span> <span>Coding</span> of <span>Party</span> <span>Manifestos</span>.”</span> <em>Political Analysis</em> 20 (1): 78–91. <a href="https://doi.org/10.1093/pan/mpr047">https://doi.org/10.1093/pan/mpr047</a>.
+</div>
+<div id="ref-muller_nostalgia_2024" class="csl-entry" role="listitem">
+Müller, Stefan, and Sven-Oliver Proksch. 2024. <span>“Nostalgia in <span>European</span> <span>Party</span> <span>Politics</span>: <span>A</span> <span>Text</span>-<span>Based</span> <span>Measurement</span> <span>Approach</span>.”</span> <em>British Journal of Political Science</em> 54 (3): 993–1005. <a href="https://doi.org/10.1017/S0007123423000571">https://doi.org/10.1017/S0007123423000571</a>.
+</div>
+<div id="ref-rheault_measuring_2016" class="csl-entry" role="listitem">
+Rheault, Ludovic, Kaspar Beelen, Christopher Cochrane, and Graeme Hirst. 2016. <span>“Measuring <span>Emotion</span> in <span>Parliamentary</span> <span>Debates</span> with <span>Automated</span> <span>Textual</span> <span>Analysis</span>.”</span> Edited by Joseph Najbauer. <em>PLOS ONE</em> 11 (12): e0168843. <a href="https://doi.org/10.1371/journal.pone.0168843">https://doi.org/10.1371/journal.pone.0168843</a>.
+</div>
+<div id="ref-slapin_scaling_2008" class="csl-entry" role="listitem">
+Slapin, Jonathan B., and Sven-Oliver Proksch. 2008. <span>“A <span>Scaling</span> <span>Model</span> for <span>Estimating</span> <span>Time</span>-<span>Series</span> <span>Party</span> <span>Positions</span> from <span>Texts</span>.”</span> <em>American Journal of Political Science</em> 52 (3): 705–22. <a href="https://doi.org/10.1111/j.1540-5907.2008.00338.x">https://doi.org/10.1111/j.1540-5907.2008.00338.x</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

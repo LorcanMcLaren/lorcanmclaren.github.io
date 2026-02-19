@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -490,7 +510,7 @@ Week 4
 <p>Last week, we discussed embeddings — the fundamental numeric representations that underlie what we turn to this week: transformers. Transformers are the neural network architecture used in all major modern language models and chatbots.</p>
 <section id="the-transformer-revolution" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="the-transformer-revolution"><span class="header-section-number">4.1.1</span> The transformer revolution</h3>
-<p>The transformer architecture was introduced in the landmark paper “Attention Is All You Need” <span class="citation" data-cites="vaswani2017attention">(<a href="../references.html#ref-vaswani2017attention" role="doc-biblioref"><strong>vaswani2017attention?</strong></a>)</span>. It represented a revolutionary departure from previous sequential architectures such as recurrent neural networks (RNNs). Where an RNN processes a sentence like “The cat sat” one word at a time — first “the”, then “cat”, then “sat” — a transformer processes the entire sequence simultaneously. This parallel processing makes transformers much faster to train and run, enables them to handle much longer texts, and makes the architecture far more scalable. The original transformer is made up of two main components: an encoder (on the left of the architecture diagram) and a decoder (on the right). Together, these characteristics lead to much better performance on tasks we care about, such as text classification.</p>
+<p>The transformer architecture was introduced in the landmark paper “Attention Is All You Need” <span class="citation" data-cites="vaswani_attention_2017">(<a href="../references.html#ref-vaswani_attention_2017" role="doc-biblioref">Vaswani et al. 2017</a>)</span>. It represented a revolutionary departure from previous sequential architectures such as recurrent neural networks (RNNs). Where an RNN processes a sentence like “The cat sat” one word at a time — first “the”, then “cat”, then “sat” — a transformer processes the entire sequence simultaneously. This parallel processing makes transformers much faster to train and run, enables them to handle much longer texts, and makes the architecture far more scalable. The original transformer is made up of two main components: an encoder (on the left of the architecture diagram) and a decoder (on the right). Together, these characteristics lead to much better performance on tasks we care about, such as text classification.</p>
 <p>For political science, transformers offer improved understanding of complex political texts, cross-lingual capabilities for comparative analysis, and the ability to handle long documents such as legislation and treaties.</p>
 </section>
 <section id="attention" class="level3" data-number="4.1.2">
@@ -542,11 +562,11 @@ Week 4
 <p>Transformers enable a range of applications in political science, including automated classification of political texts (categorising legislation by policy area, identifying key issues in parliamentary speeches), cross-lingual comparative analysis (comparing policy positions across party manifestos, analysing framing of issues in international media), and extracting structured data from unstructured text (identifying political actors and their relationships, tracking mentions of bills and policies in debates).</p>
 <section id="case-study-calls-to-action-and-protest-attendance" class="level4" data-number="4.1.8.1">
 <h4 data-number="4.1.8.1" class="anchored" data-anchor-id="case-study-calls-to-action-and-protest-attendance"><span class="header-section-number">4.1.8.1</span> Case study: Calls to action and protest attendance</h4>
-<p><span class="citation" data-cites="rogers2019calls">(<a href="../references.html#ref-rogers2019calls" role="doc-biblioref"><strong>rogers2019calls?</strong></a>)</span> used a BERT model fine-tuned on Russian (RuBERT) to identify calls to action in tweets. They found that increases in calls to action showed a moderate correlation with increases in protest attendance, suggesting that transformer-based text classification may be useful as a predictor of protest movements.</p>
+<p><span class="citation" data-cites="rogers_calls_2019">Rogers, Kovaleva, and Rumshisky (<a href="../references.html#ref-rogers_calls_2019" role="doc-biblioref">2019</a>)</span> used a BERT model fine-tuned on Russian (RuBERT) to identify calls to action in tweets. They found that increases in calls to action showed a moderate correlation with increases in protest attendance, suggesting that transformer-based text classification may be useful as a predictor of protest movements.</p>
 </section>
 <section id="case-study-framing-of-migration-on-twitter" class="level4" data-number="4.1.8.2">
 <h4 data-number="4.1.8.2" class="anchored" data-anchor-id="case-study-framing-of-migration-on-twitter"><span class="header-section-number">4.1.8.2</span> Case study: Framing of migration on Twitter</h4>
-<p><span class="citation" data-cites="mendelsohn2021modeling">(<a href="../references.html#ref-mendelsohn2021modeling" role="doc-biblioref"><strong>mendelsohn2021modeling?</strong></a>)</span> used a RoBERTa model (an improvement on the original BERT) to classify immigration-related tweets according to how they are “framed.” They found that tweets from US users about migration tended to focus on law-and-order implications and economic threat, while tweets from EU users tended to frame migrants as victims of war and globalisation, but also discussed migration in the context of cultural identity and threats to national cohesion.</p>
+<p><span class="citation" data-cites="mendelsohn_modeling_2021">Mendelsohn, Budak, and Jurgens (<a href="../references.html#ref-mendelsohn_modeling_2021" role="doc-biblioref">2021</a>)</span> used a RoBERTa model (an improvement on the original BERT) to classify immigration-related tweets according to how they are “framed.” They found that tweets from US users about migration tended to focus on law-and-order implications and economic threat, while tweets from EU users tended to frame migrants as victims of war and globalisation, but also discussed migration in the context of cultural identity and threats to national cohesion.</p>
 </section>
 </section>
 <section id="considerations" class="level3" data-number="4.1.9">
@@ -566,6 +586,17 @@ Week 4
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-mendelsohn_modeling_2021" class="csl-entry" role="listitem">
+Mendelsohn, Julia, Ceren Budak, and David Jurgens. 2021. <span>“Modeling <span>Framing</span> in <span>Immigration</span> <span>Discourse</span> on <span>Social</span> <span>Media</span>.”</span> In <em>Proceedings of the 2021 <span>Conference</span> of the <span>North</span> <span>American</span> <span>Chapter</span> of the <span>Association</span> for <span>Computational</span> <span>Linguistics</span>: <span>Human</span> <span>Language</span> <span>Technologies</span></em>, 2219–63. <a href="https://doi.org/10.18653/v1/2021.naacl-main.179">https://doi.org/10.18653/v1/2021.naacl-main.179</a>.
+</div>
+<div id="ref-rogers_calls_2019" class="csl-entry" role="listitem">
+Rogers, Anna, Olga Kovaleva, and Anna Rumshisky. 2019. <span>“Calls to <span>Action</span> on <span>Social</span> <span>Media</span>: <span>Potential</span> for <span>Censorship</span> and <span>Social</span> <span>Impact</span>.”</span> <em>EMNLP-IJCNLP 2019 Second Workshop on Natural Language Processing for Internet Freedom</em>.
+</div>
+<div id="ref-vaswani_attention_2017" class="csl-entry" role="listitem">
+Vaswani, Ashish, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017. <span>“Attention Is All You Need.”</span> <em>Advances in Neural Information Processing Systems</em> 30. <a href="https://proceedings.neurips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html">https://proceedings.neurips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

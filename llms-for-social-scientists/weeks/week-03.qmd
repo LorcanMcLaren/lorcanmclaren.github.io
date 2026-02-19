@@ -79,11 +79,11 @@ Embeddings serve two main purposes in research:
 
 #### Case study: Gender and party differences in the US House
 
-@rodriguez2023embedding used word embeddings trained separately on speeches by different groups of US legislators to examine how the same words are used with different meanings or connotations. While male and female legislators, and Republicans and Democrats, tend to use common words like "also" and "but" in similar ways, they diverge when it comes to more politically charged terms. In particular, male legislators use "marriage" in very different ways to female legislators, while Republicans refer to "immigration" in very different contexts to Democrats. Looking at nearest-neighbour terms in the embedding space, Democrats tend to use terms related to "reform" when discussing immigration, while Republicans tend to focus on "enforcement."
+@rodriguez_embedding_2023 used word embeddings trained separately on speeches by different groups of US legislators to examine how the same words are used with different meanings or connotations. While male and female legislators, and Republicans and Democrats, tend to use common words like "also" and "but" in similar ways, they diverge when it comes to more politically charged terms. In particular, male legislators use "marriage" in very different ways to female legislators, while Republicans refer to "immigration" in very different contexts to Democrats. Looking at nearest-neighbour terms in the embedding space, Democrats tend to use terms related to "reform" when discussing immigration, while Republicans tend to focus on "enforcement."
 
 #### Case study: Gender in school textbooks
 
-@lucy2020content examined how different populations are discussed in K--12 textbooks in Texas using word embeddings. They found that words related to power and achievement are more associated with terms referring to men, while words related to home life and labour are more associated with women (the labour association likely reflecting historical discussion of women entering the workplace).
+@lucy_content_2020 examined how different populations are discussed in K--12 textbooks in Texas using word embeddings. They found that words related to power and achievement are more associated with terms referring to men, while words related to home life and labour are more associated with women (the labour association likely reflecting historical discussion of women entering the workplace).
 
 ### Sentence, paragraph, and document embeddings
 
@@ -91,7 +91,7 @@ While word embeddings represent individual words, we can also compute embeddings
 
 #### Case study: Party positions in UK Parliament
 
-@rheault2020word calculated party embeddings from parliamentary debates and applied PCA. The first principal component (x-axis) captured the left--right divide, while the second (y-axis) captured the government--opposition divide. The resulting plot shows how parties shifted over time, with the Thatcher years being furthest to the right and Labour moving rightward during the Blair years under New Labour. The authors also calculated embeddings for individual legislators, allowing comparisons between individual MPs rather than just between parties.
+@rheault_word_2020 calculated party embeddings from parliamentary debates and applied PCA. The first principal component (x-axis) captured the left--right divide, while the second (y-axis) captured the government--opposition divide. The resulting plot shows how parties shifted over time, with the Thatcher years being furthest to the right and Labour moving rightward during the Blair years under New Labour. The authors also calculated embeddings for individual legislators, allowing comparisons between individual MPs rather than just between parties.
 
 ### Embeddings beyond text
 

@@ -8,7 +8,145 @@
 
 ## Lecture
 
-*Content to be added.*
+Building on last week's deep dive into transformer architectures, we now turn to the question of how we know whether a model is actually performing well. This week focuses on robust methods for validating LLM outputs, quantifying performance, and ensuring reproducibility. These are not abstract concerns --- they are essential for credible, impactful application of LLMs to political and social science research questions.
+
+The increasing ease-of-use of LLMs makes validation more important, not less. As we discussed last week, zero-shot classification allows a researcher to hand a model a set of candidate labels and a corpus of text and receive classifications without any training data at all. The barrier to entry has effectively collapsed: what once required substantial labelled datasets, machine learning expertise, and weeks of model development can now be done in an afternoon with a few lines of code. But this convenience is deceptive. It is easy to throw a set of candidate labels at a model and get results without having built out the concepts behind those labels --- without reducing their overlap, parsing out edge cases, or ensuring that they translate well to the specific domain under study.
+
+This creates a tension with foundational principles of measurement in political science. In the standard conception of measurement validity [@adcock_measurement_2001], researchers must transform broad "background" concepts into precise, systematised constructs through careful operationalisation. When we bypass this process and rely on an LLM's pre-trained understanding of a label, we risk measuring something other than what we intend. @halterman_codebook_2025 illustrate this problem with a concrete example: different research projects operationalise "protest" in substantively different ways. The Crowd Counting Consortium's definition of protest excludes labour strikes, while the CAMEO event ontology's definition includes them. If a researcher simply passes the label "protest" to an LLM without specifying which definition they mean, the model will rely on whatever internal representation of "protest" it has learned from its pre-training data --- and if those training contexts included strikes, the resulting classifications may include labour strikes as protests, leading to incorrect substantive conclusions. The label looks right, the output looks plausible, but the measurement is invalid.
+
+The same problem arises across many political science concepts. "Populism", "polarisation", "democratic backsliding" --- these are all terms with contested or context-dependent meanings that an LLM may interpret differently from how a researcher intends. Validation is the process by which we check whether a model's outputs actually correspond to the constructs we care about, and it is the only safeguard against plausible-looking but misleading results.
+
+### Validation in LLM research
+
+Validation for LLMs is uniquely challenging compared to traditional quantitative political science methods. Surveys and experiments have well-established validation playbooks: we can assess question wording, sample representativeness, treatment delivery, and so on. LLMs, by contrast, are often opaque systems with inconsistent outputs across runs due to inherent randomness, making it harder to diagnose issues. Hallucination (outputting fabricated information) and bias (reflecting societal stereotypes) are known failure modes that can be difficult to quantify. Robust validation methodologies are therefore essential if we are to have confidence in LLM-based findings.
+
+Three key validation concepts underpin this effort: establishing ground truth, computing performance metrics, and conducting human evaluation.
+
+### Ground truth
+
+The ideal validation setup requires a clear "ground truth" against which to evaluate model outputs. Ground truth can be approximated through expert annotations, historical data, or rigorously verified facts, but all of these have limitations.
+
+Political science phenomena are often complex, subjective, and open to interpretation, making ground truth particularly elusive in our field. Annotator background, textual source, and time period can all shape what counts as "true." The meaning of concepts can shift over time, and context-dependent language poses further challenges. It is important to engage deeply with primary sources and existing literature to contextualise model performance, and to always consider the potential for bias in both inputs and outputs.
+
+### Confusion matrices
+
+The confusion matrix is the fundamental tool for understanding classifier performance. It is a table that cross-tabulates actual classes (ground truth) in rows against predicted classes (model outputs) in columns. Diagonal entries represent correct predictions --- true positives and true negatives --- while off-diagonal entries represent errors: false positives (predicted positive but actually negative) and false negatives (predicted negative but actually positive).
+
+The confusion matrix provides a structured way to identify not just how much a model gets right, but the specific types of errors it makes. Which errors matter most depends on the application. In spam detection, a false positive (a legitimate email filtered as spam) is typically worse than a false negative (a spam email reaching the inbox). In medical screening, the opposite is true: a false negative (missing a real case) is far more costly than a false positive (flagging a healthy patient for follow-up).
+
+### Performance metrics
+
+Accuracy, precision, recall, and F1 score are all computed from the raw counts in the confusion matrix.
+
+**Accuracy** is the proportion of predictions that are correct: $(TP + TN) / (TP + TN + FP + FN)$. It is intuitive but can be misleading with imbalanced classes. If 90% of emails are non-spam, a model that always predicts "non-spam" achieves 90% accuracy while being entirely useless.
+
+**Precision** answers the question: when the model predicts positive, how often is it correct? It is calculated as $TP / (TP + FP)$ and measures the quality of positive predictions.
+
+**Recall** answers the question: out of all the actual positive instances, how many did the model successfully identify? It is calculated as $TP / (TP + FN)$ and measures the completeness of positive predictions.
+
+**F1 score** is the harmonic mean of precision and recall: $2 \times (Precision \times Recall) / (Precision + Recall)$. It provides a single balanced metric that is useful for comparing models, particularly when there is no strong reason to prioritise precision over recall or vice versa.
+
+Note that "positive" and "negative" are defined by the problem --- it is important to think carefully about which class is which when interpreting these metrics.
+
+#### The precision--recall tradeoff
+
+There is often a tradeoff between precision and recall; it is rare to maximise both simultaneously. A model with high precision but low recall is like a small, tightly woven net: it catches mostly true cases but misses many. A model with high recall but low precision casts a wide net, identifying most true cases but also picking up many false positives.
+
+Which to prioritise depends on the domain and the relative costs of different error types. Spam detection typically favours high precision (it is acceptable to miss some spam, but very bad to filter out legitimate emails). Medical screening favours high recall (catching as many real cases as possible is the priority, since follow-up tests can weed out false positives). Most problems fall somewhere in between, and researchers need to think carefully about these error tradeoffs in the context of their specific research question.
+
+#### Accuracy vs. precision: a visual analogy
+
+The distinction between accuracy and precision can be illustrated with a dartboard analogy. The bullseye represents the ground truth. Accuracy measures overall closeness of the darts (predictions) to the bullseye, while precision captures how tightly grouped the darts are. A model can have high accuracy while being imprecise (predictions scattered around the bullseye), or high precision while being inaccurate (tightly grouped predictions that are systematically off-centre). A precise but inaccurate model may have a systematic bias that could potentially be corrected through recalibration. This connects to the bias--variance tradeoff: balancing model complexity to avoid both underfitting (high bias) and overfitting (high variance) for better generalisation.
+
+### Multiclass averaging methods
+
+Many political science applications involve multiclass or multilabel classification rather than simple binary problems. When computing metrics such as precision, recall, and F1 across multiple classes, there are several ways to aggregate them.
+
+**Macro averaging** computes each class's metric independently and takes the unweighted mean. This gives equal emphasis to all classes regardless of frequency, making it a good choice when all classes are equally important and performance on minority classes matters.
+
+**Micro averaging** pools all the true positive, false positive, and false negative counts across classes and computes metrics on the pooled counts. This implicitly weights by class frequency and naturally emphasises the most common classes. It is useful when the overall volume of correct predictions is more important than class-level performance.
+
+**Weighted averaging** computes per-class metrics and then takes a weighted average, with weights proportional to the number of instances in each class. This accounts for class imbalance while allowing each class to contribute to the final metric.
+
+To illustrate: consider a three-class problem where Class A has 100 instances (F1 = 0.90), Class B has 50 instances (F1 = 0.80), and Class C has 10 instances (F1 = 0.60). The macro F1 would be $(0.90 + 0.80 + 0.60) / 3 = 0.77$, while the weighted F1 would be $(100 \times 0.90 + 50 \times 0.80 + 10 \times 0.60) / 160 = 0.84$. Notice how macro averaging treats Class C equally despite its small size, pulling the average down, while weighted averaging gives more influence to the larger classes.
+
+In many political science settings, weighted averaging is a reasonable default because it captures class prevalence without completely ignoring rare classes. But the choice should always be guided by the research question: use macro if all classes are equally important, micro if overall performance is key, and weighted for a tailored balance.
+
+### Standard benchmarks vs. domain validation
+
+Generic language benchmarks such as GLUE, SuperGLUE, SQuAD, and CNN/Daily Mail are valuable for comparing LLMs on broad tasks, but they have limitations for political science applications. Our work often involves domain-specific language, concepts, and historical knowledge that general-purpose models and datasets do not capture well. Even moving from parliamentary speech to legislation can pose validity problems for a model trained on one type of text.
+
+Bespoke validation datasets and performance measures tailored to political science constructs and research questions are often necessary to build real trust in a model. Developing these takes effort, but it is essential for moving beyond "off the shelf" use of LLMs. This means we need domain-specific labelled (hand-coded) data to validate against.
+
+### Task-specific evaluation metrics
+
+Standard classification metrics such as accuracy, precision, recall, and F1 are a starting point, but researchers should also consider task-specific measures. BLEU evaluates machine translation quality based on n-gram overlap between model outputs and reference human translations. ROUGE assesses summarisation quality based on overlapping word sequences between model and reference summaries. Perplexity measures a language model's uncertainty in predicting the next word.
+
+These metrics give a more focused sense of how well a model is performing the specific task at hand, beyond generic predictive power. Human evaluation --- having raters assess output fluency, coherence, and relevance --- is also valuable despite being labour-intensive. Careful qualitative error analysis can surface insightful patterns about model failure modes, helping to build a more nuanced picture than summary metrics alone and pointing to potential fixes.
+
+### Crowdcoding
+
+Crowdsourcing (or "crowdcoding") can be a powerful tool for efficiently building domain-specific validation datasets. Services such as Amazon Mechanical Turk allow researchers to hire annotators at scale, which is especially valuable for labelling tasks that benefit from many judgements --- for example, labelling sentences as claims, identifying political parties, or rating sentiment.
+
+Crowdsourcing leverages the diversity of the crowd to reduce individual annotator biases. However, quality control is critical, especially for nuanced political science concepts. Researchers cannot simply assume high-quality labels from the outset. Careful training of annotators, very precise annotation guidelines with worked examples, and ongoing monitoring of outputs are all essential.
+
+### Codebooks and annotation
+
+Codebooks are key for making annotation efforts reproducible and consistent across multiple annotators. They operationalise abstract constructs into discrete labels that can be applied systematically, and they use examples and decision rules to ensure that everyone interprets edge cases in the same way.
+
+A good codebook has clear definitions of all categories and anticipates likely points of confusion or disagreement, providing guidance on how to resolve them. Developing a codebook is often an iterative process: draft the codebook, try coding with it, identify points of divergence, discuss and amend, and repeat. This can be time-consuming but is critical for producing high-quality labelled data that others can make sense of and reuse.
+
+### Intercoder reliability
+
+Inter-annotator agreement metrics quantify the degree of consistency between multiple human raters --- a form of reliability measurement.
+
+**Percentage agreement** is the simplest measure: the proportion of items on which coders agree. It is intuitive but does not account for chance agreement. With only two categories, even random guessing would produce agreement roughly 50% of the time.
+
+**Cohen's kappa** corrects for chance agreement and is designed for two raters working with categorical data. It is widely used but limited to pairwise comparisons.
+
+**Krippendorff's alpha** is more flexible: it handles any number of raters, works with different data scales (nominal, ordinal, interval), and accounts for missing data.
+
+As a rough guide for interpretation: values below 0.4 indicate poor agreement, 0.4--0.6 moderate agreement, 0.6--0.8 substantial agreement, and above 0.8 near-perfect agreement. High agreement suggests that annotations are reproducible and trustworthy; low agreement points to ambiguity in categories or gaps in annotator training. However, agreement alone is not sufficient --- coders could agree consistently on a flawed set of labels. Metrics should always be combined with human inspection.
+
+When choosing a reliability metric, percentage agreement is acceptable for quick checks and clearly defined, non-overlapping categories. Cohen's kappa is appropriate for two independent raters doing categorical labelling. Krippendorff's alpha is the most general option and is preferable when there are multiple raters, missing values, or ordinal/interval data. When in doubt, it is better to use a chance-corrected metric.
+
+### Human evaluation challenges
+
+Human evaluation of LLM outputs is invaluable for assessing quality but is susceptible to several cognitive biases. Anchoring effects mean that human ratings can be swayed by the order in which outputs are seen --- if raters start with strong outputs, mediocre ones later may seem worse than they are. Priming effects arise when raters are shown the "correct" output before rating, biasing their perception. Fatigue effects cause rating quality to drift over time as raters tire or lose concentration, introducing noise.
+
+Careful experimental design can mitigate these problems: randomising presentation order, separating correct answers from submissions to be rated, and enforcing breaks. But some subjectivity is inevitable, even with the best designs. Transparency is key: report inter-annotator metrics, distribute annotation guidelines, and acknowledge limitations. Human evaluation scores should be one piece of the overall assessment alongside more quantitative metrics.
+
+### Open science and reproducibility
+
+Open science practices are essential for reproducibility --- making it possible for others to validate and extend findings. Sharing data and code should be the norm: not just final processed data, but raw inputs, processing scripts, model training code, and everything in between. Detailed methods sections that outline key steps and decision points, supplemented by digital appendices recording hyperparameter settings, random seeds, and other fine-grained details, enable scrutiny and follow-on work by the broader community.
+
+A wide range of sharing platforms are available, including GitHub, the Open Science Framework (OSF), and Dataverse. Many venues now require data and code sharing, but it is worth doing even when not strictly mandatory. Researchers should also consider intellectual property, data privacy, and ethical issues around sharing --- sensitive information should be scrubbed and necessary permissions obtained.
+
+#### Preregistration
+
+Preregistering studies makes it clear which analytic choices were made ahead of time versus after seeing the data. A preregistration typically includes clearly specified research questions, data collection and annotation procedures, exclusion criteria, and planned analyses.
+
+Preregistration does not prevent exploratory analysis, but it makes the line between confirmatory and exploratory work explicit. This helps avoid HARKing (hypothesising after results are known), p-hacking, and overfitting to noise. It is not just a box to check --- it is a valuable tool for making studies more credible and inviting replication.
+
+Preregistration can be challenging for LLM projects that are intrinsically iterative or exploratory. In such cases, researchers might preregister key decision points or write up results as a registered report. Many preregistration templates are available on platforms like OSF and AsPredicted.
+
+#### Version control with Git
+
+Version control is essential for managing complex codebases and collaborating effectively. Git, together with web-based platforms like GitHub, is the standard tool. It tracks changes, supports branching and merging, and integrates well with other reproducibility tools.
+
+The basic Git workflow involves four areas: the working directory (where files are edited), the staging area (where changes are prepared for commit), the local repository (the commit history on the local machine), and the remote repository (the shared project history hosted online). The core commands map to movements between these areas: `git add` stages changes, `git commit` creates a snapshot, `git push` uploads commits to the remote, and `git pull` downloads and integrates remote changes.
+
+Git models project history as a tree. Each commit is a node, and branches split off and merge back in. Regular commits with clear messages create a log of project evolution. Tagging particular commits can mark important milestones such as paper submissions or data freezes. Diffs show line-by-line changes between versions, making it straightforward to track what changed, when, and why.
+
+Branching allows parallel development and experimentation without disrupting the main codebase. Each branch is a separate workspace for developing a feature, fixing a bug, or exploring an idea. Branches can be merged back into the main branch when ready, with Git intelligently combining changes and flagging conflicts for manual resolution. This is also useful for code review: a collaborator can share a branch, receive feedback, make changes, and merge once the work is approved.
+
+#### GitHub
+
+GitHub is the dominant platform for collaborative coding and project management. It provides hosted Git repositories with free public and paid private options, and its web interface adds many convenient features: an issue tracker for reporting bugs and discussing tasks, project boards for organising work, wikis for shared documentation, and GitHub Pages for hosting static websites. GitHub also has a large open-source community, making it a natural first port of call when looking for code or sharing your own.
+
+#### Reference management and document preparation
+
+Reference managers such as Zotero, Mendeley, and BibTeX minimise citation formatting hassles, store PDFs, and synchronise bibliographies across devices. Plain-text formats such as LaTeX, Markdown, and Jupyter notebooks separate content from presentation, making writing modular and helping to avoid over-fixation on formatting during drafting. These tools, combined with version control and automated backups, form the infrastructure of a reproducible research workflow.
 
 ## Lab
 

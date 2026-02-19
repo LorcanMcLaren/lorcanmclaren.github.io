@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -579,11 +599,11 @@ Week 3
 </ol>
 <section id="case-study-gender-and-party-differences-in-the-us-house" class="level4" data-number="3.1.6.1">
 <h4 data-number="3.1.6.1" class="anchored" data-anchor-id="case-study-gender-and-party-differences-in-the-us-house"><span class="header-section-number">3.1.6.1</span> Case study: Gender and party differences in the US House</h4>
-<p><span class="citation" data-cites="rodriguez2023embedding">(<a href="../references.html#ref-rodriguez2023embedding" role="doc-biblioref"><strong>rodriguez2023embedding?</strong></a>)</span> used word embeddings trained separately on speeches by different groups of US legislators to examine how the same words are used with different meanings or connotations. While male and female legislators, and Republicans and Democrats, tend to use common words like “also” and “but” in similar ways, they diverge when it comes to more politically charged terms. In particular, male legislators use “marriage” in very different ways to female legislators, while Republicans refer to “immigration” in very different contexts to Democrats. Looking at nearest-neighbour terms in the embedding space, Democrats tend to use terms related to “reform” when discussing immigration, while Republicans tend to focus on “enforcement.”</p>
+<p><span class="citation" data-cites="rodriguez_embedding_2023">Rodriguez, Spirling, and Stewart (<a href="../references.html#ref-rodriguez_embedding_2023" role="doc-biblioref">2023</a>)</span> used word embeddings trained separately on speeches by different groups of US legislators to examine how the same words are used with different meanings or connotations. While male and female legislators, and Republicans and Democrats, tend to use common words like “also” and “but” in similar ways, they diverge when it comes to more politically charged terms. In particular, male legislators use “marriage” in very different ways to female legislators, while Republicans refer to “immigration” in very different contexts to Democrats. Looking at nearest-neighbour terms in the embedding space, Democrats tend to use terms related to “reform” when discussing immigration, while Republicans tend to focus on “enforcement.”</p>
 </section>
 <section id="case-study-gender-in-school-textbooks" class="level4" data-number="3.1.6.2">
 <h4 data-number="3.1.6.2" class="anchored" data-anchor-id="case-study-gender-in-school-textbooks"><span class="header-section-number">3.1.6.2</span> Case study: Gender in school textbooks</h4>
-<p><span class="citation" data-cites="lucy2020content">(<a href="../references.html#ref-lucy2020content" role="doc-biblioref"><strong>lucy2020content?</strong></a>)</span> examined how different populations are discussed in K–12 textbooks in Texas using word embeddings. They found that words related to power and achievement are more associated with terms referring to men, while words related to home life and labour are more associated with women (the labour association likely reflecting historical discussion of women entering the workplace).</p>
+<p><span class="citation" data-cites="lucy_content_2020">Lucy et al. (<a href="../references.html#ref-lucy_content_2020" role="doc-biblioref">2020</a>)</span> examined how different populations are discussed in K–12 textbooks in Texas using word embeddings. They found that words related to power and achievement are more associated with terms referring to men, while words related to home life and labour are more associated with women (the labour association likely reflecting historical discussion of women entering the workplace).</p>
 </section>
 </section>
 <section id="sentence-paragraph-and-document-embeddings" class="level3" data-number="3.1.7">
@@ -591,7 +611,7 @@ Week 3
 <p>While word embeddings represent individual words, we can also compute embeddings for longer text sequences — sentences, paragraphs, or entire documents. These are used for clustering, topic modelling, classification, legislative text comparison, policy area classification, speaker comparison, and ideological scaling.</p>
 <section id="case-study-party-positions-in-uk-parliament" class="level4" data-number="3.1.7.1">
 <h4 data-number="3.1.7.1" class="anchored" data-anchor-id="case-study-party-positions-in-uk-parliament"><span class="header-section-number">3.1.7.1</span> Case study: Party positions in UK Parliament</h4>
-<p><span class="citation" data-cites="rheault2020word">(<a href="../references.html#ref-rheault2020word" role="doc-biblioref"><strong>rheault2020word?</strong></a>)</span> calculated party embeddings from parliamentary debates and applied PCA. The first principal component (x-axis) captured the left–right divide, while the second (y-axis) captured the government–opposition divide. The resulting plot shows how parties shifted over time, with the Thatcher years being furthest to the right and Labour moving rightward during the Blair years under New Labour. The authors also calculated embeddings for individual legislators, allowing comparisons between individual MPs rather than just between parties.</p>
+<p><span class="citation" data-cites="rheault_word_2020">Rheault and Cochrane (<a href="../references.html#ref-rheault_word_2020" role="doc-biblioref">2020</a>)</span> calculated party embeddings from parliamentary debates and applied PCA. The first principal component (x-axis) captured the left–right divide, while the second (y-axis) captured the government–opposition divide. The resulting plot shows how parties shifted over time, with the Thatcher years being furthest to the right and Labour moving rightward during the Blair years under New Labour. The authors also calculated embeddings for individual legislators, allowing comparisons between individual MPs rather than just between parties.</p>
 </section>
 </section>
 <section id="embeddings-beyond-text" class="level3" data-number="3.1.8">
@@ -611,6 +631,17 @@ Week 3
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-lucy_content_2020" class="csl-entry" role="listitem">
+Lucy, Li, Dorottya Demszky, Patricia Bromley, and Dan Jurafsky. 2020. <span>“Content <span>Analysis</span> of <span>Textbooks</span> via <span>Natural</span> <span>Language</span> <span>Processing</span>: <span>Findings</span> on <span>Gender</span>, <span>Race</span>, and <span>Ethnicity</span> in <span>Texas</span> <span>U</span>.<span>S</span>. <span>History</span> <span>Textbooks</span>.”</span> <em>AERA Open</em> 6 (3): 2332858420940312. <a href="https://doi.org/10.1177/2332858420940312">https://doi.org/10.1177/2332858420940312</a>.
+</div>
+<div id="ref-rheault_word_2020" class="csl-entry" role="listitem">
+Rheault, Ludovic, and Christopher Cochrane. 2020. <span>“Word <span>Embeddings</span> for the <span>Analysis</span> of <span>Ideological</span> <span>Placement</span> in <span>Parliamentary</span> <span>Corpora</span>.”</span> <em>Political Analysis</em> 28 (1): 112–33. <a href="https://doi.org/10.1017/pan.2019.26">https://doi.org/10.1017/pan.2019.26</a>.
+</div>
+<div id="ref-rodriguez_embedding_2023" class="csl-entry" role="listitem">
+Rodriguez, Pedro L., Arthur Spirling, and Brandon M. Stewart. 2023. <span>“Embedding <span>Regression</span>: <span>Models</span> for <span>Context</span>-<span>Specific</span> <span>Description</span> and <span>Inference</span>.”</span> <em>American Political Science Review</em> 117 (4): 1255–74. <a href="https://doi.org/10.1017/S0003055422001228">https://doi.org/10.1017/S0003055422001228</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

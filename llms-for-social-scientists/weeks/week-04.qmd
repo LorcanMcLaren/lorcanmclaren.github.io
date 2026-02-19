@@ -12,7 +12,7 @@ Last week, we discussed embeddings --- the fundamental numeric representations t
 
 ### The transformer revolution
 
-The transformer architecture was introduced in the landmark paper "Attention Is All You Need" [@vaswani2017attention]. It represented a revolutionary departure from previous sequential architectures such as recurrent neural networks (RNNs). Where an RNN processes a sentence like "The cat sat" one word at a time --- first "the", then "cat", then "sat" --- a transformer processes the entire sequence simultaneously. This parallel processing makes transformers much faster to train and run, enables them to handle much longer texts, and makes the architecture far more scalable. The original transformer is made up of two main components: an encoder (on the left of the architecture diagram) and a decoder (on the right). Together, these characteristics lead to much better performance on tasks we care about, such as text classification.
+The transformer architecture was introduced in the landmark paper "Attention Is All You Need" [@vaswani_attention_2017]. It represented a revolutionary departure from previous sequential architectures such as recurrent neural networks (RNNs). Where an RNN processes a sentence like "The cat sat" one word at a time --- first "the", then "cat", then "sat" --- a transformer processes the entire sequence simultaneously. This parallel processing makes transformers much faster to train and run, enables them to handle much longer texts, and makes the architecture far more scalable. The original transformer is made up of two main components: an encoder (on the left of the architecture diagram) and a decoder (on the right). Together, these characteristics lead to much better performance on tasks we care about, such as text classification.
 
 For political science, transformers offer improved understanding of complex political texts, cross-lingual capabilities for comparative analysis, and the ability to handle long documents such as legislation and treaties.
 
@@ -72,11 +72,11 @@ Transformers enable a range of applications in political science, including auto
 
 #### Case study: Calls to action and protest attendance
 
-@rogers2019calls used a BERT model fine-tuned on Russian (RuBERT) to identify calls to action in tweets. They found that increases in calls to action showed a moderate correlation with increases in protest attendance, suggesting that transformer-based text classification may be useful as a predictor of protest movements.
+@rogers_calls_2019 used a BERT model fine-tuned on Russian (RuBERT) to identify calls to action in tweets. They found that increases in calls to action showed a moderate correlation with increases in protest attendance, suggesting that transformer-based text classification may be useful as a predictor of protest movements.
 
 #### Case study: Framing of migration on Twitter
 
-@mendelsohn2021modeling used a RoBERTa model (an improvement on the original BERT) to classify immigration-related tweets according to how they are "framed." They found that tweets from US users about migration tended to focus on law-and-order implications and economic threat, while tweets from EU users tended to frame migrants as victims of war and globalisation, but also discussed migration in the context of cultural identity and threats to national cohesion.
+@mendelsohn_modeling_2021 used a RoBERTa model (an improvement on the original BERT) to classify immigration-related tweets according to how they are "framed." They found that tweets from US users about migration tended to focus on law-and-order implications and economic threat, while tweets from EU users tended to frame migrants as victims of war and globalisation, but also discussed migration in the context of cultural identity and threats to national cohesion.
 
 ### Considerations
 

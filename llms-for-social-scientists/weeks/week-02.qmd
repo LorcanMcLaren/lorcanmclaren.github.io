@@ -16,13 +16,13 @@ Content analysis is used to understand the (self-)presentation of political acto
 
 #### Human vs. automated content analysis
 
-Humans are flexible and able to handle nuance and ambiguity, but are vulnerable to subjectivity and performance variability over time. Even trained expert coders --- the "gold standard" --- are not failure-proof. The Manifesto Project, a major dataset of political texts annotated at the sentence-level with labels for policy area, has been found to have levels of inter-rater agreement and reliability so low that, had the coders been oncologists, their levels of tumour misdiagnosis would have been medically and financially catastrophic [@mikhaylov2012coder]. Automated methods are more consistent, cost- and time-efficient, but they may be consistently wrong. Humans are still typically used as the point of reference ("ground truth") against which we compare other approaches.
+Humans are flexible and able to handle nuance and ambiguity, but are vulnerable to subjectivity and performance variability over time. Even trained expert coders --- the "gold standard" --- are not failure-proof. The Manifesto Project, a major dataset of political texts annotated at the sentence-level with labels for policy area, has been found to have levels of inter-rater agreement and reliability so low that, had the coders been oncologists, their levels of tumour misdiagnosis would have been medically and financially catastrophic [@mikhaylov_coder_2012]. Automated methods are more consistent, cost- and time-efficient, but they may be consistently wrong. Humans are still typically used as the point of reference ("ground truth") against which we compare other approaches.
 
 ### Quantitative text analysis
 
 In quantitative text analysis, we convert each document into some kind of numeric representation which we can work with more easily. The document-feature matrix (DFM) is one widely used representation that records the frequency of each feature (typically a word) across each document. From even a simple DFM, we can make initial observations --- for instance, comparing how frequently different US presidents mention terms like "economy", "crime", or "climate" in their State of the Union addresses.
 
-Four key principles guide quantitative text analysis [@grimmer2013text]:
+Four key principles guide quantitative text analysis [@grimmer_text_2013]:
 
 1. All quantitative models of language are wrong --- but some are useful.
 2. Quantitative methods for text amplify resources and augment humans.
@@ -31,7 +31,7 @@ Four key principles guide quantitative text analysis [@grimmer2013text]:
 
 ### Process
 
-The typical text-as-data workflow follows seven steps [@benoit2020text]:
+The typical text-as-data workflow follows seven steps [@benoit_text_2020]:
 
 1. **Selecting texts and defining the corpus.** Identify the corpus of texts relevant to the research question. Texts are generally distinguished from one another by attributes relating to the author, speaker, time, or topic. Be aware of selection issues and data gaps (e.g. coalition manifestos tend to disappear after a coalition collapses, leading to a bias in the dataset towards more stable coalitions).
 
@@ -51,19 +51,19 @@ The typical text-as-data workflow follows seven steps [@benoit2020text]:
 
 #### Characterising text
 
-**Keyword extraction and analysis** involves identifying the most frequent or distinctive terms in a corpus. For example, keyword datasets have been used to track how European political parties on Facebook discuss the migration crisis, with variation across countries and ideological groups [@caravaca2025european].
+**Keyword extraction and analysis** involves identifying the most frequent or distinctive terms in a corpus. For example, keyword datasets have been used to track how European political parties on Facebook discuss the migration crisis, with variation across countries and ideological groups [@caravaca_dataset_2025].
 
-**Named entity recognition (NER)** identifies people, organisations, and other entities mentioned in text. @jaros2018china used NER in Chinese official provincial newspapers to recognise all people and organisations named in Party newspapers, using the frequency of mentions as a measure of power. They found that Xi Jinping was much more frequently mentioned in Party newspapers than his predecessor.
+**Named entity recognition (NER)** identifies people, organisations, and other entities mentioned in text. @jinping_chinas_2018 used NER in Chinese official provincial newspapers to recognise all people and organisations named in Party newspapers, using the frequency of mentions as a measure of power. They found that Xi Jinping was much more frequently mentioned in Party newspapers than his predecessor.
 
-**Sentiment analysis** measures the emotional tone of text. @rheault2016measuring tracked the emotional polarity of government and opposition speeches in Britain from 1946 to 2013.
+**Sentiment analysis** measures the emotional tone of text. @rheault_measuring_2016 tracked the emotional polarity of government and opposition speeches in Britain from 1946 to 2013.
 
-**Readability analysis** assesses how easy texts are to understand. @benoit2019measuring examined the readability of US State of the Union addresses over time, finding a trend towards simpler language.
+**Readability analysis** assesses how easy texts are to understand. @benoit_measuring_2019 examined the readability of US State of the Union addresses over time, finding a trend towards simpler language.
 
 #### Classifying into known categories
 
 **Dictionary analysis** uses predefined lists of words to classify text. Dictionaries are interpretable but brittle: they do not generalise well to other datasets and are vulnerable to polysemy (e.g. the word "kind" can mean both "type" and "generous").
 
-**Supervised machine learning** is less interpretable but more flexible. A model is trained on labelled examples and then applied to classify unseen documents. For example, @muller2024nostalgia used DistilBERT to measure party-level nostalgia across European democracies.
+**Supervised machine learning** is less interpretable but more flexible. A model is trained on labelled examples and then applied to classify unseen documents. For example, @muller_nostalgia_2024 used DistilBERT to measure party-level nostalgia across European democracies.
 
 #### Discovering categories
 
@@ -71,9 +71,9 @@ The typical text-as-data workflow follows seven steps [@benoit2020text]:
 
 #### Measuring latent features
 
-**Supervised scaling** methods such as Wordscores [@laver2003extracting] require some reference texts for which a score (e.g. left--right position) is known, from which the model learns to score new texts.
+**Supervised scaling** methods such as Wordscores [@laver_extracting_2003] require some reference texts for which a score (e.g. left--right position) is known, from which the model learns to score new texts.
 
-**Unsupervised scaling** methods such as Wordfish [@slapin2008scaling] run without reference texts. It is up to the researcher to interpret what the estimated dimensions actually represent. A risk is that the model might capture thematic differences (e.g. talking about the economy vs. foreign policy) rather than ideological differences.
+**Unsupervised scaling** methods such as Wordfish [@slapin_scaling_2008] run without reference texts. It is up to the researcher to interpret what the estimated dimensions actually represent. A risk is that the model might capture thematic differences (e.g. talking about the economy vs. foreign policy) rather than ideological differences.
 
 ::: {.callout-note}
 The techniques discussed this week rely on document-feature matrices as the numeric representation of text. Next week, we will introduce another representation --- embeddings --- which underpin many modern text analysis methods and are fundamental to large language models.
