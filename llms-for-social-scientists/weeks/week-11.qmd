@@ -1,3 +1,8 @@
+---
+nocite: |
+  @luken_mexca_2024
+---
+
 # Beyond Text {#sec-week11}
 
 ::: {.callout-note}
@@ -16,4 +21,4 @@
 
 ## Readings
 
-- Luken, M. et al. (2024) 'MEXCA - A Simple and Robust Pipeline for Capturing Emotion Expressions in Faces, Vocalization, and Speech'. *OSF*. <https://doi.org/10.31234/osf.io/56svb>
+- @luken_mexca_2024

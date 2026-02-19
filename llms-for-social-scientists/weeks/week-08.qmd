@@ -1,3 +1,8 @@
+---
+nocite: |
+  @wan_kelly_2023, @rossi_problems_2024
+---
+
 # Interpretability, Explainability and Bias {#sec-week8}
 
 ::: {.callout-note}
@@ -16,5 +21,5 @@
 
 ## Readings
 
-- Wan, Y. et al. (2023) '"Kelly is a Warm Person, Joseph is a Role Model": Gender Biases in LLM-Generated Reference Letters'. *arXiv*. <https://doi.org/10.48550/arXiv.2310.09219>
-- Rossi, L., Harrison, K. and Shklovski, I. (2024) 'The Problems of LLM-generated Data in Social Science Research', *Sociologica*, 18(2), pp. 145--168. <https://doi.org/10.6092/issn.1971-8853/19576>
+- @wan_kelly_2023
+- @rossi_problems_2024

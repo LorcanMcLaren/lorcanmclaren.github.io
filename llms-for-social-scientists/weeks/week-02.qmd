@@ -1,3 +1,8 @@
+---
+nocite: |
+  @grimmer_text_2013
+---
+
 # Text-as-Data {#sec-week2}
 
 ::: {.callout-note}
@@ -85,4 +90,4 @@ The techniques discussed this week rely on document-feature matrices as the nume
 
 ## Readings
 
-- Grimmer, J. and Stewart, B.M. (2013) 'Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts', *Political Analysis*, 21(3), pp. 267--297. <https://doi.org/10.1093/pan/mps028>
+- @grimmer_text_2013
