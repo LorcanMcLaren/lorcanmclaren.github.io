@@ -1,27 +1,28 @@
 ---
-title: "Text Annotation Tooling"
+title: "CodeBook"
 date: "2024"
 date-format: "YYYY"
-image: "../images/green-pill-annotator.png"
-format: 
+image: "../images/CodeBook.png"
+# codelink: "https://github.com/LorcanMcLaren/"
+format:
   html:
     page-layout: article
-    template-partials: 
+    template-partials:
       - "../partials/title-block.html"
 ---
 
-I am currently developing a customisable tool to provide an improved text annotation workflow to researchers. Creating large sets of annotated text is a common task in many text-as-data approaches. Recent advancements in LLMs have accelerated this trend, as domain-specific ground truth is important for validating zero- and few-shot models, or for fine-tuning. 
+CodeBook is a codebook-driven text annotation tool for computational social science. A single JSON codebook file defines your annotation task for human annotators, serves as input to an LLM annotation pipeline, and can be exported as a LaTeX or Markdown document to render as a PDF or paper appendix.
 
-My tool provides the following benefits at **zero** cost:
+Creating large sets of annotated text is a common task in many text-as-data approaches. Recent advancements in LLMs have accelerated this trend, as domain-specific ground truth is important for validating zero- and few-shot models, or for fine-tuning.
+
+CodeBook provides the following features:
 
 - Consistent experience for teams of annotators
-- Low-latency, reproducible workflows 
-- Multiple common annotation types, including binary, dropdown or Likert scale
-- Fully customisable, with functionality to develop your own annotation schema and instructions
-- No more messy codebooks that force annotators to switch windows
+- Low-latency, reproducible annotation workflows
+- Multiple annotation types: binary, dropdown [categorical], Likert scale, and open ended-text
+- Fully customisable codebook editor with integrated instructions and examples
+- Codebook export in LaTeX and Markdown formats for easy rendering in papers and appendices
+- LLM prompt preview and export for pipeline integration
 - CSV input and output for interoperability
 
-
-<!-- ![A custom annotation workflow for discrete emotions](../images/green-pill-annotator.png) -->
-
-Try out a beta version of the tool [here](https://green-pill.streamlit.app/). Feel free to reach out if you encounter any bugs or need additional features for your annotation task
+Try the tool [here](https://codebook.streamlit.app/). Feel free to reach out if you encounter any bugs or need additional features for your annotation task.

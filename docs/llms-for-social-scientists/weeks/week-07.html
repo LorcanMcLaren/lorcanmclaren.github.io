@@ -395,7 +395,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-08.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bias in LLMs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -407,13 +407,13 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Beyond Text</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Interpretability and Explainability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Project Presentations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beyond Text</span></span></a>
   </div>
 </li>
       </ul>
@@ -451,7 +451,13 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">7.1</span> Lecture</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">7.1</span> Lecture</a>
+  <ul class="collapse">
+  <li><a href="#llms-vs.-human-annotators" id="toc-llms-vs.-human-annotators" class="nav-link" data-scroll-target="#llms-vs.-human-annotators"><span class="header-section-number">7.1.1</span> LLMs vs.&nbsp;human annotators</a></li>
+  <li><a href="#prompt-engineering" id="toc-prompt-engineering" class="nav-link" data-scroll-target="#prompt-engineering"><span class="header-section-number">7.1.2</span> Prompt engineering</a></li>
+  <li><a href="#hyperparameters" id="toc-hyperparameters" class="nav-link" data-scroll-target="#hyperparameters"><span class="header-section-number">7.1.3</span> Hyperparameters</a></li>
+  <li><a href="#conceptual-clarity" id="toc-conceptual-clarity" class="nav-link" data-scroll-target="#conceptual-clarity"><span class="header-section-number">7.1.4</span> Conceptual clarity</a></li>
+  </ul></li>
   <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">7.2</span> Lab</a></li>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">7.3</span> Readings</a></li>
   </ul>
@@ -490,13 +496,78 @@ Week 7
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Lecture:</strong> Advanced prompting<br>
-<strong>Lab:</strong> Introduction to <code>langchain</code></p>
+<p><strong>Lecture:</strong> Prompt engineering, hyperparameters, and LLMs vs.&nbsp;human annotation<br>
+<strong>Lab:</strong> Prompt engineering and API usage in Python</p>
 </div>
 </div>
 <section id="lecture" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="lecture"><span class="header-section-number">7.1</span> Lecture</h2>
-<p><em>Content to be added.</em></p>
+<p>This week continues our exploration of generative language models, with a focus on practical prompt engineering techniques and the hyperparameters that control model output. These skills are immediately applicable to course projects and are critical for anyone using LLMs in computational social science research.</p>
+<section id="llms-vs.-human-annotators" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="llms-vs.-human-annotators"><span class="header-section-number">7.1.1</span> LLMs vs.&nbsp;human annotators</h3>
+<p>Before turning to prompt engineering, it is worth considering how LLMs compare to human annotators for text classification tasks. <span class="citation" data-cites="gilardi_chatgpt_2023">Gilardi, Alizadeh, and Kubli (<a href="../references.html#ref-gilardi_chatgpt_2023" role="doc-biblioref">2023</a>)</span> compared the performance of ChatGPT against trained annotators and Amazon Mechanical Turk crowd workers across several datasets, measuring both accuracy and intercoder agreement. Their results showed that LLMs often match or exceed human performance on straightforward tasks such as relevance classification, particularly when temperature settings are kept low (e.g.&nbsp;0.2 rather than 1.0). However, human validation remains essential for more complex judgements involving framing or nuanced conceptual distinctions. These findings have important implications for research scalability and efficiency, but they do not eliminate the need for careful validation.</p>
+</section>
+<section id="prompt-engineering" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="prompt-engineering"><span class="header-section-number">7.1.2</span> Prompt engineering</h3>
+<p>Prompt engineering is the practice of optimising inputs to get better outputs from generative models. It is both an art and a science, requiring experimentation and creativity alongside systematic evaluation. Small changes to a prompt can dramatically affect output quality — the same sentiment analysis task can yield verbose and inconsistent results with one prompt formulation, and clean, structured outputs with another. The goal is reliable, consistent outputs that meet research standards.</p>
+<section id="prompting-fundamentals" class="level4" data-number="7.1.2.1">
+<h4 data-number="7.1.2.1" class="anchored" data-anchor-id="prompting-fundamentals"><span class="header-section-number">7.1.2.1</span> Prompting fundamentals</h4>
+<p>Three simple techniques often outperform switching to a larger model:</p>
+<p><strong>Specificity.</strong> Vague prompts lead to vague answers. Instead of “Analyse this speech,” a more effective prompt would be “Analyse the economic policy positions in this speech using the CAP codebook.” Precision about requirements, categories, and expected output format substantially improves results.</p>
+<p><strong>Reducing hallucination.</strong> Explicitly instructing models to indicate uncertainty reduces hallucination. Telling the model to respond with “I don’t know” or “N/A” when it is unsure helps prevent fabricated outputs.</p>
+<p><strong>Instruction order.</strong> LLMs exhibit primacy and recency effects: they tend to attend most carefully to instructions placed at the beginning or end of a prompt, and may lose track of information in the middle. Place the most important instructions accordingly.</p>
+</section>
+<section id="few-shot-prompting" class="level4" data-number="7.1.2.2">
+<h4 data-number="7.1.2.2" class="anchored" data-anchor-id="few-shot-prompting"><span class="header-section-number">7.1.2.2</span> Few-shot prompting</h4>
+<p>Few-shot prompting teaches the model by example. In a zero-shot prompt, no examples are provided and the model relies entirely on pre-training. In a one-shot prompt, a single example guides the response format. In a few-shot prompt, multiple examples establish a clear pattern. Models can learn patterns from just two or three examples, and few-shot prompting is particularly effective for specialised tasks, domain-specific vocabulary, and ensuring consistent formatting in research applications. Examples should represent the full range of expected inputs.</p>
+<p><strong>Dynamic few-shot prompting</strong> is an advanced variant. Rather than using fixed examples for all queries, it selects examples from a larger pool based on their similarity to the current query. This requires computing semantic similarity between the query and available examples and selecting the most relevant ones for each prompt. It is more complex to implement but often more effective when inputs are diverse.</p>
+</section>
+<section id="prompt-components" class="level4" data-number="7.1.2.3">
+<h4 data-number="7.1.2.3" class="anchored" data-anchor-id="prompt-components"><span class="header-section-number">7.1.2.3</span> Prompt components</h4>
+<p>A well-structured complex prompt may include several components, each serving a specific purpose: a <strong>persona</strong> that establishes expertise and role (e.g.&nbsp;“You are an expert in large language models”), an <strong>instruction</strong> that states the main task, <strong>context</strong> that provides background and constraints, a <strong>format</strong> specification for the desired output structure, an <strong>audience</strong> definition, a <strong>tone</strong> directive, and the <strong>data</strong> to be processed. Not all elements are needed for every task, but research applications often require more structured prompts than casual use.</p>
+<p>In code, a modular approach defines each component as a separate variable. The final prompt is assembled by concatenating the components. This makes it easy to experiment by changing one component at a time, improves maintainability, and supports systematic testing of component variations to identify optimal configurations. The final prompt structure should be documented in research methods sections.</p>
+</section>
+<section id="chain-of-thought-prompting" class="level4" data-number="7.1.2.4">
+<h4 data-number="7.1.2.4" class="anchored" data-anchor-id="chain-of-thought-prompting"><span class="header-section-number">7.1.2.4</span> Chain-of-thought prompting</h4>
+<p>Chain-of-thought (CoT) prompting asks the model to show its reasoning steps explicitly. Rather than producing an answer directly, the model walks through the logic that leads to its conclusion. This is particularly effective for mathematical problems, logical reasoning, multi-step analysis, and policy analysis with multiple interacting factors. CoT prompting improves accuracy and provides transparency into the model’s reasoning process. It can be combined with few-shot examples: providing worked examples that include reasoning steps teaches the model to apply the same approach to new problems.</p>
+</section>
+<section id="self-consistency" class="level4" data-number="7.1.2.5">
+<h4 data-number="7.1.2.5" class="anchored" data-anchor-id="self-consistency"><span class="header-section-number">7.1.2.5</span> Self-consistency</h4>
+<p>Self-consistency is a technique for improving accuracy on difficult problems. The approach generates multiple independent solutions to the same problem (each using chain-of-thought reasoning), then takes a majority vote to determine the final answer. This reduces the impact of random errors in reasoning and is particularly effective for classification of ambiguous cases. The tradeoff is increased computation time and cost, but for high-stakes applications requiring reliability, the improvement in accuracy can justify the expense.</p>
+</section>
+<section id="iterative-prompt-development" class="level4" data-number="7.1.2.6">
+<h4 data-number="7.1.2.6" class="anchored" data-anchor-id="iterative-prompt-development"><span class="header-section-number">7.1.2.6</span> Iterative prompt development</h4>
+<p>Prompt engineering is inherently iterative. The process mirrors the scientific method: start with a hypothesis (a prompt that should improve output), test it (run the prompt), analyse the results, and refine. Starting simple and adding complexity as needed, while documenting iterations to understand what works and why, is the most effective approach. This process is critical for developing reproducible research methods.</p>
+</section>
+<section id="structured-output" class="level4" data-number="7.1.2.7">
+<h4 data-number="7.1.2.7" class="anchored" data-anchor-id="structured-output"><span class="header-section-number">7.1.2.7</span> Structured output</h4>
+<p>For research applications, generative LLM responses are often most useful in machine-readable formats. Common formats include JSON, XML, and YAML. Structured outputs are easier to validate, analyse, and integrate into automated processing pipelines, and they ensure consistent format across multiple queries. When prompting for structured output, always demonstrate the desired format in the prompt, include examples with the exact keys and structure expected, and clearly specify data types for each field.</p>
+</section>
+<section id="system-and-user-prompts" class="level4" data-number="7.1.2.8">
+<h4 data-number="7.1.2.8" class="anchored" data-anchor-id="system-and-user-prompts"><span class="header-section-number">7.1.2.8</span> System and user prompts</h4>
+<p>When interacting with models through APIs, prompts are typically divided into two components. The <strong>system prompt</strong> defines the persona, expertise, and overall guidelines and constraints. The <strong>user prompt</strong> contains the specific text to be analysed and may include examples or criteria. This separation enables consistent behaviour across multiple queries and reusable system prompts for related tasks. For research, maintaining consistent system prompts and documenting both components is important for reproducibility. Not all models support this separation, in which case everything can be included in a single prompt. Whether separating system and user prompts makes a meaningful difference to performance is not yet entirely clear.</p>
+</section>
+</section>
+<section id="hyperparameters" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="hyperparameters"><span class="header-section-number">7.1.3</span> Hyperparameters</h3>
+<p>Generative language models are trained to predict the next token given a sequence of previous tokens. When generating text, the model produces a probability distribution over possible next tokens and selects one according to that distribution. Several hyperparameters control how this selection is made, and they significantly affect model outputs.</p>
+<section id="temperature" class="level4" data-number="7.1.3.1">
+<h4 data-number="7.1.3.1" class="anchored" data-anchor-id="temperature"><span class="header-section-number">7.1.3.1</span> Temperature</h4>
+<p>Temperature controls the randomness of token selection. Technically, it is a scaling factor applied to the raw model outputs (logits) before they are converted into probabilities. At low temperature, the probability distribution becomes sharper: the model focuses on the highest-probability tokens, producing more deterministic, predictable, and conservative responses. At high temperature, the distribution flattens: lower-probability tokens have a greater chance of being selected, producing more diverse, creative, and unexpected responses. A temperature of 0 yields completely deterministic output (greedy decoding, always selecting the most probable token), while a temperature of 1 samples directly from the unmodified probability distribution. For most research classification tasks, low temperature settings are preferable.</p>
+</section>
+<section id="top-p-nucleus-sampling" class="level4" data-number="7.1.3.2">
+<h4 data-number="7.1.3.2" class="anchored" data-anchor-id="top-p-nucleus-sampling"><span class="header-section-number">7.1.3.2</span> Top-p (nucleus sampling)</h4>
+<p>Top-p, also known as nucleus sampling, offers an alternative way to control randomness. It selects from the smallest set of tokens whose cumulative probability exceeds the threshold <em>p</em>. At low top-p, only the most likely tokens are considered, producing focused and conservative outputs. At high top-p, a wider range of tokens enters the candidate pool, leading to more diverse vocabulary. Top-p often provides more intuitive control than temperature and complements it. Values typically range from 0.1 to 1.0.</p>
+</section>
+<section id="choosing-settings" class="level4" data-number="7.1.3.3">
+<h4 data-number="7.1.3.3" class="anchored" data-anchor-id="choosing-settings"><span class="header-section-number">7.1.3.3</span> Choosing settings</h4>
+<p>The appropriate settings depend on the task. For brainstorming or exploratory work, high temperature and high top-p produce diverse and creative outputs. For formal writing or email generation, low temperature and low top-p yield predictable, focused results. For creative writing, high temperature with low top-p allows creativity while maintaining coherence. For translation or technical tasks, low temperature with high top-p provides accuracy with vocabulary variety. For research classification, low temperature is almost always appropriate. These settings should be documented in research methods sections, and researchers should experiment to find optimal configurations for their specific tasks.</p>
+</section>
+</section>
+<section id="conceptual-clarity" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="conceptual-clarity"><span class="header-section-number">7.1.4</span> Conceptual clarity</h3>
+<p>The convenience and scalability of LLMs for text classification does not ensure accuracy. Traditional validation methods — the kind discussed in <a href="week-05.html" class="quarto-xref"><span>Chapter 5</span></a> — remain essential when using LLMs instead of, or alongside, human coders. Clear conceptual definitions are even more critical with generative models: the researcher should never assume that the model understands a concept in the same way they do. Outputs should always be validated against human judgements, established measures, and ground truth when available, and validation procedures should be documented thoroughly.</p>
+</section>
 </section>
 <section id="lab" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">7.2</span> Lab</h2>
@@ -505,17 +576,20 @@ Week 7
 <section id="readings" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="readings"><span class="header-section-number">7.3</span> Readings</h2>
 <ul>
-<li><span class="citation" data-cites="abdurahman_perils_2024">Abdurahman et al. (<a href="../references.html#ref-abdurahman_perils_2024" role="doc-biblioref">2024</a>)</span></li>
-<li><span class="citation" data-cites="barrie_replication_2024">Barrie, Palmer, and Spirling (<a href="../references.html#ref-barrie_replication_2024" role="doc-biblioref">2024</a>)</span></li>
+<li><span class="citation" data-cites="tornberg_best_2024">Törnberg (<a href="../references.html#ref-tornberg_best_2024" role="doc-biblioref">2024</a>)</span></li>
+<li><span class="citation" data-cites="hackenburg_evaluating_2024">Hackenburg and Margetts (<a href="../references.html#ref-hackenburg_evaluating_2024" role="doc-biblioref">2024</a>)</span></li>
 </ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-abdurahman_perils_2024" class="csl-entry" role="listitem">
-Abdurahman, Suhaib, Mohammad Atari, Farzan Karimi-Malekabadi, Mona J Xue, Jackson Trager, Peter S Park, Preni Golazizian, Ali Omrani, and Morteza Dehghani. 2024. <span>“Perils and Opportunities in Using Large Language Models in Psychological Research.”</span> <em>PNAS Nexus</em> 3 (7): pgae245. <a href="https://doi.org/10.1093/pnasnexus/pgae245">https://doi.org/10.1093/pnasnexus/pgae245</a>.
+<div id="ref-gilardi_chatgpt_2023" class="csl-entry" role="listitem">
+Gilardi, Fabrizio, Meysam Alizadeh, and Maël Kubli. 2023. <span>“<span>ChatGPT</span> Outperforms Crowd Workers for Text-Annotation Tasks.”</span> <em>Proceedings of the National Academy of Sciences</em> 120 (30): e2305016120. <a href="https://doi.org/10.1073/pnas.2305016120">https://doi.org/10.1073/pnas.2305016120</a>.
 </div>
-<div id="ref-barrie_replication_2024" class="csl-entry" role="listitem">
-Barrie, Christopher, Alexis Palmer, and Arthur Spirling. 2024. <span>“Replication for <span>Language</span> <span>Models</span>.”</span> <a href="https://arthurspirling.org/documents/BarriePalmerSpirling_TrustMeBro.pdf">https://arthurspirling.org/documents/BarriePalmerSpirling_TrustMeBro.pdf</a>.
+<div id="ref-hackenburg_evaluating_2024" class="csl-entry" role="listitem">
+Hackenburg, Kobi, and Helen Margetts. 2024. <span>“Evaluating the Persuasive Influence of Political Microtargeting with Large Language Models.”</span> <em>Proceedings of the National Academy of Sciences</em> 121 (24): e2403116121. <a href="https://doi.org/10.1073/pnas.2403116121">https://doi.org/10.1073/pnas.2403116121</a>.
+</div>
+<div id="ref-tornberg_best_2024" class="csl-entry" role="listitem">
+Törnberg, Petter. 2024. <span>“Best <span>Practices</span> for <span>Text</span> <span>Annotation</span> with <span>Large</span> <span>Language</span> <span>Models</span>.”</span> arXiv. <a href="https://doi.org/10.48550/arXiv.2402.05129">https://doi.org/10.48550/arXiv.2402.05129</a>.
 </div>
 </div>
 </section>
@@ -945,8 +1019,8 @@ Barrie, Christopher, Alexis Palmer, and Arthur Spirling. 2024. <span>“Replicat
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/week-08.html" class="pagination-link" aria-label="Interpretability, Explainability and Bias">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../weeks/week-08.html" class="pagination-link" aria-label="Bias in LLMs">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bias in LLMs</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

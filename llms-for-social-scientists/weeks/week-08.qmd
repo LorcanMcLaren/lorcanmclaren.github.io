@@ -1,19 +1,111 @@
 ---
 nocite: |
-  @wan_kelly_2023, @rossi_problems_2024
+  @santurkar_whose_2023, @buolamwini_gender_2018
 ---
 
-# Interpretability, Explainability and Bias {#sec-week8}
+# Bias in LLMs {#sec-week8}
 
 ::: {.callout-note}
 ## Week 8
-**Lecture:** Techniques for interpretability in text classification; sources of bias and implications\
-**Lab:** Applying `transformers-interpret` and `ferret` for interpreting model predictions; visualising bias
+**Lecture:** Defining, measuring, and mitigating bias in AI systems and LLMs\
+**Lab:** Probing and measuring bias in language models
 :::
 
 ## Lecture
 
-*Content to be added.*
+We touched briefly on bias in word embeddings in @sec-week3 and noted the importance of validation throughout the preceding weeks. This week, we focus on bias in AI systems more broadly and in LLMs specifically, covering how bias is defined, where it comes from, how it can be measured and mitigated, and the political and social controversies that surround these efforts.
+
+### Defining bias in AI systems
+
+"Bias" in the context of AI carries two distinct meanings. **Statistical bias** refers to systematic deviation from a target value --- a model that consistently overestimates or underestimates something. **Normative bias** refers to unfair or unjust differential treatment of individuals or groups.
+
+These two forms of bias can be in tension with each other. Including parental income as a predictor in a criminal justice risk assessment might improve statistical accuracy (reducing statistical bias), but it would also mean holding prejudice against individuals based on their socioeconomic background (increasing normative bias).
+
+The harms that flow from biased AI systems can be categorised as **representational harm** (reinforcing stereotypes or rendering certain groups invisible) and **allocational harm** (unfair distribution of resources or opportunities across groups). Bias in AI is fundamentally a socio-technical phenomenon: technical systems embedded in social contexts that reflect and potentially amplify existing societal biases.
+
+### Examples of algorithmic bias
+
+Several high-profile cases illustrate the range of ways bias manifests in AI systems.
+
+#### Recruitment
+
+Amazon built an automated CV screening tool trained on patterns from résumés submitted to the company over a ten-year period. Because tech hiring had been historically male-dominated, the algorithm learned to penalise résumés containing words associated with women --- downgrading candidates who attended women's colleges or had terms like "women's chess club" on their résumés. Amazon attempted to modify the algorithm but ultimately abandoned the project in 2018 when they could not guarantee it would not find other proxies for gender. The system did not invent gender bias; it reflected and intensified existing patterns of discrimination in the training data.
+
+#### Criminal justice
+
+The COMPAS algorithm, used to predict recidivism risk in the US justice system, was found to have significant racial bias: it was roughly twice as likely to falsely label Black defendants as high risk compared to white defendants, while white defendants were more likely to be incorrectly labelled low risk. The company behind COMPAS disputed this analysis, arguing that their system satisfied a different mathematical definition of fairness --- equal positive predictive value across groups. This case highlights how different mathematical definitions of fairness can be mutually incompatible, creating fundamental tradeoffs in system design.
+
+Similarly, predictive policing systems have been criticised for creating feedback loops. When algorithms direct police to patrol certain neighbourhoods based on historical crime data, they generate more arrests in those areas, which then reinforces the algorithm's focus on those neighbourhoods --- a self-fulfilling prophecy that can disproportionately impact communities that have historically experienced higher rates of policing.
+
+#### Facial recognition
+
+Research by Joy Buolamwini and Timnit Gebru demonstrated that leading facial recognition systems had error rates of less than 1% for light-skinned men but up to 35% for dark-skinned women. These disparities arise partly from training data that overrepresents certain demographics. When such systems are deployed in contexts like law enforcement, the consequences of misidentification fall disproportionately on already marginalised groups.
+
+#### LLM-generated text
+
+A 2023 study found that when asked to generate reference letters, LLMs produced more formal, positive, and agentic language for male candidates, emphasising individual contributions, while letters for female candidates emphasised teamwork and used more tentative language. This mirrors well-documented patterns in human-written reference letters and shows how LLMs can perpetuate subtle biases even in seemingly neutral text generation tasks.
+
+#### Adversarial manipulation
+
+In 2016, Microsoft released Tay, a Twitter chatbot designed to learn from user interactions. Within 24 hours, users had taught it to produce racist, antisemitic, and misogynistic content, forcing Microsoft to take it offline. While this example predates modern LLMs, it demonstrates the vulnerability of language models to learning harmful patterns from interactions --- a challenge that persists in more subtle forms with today's more sophisticated systems.
+
+### Sources of bias in LLMs
+
+Bias in LLMs emerges from multiple sources throughout the development pipeline, and understanding these sources helps in thinking systematically about where and how to intervene. It is not simply a case of "biased data in, biased results out."
+
+**Training data bias.** LLMs are trained on vast corpora of internet text, which reflect and sometimes amplify societal biases. This includes over- and underrepresentation of certain perspectives, historical biases in published content, and the predominance of certain languages and cultural contexts.
+
+**Annotation bias.** Human feedback and labelling processes introduce the biases of annotators. Recent work shows that annotator demographics significantly influence what is labelled as "harmful" or "inappropriate."
+
+**Algorithmic bias.** Technical choices in model architecture, training objectives, and optimisation techniques can amplify certain patterns over others.
+
+**Evaluation bias.** The benchmarks and metrics used to evaluate models may not adequately capture bias concerns, or may themselves encode certain assumptions.
+
+**Deployment bias.** How models are implemented in specific contexts can create new biases or amplify existing ones through system design choices.
+
+### Measuring bias in LLMs
+
+Researchers have developed several methods to measure bias in LLMs. **Embedding analysis** examines how words are positioned in the model's vector space, measuring the distance between professional terms and gender-associated terms to quantify occupational gender bias. **Stereotype assessment** uses template-based methods to test how models complete sentences about different social groups (e.g. "People from [country] are ____"). **Ideological testing** administers standard political ideology surveys or moral foundations questionnaires to models to measure political leanings. **Fairness metrics** calculate disparities in performance across demographic groups. **Controlled generation** compares outputs when only demographic variables are changed. **Adversarial testing** probes models with carefully designed prompts to reveal latent biases.
+
+Each measurement approach has strengths and limitations. Triangulating with multiple methods gives a more complete picture of bias in these complex systems.
+
+### Political leanings of LLMs
+
+Research using political typology questionnaires and analysis of responses to politically charged questions has consistently found that major commercial LLMs tend to express views aligned with centre-left politics in the US context, particularly on social issues, while economic policy positions are more variable. This bias appears to persist even when models are explicitly prompted to adopt conservative perspectives, suggesting it may be deeply embedded in model weights rather than a surface-level preference. Whether this centre-left leaning is driven by the composition of the training data or is a consequence of bias mitigation techniques (such as RLHF) remains an open question.
+
+### Bias mitigation techniques
+
+Bias mitigation approaches can be categorised by where they intervene in the LLM pipeline.
+
+**Pre-training interventions** target the data before training begins: filtering out harmful content, counterfactual data augmentation (adding modified versions of texts that reverse stereotypical patterns), and balanced corpus construction to ensure diverse representation.
+
+**Training interventions** modify the training process itself: objective functions that penalise biased associations, adversarial training that makes the model resistant to producing biased outputs, and multi-objective optimisation that balances performance with fairness metrics.
+
+**Post-training interventions** adjust the model after initial training: RLHF that rewards or punishes outputs based on bias criteria, knowledge editing that directly modifies model weights to change specific associations, and output filtering that catches and modifies biased outputs.
+
+**System-level interventions** operate outside the model: explainability techniques to understand model behaviour, prompt engineering to elicit less biased responses, and human-in-the-loop approaches that combine automation with human oversight.
+
+Most commercial LLMs use multiple approaches in combination, with RLHF becoming particularly dominant in recent systems.
+
+### Challenges in bias mitigation
+
+LLMs present several unique challenges for bias mitigation. **Hallucination and confabulation** mean that models can generate factually incorrect yet convincing information, potentially reinforcing stereotypes or creating new misrepresentations. **Output instability** means that even with fixed prompts and parameters, models can produce different outputs across runs, complicating evaluation. **Data inequality reproduction** is a risk when LLMs are used to overcome data scarcity: groups underrepresented in training data will remain underrepresented in synthetic data, and uneven capabilities across languages and cultures create disparities in who can benefit from these technologies. **Value lock-in** occurs when models freeze a particular moment's social values, unable to evolve naturally with changing norms without explicit retraining. **Proxy discrimination** means that even when explicitly biased variables are removed, models may learn to use correlated features as proxies.
+
+These challenges highlight the need for ongoing monitoring and evaluation rather than one-time bias mitigation efforts.
+
+### Unintended consequences and backlash
+
+Bias mitigation efforts, while necessary, have produced several unintended consequences. **Overcorrection** can lead to historically inaccurate outputs --- Google's Gemini model, for instance, generated images of racially diverse Nazi soldiers and US founding fathers, sacrificing historical accuracy in pursuit of demographic representation. **Political polarisation** around AI has intensified, with the perception that mainstream LLMs lean politically left fuelling the development of explicitly ideological alternatives. LLMs have become battlegrounds in broader cultural conflicts, with different stakeholders holding fundamentally different conceptions of what constitutes harmful bias versus appropriate representation of social realities.
+
+These controversies reveal the impossibility of "neutral" AI. Bias mitigation inevitably involves tradeoffs between values like accuracy, inclusivity, historical fidelity, and cultural relevance. These tradeoffs are fundamentally political, not just technical. The question of who gets to define what counts as "bias" and what values should guide AI development cannot be answered through technical means alone.
+
+### Open questions
+
+Several important questions remain unresolved. Is completely unbiased AI possible, or even desirable? This question pushes us to consider whether bias is simply a flaw to be eliminated or an inevitable aspect of any system embedded in human society. Who should decide what constitutes harmful bias --- companies, regulators, diverse stakeholder panels, or some democratic process? And how should we balance accuracy with bias mitigation when a model that accurately reflects historical disparities may perpetuate harm?
+
+### Frontiers
+
+Current research frontiers include **multi-stakeholder fairness** (frameworks that accommodate the diverse fairness requirements of different communities), **value pluralism in AI alignment** (moving beyond the assumption that there is a single correct way to align AI systems), **constitutional AI** (using explicit, transparent principles to guide model behaviour rather than relying solely on implicit learning from human feedback), and **cross-cultural bias assessment** (developing approaches that work across different cultural contexts, recognising that bias manifests differently around the world). These approaches share a recognition that bias is not merely a technical bug to be fixed, but an inherent challenge in developing AI systems that operate in complex social contexts with diverse stakeholders.
 
 ## Lab
 
@@ -21,5 +113,5 @@ nocite: |
 
 ## Readings
 
-- @wan_kelly_2023
-- @rossi_problems_2024
+- @santurkar_whose_2023
+- @buolamwini_gender_2018

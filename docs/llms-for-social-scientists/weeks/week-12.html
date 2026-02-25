@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>11&nbsp; Project Presentations – LLMs for Social Scientists</title>
+<title>11&nbsp; Beyond Text – LLMs for Social Scientists</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -251,7 +271,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-12.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Project Presentations</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-12.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beyond Text</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -375,7 +395,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-08.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bias in LLMs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -387,13 +407,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Beyond Text</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Interpretability and Explainability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-12.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Project Presentations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beyond Text</span></span></a>
   </div>
 </li>
       </ul>
@@ -426,16 +446,31 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">11.1</span> Lecture</a>
+  <ul class="collapse">
+  <li><a href="#audio" id="toc-audio" class="nav-link" data-scroll-target="#audio"><span class="header-section-number">11.1.1</span> Audio</a></li>
+  <li><a href="#image" id="toc-image" class="nav-link" data-scroll-target="#image"><span class="header-section-number">11.1.2</span> Image</a></li>
+  <li><a href="#video" id="toc-video" class="nav-link" data-scroll-target="#video"><span class="header-section-number">11.1.3</span> Video</a></li>
+  <li><a href="#multimodality" id="toc-multimodality" class="nav-link" data-scroll-target="#multimodality"><span class="header-section-number">11.1.4</span> Multimodality</a></li>
+  <li><a href="#frontier-applications" id="toc-frontier-applications" class="nav-link" data-scroll-target="#frontier-applications"><span class="header-section-number">11.1.5</span> Frontier applications</a></li>
+  </ul></li>
+  <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">11.2</span> Lab</a></li>
+  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">11.3</span> Readings</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-12.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Project Presentations</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-12.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beyond Text</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-week12" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Project Presentations</span></span></h1>
+<h1 class="title"><span id="sec-week11" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beyond Text</span></span></h1>
 </div>
 
 
@@ -458,16 +493,129 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Week 12
+Week 11
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Group presentations</strong></p>
+<p><strong>Lecture:</strong> Social science applications for multimodal data<br>
+<strong>Lab:</strong> Working with images, audio and video in Python</p>
 </div>
 </div>
-<p>This session is dedicated to group presentations. See the <a href="../assessment.html">Assessment</a> chapter for presentation requirements and grading criteria.</p>
+<section id="lecture" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="lecture"><span class="header-section-number">11.1</span> Lecture</h2>
+<p>This is the last week of new content. Throughout this module, we have focused primarily on text as a source of data. But using sources of data other than text — audio, images, and video — is a new and exciting area for political communication research. This week provides an overview of the main tasks in this space and how they have been applied in existing research. Political scientists have been underutilising these forms of data, and many of the papers cited here come from just a handful of authors. Other social sciences, like communication studies, have made more progress. There is a great deal of opportunity here, and the tools to make use of this data are becoming much more accessible.</p>
+<section id="audio" class="level3" data-number="11.1.1">
+<h3 data-number="11.1.1" class="anchored" data-anchor-id="audio"><span class="header-section-number">11.1.1</span> Audio</h3>
+<section id="speech-transcription" class="level4" data-number="11.1.1.1">
+<h4 data-number="11.1.1.1" class="anchored" data-anchor-id="speech-transcription"><span class="header-section-number">11.1.1.1</span> Speech transcription</h4>
+<p>Speech transcription now performs close to or even better than human transcribers. This means that any audio (or the audio track from video) can be transformed into text, making it straightforward to apply the text analysis techniques discussed throughout the course. This opens up a range of data sources that, until the last couple of years, had been closed off or required painstaking, expensive work to make accessible. One of the leading models for this task is Whisper, from OpenAI. Unlike most of their other models, Whisper is open and available for free, and even the small version performs well, at least on English <span class="citation" data-cites="radford_robust_2022">(<a href="../references.html#ref-radford_robust_2022" role="doc-biblioref">Radford et al. 2022</a>)</span>.</p>
+</section>
+<section id="speaker-identification-and-diarisation" class="level4" data-number="11.1.1.2">
+<h4 data-number="11.1.1.2" class="anchored" data-anchor-id="speaker-identification-and-diarisation"><span class="header-section-number">11.1.1.2</span> Speaker identification and diarisation</h4>
+<p>Audio can be embedded in much the same way as text. These embeddings can then be clustered to identify individual speakers — each point in the embedding space represents a separate audio segment, and clusters correspond to separate speakers. Using reference audio samples where the speaker is known, it becomes possible to automatically identify speakers in new clips <span class="citation" data-cites="rask_when_2025">(<a href="../references.html#ref-rask_when_2025" role="doc-biblioref">Rask 2025</a>)</span>. Diarisation extends this by segmenting a continuous audio recording into speaker-labelled segments, answering the question “who spoke when.” This is particularly useful for parliamentary debates, interviews, and panel discussions where multiple speakers participate.</p>
+</section>
+<section id="vocal-pitch" class="level4" data-number="11.1.1.3">
+<h4 data-number="11.1.1.3" class="anchored" data-anchor-id="vocal-pitch"><span class="header-section-number">11.1.1.3</span> Vocal pitch</h4>
+<p>Vocal pitch has emerged as a productive measure in political science research. <span class="citation" data-cites="dietrich_pitch_2019">Dietrich, Hayes, and O’brien (<a href="../references.html#ref-dietrich_pitch_2019" role="doc-biblioref">2019</a>)</span> use vocal pitch to measure emotional intensity among members of Congress, analysing over 74,000 Congressional floor speeches. They show that women in Congress are not only more likely to discuss women on the floor but also do so with greater emotional intensity. Although male legislators can and do represent women, female legislators speak about women in a way that male lawmakers generally do not. They also find that increased vocal pitch is consistent with legislators’ issue commitments: Democrats and Republicans tend to become more emotionally activated when discussing policy issues owned by their respective parties. The Congresswomen who are most emotionally activated when talking about women also receive significantly higher evaluations from women’s interest groups.</p>
+<p>In a related study, <span class="citation" data-cites="dietrich_emotional_2019">Dietrich, Enos, and Sen (<a href="../references.html#ref-dietrich_emotional_2019" role="doc-biblioref">2019</a>)</span> extract the emotional content of over 3,000 hours of oral arguments before the US Supreme Court. They use the level of emotional arousal, as measured by vocal pitch, in each of the Justices’ voices during these arguments to accurately predict many of their eventual votes. This suggests that Justices implicitly reveal their leanings during oral arguments, even before arguments and deliberations have concluded, and that subconscious vocal inflections carry information that legal, political, and textual information do not.</p>
+<p><span class="citation" data-cites="rask_when_2025">Rask (<a href="../references.html#ref-rask_when_2025" role="doc-biblioref">2025</a>)</span> studies 20 years of parliamentary speech in Denmark. He finds that politicians in governing roles speak with a lower pitch than politicians in non-governing roles, and they return to their prior pitch once they leave office. The author argues that this shift is used to shape perceptions of valued traits like competence, dominance, and composure.</p>
+</section>
+<section id="other-vocal-features" class="level4" data-number="11.1.1.4">
+<h4 data-number="11.1.1.4" class="anchored" data-anchor-id="other-vocal-features"><span class="header-section-number">11.1.1.4</span> Other vocal features</h4>
+<p>Beyond pitch, other vocal features can be extracted and analysed. These include jitter (variation in the rate of vocal fold vibration), shimmer (variability in the amplitude of the voice), loudness, mel-frequency cepstral coefficients (MFCCs, which summarise the energy distribution of specific frequencies), and linear predictive coding coefficients (LPCCs, which model how a speech signal is produced). <span class="citation" data-cites="smith_vocal_2020">Smith et al. (<a href="../references.html#ref-smith_vocal_2020" role="doc-biblioref">2020</a>)</span> demonstrate that these vocal features can serve as predictors of depression in adults, assessing whether or not someone is depressed based on a voice recording with a high degree of confidence.</p>
+</section>
+</section>
+<section id="image" class="level3" data-number="11.1.2">
+<h3 data-number="11.1.2" class="anchored" data-anchor-id="image"><span class="header-section-number">11.1.2</span> Image</h3>
+<section id="object-identification" class="level4" data-number="11.1.2.1">
+<h4 data-number="11.1.2.1" class="anchored" data-anchor-id="object-identification"><span class="header-section-number">11.1.2.1</span> Object identification</h4>
+<p>Object identification involves detecting and classifying objects within images. There are many potential applications for political science. Researchers might assess whether politicians from different parties use different visual tropes in campaign advertisements — for instance, whether Republicans are more likely to show guns, flags, or other patriotic symbols in their ads compared to Democrats. Object identification can also be used to understand how politicians use clothing to signify their identity: do left-wing, workers’ party politicians wear casual clothes to appear more like the working person, or does the opposite occur, with left-wing politicians wearing suits to be taken more seriously while right-wing politicians dress down?</p>
+<p><span class="citation" data-cites="hwang_systematic_2023">Hwang and Naik (<a href="../references.html#ref-hwang_systematic_2023" role="doc-biblioref">2023</a>)</span> use object identification at scale to measure trash prevalence across cities using street-level imagery. They train models to classify trash levels in images from Boston, Detroit, and Los Angeles, then aggregate predictions to map the spatial distribution of trash at the census tract, block group, and block levels. This kind of approach demonstrates how image classification can be used to measure local public goods provision and urban inequality.</p>
+</section>
+<section id="pose-estimation" class="level4" data-number="11.1.2.2">
+<h4 data-number="11.1.2.2" class="anchored" data-anchor-id="pose-estimation"><span class="header-section-number">11.1.2.2</span> Pose estimation</h4>
+<p>Pose estimation detects the positions of body parts within images or video, enabling the analysis of body language as another mode of communication. <span class="citation" data-cites="rittmann_measurement_2024">Rittmann (<a href="../references.html#ref-rittmann_measurement_2024" role="doc-biblioref">2024</a>)</span> uses pose estimation to study gesticulation in parliamentary speeches in the German Bundestag. He finds that efforts to deliver a nonverbally appealing speech often come at the cost of textual complexity, while textual complexity tends to diminish nonverbal effort. Legislators of governing parties navigate this trade-off by leaning towards complexity over nonverbal appeal, while opposition members tend to choose nonverbal appeal over complexity.</p>
+</section>
+<section id="face-detection" class="level4" data-number="11.1.2.3">
+<h4 data-number="11.1.2.3" class="anchored" data-anchor-id="face-detection"><span class="header-section-number">11.1.2.3</span> Face detection</h4>
+<p>Face detection identifies the presence and location of faces in images without identifying who the faces belong to. <span class="citation" data-cites="joo_image_2018">Joo and Steinert-Threlkeld (<a href="../references.html#ref-joo_image_2018" role="doc-biblioref">2018</a>)</span> use face detection to estimate protest size, showing that summing the number of detected faces in protest images provides an accurate measure of attendance that correlates highly (R = 0.76) with official crowd count estimates.</p>
+</section>
+<section id="facial-recognition" class="level4" data-number="11.1.2.4">
+<h4 data-number="11.1.2.4" class="anchored" data-anchor-id="facial-recognition"><span class="header-section-number">11.1.2.4</span> Facial recognition</h4>
+<p>Facial recognition goes a step further by identifying specific individuals. <span class="citation" data-cites="girbau_face_2024">Girbau et al. (<a href="../references.html#ref-girbau_face_2024" role="doc-biblioref">2024</a>)</span> develop a pipeline using YOLO for face detection and FaceNet for feature extraction to identify specific politicians in television news footage. By comparing detected faces against a reference database in a feature space, they can automatically measure how much screen time each candidate receives across different news channels. This approach can be used to study negative campaigning by measuring how often candidates show images or footage of their opponents in their advertisements. Their analysis of the 2016 US elections reveals substantial differences in candidate visibility across CNN, Fox, and MSNBC.</p>
+</section>
+</section>
+<section id="video" class="level3" data-number="11.1.3">
+<h3 data-number="11.1.3" class="anchored" data-anchor-id="video"><span class="header-section-number">11.1.3</span> Video</h3>
+<section id="video-summarisation" class="level4" data-number="11.1.3.1">
+<h4 data-number="11.1.3.1" class="anchored" data-anchor-id="video-summarisation"><span class="header-section-number">11.1.3.1</span> Video summarisation</h4>
+<p>Video summarisation extracts representative frames or segments from longer videos, reducing them to their key visual content. <span class="citation" data-cites="tarr_automated_2023">Tarr, Hwang, and Imai (<a href="../references.html#ref-tarr_automated_2023" role="doc-biblioref">2023</a>)</span> apply this technique to political advertisements, automatically generating summaries that capture the most visually important moments. Comparing auto-generated summaries with manually generated ones demonstrates the feasibility of using these techniques to analyse large corpora of political advertising at scale.</p>
+</section>
+<section id="motion-detection" class="level4" data-number="11.1.3.2">
+<h4 data-number="11.1.3.2" class="anchored" data-anchor-id="motion-detection"><span class="header-section-number">11.1.3.2</span> Motion detection</h4>
+<p>Motion detection tracks movement within video data. <span class="citation" data-cites="dietrich_using_2021">Dietrich (<a href="../references.html#ref-dietrich_using_2021" role="doc-biblioref">2021</a>)</span> uses motion detection to study political polarisation in the US Congress, measuring the extent to which members of Congress literally cross the aisle on the House floor. He finds that not only are Democrats and Republicans less willing to physically cross the aisle over time, but this behaviour is also predictive of future party-line voting. The study uses overhead C-SPAN footage to track movement patterns after roll-call votes, providing a novel behavioural measure of partisan division that complements traditional legislative measures.</p>
+</section>
+</section>
+<section id="multimodality" class="level3" data-number="11.1.4">
+<h3 data-number="11.1.4" class="anchored" data-anchor-id="multimodality"><span class="header-section-number">11.1.4</span> Multimodality</h3>
+<p>Many research questions benefit from combining multiple data modalities. <span class="citation" data-cites="luken_mexca_2024">Lüken et al. (<a href="../references.html#ref-luken_mexca_2024" role="doc-biblioref">2024</a>)</span> present MEXCA, a pipeline for multimodal emotion identification from video. The pipeline processes video through three parallel channels: faces are detected and extracted to perform emotion detection on individual faces; audio is processed directly, with vocal pitch and other features extracted for emotion recognition; and speakers are identified, the audio is transcribed, and sentiment analysis is performed on the transcribed text. This yields three different channels of emotion — face, voice, and speech content — which can be integrated for a richer picture than any single modality provides. There are many other opportunities to set up similar pipelines to assess the same phenomenon through different channels.</p>
+</section>
+<section id="frontier-applications" class="level3" data-number="11.1.5">
+<h3 data-number="11.1.5" class="anchored" data-anchor-id="frontier-applications"><span class="header-section-number">11.1.5</span> Frontier applications</h3>
+<p>Several application areas represent important frontiers. <strong>Short-form political video</strong>, particularly on platforms like TikTok, combines visuals, captions and text, backgrounds, audio, music, and human presenters. Existing research on political video content is limited and geographically concentrated, mostly focused on the US and Spain, despite the growing political importance of these platforms. <strong>Podcasts</strong> represent another increasingly politically important but understudied medium. The data is relatively harder to work with than text, though not prohibitively so, and the analytical tools are becoming more accessible.</p>
+<p>The broader point is that political scientists have been underutilising forms of data other than text. As the tools for working with audio, image, and video data become more accessible, there are significant gaps to be filled and important research questions to be addressed across these modalities.</p>
+</section>
+</section>
+<section id="lab" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">11.2</span> Lab</h2>
+<p><em>Content to be added.</em></p>
+</section>
+<section id="readings" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="readings"><span class="header-section-number">11.3</span> Readings</h2>
+<ul>
+<li><span class="citation" data-cites="luken_mexca_2024">Lüken et al. (<a href="../references.html#ref-luken_mexca_2024" role="doc-biblioref">2024</a>)</span></li>
+</ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-dietrich_using_2021" class="csl-entry" role="listitem">
+Dietrich, Bryce J. 2021. <span>“Using <span>Motion</span> <span>Detection</span> to <span>Measure</span> <span>Social</span> <span>Polarization</span> in the <span>U</span>.<span>S</span>. <span>House</span> of <span>Representatives</span>.”</span> <em>Political Analysis</em> 29 (2): 250–59. <a href="https://doi.org/10.1017/pan.2020.25">https://doi.org/10.1017/pan.2020.25</a>.
+</div>
+<div id="ref-dietrich_emotional_2019" class="csl-entry" role="listitem">
+Dietrich, Bryce J., Ryan D. Enos, and Maya Sen. 2019. <span>“Emotional <span>Arousal</span> <span>Predicts</span> <span>Voting</span> on the <span>U</span>.<span>S</span>. <span>Supreme</span> <span>Court</span>.”</span> <em>Political Analysis</em> 27 (2): 237–43. <a href="https://doi.org/10.1017/pan.2018.47">https://doi.org/10.1017/pan.2018.47</a>.
+</div>
+<div id="ref-dietrich_pitch_2019" class="csl-entry" role="listitem">
+Dietrich, Bryce J., Matthew Hayes, and Diana Z. O’brien. 2019. <span>“Pitch <span>Perfect</span>: <span>Vocal</span> <span>Pitch</span> and the <span>Emotional</span> <span>Intensity</span> of <span>Congressional</span> <span>Speech</span>.”</span> <em>American Political Science Review</em> 113 (4): 941–62. <a href="https://doi.org/10.1017/S0003055419000467">https://doi.org/10.1017/S0003055419000467</a>.
+</div>
+<div id="ref-girbau_face_2024" class="csl-entry" role="listitem">
+Girbau, Andreu, Tetsuro Kobayashi, Benjamin Renoust, Yusuke Matsui, and Shin’ichi Satoh. 2024. <span>“Face <span>Detection</span>, <span>Tracking</span>, and <span>Classification</span> from <span>Large</span>-<span>Scale</span> <span>News</span> <span>Archives</span> for <span>Analysis</span> of <span>Key</span> <span>Political</span> <span>Figures</span>.”</span> <em>Political Analysis</em> 32 (2): 221–39. <a href="https://doi.org/10.1017/pan.2023.33">https://doi.org/10.1017/pan.2023.33</a>.
+</div>
+<div id="ref-hwang_systematic_2023" class="csl-entry" role="listitem">
+Hwang, Jackelyn, and Nikhil Naik. 2023. <span>“Systematic <span>Social</span> <span>Observation</span> at <span>Scale</span>: <span>Using</span> <span>Crowdsourcing</span> and <span>Computer</span> <span>Vision</span> to <span>Measure</span> <span>Visible</span> <span>Neighborhood</span> <span>Conditions</span>.”</span> <em>Sociological Methodology</em> 53 (2): 183–216. <a href="https://doi.org/10.1177/00811750231160781">https://doi.org/10.1177/00811750231160781</a>.
+</div>
+<div id="ref-joo_image_2018" class="csl-entry" role="listitem">
+Joo, Jungseock, and Zachary C. Steinert-Threlkeld. 2018. <span>“Image as <span>Data</span>: <span>Automated</span> <span>Visual</span> <span>Content</span> <span>Analysis</span> for <span>Political</span> <span>Science</span>.”</span> arXiv. <a href="https://doi.org/10.48550/arXiv.1810.01544">https://doi.org/10.48550/arXiv.1810.01544</a>.
+</div>
+<div id="ref-luken_mexca_2024" class="csl-entry" role="listitem">
+Lüken, Malte, Kody Moodley, Eva Viviani, Christian Pipal, and Gijs Schumacher. 2024. <span>“<span>MEXCA</span> - <span>A</span> <span>Simple</span> and <span>Robust</span> <span>Pipeline</span> for <span>Capturing</span> <span>Emotion</span> <span>Expressions</span> in <span>Faces</span>, <span>Vocalization</span>, and <span>Speech</span>.”</span> OSF. <a href="https://doi.org/10.31234/osf.io/56svb">https://doi.org/10.31234/osf.io/56svb</a>.
+</div>
+<div id="ref-radford_robust_2022" class="csl-entry" role="listitem">
+Radford, Alec, Jong Wook Kim, Tao Xu, Greg Brockman, Christine McLeavey, and Ilya Sutskever. 2022. <span>“Robust <span>Speech</span> <span>Recognition</span> via <span>Large</span>-<span>Scale</span> <span>Weak</span> <span>Supervision</span>.”</span> <em>arXiv.org</em>. <a href="https://arxiv.org/abs/2212.04356v1">https://arxiv.org/abs/2212.04356v1</a>.
+</div>
+<div id="ref-rask_when_2025" class="csl-entry" role="listitem">
+Rask, Mathias. 2025. <span>“When <span>They</span> <span>Go</span> <span>High</span>, <span>We</span> <span>Go</span> <span>Low</span>: <span>Rhetorical</span> <span>Rewards</span> of <span>Governing</span>.”</span>
+</div>
+<div id="ref-rittmann_measurement_2024" class="csl-entry" role="listitem">
+Rittmann, Oliver. 2024. <span>“A <span>Measurement</span> <span>Framework</span> for <span>Computationally</span> <span>Analyzing</span> <span>Politicians</span>’ <span>Body</span> <span>Language</span>.”</span> OSF. <a href="https://doi.org/10.31219/osf.io/9wynp">https://doi.org/10.31219/osf.io/9wynp</a>.
+</div>
+<div id="ref-smith_vocal_2020" class="csl-entry" role="listitem">
+Smith, Marianne, Bryce Jensen Dietrich, Er-wei Bai, and Henry Jeremy Bockholt. 2020. <span>“Vocal Pattern Detection of Depression Among Older Adults.”</span> <em>International Journal of Mental Health Nursing</em> 29 (3): 440–49. <a href="https://doi.org/10.1111/inm.12678">https://doi.org/10.1111/inm.12678</a>.
+</div>
+<div id="ref-tarr_automated_2023" class="csl-entry" role="listitem">
+Tarr, Alexander, June Hwang, and Kosuke Imai. 2023. <span>“Automated <span>Coding</span> of <span>Political</span> <span>Campaign</span> <span>Advertisement</span> <span>Videos</span>: <span>An</span> <span>Empirical</span> <span>Validation</span> <span>Study</span>.”</span> <em>Political Analysis</em> 31 (4): 554–74. <a href="https://doi.org/10.1017/pan.2022.26">https://doi.org/10.1017/pan.2022.26</a>.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -889,8 +1037,8 @@ Week 12
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/week-11.html" class="pagination-link" aria-label="Beyond Text">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Beyond Text</span></span>
+      <a href="../weeks/week-11.html" class="pagination-link" aria-label="Interpretability and Explainability">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Interpretability and Explainability</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

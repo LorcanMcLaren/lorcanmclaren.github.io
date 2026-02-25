@@ -3,17 +3,79 @@ nocite: |
   @williams_exploited_2022, @bender_dangers_2021, @bucher_fine-tuned_2024
 ---
 
-# Ethical Use of LLMs? {#sec-week10}
+# Ethical Use of LLMs? {#sec-week9}
 
 ::: {.callout-note}
-## Week 10
+## Week 9
 **Lecture:** Ethical concerns in developing and deploying LLMs\
 **Lab:** Measuring environmental costs of LLM use
 :::
 
 ## Lecture
 
-*Content to be added.*
+We have been fairly positive about the use of LLMs throughout this module. This week, we explore the darker side of the industry. While we will not arrive at normative conclusions here, the goal is to think critically about the use of LLMs and their social implications. Building on last week's discussion of bias (@sec-week8), we now examine how LLMs connect to broader ethical issues --- from privacy and misinformation to environmental costs and economic externalities.
+
+### Bias risks
+
+Building on our discussion of bias last week, fairness concerns extend to how LLMs treat different groups and individuals. **Representational harms** include stereotyping (reinforcing negative associations) and erasure (making certain groups invisible). LLMs may, for example, generate stories or examples that default to stereotypical gender roles or exclude certain cultural contexts entirely. **Allocational harms** occur when resources or opportunities are distributed inequitably --- if LLMs are used in hiring, loan approval, or resource allocation, biased outputs could lead to discriminatory outcomes. **Toxicity** measures how likely models are to produce harmful, offensive, or abusive language; despite safeguards, most models can still be prompted to generate toxic content, with toxicity rates often higher when discussing marginalised groups. **Disparate performance** refers to how models often work better for dominant groups and languages --- LLMs tend to perform better on tasks involving standard American English than other dialects or languages.
+
+These issues connect directly to questions of political power and representation, making them particularly relevant for political scientists.
+
+### Data privacy concerns
+
+LLMs present several privacy concerns that political scientists should understand. **Memorisation** occurs when models reproduce verbatim content from their training data, potentially exposing private information such as email addresses, phone numbers, or financial details that was inadvertently included in training datasets. Research has shown that larger models actually memorise more than smaller ones. **Inference attacks** allow adversaries to deduce sensitive attributes not explicitly stated in data --- patterns in language can reveal demographic characteristics or political beliefs even when these are not directly mentioned. **Anthropomorphism risk** is a subtler concern: when systems appear more human-like, users tend to disclose more personal information than they would to obviously artificial systems. This psychological phenomenon can lead to overconfidence and oversharing with LLMs. It is especially problematic with the emergence of services that promote the use of chatbots as replacements for social interaction or psychotherapy. Researchers at DeepMind have noted that users share their opinions or emotions with chatbots in part because they are less afraid of social judgement, and that such sensitive data could be used to build addictive applications. **Surveillance potential** also arises from the large-scale data collection required for LLM training and fine-tuning, creating new avenues for mass surveillance with significant implications for political privacy and freedom of expression. The queries sent to services like ChatGPT are accessible to OpenAI and used to train their models unless users explicitly opt out.
+
+For political scientists, these privacy concerns intersect with questions of political liberty, surveillance, and the right to privacy in democratic societies.
+
+### False or misleading information
+
+LLMs struggle with factual reliability in ways that present particular challenges for academic and political contexts. **Hallucinations** occur when models generate text that sounds plausible but is factually incorrect, including inventing events, misattributing quotes, or creating other fabricated content with high confidence. **Majority view bias** means LLMs tend to represent the most common viewpoints found in their training data as factual, even when these reflect opinion rather than fact --- majority view does not equal fact. **Domain-specific risks** are particularly acute in areas like medicine and law, where incorrect information could lead to harmful decisions. **False expertise** arises because models typically communicate with equal confidence regardless of their actual knowledge on a topic; this authoritative tone can be particularly misleading in specialised domains and can undermine genuine expertise.
+
+These information quality issues raise significant concerns for democratic discourse, which depends on a shared factual basis for debate and decision-making. They also complicate the use of LLMs for research, education, and policy analysis.
+
+### Malicious use potential
+
+LLMs can potentially enable harmful activities at unprecedented scale and sophistication. **Disinformation campaigns** can be dramatically scaled and targeted using LLMs to generate customised content for specific audiences. In 2016, around one-fifth of tweets about the US Presidential election and one-third of tweets about the Brexit referendum were created by bots; LLMs dramatically lower the cost and increase the potential scale of such influence operations. Beyond manipulating perceptions on social media, LLMs could be weaponised in online public consultation processes. **Sophisticated fraud and scams** become easier when LLMs can generate highly personalised phishing messages or scam content that targets specific vulnerabilities based on available information about the victim. **Cyberattack automation** lowers barriers to sophisticated cyber operations by generating malicious code, identifying vulnerabilities, or crafting social engineering attacks. **Censorship assistance** enables advanced content moderation systems that might support more sophisticated censorship in authoritarian contexts.
+
+These malicious uses have direct implications for political security, electoral integrity, and national security --- core concerns for political scientists.
+
+### Implications of overreliance
+
+Beyond direct harms, LLMs may create more subtle forms of dependency that affect cognitive and social processes. **Intellectual dependency** occurs when people regularly outsource critical thinking and analytical tasks to AI systems. In academic contexts, this could lead to atrophy of research skills, analytical capabilities, and domain knowledge. A joint study by researchers at Microsoft and Carnegie Mellon found that when workers were more confident in an AI tool's capability, they were more likely to disengage their own critical thinking, particularly for lower-stakes tasks. Conversely, when workers had less confidence in the AI, they engaged more in critical thinking and reported more confidence in their ability to evaluate and improve upon the AI's output. The study also found that users with access to generative AI tools tended to produce a less diverse set of outcomes for the same task compared to those without.
+
+**Attentional displacement** happens when engagement with AI systems reduces time spent in deep focused work or direct human interaction, potentially affecting the quality of scholarship and teaching. **Emotional dependency** develops when users form attachment-like relationships with AI systems. LLM-based chatbot services are being marketed as replacements for friendships, with taglines like "always on your side" --- a framing that raises serious concerns. According to reporting by the Washington Post, the average user of Character.ai spent 93 minutes a day talking to chatbots, 18 minutes longer than the average user spends on TikTok. Several tragic cases have highlighted the dangers: a 14-year-old in Florida died by suicide after talking with a Character.ai chatbot, and authorities in Belgium launched an investigation into Chai Research after a man died by suicide following extensive chats with a Replika chatbot. **Knowledge homogenisation** is a systemic risk where multiple users relying on the same AI systems receive similar information, perspectives, and analyses, potentially reducing intellectual diversity in a field.
+
+### Environmental costs
+
+LLMs have significant environmental impacts that raise questions of sustainability. At the individual level, a single LLM interaction may consume as much power as leaving a low-brightness LED lightbulb on for one hour, and generating one image using AI can use almost as much energy as charging a smartphone. At the systemic level, training GPT-4 consumed electricity equivalent to powering about 5,000 US homes for an entire year. For comparison, streaming an hour of Netflix requires around 0.8 kWh of electricity --- you would have to watch Netflix for 1.6 million hours to consume the same amount of power it took to train GPT-3, which is smaller than GPT-4. ChatGPT queries use roughly 10 times more energy than a standard Google search, and projected energy usage for AI-assisted search could be even higher.
+
+Jevons' Paradox applies to AI development: increasing efficiency often results in increased demand, leading to a net increase in resource use. As models become more efficient, this enables development of even larger models requiring more computational power. Data centres globally use around 2% of the world's electricity, with the International Energy Agency projecting this will double by 2026. These energy demands have led to extreme measures, such as Microsoft reopening the Three Mile Island nuclear plant specifically to power AI operations, and Amazon and Google investing in small modular nuclear reactors. The EU's AI Act will require high-risk AI systems, including LLM foundation models, to report their energy consumption and resource use throughout their lifecycle.
+
+#### Case study: Ireland
+
+Ireland provides a particularly striking illustration of these environmental costs. Data centre electricity consumption has grown dramatically, from 5% of total metered electricity in 2015 to 21% in 2023, with projections reaching 31% by 2027. This demand is outpacing the creation of new renewable energy, adding approximately 1 TWh in demand annually. Data centres now account for an estimated 2.5--4% of national greenhouse gas emissions, with a single data centre consuming as much electricity as a city the size of Kilkenny.
+
+The electrical grid cannot keep up. An investigation by The Journal found that data centres are turning to backup and emergency generators that use fossil fuels, emitting over 135,000 tonnes of CO₂ in the last five years from generators not connected to the electricity grid --- comparable to running roughly 33,750 cars for a year. Data centres also consume significant quantities of water for cooling, with facilities run by companies like Facebook and Amazon requiring tens of millions of litres during warm summer months. This places additional strain on Dublin's already tight water supply, with the chair of Uisce Éireann warning that the city's drinking water supply will be under pressure in the coming years. The lack of sufficient water supply also imperils housing targets, illustrating how the environmental impacts and sociopolitical ramifications are far-reaching.
+
+These are not even the only environmental impacts. The mining of rare earth minerals needed for GPU chips and batteries for the energy transition has its own significant environmental and human costs, as does the question of how these materials are recycled or disposed of at end of life.
+
+### Negative economic externalities
+
+LLMs create economic externalities that extend well beyond their immediate users. **Increasing inequality** can manifest through downward wage pressure on routine cognitive tasks, concentration of power among technology monopolies, and access constraints that create digital divides in who can benefit from these tools. **Reduced job quality** occurs when work shifts toward monotonous monitoring and validation of AI outputs, workplaces adopt an increased pace of production, and opportunities for meaningful social interaction diminish. **Creative sector disruption** happens when AI systems trained on creative works can then generate similar content without compensation to original creators, potentially undercutting creative professions and extracting value from their work. **Hidden labour exploitation** underpins the entire AI industry: the content moderation and data labelling that makes AI systems function is largely performed in developing countries, at low pay, and exposes workers to harmful content. Reporting by TIME revealed that OpenAI used Kenyan workers on less than $2 per hour to help make ChatGPT less toxic. As a NOĒMA article put it, data labelling interfaces have evolved to treat crowdworkers like machines, prescribing highly repetitive tasks, surveilling their movements, and punishing deviation through automated tools.
+
+These economic impacts raise fundamental questions about distribution, equity, and power that are central to political economy. They also suggest the need for governance frameworks that ensure the benefits of these technologies are broadly shared.
+
+### Output ownership and responsibility
+
+LLMs raise complex questions about ownership, attribution, and responsibility. **Data provenance** concerns arise because LLMs typically do not provide clear information about the sources that influenced their outputs, making it difficult to trace the origins of generated content and evaluate its reliability. **Copyright questions** emerge when models trained on copyrighted material generate new content that may be derivative --- recent legal cases have begun addressing whether training constitutes fair use and who owns the outputs of AI systems. Is it the prompter, the AI company, or the creators whose data the model was trained on? **Legal culpability** issues concern who bears responsibility when AI-generated content causes harm --- the developer, the deployer, or the end user --- and this remains legally ambiguous in many jurisdictions. **Attribution challenges** affect academic integrity, creative recognition, and professional credit; as AI-generated content becomes more prevalent, systems for attributing intellectual and creative work need reconsideration.
+
+These questions sit at the intersection of law, ethics, and social norms --- all areas where political scientists can contribute valuable perspectives. They also relate to broader questions about intellectual property regimes in the digital age and how they affect innovation, access, and equity.
+
+### Open questions
+
+Several important questions remain. Do LLMs empower citizens by democratising certain capabilities, or do they primarily benefit those already privileged? How might the concentration of AI development affect political discourse and participation? What special responsibilities do political scientists have when using or studying these tools? How should we balance innovation with caution in our own research and teaching? And what are the long-term consequences of outsourcing certain types of daily work to LLMs?
+
+These questions highlight that ethical considerations around LLMs are not separate from the substance of political science but are increasingly central to the field's core concerns with power, governance, and democratic values.
 
 ## Lab
 

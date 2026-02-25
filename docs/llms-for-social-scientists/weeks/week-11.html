@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>10&nbsp; Beyond Text – LLMs for Social Scientists</title>
+<title>10&nbsp; Interpretability and Explainability – LLMs for Social Scientists</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -271,7 +271,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-11.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Beyond Text</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-11.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Interpretability and Explainability</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -395,7 +395,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-08.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bias in LLMs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -407,13 +407,13 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-11.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Beyond Text</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Interpretability and Explainability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Project Presentations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beyond Text</span></span></a>
   </div>
 </li>
       </ul>
@@ -451,7 +451,16 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">10.1</span> Lecture</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">10.1</span> Lecture</a>
+  <ul class="collapse">
+  <li><a href="#the-challenge-of-interpretation" id="toc-the-challenge-of-interpretation" class="nav-link" data-scroll-target="#the-challenge-of-interpretation"><span class="header-section-number">10.1.1</span> The challenge of interpretation</a></li>
+  <li><a href="#why-interpret-or-explain" id="toc-why-interpret-or-explain" class="nav-link" data-scroll-target="#why-interpret-or-explain"><span class="header-section-number">10.1.2</span> Why interpret or explain?</a></li>
+  <li><a href="#interpretability-vs.-explainability" id="toc-interpretability-vs.-explainability" class="nav-link" data-scroll-target="#interpretability-vs.-explainability"><span class="header-section-number">10.1.3</span> Interpretability vs.&nbsp;explainability</a></li>
+  <li><a href="#two-paradigms-of-llm-explainability" id="toc-two-paradigms-of-llm-explainability" class="nav-link" data-scroll-target="#two-paradigms-of-llm-explainability"><span class="header-section-number">10.1.4</span> Two paradigms of LLM explainability</a></li>
+  <li><a href="#encoder-only-models-the-fine-tuning-paradigm" id="toc-encoder-only-models-the-fine-tuning-paradigm" class="nav-link" data-scroll-target="#encoder-only-models-the-fine-tuning-paradigm"><span class="header-section-number">10.1.5</span> Encoder-only models: the fine-tuning paradigm</a></li>
+  <li><a href="#decoder-only-models-the-prompting-paradigm" id="toc-decoder-only-models-the-prompting-paradigm" class="nav-link" data-scroll-target="#decoder-only-models-the-prompting-paradigm"><span class="header-section-number">10.1.6</span> Decoder-only models: the prompting paradigm</a></li>
+  <li><a href="#evaluating-explanations" id="toc-evaluating-explanations" class="nav-link" data-scroll-target="#evaluating-explanations"><span class="header-section-number">10.1.7</span> Evaluating explanations</a></li>
+  </ul></li>
   <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">10.2</span> Lab</a></li>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">10.3</span> Readings</a></li>
   </ul>
@@ -461,9 +470,9 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-11.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Beyond Text</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-11.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Interpretability and Explainability</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-week11" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Beyond Text</span></span></h1>
+<h1 class="title"><span id="sec-week10" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Interpretability and Explainability</span></span></h1>
 </div>
 
 
@@ -486,17 +495,75 @@ div.csl-indent {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Week 11
+Week 10
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Lecture:</strong> Social science applications for multimodal data<br>
-<strong>Lab:</strong> Working with images, audio and video in Python</p>
+<p><strong>Lecture:</strong> Interpreting and explaining machine learning and LLM outputs<br>
+<strong>Lab:</strong> Applying explainability methods to language models</p>
 </div>
 </div>
 <section id="lecture" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="lecture"><span class="header-section-number">10.1</span> Lecture</h2>
-<p><em>Content to be added.</em></p>
+<p>This week addresses a fundamental challenge in machine learning and LLM research: understanding why models make the decisions they do. While some model types are inherently interpretable, many of the most powerful models — including transformer-based language models — operate as “black boxes.” The lack of interpretability has real consequences, and language models are particularly sensitive: minor changes to prompts can lead to dramatically different outputs, creating a need for robust explanation methods.</p>
+<section id="the-challenge-of-interpretation" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="the-challenge-of-interpretation"><span class="header-section-number">10.1.1</span> The challenge of interpretation</h3>
+<p>In machine learning, there is a fundamental tension between performance and interpretability. Models like decision trees or linear regression are inherently interpretable, allowing us to trace exactly how inputs lead to outputs. Deep learning models, by contrast, often achieve higher performance but at the cost of transparency. This matters because systems that lack interpretability may fail to generalise or may achieve their goals through unintended means.</p>
+<p>A well-known example involves an image classifier that was trained to distinguish huskies from wolves. When the model was examined using explainability techniques, researchers found it had learned to associate wolves with snow in the background rather than with the actual features of the animal <span class="citation" data-cites="ribeiro_why_2016">(<a href="../references.html#ref-ribeiro_why_2016" role="doc-biblioref">Ribeiro, Singh, and Guestrin 2016</a>)</span>. Similarly, a pneumonia identification model was found to have learned associations between certain scan features and specific hospitals that had relatively higher or lower rates of pneumonia cases, rather than learning to identify pneumonia itself <span class="citation" data-cites="zech_variable_2018">(<a href="../references.html#ref-zech_variable_2018" role="doc-biblioref">Zech et al. 2018</a>)</span>. Without interpretability tools, these failures would have gone undetected.</p>
+<p>With language models specifically, their sensitivity to inputs presents unique challenges. Minor changes to prompts can lead to dramatically different outputs, creating a need for robust explanation methods to understand these behaviours.</p>
+</section>
+<section id="why-interpret-or-explain" class="level3" data-number="10.1.2">
+<h3 data-number="10.1.2" class="anchored" data-anchor-id="why-interpret-or-explain"><span class="header-section-number">10.1.2</span> Why interpret or explain?</h3>
+<p>Explanation serves multiple critical functions. For model developers, explanations help with <strong>debugging errors and biases</strong> by identifying the sources of problems, enabling targeted interventions rather than wholesale retraining. Explanation also supports <strong>targeted model improvements</strong> and helps in <strong>understanding capabilities and limitations</strong> — clarifying when and why models succeed or fail. It is essential for <strong>explaining hallucinations and uncertainty</strong>, helping users calibrate their trust appropriately. In applied settings, explanation is critical for <strong>ensuring accountability in AI-assisted decisions</strong>, and from a legal perspective, the EU’s General Data Protection Regulation includes provisions that can be interpreted as creating a “right to explanation” for automated decisions that significantly affect individuals.</p>
+<p>For political science specifically, explanations help us understand why certain documents were classified in particular ways, can reveal potential political leanings embedded in model outputs, and illuminate the reasoning behind automated assessments.</p>
+</section>
+<section id="interpretability-vs.-explainability" class="level3" data-number="10.1.3">
+<h3 data-number="10.1.3" class="anchored" data-anchor-id="interpretability-vs.-explainability"><span class="header-section-number">10.1.3</span> Interpretability vs.&nbsp;explainability</h3>
+<p>Understanding the distinction between these two concepts is crucial for approaching model transparency effectively. <strong>Interpretability</strong> refers to the inherent transparency of a model’s decision-making process. An interpretable model like a decision tree allows us to directly trace how inputs map to outputs without additional tools; the understanding is immediate and the transparency is built into the model design. <strong>Explainability</strong>, on the other hand, involves post-hoc methods that can help explain any model, including complex black boxes. Techniques like SHAP values or LIME create local explanations of specific predictions, providing approximations or simplified representations of model behaviour after the model has been trained.</p>
+<p>This distinction has practical implications. When choosing models for high-stakes applications, interpretable models may be preferable if transparency is critical. However, when both performance and understanding are needed, explainability techniques offer a compromise. For political science applications, interpretable models may be preferable for public-facing policy applications, while explainability techniques might be needed when analysing complex language models in research settings.</p>
+</section>
+<section id="two-paradigms-of-llm-explainability" class="level3" data-number="10.1.4">
+<h3 data-number="10.1.4" class="anchored" data-anchor-id="two-paradigms-of-llm-explainability"><span class="header-section-number">10.1.4</span> Two paradigms of LLM explainability</h3>
+<p>It is important to distinguish between two fundamentally different paradigms. The <strong>traditional fine-tuning paradigm</strong> involves taking a pre-trained encoder model and adapting it to specific tasks; here, the goal is often to explain classification decisions or other discrete outputs. The <strong>prompting paradigm</strong>, which has emerged with large decoder-only models like GPT-4 or Claude, uses the model’s generative capabilities directly through carefully crafted prompts. The explanation challenges are different in each case, and the methods covered below are organised accordingly.</p>
+</section>
+<section id="encoder-only-models-the-fine-tuning-paradigm" class="level3" data-number="10.1.5">
+<h3 data-number="10.1.5" class="anchored" data-anchor-id="encoder-only-models-the-fine-tuning-paradigm"><span class="header-section-number">10.1.5</span> Encoder-only models: the fine-tuning paradigm</h3>
+<section id="local-explanation-methods" class="level4" data-number="10.1.5.1">
+<h4 data-number="10.1.5.1" class="anchored" data-anchor-id="local-explanation-methods"><span class="header-section-number">10.1.5.1</span> Local explanation methods</h4>
+<p>Local explanation methods focus on explaining specific predictions rather than the model’s overall behaviour. They are particularly useful for stakeholders who need to understand individual decisions. There are three major approaches.</p>
+<p><strong>Feature attribution</strong> methods assign importance scores to input features, showing which parts of the text most influenced a model’s decision. These include perturbation-based approaches that measure output changes when inputs are modified, gradient-based methods like integrated gradients that trace the flow of information, model-agnostic approaches like LIME that approximate complex models with simpler ones, and game-theoretic approaches like SHAP that distribute credit among features. Feature attribution is particularly valuable for identifying when models rely on spurious correlations rather than meaningful patterns. The results are typically visualised through heatmaps or highlighting, making them accessible to non-technical stakeholders.</p>
+<p><strong>Attention-based explanation</strong> leverages the attention mechanisms central to transformer-based LLMs. Attention patterns can be visualised as attention maps or bipartite graphs, revealing both syntactic dependencies (like subject-verb relationships) and semantic associations. There is an ongoing debate about whether attention weights constitute faithful explanations of model behaviour — some researchers argue they provide meaningful insights, while others point out that attention does not always correlate with feature importance. Despite this debate, attention visualisations can be valuable complementary tools alongside other explanation methods. In essence, attention-based explanations show relationships between elements of the input (how the model processes information), while feature attribution explanations show the importance of each input element to the final output (what the model uses to make decisions).</p>
+<p><strong>Example-based explanation</strong> leverages the idea that similar examples can provide intuitive understanding of model behaviour. Adversarial examples reveal model vulnerabilities by showing minimal input changes that drastically change outputs. Counterfactuals demonstrate what changes to an input would alter its prediction, providing insights into decision boundaries. Data influence methods identify which training examples most affected a specific prediction, connecting model behaviour to its learning history. These approaches are particularly valuable for non-technical stakeholders who find concrete examples more intuitive than abstract feature importances.</p>
+</section>
+<section id="global-explanation-methods" class="level4" data-number="10.1.5.2">
+<h4 data-number="10.1.5.2" class="anchored" data-anchor-id="global-explanation-methods"><span class="header-section-number">10.1.5.2</span> Global explanation methods</h4>
+<p>While local methods explain specific predictions, global methods aim to understand model behaviour across all possible inputs — attempting to look inside the black box.</p>
+<p><strong>Probing-based explanation</strong> tests what linguistic knowledge is encoded in model representations by training simple classifiers on these representations to predict specific linguistic properties. Research has revealed a fascinating hierarchical pattern across model layers: lower layers typically encode word-level syntax and local dependencies, middle layers capture sentence-level syntax and more complex relationships, and higher layers represent semantic information and broader context. This hierarchical organisation mirrors the way humans process language, suggesting that models may be learning similar abstraction patterns despite their different architecture.</p>
+<p><strong>Neuron activation explanation</strong> analyses individual neurons or dimensions in model representations to identify specialised functions. Recent work has found that LLMs can actually explain the functions of neurons in other LLMs, providing human-interpretable descriptions of what specific components detect. This approach has been particularly valuable for understanding emergent capabilities — behaviours that were not explicitly designed but arise from scale and training. For political scientists, these methods could help identify when and how politically relevant concepts are encoded in model representations.</p>
+<p><strong>Mechanistic interpretability</strong> represents the most ambitious approach, aiming to reverse-engineer exactly how models work internally. This approach studies model components as “circuits” — functional units that perform specific tasks — and analyses connections between neurons and attention heads to understand information flow. The main challenge is scaling this analysis to larger models with billions of parameters. Current work focuses on identifying general patterns and principles rather than comprehensive explanations. This emerging field may eventually allow us to understand model reasoning at a level comparable to human thought processes, though significant challenges remain.</p>
+</section>
+</section>
+<section id="decoder-only-models-the-prompting-paradigm" class="level3" data-number="10.1.6">
+<h3 data-number="10.1.6" class="anchored" data-anchor-id="decoder-only-models-the-prompting-paradigm"><span class="header-section-number">10.1.6</span> Decoder-only models: the prompting paradigm</h3>
+<p>As we shift to generative models, explanation methods focus on different aspects of model behaviour.</p>
+<section id="explaining-in-context-learning" class="level4" data-number="10.1.6.1">
+<h4 data-number="10.1.6.1" class="anchored" data-anchor-id="explaining-in-context-learning"><span class="header-section-number">10.1.6.1</span> Explaining in-context learning</h4>
+<p>In-context learning — the ability to adapt to tasks from examples in the prompt without weight updates — remains somewhat mysterious despite its practical success. Research shows that large models can override their semantic priors with just a few examples, while smaller models rely more heavily on pre-training knowledge. Understanding these mechanisms helps design better prompts and predict when in-context learning will succeed or fail. This capability sits at the intersection of memorisation and generalisation, raising interesting questions about what constitutes “learning” in these systems.</p>
+</section>
+<section id="self-explanation-and-chain-of-thought" class="level4" data-number="10.1.6.2">
+<h4 data-number="10.1.6.2" class="anchored" data-anchor-id="self-explanation-and-chain-of-thought"><span class="header-section-number">10.1.6.2</span> Self-explanation and chain of thought</h4>
+<p>An exciting development in LLM explainability is that the models themselves can generate natural-language explanations of their reasoning processes. Using chain-of-thought prompting, we can elicit step-by-step reasoning that reveals how the model arrives at conclusions. Models can also provide post-hoc explanations of already-completed predictions, and even engage in counterfactual reasoning about how outputs would change if inputs were different.</p>
+<p>The critical research question is whether these explanations faithfully represent the actual computational processes happening within the model, or whether they are merely plausible narratives constructed after the fact. Some evidence suggests these explanations can be faithful to some degree, but they may also rationalise decisions made through other mechanisms. Despite this uncertainty, self-explanations provide immediate practical value by making model decisions more transparent to users without requiring technical understanding of model internals.</p>
+</section>
+<section id="representation-engineering" class="level4" data-number="10.1.6.3">
+<h4 data-number="10.1.6.3" class="anchored" data-anchor-id="representation-engineering"><span class="header-section-number">10.1.6.3</span> Representation engineering</h4>
+<p>Representation engineering takes a top-down approach to understanding and controlling model behaviour by identifying and manipulating high-level concepts in the model’s representation space. By identifying concept vectors that correspond to specific ideas or attributes, researchers can steer model outputs by adding or subtracting these vectors from internal states. This approach has proven powerful for model alignment and control, allowing targeted interventions without wholesale retraining. For political scientists, representation engineering could potentially help mitigate political biases or adapt models to specific political contexts.</p>
+</section>
+</section>
+<section id="evaluating-explanations" class="level3" data-number="10.1.7">
+<h3 data-number="10.1.7" class="anchored" data-anchor-id="evaluating-explanations"><span class="header-section-number">10.1.7</span> Evaluating explanations</h3>
+<p>A critical challenge in explanation research is evaluation: how do we know if explanations are good? Two key criteria are <strong>plausibility</strong> (do explanations make sense to humans and align with their mental models?) and <strong>faithfulness</strong> (do explanations accurately reflect the model’s actual decision process?). There is often tension between these criteria. Simple, human-understandable explanations may not faithfully capture complex model processes, while perfectly faithful explanations might be too complex for human comprehension. This tension is particularly acute in self-explanation, where the model generates its own reasoning narratives that may be plausible without being faithful.</p>
+</section>
 </section>
 <section id="lab" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">10.2</span> Lab</h2>
@@ -505,13 +572,20 @@ Week 11
 <section id="readings" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="readings"><span class="header-section-number">10.3</span> Readings</h2>
 <ul>
-<li><span class="citation" data-cites="luken_mexca_2024">Lüken et al. (<a href="../references.html#ref-luken_mexca_2024" role="doc-biblioref">2024</a>)</span></li>
+<li><span class="citation" data-cites="ribeiro_why_2016">Ribeiro, Singh, and Guestrin (<a href="../references.html#ref-ribeiro_why_2016" role="doc-biblioref">2016</a>)</span></li>
+<li><span class="citation" data-cites="zhao_explainability_2023">Zhao et al. (<a href="../references.html#ref-zhao_explainability_2023" role="doc-biblioref">2023</a>)</span></li>
 </ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-luken_mexca_2024" class="csl-entry" role="listitem">
-Lüken, Malte, Kody Moodley, Eva Viviani, Christian Pipal, and Gijs Schumacher. 2024. <span>“<span>MEXCA</span> - <span>A</span> <span>Simple</span> and <span>Robust</span> <span>Pipeline</span> for <span>Capturing</span> <span>Emotion</span> <span>Expressions</span> in <span>Faces</span>, <span>Vocalization</span>, and <span>Speech</span>.”</span> OSF. <a href="https://doi.org/10.31234/osf.io/56svb">https://doi.org/10.31234/osf.io/56svb</a>.
+<div id="ref-ribeiro_why_2016" class="csl-entry" role="listitem">
+Ribeiro, Marco Tulio, Sameer Singh, and Carlos Guestrin. 2016. <span>“"<span>Why</span> <span>Should</span> <span>I</span> <span>Trust</span> <span>You</span>?": <span>Explaining</span> the <span>Predictions</span> of <span>Any</span> <span>Classifier</span>.”</span> In <em>Proceedings of the 22nd <span>ACM</span> <span>SIGKDD</span> <span>International</span> <span>Conference</span> on <span>Knowledge</span> <span>Discovery</span> and <span>Data</span> <span>Mining</span></em>, 1135–44. San Francisco California USA: ACM. <a href="https://doi.org/10.1145/2939672.2939778">https://doi.org/10.1145/2939672.2939778</a>.
+</div>
+<div id="ref-zech_variable_2018" class="csl-entry" role="listitem">
+Zech, John R., Marcus A. Badgeley, Manway Liu, Anthony B. Costa, Joseph J. Titano, and Eric Karl Oermann. 2018. <span>“Variable Generalization Performance of a Deep Learning Model to Detect Pneumonia in Chest Radiographs: <span>A</span> Cross-Sectional Study.”</span> <em>PLOS Medicine</em> 15 (11): e1002683. <a href="https://doi.org/10.1371/journal.pmed.1002683">https://doi.org/10.1371/journal.pmed.1002683</a>.
+</div>
+<div id="ref-zhao_explainability_2023" class="csl-entry" role="listitem">
+Zhao, Haiyan, Hanjie Chen, Fan Yang, Ninghao Liu, Huiqi Deng, Hengyi Cai, Shuaiqiang Wang, Dawei Yin, and Mengnan Du. 2023. <span>“Explainability for <span>Large</span> <span>Language</span> <span>Models</span>: <span>A</span> <span>Survey</span>.”</span> arXiv. <a href="https://doi.org/10.48550/arXiv.2309.01029">https://doi.org/10.48550/arXiv.2309.01029</a>.
 </div>
 </div>
 </section>
@@ -941,8 +1015,8 @@ Lüken, Malte, Kody Moodley, Eva Viviani, Christian Pipal, and Gijs Schumacher. 
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/week-12.html" class="pagination-link" aria-label="Project Presentations">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Project Presentations</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../weeks/week-12.html" class="pagination-link" aria-label="Beyond Text">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beyond Text</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

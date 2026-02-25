@@ -395,7 +395,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-08.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bias in LLMs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -407,13 +407,13 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Beyond Text</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Interpretability and Explainability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Project Presentations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beyond Text</span></span></a>
   </div>
 </li>
       </ul>
@@ -451,7 +451,12 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">6.1</span> Lecture</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">6.1</span> Lecture</a>
+  <ul class="collapse">
+  <li><a href="#the-text-analysis-research-pipeline" id="toc-the-text-analysis-research-pipeline" class="nav-link" data-scroll-target="#the-text-analysis-research-pipeline"><span class="header-section-number">6.1.1</span> The text analysis research pipeline</a></li>
+  <li><a href="#generative-language-models" id="toc-generative-language-models" class="nav-link" data-scroll-target="#generative-language-models"><span class="header-section-number">6.1.2</span> Generative language models</a></li>
+  <li><a href="#generative-models-in-political-science" id="toc-generative-models-in-political-science" class="nav-link" data-scroll-target="#generative-models-in-political-science"><span class="header-section-number">6.1.3</span> Generative models in political science</a></li>
+  </ul></li>
   <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">6.2</span> Lab</a></li>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">6.3</span> Readings</a></li>
   </ul>
@@ -490,13 +495,88 @@ Week 6
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Lecture:</strong> Basics of decoder-only models<br>
-<strong>Lab:</strong> Introduction to HuggingFace <code>transformers</code></p>
+<p><strong>Lecture:</strong> Text analysis research pipeline, generative model fundamentals, and applications in political science<br>
+<strong>Lab:</strong> Using generative language models for text analysis</p>
 </div>
 </div>
 <section id="lecture" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="lecture"><span class="header-section-number">6.1</span> Lecture</h2>
-<p><em>Content to be added.</em></p>
+<p>This week marks a transition from classification-focused approaches to generative language models. Before discussing these models in detail, it is important to situate them within the broader text analysis research pipeline.</p>
+<section id="the-text-analysis-research-pipeline" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="the-text-analysis-research-pipeline"><span class="header-section-number">6.1.1</span> The text analysis research pipeline</h3>
+<p>Whether using traditional machine learning, transformer-based classifiers, or generative models, text analysis research in political science typically follows the same general pipeline. Understanding this pipeline is essential for designing rigorous studies and for your course projects.</p>
+<p><strong>Theory and hypothesis generation.</strong> Following open science practices, theory building and hypothesis generation should come before data collection and exploration. This is when you would typically preregister your research, including questions, hypotheses, and design. It is critical to maintain a theory-driven rather than data-driven approach, especially with powerful generative tools available that might tempt researchers into exploratory fishing expeditions.</p>
+<p><strong>Data collection and preprocessing.</strong> Text data comes in many forms: speeches, social media content, news articles, policy documents, and more. Preprocessing steps include tokenisation (breaking text into words or subwords), cleaning (removing special characters and formatting), and normalisation (lowercasing, lemmatisation). All preprocessing steps should be documented for reproducibility.</p>
+<p><strong>Manual annotation.</strong> This step should be conducted before any classification with a model to ensure clear concept definition. It is particularly important when working with generative models to ensure that definitions are driven by the researcher’s theoretical understanding, not the model’s. Through annotation, researchers encounter edge cases that provide insight into where a model might succeed or fail. Annotation at this stage helps maintain conceptual clarity throughout the research process.</p>
+<p><strong>Model training and classification.</strong> Modern approaches include fine-tuning transformer models on annotated data. Validation on unseen data is critical — never evaluate on your training data. Cross-validation helps ensure robustness of performance evaluation.</p>
+<p><strong>Aggregation and quantification.</strong> After classification, results often need to be aggregated to meaningful analytical units. If classifying sentiment at the sentence level, for instance, results may need to be aggregated to the document or speaker level. Aggregation methods include simple counts or proportions, weighted approaches based on confidence scores, and time-series representations for temporal analysis. This step connects model outputs to testable hypotheses.</p>
+<p><strong>Hypothesis testing and interpretation.</strong> The final step applies standard statistical techniques to aggregated model outputs. Common approaches include regression models, multilevel models, and time-series analysis. It is critically important to connect statistical findings back to the original theory. Models are tools to help answer questions, not ends in themselves.</p>
+<p>Notice the cyclical nature of this pipeline: validation feeds back into model training, and findings may prompt refinement of earlier steps.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Worked example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider a study of emotions in party manifestos. Theory from populist communication research suggests that populist parties leverage negative emotions. The research question might be: do populist parties utilise fear appeals more than mainstream parties? The hypothesis: populist manifestos will contain higher proportions of fear language. Data collection involves gathering party manifestos from multiple countries and elections, from both populist (e.g.&nbsp;AfD, Lega) and mainstream parties. Manual annotation requires developing a codebook defining “fear language” with examples of threats, dangers, and risks, then annotating a subset of sentences. Model training involves building a classifier to identify fear language and validating on held-out data. Aggregation calculates the proportion of fear content by party type, country, and election year. Hypothesis testing then compares fear language prevalence statistically, controlling for economic conditions and ideology, and interpreting results in relation to populist communication theory.</p>
+</div>
+</div>
+</section>
+<section id="generative-language-models" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="generative-language-models"><span class="header-section-number">6.1.2</span> Generative language models</h3>
+<p>Generative models fundamentally differ from classification models in their ability to produce novel text. This capability creates both opportunities and challenges for research applications.</p>
+<section id="decoder-only-architectures" class="level4" data-number="6.1.2.1">
+<h4 data-number="6.1.2.1" class="anchored" data-anchor-id="decoder-only-architectures"><span class="header-section-number">6.1.2.1</span> Decoder-only architectures</h4>
+<p>Most modern generative LLMs — including ChatGPT, Claude, Llama, and Mistral — use a decoder-only architecture. This is a key distinction from the encoder-decoder models discussed in <a href="week-04.html" class="quarto-xref"><span>Chapter 4</span></a>. A decoder-only model processes text sequentially, predicting one token at a time based on all previous tokens, using the self-attention mechanism to consider the full preceding context. This architecture is particularly efficient for text generation, with a simpler training process and inference pipeline compared to encoder-decoder models.</p>
+</section>
+<section id="training-and-compute" class="level4" data-number="6.1.2.2">
+<h4 data-number="6.1.2.2" class="anchored" data-anchor-id="training-and-compute"><span class="header-section-number">6.1.2.2</span> Training and compute</h4>
+<p>Pre-training happens on massive text corpora — hundreds of terabytes drawn from the web, books, scientific papers, and other sources, amounting to trillions of tokens of text. The computational resources involved are staggering: GPT-4 is estimated to have cost anywhere from $30 million to over $100 million to train, using thousands of specialised GPUs over several months.</p>
+<p>After pre-training, foundation models typically undergo instruction tuning with reinforcement learning from human feedback (RLHF). This process aligns models with human preferences and reduces harmful outputs. RLHF works by first fine-tuning the model on a dataset of instructions paired with desired responses, then collecting human feedback by having people rank different model outputs, training a separate reward model that learns to predict human preferences, and finally using reinforcement learning to optimise the model against this reward model.</p>
+<p>The environmental impact of training these models is significant, with electricity consumption equivalent to that of small towns. These resource requirements create accessibility barriers for academic researchers.</p>
+</section>
+<section id="model-size" class="level4" data-number="6.1.2.3">
+<h4 data-number="6.1.2.3" class="anchored" data-anchor-id="model-size"><span class="header-section-number">6.1.2.3</span> Model size</h4>
+<p>Model size is measured in parameters — the weights and biases that can be adjusted during training. Sizes have grown exponentially, from BERT-large’s 340 million parameters in 2018 to GPT-3’s 175 billion in 2020 and models estimated at over a trillion parameters in more recent years. Models can be roughly categorised as small (1–7 billion parameters, e.g.&nbsp;Mistral 7B), medium (13–70 billion, e.g.&nbsp;Llama 3 70B), or large (100 billion and above, e.g.&nbsp;Llama 3 405B, DeepSeek R1 at 685 billion, or GPT-4 estimated at around 1.8 trillion).</p>
+<p>Generally, larger models perform better across tasks, but with diminishing returns. Smaller models are now competitive for many tasks thanks to improved training techniques. The size–performance tradeoff is particularly relevant for researchers with limited compute, as resource constraints often determine which models can realistically be used.</p>
+</section>
+<section id="open-source-vs.-closed-source" class="level4" data-number="6.1.2.4">
+<h4 data-number="6.1.2.4" class="anchored" data-anchor-id="open-source-vs.-closed-source"><span class="header-section-number">6.1.2.4</span> Open source vs.&nbsp;closed source</h4>
+<p>Closed-source models such as GPT-4, Claude, and Gemini are proprietary: access is provided through APIs, and model weights are treated as trade secrets. They have historically had a performance edge but lack transparency. Open-source models such as Llama 3, Mistral, Gemma, and DeepSeek are publicly available, can be run locally, and can be modified and fine-tuned. Recent open-source releases have substantially closed the performance gap.</p>
+<p>For research, open-source models offer important advantages: the ability to run locally without API costs, transparency about training data and methods, the possibility for modification and fine-tuning, and crucially, reproducibility of results. However, leading closed models still maintain advantages in certain capabilities.</p>
+</section>
+<section id="apis" class="level4" data-number="6.1.2.5">
+<h4 data-number="6.1.2.5" class="anchored" data-anchor-id="apis"><span class="header-section-number">6.1.2.5</span> APIs</h4>
+<p>Application Programming Interfaces (APIs) provide programmatic access to models without the need to run them locally. Major providers include OpenAI (GPT-3.5, GPT-4), Anthropic (Claude), and Google (Gemini). For researchers, several considerations apply: costs accumulate quickly with large datasets (charged per token for both input and output), rate limits restrict throughput, data privacy and storage policies vary, and models may change without notice, creating a “moving target” problem that complicates reproducibility. Budget planning is essential for research projects using commercial APIs.</p>
+</section>
+</section>
+<section id="generative-models-in-political-science" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="generative-models-in-political-science"><span class="header-section-number">6.1.3</span> Generative models in political science</h3>
+<section id="tailored-political-persuasion" class="level4" data-number="6.1.3.1">
+<h4 data-number="6.1.3.1" class="anchored" data-anchor-id="tailored-political-persuasion"><span class="header-section-number">6.1.3.1</span> Tailored political persuasion</h4>
+<p>Recent research has demonstrated that LLMs can generate very persuasive political messages <span class="citation" data-cites="hackenburg_evaluating_2024">(<a href="../references.html#ref-hackenburg_evaluating_2024" role="doc-biblioref">Hackenburg and Margetts 2024</a>)</span>, and that these messages can be individually tailored using personal data to increase their persuasive effect <span class="citation" data-cites="timm_tailored_2025">(<a href="../references.html#ref-timm_tailored_2025" role="doc-biblioref">Timm, Talele, and Haimes 2025</a>)</span>. Applications include campaign communications, policy explanations, and voter outreach. However, the ethical considerations are significant: there are risks of manipulation through personalised persuasion, privacy implications related to data collection, and potential impacts on democratic transparency. Persuasion techniques tend to seem helpful when used by one’s own side but manipulative when used by opponents.</p>
+</section>
+<section id="simulating-opinion" class="level4" data-number="6.1.3.2">
+<h4 data-number="6.1.3.2" class="anchored" data-anchor-id="simulating-opinion"><span class="header-section-number">6.1.3.2</span> Simulating opinion</h4>
+<p>The “silicon samples” approach uses LLMs with fictional personas and backstories to simulate survey responses <span class="citation" data-cites="argyle_out_2023">(<a href="../references.html#ref-argyle_out_2023" role="doc-biblioref">Argyle et al. 2023</a>)</span>. Researchers have also used LLM agents to study how misinformation evolves and spreads on social media <span class="citation" data-cites="liu_tiny_2024">(<a href="../references.html#ref-liu_tiny_2024" role="doc-biblioref">Liu et al. 2024</a>)</span>. These approaches offer rapid hypothesis testing and cost-effectiveness compared to traditional surveys, but face limitations including sociodemographic and political biases in model outputs and the difficulty of validating against ground truth. This approach should complement rather than replace human subject research.</p>
+</section>
+<section id="simulating-behaviour" class="level4" data-number="6.1.3.3">
+<h4 data-number="6.1.3.3" class="anchored" data-anchor-id="simulating-behaviour"><span class="header-section-number">6.1.3.3</span> Simulating behaviour</h4>
+<p>LLMs can simulate political actors in various contexts: coalition negotiations in parliamentary democracies <span class="citation" data-cites="moghimifar_modelling_2024">(<a href="../references.html#ref-moghimifar_modelling_2024" role="doc-biblioref">Moghimifar et al. 2024</a>)</span>, legislative behaviour in the US Senate <span class="citation" data-cites="baker_simulating_2024">(<a href="../references.html#ref-baker_simulating_2024" role="doc-biblioref">Baker and Azher 2024</a>)</span>, and even hypothetical interactions between human and alien civilisations <span class="citation" data-cites="xue_what_2025">(<a href="../references.html#ref-xue_what_2025" role="doc-biblioref">Xue et al. 2025</a>)</span>. These simulations are particularly valuable for exploring counterfactual scenarios that are difficult to study empirically. However, models may struggle with strategic reasoning, risk reinforcing stereotypes, and are difficult to validate against actual behaviour. This approach is most appropriate for exploratory research and theory development, and should be combined with other methodological approaches.</p>
+</section>
+<section id="creating-training-data" class="level4" data-number="6.1.3.4">
+<h4 data-number="6.1.3.4" class="anchored" data-anchor-id="creating-training-data"><span class="header-section-number">6.1.3.4</span> Creating training data</h4>
+<p>Generative models can create synthetic training data for downstream models. This is particularly useful for augmenting small datasets where human annotation is expensive, creating balanced datasets for rare categories, and generating counterfactual examples. An important distinction applies here: the researcher studies real-world data using a model trained on synthetic data, rather than directly studying synthetic data. Quality control and validation are essential when using this approach.</p>
+</section>
+<section id="generative-models-in-text-analysis" class="level4" data-number="6.1.3.5">
+<h4 data-number="6.1.3.5" class="anchored" data-anchor-id="generative-models-in-text-analysis"><span class="header-section-number">6.1.3.5</span> Generative models in text analysis</h4>
+<p>Beyond synthetic data generation, generative models can assist with classification of political content, creating text embeddings, labelling identified clusters, and summarising large document collections. However, validation against human judgements remains essential, and model parameters and prompts must be documented for reproducibility. These tools should augment rather than replace careful research design and methodology.</p>
+</section>
+</section>
 </section>
 <section id="lab" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">6.2</span> Lab</h2>
@@ -505,17 +585,35 @@ Week 6
 <section id="readings" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="readings"><span class="header-section-number">6.3</span> Readings</h2>
 <ul>
-<li><span class="citation" data-cites="heseltine_large_2024">Heseltine and Hohenberg (<a href="../references.html#ref-heseltine_large_2024" role="doc-biblioref">2024</a>)</span></li>
 <li><span class="citation" data-cites="gilardi_chatgpt_2023">Gilardi, Alizadeh, and Kubli (<a href="../references.html#ref-gilardi_chatgpt_2023" role="doc-biblioref">2023</a>)</span></li>
+<li><span class="citation" data-cites="argyle_out_2023">Argyle et al. (<a href="../references.html#ref-argyle_out_2023" role="doc-biblioref">2023</a>)</span></li>
 </ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-argyle_out_2023" class="csl-entry" role="listitem">
+Argyle, Lisa P., Ethan C. Busby, Nancy Fulda, Joshua R. Gubler, Christopher Rytting, and David Wingate. 2023. <span>“Out of <span>One</span>, <span>Many</span>: <span>Using</span> <span>Language</span> <span>Models</span> to <span>Simulate</span> <span>Human</span> <span>Samples</span>.”</span> <em>Political Analysis</em> 31 (3): 337–51. <a href="https://doi.org/10.1017/pan.2023.2">https://doi.org/10.1017/pan.2023.2</a>.
+</div>
+<div id="ref-baker_simulating_2024" class="csl-entry" role="listitem">
+Baker, Zachary R., and Zarif L. Azher. 2024. <span>“Simulating <span>The</span> <span>U</span>.<span>S</span>. <span>Senate</span>: <span>An</span> <span>LLM</span>-<span>Driven</span> <span>Agent</span> <span>Approach</span> to <span>Modeling</span> <span>Legislative</span> <span>Behavior</span> and <span>Bipartisanship</span>.”</span> arXiv. <a href="https://doi.org/10.48550/arXiv.2406.18702">https://doi.org/10.48550/arXiv.2406.18702</a>.
+</div>
 <div id="ref-gilardi_chatgpt_2023" class="csl-entry" role="listitem">
 Gilardi, Fabrizio, Meysam Alizadeh, and Maël Kubli. 2023. <span>“<span>ChatGPT</span> Outperforms Crowd Workers for Text-Annotation Tasks.”</span> <em>Proceedings of the National Academy of Sciences</em> 120 (30): e2305016120. <a href="https://doi.org/10.1073/pnas.2305016120">https://doi.org/10.1073/pnas.2305016120</a>.
 </div>
-<div id="ref-heseltine_large_2024" class="csl-entry" role="listitem">
-Heseltine, Michael, and Bernhard Clemm von Hohenberg. 2024. <span>“Large Language Models as a Substitute for Human Experts in Annotating Political Text.”</span> <em>Research &amp; Politics</em>, February. <a href="https://doi.org/10.1177/20531680241236239">https://doi.org/10.1177/20531680241236239</a>.
+<div id="ref-hackenburg_evaluating_2024" class="csl-entry" role="listitem">
+Hackenburg, Kobi, and Helen Margetts. 2024. <span>“Evaluating the Persuasive Influence of Political Microtargeting with Large Language Models.”</span> <em>Proceedings of the National Academy of Sciences</em> 121 (24): e2403116121. <a href="https://doi.org/10.1073/pnas.2403116121">https://doi.org/10.1073/pnas.2403116121</a>.
+</div>
+<div id="ref-liu_tiny_2024" class="csl-entry" role="listitem">
+Liu, Yuhan, Zirui Song, Xiaoqing Zhang, Xiuying Chen, and Rui Yan. 2024. <span>“From a <span>Tiny</span> <span>Slip</span> to a <span>Giant</span> <span>Leap</span>: <span>An</span> <span>LLM</span>-<span>Based</span> <span>Simulation</span> for <span>Fake</span> <span>News</span> <span>Evolution</span>.”</span> arXiv. <a href="https://doi.org/10.48550/arXiv.2410.19064">https://doi.org/10.48550/arXiv.2410.19064</a>.
+</div>
+<div id="ref-moghimifar_modelling_2024" class="csl-entry" role="listitem">
+Moghimifar, Farhad, Yuan-Fang Li, Robert Thomson, and Gholamreza Haffari. 2024. <span>“Modelling <span>Political</span> <span>Coalition</span> <span>Negotiations</span> <span>Using</span> <span>LLM</span>-Based <span>Agents</span>.”</span> arXiv. <a href="https://doi.org/10.48550/arXiv.2402.11712">https://doi.org/10.48550/arXiv.2402.11712</a>.
+</div>
+<div id="ref-timm_tailored_2025" class="csl-entry" role="listitem">
+Timm, Jasper, Chetan Talele, and Jacob Haimes. 2025. <span>“Tailored <span>Truths</span>: <span>Optimizing</span> <span>LLM</span> <span>Persuasion</span> with <span>Personalization</span> and <span>Fabricated</span> <span>Statistics</span>.”</span> arXiv. <a href="https://doi.org/10.48550/arXiv.2501.17273">https://doi.org/10.48550/arXiv.2501.17273</a>.
+</div>
+<div id="ref-xue_what_2025" class="csl-entry" role="listitem">
+Xue, Zhaoqian, Mingyu Jin, Beichen Wang, Suiyuan Zhu, Kai Mei, Hua Tang, Wenyue Hua, Mengnan Du, and Yongfeng Zhang. 2025. <span>“What If <span>LLMs</span> <span>Have</span> <span>Different</span> <span>World</span> <span>Views</span>: <span>Simulating</span> <span>Alien</span> <span>Civilizations</span> with <span>LLM</span>-Based <span>Agents</span>.”</span> arXiv. <a href="https://doi.org/10.48550/arXiv.2402.13184">https://doi.org/10.48550/arXiv.2402.13184</a>.
 </div>
 </div>
 </section>

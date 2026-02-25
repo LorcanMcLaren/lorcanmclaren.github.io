@@ -1,8 +1,86 @@
-# Project Presentations {#sec-week12}
+---
+nocite: |
+  @luken_mexca_2024
+---
+
+# Beyond Text {#sec-week11}
 
 ::: {.callout-note}
-## Week 12
-**Group presentations**
+## Week 11
+**Lecture:** Social science applications for multimodal data\
+**Lab:** Working with images, audio and video in Python
 :::
 
-This session is dedicated to group presentations. See the [Assessment](../assessment.qmd) chapter for presentation requirements and grading criteria.
+## Lecture
+
+This is the last week of new content. Throughout this module, we have focused primarily on text as a source of data. But using sources of data other than text --- audio, images, and video --- is a new and exciting area for political communication research. This week provides an overview of the main tasks in this space and how they have been applied in existing research. Political scientists have been underutilising these forms of data, and many of the papers cited here come from just a handful of authors. Other social sciences, like communication studies, have made more progress. There is a great deal of opportunity here, and the tools to make use of this data are becoming much more accessible.
+
+### Audio
+
+#### Speech transcription
+
+Speech transcription now performs close to or even better than human transcribers. This means that any audio (or the audio track from video) can be transformed into text, making it straightforward to apply the text analysis techniques discussed throughout the course. This opens up a range of data sources that, until the last couple of years, had been closed off or required painstaking, expensive work to make accessible. One of the leading models for this task is Whisper, from OpenAI. Unlike most of their other models, Whisper is open and available for free, and even the small version performs well, at least on English [@radford_robust_2022].
+
+#### Speaker identification and diarisation
+
+Audio can be embedded in much the same way as text. These embeddings can then be clustered to identify individual speakers --- each point in the embedding space represents a separate audio segment, and clusters correspond to separate speakers. Using reference audio samples where the speaker is known, it becomes possible to automatically identify speakers in new clips [@rask_when_2025]. Diarisation extends this by segmenting a continuous audio recording into speaker-labelled segments, answering the question "who spoke when." This is particularly useful for parliamentary debates, interviews, and panel discussions where multiple speakers participate.
+
+#### Vocal pitch
+
+Vocal pitch has emerged as a productive measure in political science research. @dietrich_pitch_2019 use vocal pitch to measure emotional intensity among members of Congress, analysing over 74,000 Congressional floor speeches. They show that women in Congress are not only more likely to discuss women on the floor but also do so with greater emotional intensity. Although male legislators can and do represent women, female legislators speak about women in a way that male lawmakers generally do not. They also find that increased vocal pitch is consistent with legislators' issue commitments: Democrats and Republicans tend to become more emotionally activated when discussing policy issues owned by their respective parties. The Congresswomen who are most emotionally activated when talking about women also receive significantly higher evaluations from women's interest groups.
+
+In a related study, @dietrich_emotional_2019 extract the emotional content of over 3,000 hours of oral arguments before the US Supreme Court. They use the level of emotional arousal, as measured by vocal pitch, in each of the Justices' voices during these arguments to accurately predict many of their eventual votes. This suggests that Justices implicitly reveal their leanings during oral arguments, even before arguments and deliberations have concluded, and that subconscious vocal inflections carry information that legal, political, and textual information do not.
+
+@rask_when_2025 studies 20 years of parliamentary speech in Denmark. He finds that politicians in governing roles speak with a lower pitch than politicians in non-governing roles, and they return to their prior pitch once they leave office. The author argues that this shift is used to shape perceptions of valued traits like competence, dominance, and composure.
+
+#### Other vocal features
+
+Beyond pitch, other vocal features can be extracted and analysed. These include jitter (variation in the rate of vocal fold vibration), shimmer (variability in the amplitude of the voice), loudness, mel-frequency cepstral coefficients (MFCCs, which summarise the energy distribution of specific frequencies), and linear predictive coding coefficients (LPCCs, which model how a speech signal is produced). @smith_vocal_2020 demonstrate that these vocal features can serve as predictors of depression in adults, assessing whether or not someone is depressed based on a voice recording with a high degree of confidence.
+
+### Image
+
+#### Object identification
+
+Object identification involves detecting and classifying objects within images. There are many potential applications for political science. Researchers might assess whether politicians from different parties use different visual tropes in campaign advertisements --- for instance, whether Republicans are more likely to show guns, flags, or other patriotic symbols in their ads compared to Democrats. Object identification can also be used to understand how politicians use clothing to signify their identity: do left-wing, workers' party politicians wear casual clothes to appear more like the working person, or does the opposite occur, with left-wing politicians wearing suits to be taken more seriously while right-wing politicians dress down?
+
+@hwang_systematic_2023 use object identification at scale to measure trash prevalence across cities using street-level imagery. They train models to classify trash levels in images from Boston, Detroit, and Los Angeles, then aggregate predictions to map the spatial distribution of trash at the census tract, block group, and block levels. This kind of approach demonstrates how image classification can be used to measure local public goods provision and urban inequality.
+
+#### Pose estimation
+
+Pose estimation detects the positions of body parts within images or video, enabling the analysis of body language as another mode of communication. @rittmann_measurement_2024 uses pose estimation to study gesticulation in parliamentary speeches in the German Bundestag. He finds that efforts to deliver a nonverbally appealing speech often come at the cost of textual complexity, while textual complexity tends to diminish nonverbal effort. Legislators of governing parties navigate this trade-off by leaning towards complexity over nonverbal appeal, while opposition members tend to choose nonverbal appeal over complexity.
+
+#### Face detection
+
+Face detection identifies the presence and location of faces in images without identifying who the faces belong to. @joo_image_2018 use face detection to estimate protest size, showing that summing the number of detected faces in protest images provides an accurate measure of attendance that correlates highly (R = 0.76) with official crowd count estimates.
+
+#### Facial recognition
+
+Facial recognition goes a step further by identifying specific individuals. @girbau_face_2024 develop a pipeline using YOLO for face detection and FaceNet for feature extraction to identify specific politicians in television news footage. By comparing detected faces against a reference database in a feature space, they can automatically measure how much screen time each candidate receives across different news channels. This approach can be used to study negative campaigning by measuring how often candidates show images or footage of their opponents in their advertisements. Their analysis of the 2016 US elections reveals substantial differences in candidate visibility across CNN, Fox, and MSNBC.
+
+### Video
+
+#### Video summarisation
+
+Video summarisation extracts representative frames or segments from longer videos, reducing them to their key visual content. @tarr_automated_2023 apply this technique to political advertisements, automatically generating summaries that capture the most visually important moments. Comparing auto-generated summaries with manually generated ones demonstrates the feasibility of using these techniques to analyse large corpora of political advertising at scale.
+
+#### Motion detection
+
+Motion detection tracks movement within video data. @dietrich_using_2021 uses motion detection to study political polarisation in the US Congress, measuring the extent to which members of Congress literally cross the aisle on the House floor. He finds that not only are Democrats and Republicans less willing to physically cross the aisle over time, but this behaviour is also predictive of future party-line voting. The study uses overhead C-SPAN footage to track movement patterns after roll-call votes, providing a novel behavioural measure of partisan division that complements traditional legislative measures.
+
+### Multimodality
+
+Many research questions benefit from combining multiple data modalities. @luken_mexca_2024 present MEXCA, a pipeline for multimodal emotion identification from video. The pipeline processes video through three parallel channels: faces are detected and extracted to perform emotion detection on individual faces; audio is processed directly, with vocal pitch and other features extracted for emotion recognition; and speakers are identified, the audio is transcribed, and sentiment analysis is performed on the transcribed text. This yields three different channels of emotion --- face, voice, and speech content --- which can be integrated for a richer picture than any single modality provides. There are many other opportunities to set up similar pipelines to assess the same phenomenon through different channels.
+
+### Frontier applications
+
+Several application areas represent important frontiers. **Short-form political video**, particularly on platforms like TikTok, combines visuals, captions and text, backgrounds, audio, music, and human presenters. Existing research on political video content is limited and geographically concentrated, mostly focused on the US and Spain, despite the growing political importance of these platforms. **Podcasts** represent another increasingly politically important but understudied medium. The data is relatively harder to work with than text, though not prohibitively so, and the analytical tools are becoming more accessible.
+
+The broader point is that political scientists have been underutilising forms of data other than text. As the tools for working with audio, image, and video data become more accessible, there are significant gaps to be filled and important research questions to be addressed across these modalities.
+
+## Lab
+
+*Content to be added.*
+
+## Readings
+
+- @luken_mexca_2024

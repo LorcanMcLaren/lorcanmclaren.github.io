@@ -1,19 +1,96 @@
 ---
 nocite: |
-  @heseltine_large_2024, @gilardi_chatgpt_2023
+  @gilardi_chatgpt_2023, @argyle_out_2023
 ---
 
 # Generative Language Models I {#sec-week6}
 
 ::: {.callout-note}
 ## Week 6
-**Lecture:** Basics of decoder-only models\
-**Lab:** Introduction to HuggingFace `transformers`
+**Lecture:** Text analysis research pipeline, generative model fundamentals, and applications in political science\
+**Lab:** Using generative language models for text analysis
 :::
 
 ## Lecture
 
-*Content to be added.*
+This week marks a transition from classification-focused approaches to generative language models. Before discussing these models in detail, it is important to situate them within the broader text analysis research pipeline.
+
+### The text analysis research pipeline
+
+Whether using traditional machine learning, transformer-based classifiers, or generative models, text analysis research in political science typically follows the same general pipeline. Understanding this pipeline is essential for designing rigorous studies and for your course projects.
+
+**Theory and hypothesis generation.** Following open science practices, theory building and hypothesis generation should come before data collection and exploration. This is when you would typically preregister your research, including questions, hypotheses, and design. It is critical to maintain a theory-driven rather than data-driven approach, especially with powerful generative tools available that might tempt researchers into exploratory fishing expeditions.
+
+**Data collection and preprocessing.** Text data comes in many forms: speeches, social media content, news articles, policy documents, and more. Preprocessing steps include tokenisation (breaking text into words or subwords), cleaning (removing special characters and formatting), and normalisation (lowercasing, lemmatisation). All preprocessing steps should be documented for reproducibility.
+
+**Manual annotation.** This step should be conducted before any classification with a model to ensure clear concept definition. It is particularly important when working with generative models to ensure that definitions are driven by the researcher's theoretical understanding, not the model's. Through annotation, researchers encounter edge cases that provide insight into where a model might succeed or fail. Annotation at this stage helps maintain conceptual clarity throughout the research process.
+
+**Model training and classification.** Modern approaches include fine-tuning transformer models on annotated data. Validation on unseen data is critical --- never evaluate on your training data. Cross-validation helps ensure robustness of performance evaluation.
+
+**Aggregation and quantification.** After classification, results often need to be aggregated to meaningful analytical units. If classifying sentiment at the sentence level, for instance, results may need to be aggregated to the document or speaker level. Aggregation methods include simple counts or proportions, weighted approaches based on confidence scores, and time-series representations for temporal analysis. This step connects model outputs to testable hypotheses.
+
+**Hypothesis testing and interpretation.** The final step applies standard statistical techniques to aggregated model outputs. Common approaches include regression models, multilevel models, and time-series analysis. It is critically important to connect statistical findings back to the original theory. Models are tools to help answer questions, not ends in themselves.
+
+Notice the cyclical nature of this pipeline: validation feeds back into model training, and findings may prompt refinement of earlier steps.
+
+::: {.callout-tip}
+## Worked example
+Consider a study of emotions in party manifestos. Theory from populist communication research suggests that populist parties leverage negative emotions. The research question might be: do populist parties utilise fear appeals more than mainstream parties? The hypothesis: populist manifestos will contain higher proportions of fear language. Data collection involves gathering party manifestos from multiple countries and elections, from both populist (e.g. AfD, Lega) and mainstream parties. Manual annotation requires developing a codebook defining "fear language" with examples of threats, dangers, and risks, then annotating a subset of sentences. Model training involves building a classifier to identify fear language and validating on held-out data. Aggregation calculates the proportion of fear content by party type, country, and election year. Hypothesis testing then compares fear language prevalence statistically, controlling for economic conditions and ideology, and interpreting results in relation to populist communication theory.
+:::
+
+### Generative language models
+
+Generative models fundamentally differ from classification models in their ability to produce novel text. This capability creates both opportunities and challenges for research applications.
+
+#### Decoder-only architectures
+
+Most modern generative LLMs --- including ChatGPT, Claude, Llama, and Mistral --- use a decoder-only architecture. This is a key distinction from the encoder-decoder models discussed in @sec-week4. A decoder-only model processes text sequentially, predicting one token at a time based on all previous tokens, using the self-attention mechanism to consider the full preceding context. This architecture is particularly efficient for text generation, with a simpler training process and inference pipeline compared to encoder-decoder models.
+
+#### Training and compute
+
+Pre-training happens on massive text corpora --- hundreds of terabytes drawn from the web, books, scientific papers, and other sources, amounting to trillions of tokens of text. The computational resources involved are staggering: GPT-4 is estimated to have cost anywhere from $30 million to over $100 million to train, using thousands of specialised GPUs over several months.
+
+After pre-training, foundation models typically undergo instruction tuning with reinforcement learning from human feedback (RLHF). This process aligns models with human preferences and reduces harmful outputs. RLHF works by first fine-tuning the model on a dataset of instructions paired with desired responses, then collecting human feedback by having people rank different model outputs, training a separate reward model that learns to predict human preferences, and finally using reinforcement learning to optimise the model against this reward model.
+
+The environmental impact of training these models is significant, with electricity consumption equivalent to that of small towns. These resource requirements create accessibility barriers for academic researchers.
+
+#### Model size
+
+Model size is measured in parameters --- the weights and biases that can be adjusted during training. Sizes have grown exponentially, from BERT-large's 340 million parameters in 2018 to GPT-3's 175 billion in 2020 and models estimated at over a trillion parameters in more recent years. Models can be roughly categorised as small (1--7 billion parameters, e.g. Mistral 7B), medium (13--70 billion, e.g. Llama 3 70B), or large (100 billion and above, e.g. Llama 3 405B, DeepSeek R1 at 685 billion, or GPT-4 estimated at around 1.8 trillion).
+
+Generally, larger models perform better across tasks, but with diminishing returns. Smaller models are now competitive for many tasks thanks to improved training techniques. The size--performance tradeoff is particularly relevant for researchers with limited compute, as resource constraints often determine which models can realistically be used.
+
+#### Open source vs. closed source
+
+Closed-source models such as GPT-4, Claude, and Gemini are proprietary: access is provided through APIs, and model weights are treated as trade secrets. They have historically had a performance edge but lack transparency. Open-source models such as Llama 3, Mistral, Gemma, and DeepSeek are publicly available, can be run locally, and can be modified and fine-tuned. Recent open-source releases have substantially closed the performance gap.
+
+For research, open-source models offer important advantages: the ability to run locally without API costs, transparency about training data and methods, the possibility for modification and fine-tuning, and crucially, reproducibility of results. However, leading closed models still maintain advantages in certain capabilities.
+
+#### APIs
+
+Application Programming Interfaces (APIs) provide programmatic access to models without the need to run them locally. Major providers include OpenAI (GPT-3.5, GPT-4), Anthropic (Claude), and Google (Gemini). For researchers, several considerations apply: costs accumulate quickly with large datasets (charged per token for both input and output), rate limits restrict throughput, data privacy and storage policies vary, and models may change without notice, creating a "moving target" problem that complicates reproducibility. Budget planning is essential for research projects using commercial APIs.
+
+### Generative models in political science
+
+#### Tailored political persuasion
+
+Recent research has demonstrated that LLMs can generate very persuasive political messages [@hackenburg_evaluating_2024], and that these messages can be individually tailored using personal data to increase their persuasive effect [@timm_tailored_2025]. Applications include campaign communications, policy explanations, and voter outreach. However, the ethical considerations are significant: there are risks of manipulation through personalised persuasion, privacy implications related to data collection, and potential impacts on democratic transparency. Persuasion techniques tend to seem helpful when used by one's own side but manipulative when used by opponents.
+
+#### Simulating opinion
+
+The "silicon samples" approach uses LLMs with fictional personas and backstories to simulate survey responses [@argyle_out_2023]. Researchers have also used LLM agents to study how misinformation evolves and spreads on social media [@liu_tiny_2024]. These approaches offer rapid hypothesis testing and cost-effectiveness compared to traditional surveys, but face limitations including sociodemographic and political biases in model outputs and the difficulty of validating against ground truth. This approach should complement rather than replace human subject research.
+
+#### Simulating behaviour
+
+LLMs can simulate political actors in various contexts: coalition negotiations in parliamentary democracies [@moghimifar_modelling_2024], legislative behaviour in the US Senate [@baker_simulating_2024], and even hypothetical interactions between human and alien civilisations [@xue_what_2025]. These simulations are particularly valuable for exploring counterfactual scenarios that are difficult to study empirically. However, models may struggle with strategic reasoning, risk reinforcing stereotypes, and are difficult to validate against actual behaviour. This approach is most appropriate for exploratory research and theory development, and should be combined with other methodological approaches.
+
+#### Creating training data
+
+Generative models can create synthetic training data for downstream models. This is particularly useful for augmenting small datasets where human annotation is expensive, creating balanced datasets for rare categories, and generating counterfactual examples. An important distinction applies here: the researcher studies real-world data using a model trained on synthetic data, rather than directly studying synthetic data. Quality control and validation are essential when using this approach.
+
+#### Generative models in text analysis
+
+Beyond synthetic data generation, generative models can assist with classification of political content, creating text embeddings, labelling identified clusters, and summarising large document collections. However, validation against human judgements remains essential, and model parameters and prompts must be documented for reproducibility. These tools should augment rather than replace careful research design and methodology.
 
 ## Lab
 
@@ -21,5 +98,5 @@ nocite: |
 
 ## Readings
 
-- @heseltine_large_2024
 - @gilardi_chatgpt_2023
+- @argyle_out_2023

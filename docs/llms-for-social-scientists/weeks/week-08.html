@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Interpretability, Explainability and Bias – LLMs for Social Scientists</title>
+<title>8&nbsp; Bias in LLMs – LLMs for Social Scientists</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -271,7 +271,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-08.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-08.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bias in LLMs</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -395,7 +395,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-08.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bias in LLMs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -407,13 +407,13 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Beyond Text</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Interpretability and Explainability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Project Presentations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beyond Text</span></span></a>
   </div>
 </li>
       </ul>
@@ -451,7 +451,19 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">8.1</span> Lecture</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">8.1</span> Lecture</a>
+  <ul class="collapse">
+  <li><a href="#defining-bias-in-ai-systems" id="toc-defining-bias-in-ai-systems" class="nav-link" data-scroll-target="#defining-bias-in-ai-systems"><span class="header-section-number">8.1.1</span> Defining bias in AI systems</a></li>
+  <li><a href="#examples-of-algorithmic-bias" id="toc-examples-of-algorithmic-bias" class="nav-link" data-scroll-target="#examples-of-algorithmic-bias"><span class="header-section-number">8.1.2</span> Examples of algorithmic bias</a></li>
+  <li><a href="#sources-of-bias-in-llms" id="toc-sources-of-bias-in-llms" class="nav-link" data-scroll-target="#sources-of-bias-in-llms"><span class="header-section-number">8.1.3</span> Sources of bias in LLMs</a></li>
+  <li><a href="#measuring-bias-in-llms" id="toc-measuring-bias-in-llms" class="nav-link" data-scroll-target="#measuring-bias-in-llms"><span class="header-section-number">8.1.4</span> Measuring bias in LLMs</a></li>
+  <li><a href="#political-leanings-of-llms" id="toc-political-leanings-of-llms" class="nav-link" data-scroll-target="#political-leanings-of-llms"><span class="header-section-number">8.1.5</span> Political leanings of LLMs</a></li>
+  <li><a href="#bias-mitigation-techniques" id="toc-bias-mitigation-techniques" class="nav-link" data-scroll-target="#bias-mitigation-techniques"><span class="header-section-number">8.1.6</span> Bias mitigation techniques</a></li>
+  <li><a href="#challenges-in-bias-mitigation" id="toc-challenges-in-bias-mitigation" class="nav-link" data-scroll-target="#challenges-in-bias-mitigation"><span class="header-section-number">8.1.7</span> Challenges in bias mitigation</a></li>
+  <li><a href="#unintended-consequences-and-backlash" id="toc-unintended-consequences-and-backlash" class="nav-link" data-scroll-target="#unintended-consequences-and-backlash"><span class="header-section-number">8.1.8</span> Unintended consequences and backlash</a></li>
+  <li><a href="#open-questions" id="toc-open-questions" class="nav-link" data-scroll-target="#open-questions"><span class="header-section-number">8.1.9</span> Open questions</a></li>
+  <li><a href="#frontiers" id="toc-frontiers" class="nav-link" data-scroll-target="#frontiers"><span class="header-section-number">8.1.10</span> Frontiers</a></li>
+  </ul></li>
   <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">8.2</span> Lab</a></li>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">8.3</span> Readings</a></li>
   </ul>
@@ -461,9 +473,9 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-08.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-08.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bias in LLMs</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-week8" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></span></h1>
+<h1 class="title"><span id="sec-week8" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bias in LLMs</span></span></h1>
 </div>
 
 
@@ -490,13 +502,89 @@ Week 8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Lecture:</strong> Techniques for interpretability in text classification; sources of bias and implications<br>
-<strong>Lab:</strong> Applying <code>transformers-interpret</code> and <code>ferret</code> for interpreting model predictions; visualising bias</p>
+<p><strong>Lecture:</strong> Defining, measuring, and mitigating bias in AI systems and LLMs<br>
+<strong>Lab:</strong> Probing and measuring bias in language models</p>
 </div>
 </div>
 <section id="lecture" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="lecture"><span class="header-section-number">8.1</span> Lecture</h2>
-<p><em>Content to be added.</em></p>
+<p>We touched briefly on bias in word embeddings in <a href="week-03.html" class="quarto-xref"><span>Chapter 3</span></a> and noted the importance of validation throughout the preceding weeks. This week, we focus on bias in AI systems more broadly and in LLMs specifically, covering how bias is defined, where it comes from, how it can be measured and mitigated, and the political and social controversies that surround these efforts.</p>
+<section id="defining-bias-in-ai-systems" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="defining-bias-in-ai-systems"><span class="header-section-number">8.1.1</span> Defining bias in AI systems</h3>
+<p>“Bias” in the context of AI carries two distinct meanings. <strong>Statistical bias</strong> refers to systematic deviation from a target value — a model that consistently overestimates or underestimates something. <strong>Normative bias</strong> refers to unfair or unjust differential treatment of individuals or groups.</p>
+<p>These two forms of bias can be in tension with each other. Including parental income as a predictor in a criminal justice risk assessment might improve statistical accuracy (reducing statistical bias), but it would also mean holding prejudice against individuals based on their socioeconomic background (increasing normative bias).</p>
+<p>The harms that flow from biased AI systems can be categorised as <strong>representational harm</strong> (reinforcing stereotypes or rendering certain groups invisible) and <strong>allocational harm</strong> (unfair distribution of resources or opportunities across groups). Bias in AI is fundamentally a socio-technical phenomenon: technical systems embedded in social contexts that reflect and potentially amplify existing societal biases.</p>
+</section>
+<section id="examples-of-algorithmic-bias" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="examples-of-algorithmic-bias"><span class="header-section-number">8.1.2</span> Examples of algorithmic bias</h3>
+<p>Several high-profile cases illustrate the range of ways bias manifests in AI systems.</p>
+<section id="recruitment" class="level4" data-number="8.1.2.1">
+<h4 data-number="8.1.2.1" class="anchored" data-anchor-id="recruitment"><span class="header-section-number">8.1.2.1</span> Recruitment</h4>
+<p>Amazon built an automated CV screening tool trained on patterns from résumés submitted to the company over a ten-year period. Because tech hiring had been historically male-dominated, the algorithm learned to penalise résumés containing words associated with women — downgrading candidates who attended women’s colleges or had terms like “women’s chess club” on their résumés. Amazon attempted to modify the algorithm but ultimately abandoned the project in 2018 when they could not guarantee it would not find other proxies for gender. The system did not invent gender bias; it reflected and intensified existing patterns of discrimination in the training data.</p>
+</section>
+<section id="criminal-justice" class="level4" data-number="8.1.2.2">
+<h4 data-number="8.1.2.2" class="anchored" data-anchor-id="criminal-justice"><span class="header-section-number">8.1.2.2</span> Criminal justice</h4>
+<p>The COMPAS algorithm, used to predict recidivism risk in the US justice system, was found to have significant racial bias: it was roughly twice as likely to falsely label Black defendants as high risk compared to white defendants, while white defendants were more likely to be incorrectly labelled low risk. The company behind COMPAS disputed this analysis, arguing that their system satisfied a different mathematical definition of fairness — equal positive predictive value across groups. This case highlights how different mathematical definitions of fairness can be mutually incompatible, creating fundamental tradeoffs in system design.</p>
+<p>Similarly, predictive policing systems have been criticised for creating feedback loops. When algorithms direct police to patrol certain neighbourhoods based on historical crime data, they generate more arrests in those areas, which then reinforces the algorithm’s focus on those neighbourhoods — a self-fulfilling prophecy that can disproportionately impact communities that have historically experienced higher rates of policing.</p>
+</section>
+<section id="facial-recognition" class="level4" data-number="8.1.2.3">
+<h4 data-number="8.1.2.3" class="anchored" data-anchor-id="facial-recognition"><span class="header-section-number">8.1.2.3</span> Facial recognition</h4>
+<p>Research by Joy Buolamwini and Timnit Gebru demonstrated that leading facial recognition systems had error rates of less than 1% for light-skinned men but up to 35% for dark-skinned women. These disparities arise partly from training data that overrepresents certain demographics. When such systems are deployed in contexts like law enforcement, the consequences of misidentification fall disproportionately on already marginalised groups.</p>
+</section>
+<section id="llm-generated-text" class="level4" data-number="8.1.2.4">
+<h4 data-number="8.1.2.4" class="anchored" data-anchor-id="llm-generated-text"><span class="header-section-number">8.1.2.4</span> LLM-generated text</h4>
+<p>A 2023 study found that when asked to generate reference letters, LLMs produced more formal, positive, and agentic language for male candidates, emphasising individual contributions, while letters for female candidates emphasised teamwork and used more tentative language. This mirrors well-documented patterns in human-written reference letters and shows how LLMs can perpetuate subtle biases even in seemingly neutral text generation tasks.</p>
+</section>
+<section id="adversarial-manipulation" class="level4" data-number="8.1.2.5">
+<h4 data-number="8.1.2.5" class="anchored" data-anchor-id="adversarial-manipulation"><span class="header-section-number">8.1.2.5</span> Adversarial manipulation</h4>
+<p>In 2016, Microsoft released Tay, a Twitter chatbot designed to learn from user interactions. Within 24 hours, users had taught it to produce racist, antisemitic, and misogynistic content, forcing Microsoft to take it offline. While this example predates modern LLMs, it demonstrates the vulnerability of language models to learning harmful patterns from interactions — a challenge that persists in more subtle forms with today’s more sophisticated systems.</p>
+</section>
+</section>
+<section id="sources-of-bias-in-llms" class="level3" data-number="8.1.3">
+<h3 data-number="8.1.3" class="anchored" data-anchor-id="sources-of-bias-in-llms"><span class="header-section-number">8.1.3</span> Sources of bias in LLMs</h3>
+<p>Bias in LLMs emerges from multiple sources throughout the development pipeline, and understanding these sources helps in thinking systematically about where and how to intervene. It is not simply a case of “biased data in, biased results out.”</p>
+<p><strong>Training data bias.</strong> LLMs are trained on vast corpora of internet text, which reflect and sometimes amplify societal biases. This includes over- and underrepresentation of certain perspectives, historical biases in published content, and the predominance of certain languages and cultural contexts.</p>
+<p><strong>Annotation bias.</strong> Human feedback and labelling processes introduce the biases of annotators. Recent work shows that annotator demographics significantly influence what is labelled as “harmful” or “inappropriate.”</p>
+<p><strong>Algorithmic bias.</strong> Technical choices in model architecture, training objectives, and optimisation techniques can amplify certain patterns over others.</p>
+<p><strong>Evaluation bias.</strong> The benchmarks and metrics used to evaluate models may not adequately capture bias concerns, or may themselves encode certain assumptions.</p>
+<p><strong>Deployment bias.</strong> How models are implemented in specific contexts can create new biases or amplify existing ones through system design choices.</p>
+</section>
+<section id="measuring-bias-in-llms" class="level3" data-number="8.1.4">
+<h3 data-number="8.1.4" class="anchored" data-anchor-id="measuring-bias-in-llms"><span class="header-section-number">8.1.4</span> Measuring bias in LLMs</h3>
+<p>Researchers have developed several methods to measure bias in LLMs. <strong>Embedding analysis</strong> examines how words are positioned in the model’s vector space, measuring the distance between professional terms and gender-associated terms to quantify occupational gender bias. <strong>Stereotype assessment</strong> uses template-based methods to test how models complete sentences about different social groups (e.g.&nbsp;“People from [country] are ____”). <strong>Ideological testing</strong> administers standard political ideology surveys or moral foundations questionnaires to models to measure political leanings. <strong>Fairness metrics</strong> calculate disparities in performance across demographic groups. <strong>Controlled generation</strong> compares outputs when only demographic variables are changed. <strong>Adversarial testing</strong> probes models with carefully designed prompts to reveal latent biases.</p>
+<p>Each measurement approach has strengths and limitations. Triangulating with multiple methods gives a more complete picture of bias in these complex systems.</p>
+</section>
+<section id="political-leanings-of-llms" class="level3" data-number="8.1.5">
+<h3 data-number="8.1.5" class="anchored" data-anchor-id="political-leanings-of-llms"><span class="header-section-number">8.1.5</span> Political leanings of LLMs</h3>
+<p>Research using political typology questionnaires and analysis of responses to politically charged questions has consistently found that major commercial LLMs tend to express views aligned with centre-left politics in the US context, particularly on social issues, while economic policy positions are more variable. This bias appears to persist even when models are explicitly prompted to adopt conservative perspectives, suggesting it may be deeply embedded in model weights rather than a surface-level preference. Whether this centre-left leaning is driven by the composition of the training data or is a consequence of bias mitigation techniques (such as RLHF) remains an open question.</p>
+</section>
+<section id="bias-mitigation-techniques" class="level3" data-number="8.1.6">
+<h3 data-number="8.1.6" class="anchored" data-anchor-id="bias-mitigation-techniques"><span class="header-section-number">8.1.6</span> Bias mitigation techniques</h3>
+<p>Bias mitigation approaches can be categorised by where they intervene in the LLM pipeline.</p>
+<p><strong>Pre-training interventions</strong> target the data before training begins: filtering out harmful content, counterfactual data augmentation (adding modified versions of texts that reverse stereotypical patterns), and balanced corpus construction to ensure diverse representation.</p>
+<p><strong>Training interventions</strong> modify the training process itself: objective functions that penalise biased associations, adversarial training that makes the model resistant to producing biased outputs, and multi-objective optimisation that balances performance with fairness metrics.</p>
+<p><strong>Post-training interventions</strong> adjust the model after initial training: RLHF that rewards or punishes outputs based on bias criteria, knowledge editing that directly modifies model weights to change specific associations, and output filtering that catches and modifies biased outputs.</p>
+<p><strong>System-level interventions</strong> operate outside the model: explainability techniques to understand model behaviour, prompt engineering to elicit less biased responses, and human-in-the-loop approaches that combine automation with human oversight.</p>
+<p>Most commercial LLMs use multiple approaches in combination, with RLHF becoming particularly dominant in recent systems.</p>
+</section>
+<section id="challenges-in-bias-mitigation" class="level3" data-number="8.1.7">
+<h3 data-number="8.1.7" class="anchored" data-anchor-id="challenges-in-bias-mitigation"><span class="header-section-number">8.1.7</span> Challenges in bias mitigation</h3>
+<p>LLMs present several unique challenges for bias mitigation. <strong>Hallucination and confabulation</strong> mean that models can generate factually incorrect yet convincing information, potentially reinforcing stereotypes or creating new misrepresentations. <strong>Output instability</strong> means that even with fixed prompts and parameters, models can produce different outputs across runs, complicating evaluation. <strong>Data inequality reproduction</strong> is a risk when LLMs are used to overcome data scarcity: groups underrepresented in training data will remain underrepresented in synthetic data, and uneven capabilities across languages and cultures create disparities in who can benefit from these technologies. <strong>Value lock-in</strong> occurs when models freeze a particular moment’s social values, unable to evolve naturally with changing norms without explicit retraining. <strong>Proxy discrimination</strong> means that even when explicitly biased variables are removed, models may learn to use correlated features as proxies.</p>
+<p>These challenges highlight the need for ongoing monitoring and evaluation rather than one-time bias mitigation efforts.</p>
+</section>
+<section id="unintended-consequences-and-backlash" class="level3" data-number="8.1.8">
+<h3 data-number="8.1.8" class="anchored" data-anchor-id="unintended-consequences-and-backlash"><span class="header-section-number">8.1.8</span> Unintended consequences and backlash</h3>
+<p>Bias mitigation efforts, while necessary, have produced several unintended consequences. <strong>Overcorrection</strong> can lead to historically inaccurate outputs — Google’s Gemini model, for instance, generated images of racially diverse Nazi soldiers and US founding fathers, sacrificing historical accuracy in pursuit of demographic representation. <strong>Political polarisation</strong> around AI has intensified, with the perception that mainstream LLMs lean politically left fuelling the development of explicitly ideological alternatives. LLMs have become battlegrounds in broader cultural conflicts, with different stakeholders holding fundamentally different conceptions of what constitutes harmful bias versus appropriate representation of social realities.</p>
+<p>These controversies reveal the impossibility of “neutral” AI. Bias mitigation inevitably involves tradeoffs between values like accuracy, inclusivity, historical fidelity, and cultural relevance. These tradeoffs are fundamentally political, not just technical. The question of who gets to define what counts as “bias” and what values should guide AI development cannot be answered through technical means alone.</p>
+</section>
+<section id="open-questions" class="level3" data-number="8.1.9">
+<h3 data-number="8.1.9" class="anchored" data-anchor-id="open-questions"><span class="header-section-number">8.1.9</span> Open questions</h3>
+<p>Several important questions remain unresolved. Is completely unbiased AI possible, or even desirable? This question pushes us to consider whether bias is simply a flaw to be eliminated or an inevitable aspect of any system embedded in human society. Who should decide what constitutes harmful bias — companies, regulators, diverse stakeholder panels, or some democratic process? And how should we balance accuracy with bias mitigation when a model that accurately reflects historical disparities may perpetuate harm?</p>
+</section>
+<section id="frontiers" class="level3" data-number="8.1.10">
+<h3 data-number="8.1.10" class="anchored" data-anchor-id="frontiers"><span class="header-section-number">8.1.10</span> Frontiers</h3>
+<p>Current research frontiers include <strong>multi-stakeholder fairness</strong> (frameworks that accommodate the diverse fairness requirements of different communities), <strong>value pluralism in AI alignment</strong> (moving beyond the assumption that there is a single correct way to align AI systems), <strong>constitutional AI</strong> (using explicit, transparent principles to guide model behaviour rather than relying solely on implicit learning from human feedback), and <strong>cross-cultural bias assessment</strong> (developing approaches that work across different cultural contexts, recognising that bias manifests differently around the world). These approaches share a recognition that bias is not merely a technical bug to be fixed, but an inherent challenge in developing AI systems that operate in complex social contexts with diverse stakeholders.</p>
+</section>
 </section>
 <section id="lab" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">8.2</span> Lab</h2>
@@ -505,17 +593,17 @@ Week 8
 <section id="readings" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="readings"><span class="header-section-number">8.3</span> Readings</h2>
 <ul>
-<li><span class="citation" data-cites="wan_kelly_2023">Wan et al. (<a href="../references.html#ref-wan_kelly_2023" role="doc-biblioref">2023</a>)</span></li>
-<li><span class="citation" data-cites="rossi_problems_2024">Rossi, Harrison, and Shklovski (<a href="../references.html#ref-rossi_problems_2024" role="doc-biblioref">2024</a>)</span></li>
+<li><span class="citation" data-cites="santurkar_whose_2023">Santurkar et al. (<a href="../references.html#ref-santurkar_whose_2023" role="doc-biblioref">2023</a>)</span></li>
+<li><span class="citation" data-cites="buolamwini_gender_2018">Buolamwini and Gebru (<a href="../references.html#ref-buolamwini_gender_2018" role="doc-biblioref">2018</a>)</span></li>
 </ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-rossi_problems_2024" class="csl-entry" role="listitem">
-Rossi, Luca, Katherine Harrison, and Irina Shklovski. 2024. <span>“The <span>Problems</span> of <span>LLM</span>-Generated <span>Data</span> in <span>Social</span> <span>Science</span> <span>Research</span>.”</span> <em>Sociologica</em> 18 (2): 145–68. <a href="https://doi.org/10.6092/issn.1971-8853/19576">https://doi.org/10.6092/issn.1971-8853/19576</a>.
+<div id="ref-buolamwini_gender_2018" class="csl-entry" role="listitem">
+Buolamwini, Joy, and Timnit Gebru. 2018. <span>“Gender <span>Shades</span>: <span>Intersectional</span> <span>Accuracy</span> <span>Disparities</span> in <span>Commercial</span> <span>Gender</span> <span>Classification</span>.”</span> In <em>Proceedings of the 1st <span>Conference</span> on <span>Fairness</span>, <span>Accountability</span> and <span>Transparency</span></em>, 81:77–91. PMLR. <a href="https://proceedings.mlr.press/v81/buolamwini18a.html">https://proceedings.mlr.press/v81/buolamwini18a.html</a>.
 </div>
-<div id="ref-wan_kelly_2023" class="csl-entry" role="listitem">
-Wan, Yixin, George Pu, Jiao Sun, Aparna Garimella, Kai-Wei Chang, and Nanyun Peng. 2023. <span>“"<span>Kelly</span> Is a <span>Warm</span> <span>Person</span>, <span>Joseph</span> Is a <span>Role</span> <span>Model</span>": <span>Gender</span> <span>Biases</span> in <span>LLM</span>-<span>Generated</span> <span>Reference</span> <span>Letters</span>.”</span> arXiv. <a href="https://doi.org/10.48550/arXiv.2310.09219">https://doi.org/10.48550/arXiv.2310.09219</a>.
+<div id="ref-santurkar_whose_2023" class="csl-entry" role="listitem">
+Santurkar, Shibani, Esin Durmus, Faisal Ladhak, Cinoo Lee, Percy Liang, and Tatsunori Hashimoto. 2023. <span>“Whose <span>Opinions</span> <span>Do</span> <span>Language</span> <span>Models</span> <span>Reflect</span>?”</span> In <em>Proceedings of the 40th <span>International</span> <span>Conference</span> on <span>Machine</span> <span>Learning</span></em>, 202:29971–30004. PMLR. <a href="https://proceedings.mlr.press/v202/santurkar23a.html">https://proceedings.mlr.press/v202/santurkar23a.html</a>.
 </div>
 </div>
 </section>

@@ -395,7 +395,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-08.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bias in LLMs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -407,13 +407,13 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Beyond Text</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Interpretability and Explainability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Project Presentations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beyond Text</span></span></a>
   </div>
 </li>
       </ul>
@@ -451,7 +451,18 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">9.1</span> Lecture</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">9.1</span> Lecture</a>
+  <ul class="collapse">
+  <li><a href="#bias-risks" id="toc-bias-risks" class="nav-link" data-scroll-target="#bias-risks"><span class="header-section-number">9.1.1</span> Bias risks</a></li>
+  <li><a href="#data-privacy-concerns" id="toc-data-privacy-concerns" class="nav-link" data-scroll-target="#data-privacy-concerns"><span class="header-section-number">9.1.2</span> Data privacy concerns</a></li>
+  <li><a href="#false-or-misleading-information" id="toc-false-or-misleading-information" class="nav-link" data-scroll-target="#false-or-misleading-information"><span class="header-section-number">9.1.3</span> False or misleading information</a></li>
+  <li><a href="#malicious-use-potential" id="toc-malicious-use-potential" class="nav-link" data-scroll-target="#malicious-use-potential"><span class="header-section-number">9.1.4</span> Malicious use potential</a></li>
+  <li><a href="#implications-of-overreliance" id="toc-implications-of-overreliance" class="nav-link" data-scroll-target="#implications-of-overreliance"><span class="header-section-number">9.1.5</span> Implications of overreliance</a></li>
+  <li><a href="#environmental-costs" id="toc-environmental-costs" class="nav-link" data-scroll-target="#environmental-costs"><span class="header-section-number">9.1.6</span> Environmental costs</a></li>
+  <li><a href="#negative-economic-externalities" id="toc-negative-economic-externalities" class="nav-link" data-scroll-target="#negative-economic-externalities"><span class="header-section-number">9.1.7</span> Negative economic externalities</a></li>
+  <li><a href="#output-ownership-and-responsibility" id="toc-output-ownership-and-responsibility" class="nav-link" data-scroll-target="#output-ownership-and-responsibility"><span class="header-section-number">9.1.8</span> Output ownership and responsibility</a></li>
+  <li><a href="#open-questions" id="toc-open-questions" class="nav-link" data-scroll-target="#open-questions"><span class="header-section-number">9.1.9</span> Open questions</a></li>
+  </ul></li>
   <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">9.2</span> Lab</a></li>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">9.3</span> Readings</a></li>
   </ul>
@@ -463,7 +474,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-01.html">Weekly Content</a></li><li class="breadcrumb-item"><a href="../weeks/week-10.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Ethical Use of LLMs?</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-week10" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Ethical Use of LLMs?</span></span></h1>
+<h1 class="title"><span id="sec-week9" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Ethical Use of LLMs?</span></span></h1>
 </div>
 
 
@@ -486,7 +497,7 @@ div.csl-indent {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Week 10
+Week 9
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -496,7 +507,58 @@ Week 10
 </div>
 <section id="lecture" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="lecture"><span class="header-section-number">9.1</span> Lecture</h2>
-<p><em>Content to be added.</em></p>
+<p>We have been fairly positive about the use of LLMs throughout this module. This week, we explore the darker side of the industry. While we will not arrive at normative conclusions here, the goal is to think critically about the use of LLMs and their social implications. Building on last week’s discussion of bias (<a href="week-08.html" class="quarto-xref"><span>Chapter 8</span></a>), we now examine how LLMs connect to broader ethical issues — from privacy and misinformation to environmental costs and economic externalities.</p>
+<section id="bias-risks" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="bias-risks"><span class="header-section-number">9.1.1</span> Bias risks</h3>
+<p>Building on our discussion of bias last week, fairness concerns extend to how LLMs treat different groups and individuals. <strong>Representational harms</strong> include stereotyping (reinforcing negative associations) and erasure (making certain groups invisible). LLMs may, for example, generate stories or examples that default to stereotypical gender roles or exclude certain cultural contexts entirely. <strong>Allocational harms</strong> occur when resources or opportunities are distributed inequitably — if LLMs are used in hiring, loan approval, or resource allocation, biased outputs could lead to discriminatory outcomes. <strong>Toxicity</strong> measures how likely models are to produce harmful, offensive, or abusive language; despite safeguards, most models can still be prompted to generate toxic content, with toxicity rates often higher when discussing marginalised groups. <strong>Disparate performance</strong> refers to how models often work better for dominant groups and languages — LLMs tend to perform better on tasks involving standard American English than other dialects or languages.</p>
+<p>These issues connect directly to questions of political power and representation, making them particularly relevant for political scientists.</p>
+</section>
+<section id="data-privacy-concerns" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="data-privacy-concerns"><span class="header-section-number">9.1.2</span> Data privacy concerns</h3>
+<p>LLMs present several privacy concerns that political scientists should understand. <strong>Memorisation</strong> occurs when models reproduce verbatim content from their training data, potentially exposing private information such as email addresses, phone numbers, or financial details that was inadvertently included in training datasets. Research has shown that larger models actually memorise more than smaller ones. <strong>Inference attacks</strong> allow adversaries to deduce sensitive attributes not explicitly stated in data — patterns in language can reveal demographic characteristics or political beliefs even when these are not directly mentioned. <strong>Anthropomorphism risk</strong> is a subtler concern: when systems appear more human-like, users tend to disclose more personal information than they would to obviously artificial systems. This psychological phenomenon can lead to overconfidence and oversharing with LLMs. It is especially problematic with the emergence of services that promote the use of chatbots as replacements for social interaction or psychotherapy. Researchers at DeepMind have noted that users share their opinions or emotions with chatbots in part because they are less afraid of social judgement, and that such sensitive data could be used to build addictive applications. <strong>Surveillance potential</strong> also arises from the large-scale data collection required for LLM training and fine-tuning, creating new avenues for mass surveillance with significant implications for political privacy and freedom of expression. The queries sent to services like ChatGPT are accessible to OpenAI and used to train their models unless users explicitly opt out.</p>
+<p>For political scientists, these privacy concerns intersect with questions of political liberty, surveillance, and the right to privacy in democratic societies.</p>
+</section>
+<section id="false-or-misleading-information" class="level3" data-number="9.1.3">
+<h3 data-number="9.1.3" class="anchored" data-anchor-id="false-or-misleading-information"><span class="header-section-number">9.1.3</span> False or misleading information</h3>
+<p>LLMs struggle with factual reliability in ways that present particular challenges for academic and political contexts. <strong>Hallucinations</strong> occur when models generate text that sounds plausible but is factually incorrect, including inventing events, misattributing quotes, or creating other fabricated content with high confidence. <strong>Majority view bias</strong> means LLMs tend to represent the most common viewpoints found in their training data as factual, even when these reflect opinion rather than fact — majority view does not equal fact. <strong>Domain-specific risks</strong> are particularly acute in areas like medicine and law, where incorrect information could lead to harmful decisions. <strong>False expertise</strong> arises because models typically communicate with equal confidence regardless of their actual knowledge on a topic; this authoritative tone can be particularly misleading in specialised domains and can undermine genuine expertise.</p>
+<p>These information quality issues raise significant concerns for democratic discourse, which depends on a shared factual basis for debate and decision-making. They also complicate the use of LLMs for research, education, and policy analysis.</p>
+</section>
+<section id="malicious-use-potential" class="level3" data-number="9.1.4">
+<h3 data-number="9.1.4" class="anchored" data-anchor-id="malicious-use-potential"><span class="header-section-number">9.1.4</span> Malicious use potential</h3>
+<p>LLMs can potentially enable harmful activities at unprecedented scale and sophistication. <strong>Disinformation campaigns</strong> can be dramatically scaled and targeted using LLMs to generate customised content for specific audiences. In 2016, around one-fifth of tweets about the US Presidential election and one-third of tweets about the Brexit referendum were created by bots; LLMs dramatically lower the cost and increase the potential scale of such influence operations. Beyond manipulating perceptions on social media, LLMs could be weaponised in online public consultation processes. <strong>Sophisticated fraud and scams</strong> become easier when LLMs can generate highly personalised phishing messages or scam content that targets specific vulnerabilities based on available information about the victim. <strong>Cyberattack automation</strong> lowers barriers to sophisticated cyber operations by generating malicious code, identifying vulnerabilities, or crafting social engineering attacks. <strong>Censorship assistance</strong> enables advanced content moderation systems that might support more sophisticated censorship in authoritarian contexts.</p>
+<p>These malicious uses have direct implications for political security, electoral integrity, and national security — core concerns for political scientists.</p>
+</section>
+<section id="implications-of-overreliance" class="level3" data-number="9.1.5">
+<h3 data-number="9.1.5" class="anchored" data-anchor-id="implications-of-overreliance"><span class="header-section-number">9.1.5</span> Implications of overreliance</h3>
+<p>Beyond direct harms, LLMs may create more subtle forms of dependency that affect cognitive and social processes. <strong>Intellectual dependency</strong> occurs when people regularly outsource critical thinking and analytical tasks to AI systems. In academic contexts, this could lead to atrophy of research skills, analytical capabilities, and domain knowledge. A joint study by researchers at Microsoft and Carnegie Mellon found that when workers were more confident in an AI tool’s capability, they were more likely to disengage their own critical thinking, particularly for lower-stakes tasks. Conversely, when workers had less confidence in the AI, they engaged more in critical thinking and reported more confidence in their ability to evaluate and improve upon the AI’s output. The study also found that users with access to generative AI tools tended to produce a less diverse set of outcomes for the same task compared to those without.</p>
+<p><strong>Attentional displacement</strong> happens when engagement with AI systems reduces time spent in deep focused work or direct human interaction, potentially affecting the quality of scholarship and teaching. <strong>Emotional dependency</strong> develops when users form attachment-like relationships with AI systems. LLM-based chatbot services are being marketed as replacements for friendships, with taglines like “always on your side” — a framing that raises serious concerns. According to reporting by the Washington Post, the average user of Character.ai spent 93 minutes a day talking to chatbots, 18 minutes longer than the average user spends on TikTok. Several tragic cases have highlighted the dangers: a 14-year-old in Florida died by suicide after talking with a Character.ai chatbot, and authorities in Belgium launched an investigation into Chai Research after a man died by suicide following extensive chats with a Replika chatbot. <strong>Knowledge homogenisation</strong> is a systemic risk where multiple users relying on the same AI systems receive similar information, perspectives, and analyses, potentially reducing intellectual diversity in a field.</p>
+</section>
+<section id="environmental-costs" class="level3" data-number="9.1.6">
+<h3 data-number="9.1.6" class="anchored" data-anchor-id="environmental-costs"><span class="header-section-number">9.1.6</span> Environmental costs</h3>
+<p>LLMs have significant environmental impacts that raise questions of sustainability. At the individual level, a single LLM interaction may consume as much power as leaving a low-brightness LED lightbulb on for one hour, and generating one image using AI can use almost as much energy as charging a smartphone. At the systemic level, training GPT-4 consumed electricity equivalent to powering about 5,000 US homes for an entire year. For comparison, streaming an hour of Netflix requires around 0.8 kWh of electricity — you would have to watch Netflix for 1.6 million hours to consume the same amount of power it took to train GPT-3, which is smaller than GPT-4. ChatGPT queries use roughly 10 times more energy than a standard Google search, and projected energy usage for AI-assisted search could be even higher.</p>
+<p>Jevons’ Paradox applies to AI development: increasing efficiency often results in increased demand, leading to a net increase in resource use. As models become more efficient, this enables development of even larger models requiring more computational power. Data centres globally use around 2% of the world’s electricity, with the International Energy Agency projecting this will double by 2026. These energy demands have led to extreme measures, such as Microsoft reopening the Three Mile Island nuclear plant specifically to power AI operations, and Amazon and Google investing in small modular nuclear reactors. The EU’s AI Act will require high-risk AI systems, including LLM foundation models, to report their energy consumption and resource use throughout their lifecycle.</p>
+<section id="case-study-ireland" class="level4" data-number="9.1.6.1">
+<h4 data-number="9.1.6.1" class="anchored" data-anchor-id="case-study-ireland"><span class="header-section-number">9.1.6.1</span> Case study: Ireland</h4>
+<p>Ireland provides a particularly striking illustration of these environmental costs. Data centre electricity consumption has grown dramatically, from 5% of total metered electricity in 2015 to 21% in 2023, with projections reaching 31% by 2027. This demand is outpacing the creation of new renewable energy, adding approximately 1 TWh in demand annually. Data centres now account for an estimated 2.5–4% of national greenhouse gas emissions, with a single data centre consuming as much electricity as a city the size of Kilkenny.</p>
+<p>The electrical grid cannot keep up. An investigation by The Journal found that data centres are turning to backup and emergency generators that use fossil fuels, emitting over 135,000 tonnes of CO₂ in the last five years from generators not connected to the electricity grid — comparable to running roughly 33,750 cars for a year. Data centres also consume significant quantities of water for cooling, with facilities run by companies like Facebook and Amazon requiring tens of millions of litres during warm summer months. This places additional strain on Dublin’s already tight water supply, with the chair of Uisce Éireann warning that the city’s drinking water supply will be under pressure in the coming years. The lack of sufficient water supply also imperils housing targets, illustrating how the environmental impacts and sociopolitical ramifications are far-reaching.</p>
+<p>These are not even the only environmental impacts. The mining of rare earth minerals needed for GPU chips and batteries for the energy transition has its own significant environmental and human costs, as does the question of how these materials are recycled or disposed of at end of life.</p>
+</section>
+</section>
+<section id="negative-economic-externalities" class="level3" data-number="9.1.7">
+<h3 data-number="9.1.7" class="anchored" data-anchor-id="negative-economic-externalities"><span class="header-section-number">9.1.7</span> Negative economic externalities</h3>
+<p>LLMs create economic externalities that extend well beyond their immediate users. <strong>Increasing inequality</strong> can manifest through downward wage pressure on routine cognitive tasks, concentration of power among technology monopolies, and access constraints that create digital divides in who can benefit from these tools. <strong>Reduced job quality</strong> occurs when work shifts toward monotonous monitoring and validation of AI outputs, workplaces adopt an increased pace of production, and opportunities for meaningful social interaction diminish. <strong>Creative sector disruption</strong> happens when AI systems trained on creative works can then generate similar content without compensation to original creators, potentially undercutting creative professions and extracting value from their work. <strong>Hidden labour exploitation</strong> underpins the entire AI industry: the content moderation and data labelling that makes AI systems function is largely performed in developing countries, at low pay, and exposes workers to harmful content. Reporting by TIME revealed that OpenAI used Kenyan workers on less than $2 per hour to help make ChatGPT less toxic. As a NOĒMA article put it, data labelling interfaces have evolved to treat crowdworkers like machines, prescribing highly repetitive tasks, surveilling their movements, and punishing deviation through automated tools.</p>
+<p>These economic impacts raise fundamental questions about distribution, equity, and power that are central to political economy. They also suggest the need for governance frameworks that ensure the benefits of these technologies are broadly shared.</p>
+</section>
+<section id="output-ownership-and-responsibility" class="level3" data-number="9.1.8">
+<h3 data-number="9.1.8" class="anchored" data-anchor-id="output-ownership-and-responsibility"><span class="header-section-number">9.1.8</span> Output ownership and responsibility</h3>
+<p>LLMs raise complex questions about ownership, attribution, and responsibility. <strong>Data provenance</strong> concerns arise because LLMs typically do not provide clear information about the sources that influenced their outputs, making it difficult to trace the origins of generated content and evaluate its reliability. <strong>Copyright questions</strong> emerge when models trained on copyrighted material generate new content that may be derivative — recent legal cases have begun addressing whether training constitutes fair use and who owns the outputs of AI systems. Is it the prompter, the AI company, or the creators whose data the model was trained on? <strong>Legal culpability</strong> issues concern who bears responsibility when AI-generated content causes harm — the developer, the deployer, or the end user — and this remains legally ambiguous in many jurisdictions. <strong>Attribution challenges</strong> affect academic integrity, creative recognition, and professional credit; as AI-generated content becomes more prevalent, systems for attributing intellectual and creative work need reconsideration.</p>
+<p>These questions sit at the intersection of law, ethics, and social norms — all areas where political scientists can contribute valuable perspectives. They also relate to broader questions about intellectual property regimes in the digital age and how they affect innovation, access, and equity.</p>
+</section>
+<section id="open-questions" class="level3" data-number="9.1.9">
+<h3 data-number="9.1.9" class="anchored" data-anchor-id="open-questions"><span class="header-section-number">9.1.9</span> Open questions</h3>
+<p>Several important questions remain. Do LLMs empower citizens by democratising certain capabilities, or do they primarily benefit those already privileged? How might the concentration of AI development affect political discourse and participation? What special responsibilities do political scientists have when using or studying these tools? How should we balance innovation with caution in our own research and teaching? And what are the long-term consequences of outsourcing certain types of daily work to LLMs?</p>
+<p>These questions highlight that ethical considerations around LLMs are not separate from the substance of political science but are increasingly central to the field’s core concerns with power, governance, and democratic values.</p>
+</section>
 </section>
 <section id="lab" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">9.2</span> Lab</h2>
@@ -944,13 +1006,13 @@ Williams, Adrienne, Milagros Miceli, and Timnit Gebru. 2022. <span>“The <span>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/week-08.html" class="pagination-link" aria-label="Interpretability, Explainability and Bias">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interpretability, Explainability and Bias</span></span>
+      <a href="../weeks/week-08.html" class="pagination-link" aria-label="Bias in LLMs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bias in LLMs</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/week-11.html" class="pagination-link" aria-label="Beyond Text">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Beyond Text</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../weeks/week-11.html" class="pagination-link" aria-label="Interpretability and Explainability">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Interpretability and Explainability</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
