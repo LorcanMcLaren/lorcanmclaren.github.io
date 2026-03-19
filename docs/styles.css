@@ -90,6 +90,26 @@ i {
   margin-right: auto;
 }
 
+:root {
+  --inline-code-color: #4a3a40;
+  --inline-code-bg: rgba(95, 59, 74, 0.08);
+  --inline-code-border: rgba(122, 90, 101, 0.22);
+}
+
+p code,
+li code,
+td code,
+dd code,
+dt code,
+figcaption code,
+blockquote code {
+  color: var(--inline-code-color) !important;
+  background: var(--inline-code-bg) !important;
+  border: 1px solid var(--inline-code-border);
+  border-radius: 0.45rem;
+  padding: 0.08rem 0.35rem;
+}
+
 /* add an image_list class which then can be removed on mobile */
 .image_list {
     display: flex;
@@ -125,6 +145,12 @@ i {
 
 .quarto-dark .abstract-text {
   color: #bbb;
+}
+
+.quarto-dark {
+  --inline-code-color: #d7e6f3;
+  --inline-code-bg: #13212d;
+  --inline-code-border: rgba(183, 208, 228, 0.18);
 }
 
 /* ---- CV page styles ---- */

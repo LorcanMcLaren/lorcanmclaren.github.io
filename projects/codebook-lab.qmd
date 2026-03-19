@@ -26,6 +26,8 @@ The relationship between the two tools is straightforward: [CodeBook Studio](cod
   --codebook-data-bg: #fcf8f5;
   --codebook-title: #5f3b4a;
   --codebook-text: #4a3a40;
+  --codebook-code-bg: rgba(95, 59, 74, 0.08);
+  --codebook-code-border: rgba(122, 90, 101, 0.22);
   --codebook-shadow: rgba(0, 0, 0, 0.05);
   display: grid;
   grid-template-columns: minmax(220px, 1fr) 80px minmax(220px, 1fr);
@@ -35,11 +37,13 @@ The relationship between the two tools is straightforward: [CodeBook Studio](cod
 }
 
 .quarto-dark .codebook-flow {
-  --codebook-border: #b08d99;
-  --codebook-card-bg: #2a2431;
-  --codebook-data-bg: #231f29;
-  --codebook-title: #f3dbe4;
-  --codebook-text: #f2e8ec;
+  --codebook-border: #7b9bb5;
+  --codebook-card-bg: #253544;
+  --codebook-data-bg: #1f2d3a;
+  --codebook-title: #b7d0e4;
+  --codebook-text: #d7e6f3;
+  --codebook-code-bg: #13212d;
+  --codebook-code-border: rgba(183, 208, 228, 0.18);
   --codebook-shadow: rgba(0, 0, 0, 0.22);
 }
 
@@ -99,8 +103,21 @@ The relationship between the two tools is straightforward: [CodeBook Studio](cod
 }
 
 .codebook-card code,
+.codebook-card li code,
 .codebook-data code {
   color: var(--codebook-text);
+  background: var(--codebook-code-bg);
+  border: 1px solid var(--codebook-code-border);
+  border-radius: 0.45rem;
+  padding: 0.08rem 0.35rem;
+}
+
+.quarto-dark .codebook-card code,
+.quarto-dark .codebook-card li code,
+.quarto-dark .codebook-data code {
+  color: var(--codebook-text) !important;
+  background: var(--codebook-code-bg) !important;
+  border-color: var(--codebook-code-border) !important;
 }
 
 @media (max-width: 900px) {
