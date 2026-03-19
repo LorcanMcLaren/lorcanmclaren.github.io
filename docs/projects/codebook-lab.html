@@ -315,7 +315,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>CodeBook Lab is an LLM annotation pipeline for computational social science. It is designed to help researchers run, compare, and evaluate annotation experiments without writing custom annotation infrastructure for each new project.</p>
-<p>Used alongside <a href="../projects/codebook-studio.html">CodeBook Studio</a>, it allows researchers to define an annotation task once and then use that same codebook to run local or HPC-based LLM workflows. Human annotations serve as the validation benchmark, making it possible to compare model outputs against a researcher-defined gold standard.</p>
+<p>Used alongside <a href="../projects/codebook-studio.html">CodeBook Studio</a>, it allows researchers to define an annotation task once and then use that same codebook plus a human-annotated <code>ground-truth.csv</code> to run local or HPC-based LLM workflows. Human annotations serve as the validation benchmark, and CodeBook Lab strips the codebook-defined label columns from <code>ground-truth.csv</code> before sending text to the LLM, making it possible to compare model outputs against a researcher-defined gold standard.</p>
 <section id="how-studio-and-lab-fit-together" class="level2">
 <h2 class="anchored" data-anchor-id="how-studio-and-lab-fit-together">How Studio and Lab Fit Together</h2>
 <p>The relationship between the two tools is straightforward: <a href="../projects/codebook-studio.html">CodeBook Studio</a> is where the annotation task is defined, while CodeBook Lab is where the LLM experiment is run and evaluated.</p>
@@ -417,7 +417,7 @@ ul.task-list li input[type="checkbox"] {
   <div class="codebook-bridge">
     <div class="codebook-data">
       <strong>Outputs from Studio</strong><br>
-      <code>codebook.json</code>, annotation design, and human-coded data
+      <code>codebook.json</code> and a human-annotated <code>ground-truth.csv</code>
     </div>
 
     <div class="codebook-arrow" aria-hidden="true">→</div>
@@ -446,7 +446,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>The repository includes a synthetic starter task and a configuration-driven workflow so that most experiments can be controlled through a single <code>param_grid.yaml</code> file rather than by editing pipeline code.</p>
 <p>The source code is available on <a href="https://github.com/LorcanMcLaren/codebook-lab">GitHub</a>.</p>
-<p>CodeBook Lab is paired with <a href="../projects/codebook-studio.html">CodeBook Studio</a>, which provides the interface for defining annotation tasks and exporting the <code>codebook.json</code> files used by the pipeline.</p>
+<p>CodeBook Lab is paired with <a href="../projects/codebook-studio.html">CodeBook Studio</a>, which provides the interface for defining annotation tasks, exporting the <code>codebook.json</code> files used by the pipeline, and producing the human-annotated CSV that serves as <code>ground-truth.csv</code> during evaluation.</p>
 
 
 </section>

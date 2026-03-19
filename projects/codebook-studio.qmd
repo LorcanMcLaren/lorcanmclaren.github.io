@@ -12,9 +12,9 @@ format:
       - "../partials/title-block.html"
 ---
 
-CodeBook Studio is a codebook-driven text annotation tool for computational social science. A single JSON codebook file defines your annotation task for human annotators, serves as input to an LLM annotation pipeline, and can be exported as a LaTeX or Markdown document for papers, appendices, or research documentation.
+CodeBook Studio is a codebook-driven text annotation tool for computational social science. It lets researchers define an annotation task, annotate texts, export the task as `codebook.json`, and save the human-annotated data as `ground-truth.csv` for downstream LLM evaluation.
 
-It is designed to reduce the overhead of building annotation workflows from scratch. Researchers can define a task once, use it for human annotation, preview the corresponding LLM prompts, and carry the same codebook directly into CodeBook Lab for model-based experiments.
+It is designed to reduce the overhead of building annotation workflows from scratch. Researchers can define a task once, use it for human annotation, preview the corresponding LLM prompts, and carry the same codebook plus the human-coded `ground-truth.csv` directly into CodeBook Lab for model-based experiments. CodeBook Lab then strips the annotation columns automatically before passing the text to the LLM.
 
 CodeBook Studio provides the following features:
 
@@ -27,6 +27,6 @@ CodeBook Studio provides the following features:
 
 The app is available at [codebook.streamlit.app](https://codebook.streamlit.app/). The source code is available on [GitHub](https://github.com/LorcanMcLaren/codebook-studio).
 
-CodeBook Studio is paired with [CodeBook Lab](codebook-lab.qmd), which runs and evaluates LLM annotation experiments from the same codebook structure.
+CodeBook Studio is paired with [CodeBook Lab](codebook-lab.qmd), which runs and evaluates LLM annotation experiments from the same codebook structure and compares model outputs against the human annotations saved from Studio.
 
 Feel free to reach out if you encounter any bugs or need additional features for your annotation workflow.

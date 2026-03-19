@@ -12,7 +12,7 @@ format:
 
 CodeBook Lab is an LLM annotation pipeline for computational social science. It is designed to help researchers run, compare, and evaluate annotation experiments without writing custom annotation infrastructure for each new project.
 
-Used alongside [CodeBook Studio](codebook-studio.qmd), it allows researchers to define an annotation task once and then use that same codebook to run local or HPC-based LLM workflows. Human annotations serve as the validation benchmark, making it possible to compare model outputs against a researcher-defined gold standard.
+Used alongside [CodeBook Studio](codebook-studio.qmd), it allows researchers to define an annotation task once and then use that same codebook plus a human-annotated `ground-truth.csv` to run local or HPC-based LLM workflows. Human annotations serve as the validation benchmark, and CodeBook Lab strips the codebook-defined label columns from `ground-truth.csv` before sending text to the LLM, making it possible to compare model outputs against a researcher-defined gold standard.
 
 ## How Studio and Lab Fit Together
 
@@ -117,7 +117,7 @@ The relationship between the two tools is straightforward: [CodeBook Studio](cod
   <div class="codebook-bridge">
     <div class="codebook-data">
       <strong>Outputs from Studio</strong><br>
-      <code>codebook.json</code>, annotation design, and human-coded data
+      <code>codebook.json</code> and a human-annotated <code>ground-truth.csv</code>
     </div>
 
     <div class="codebook-arrow" aria-hidden="true">→</div>
@@ -150,4 +150,4 @@ The repository includes a synthetic starter task and a configuration-driven work
 
 The source code is available on [GitHub](https://github.com/LorcanMcLaren/codebook-lab).
 
-CodeBook Lab is paired with [CodeBook Studio](codebook-studio.qmd), which provides the interface for defining annotation tasks and exporting the `codebook.json` files used by the pipeline.
+CodeBook Lab is paired with [CodeBook Studio](codebook-studio.qmd), which provides the interface for defining annotation tasks, exporting the `codebook.json` files used by the pipeline, and producing the human-annotated CSV that serves as `ground-truth.csv` during evaluation.
