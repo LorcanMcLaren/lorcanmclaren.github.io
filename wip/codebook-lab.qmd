@@ -2,7 +2,6 @@
 title: "CodeBook Lab"
 date: "2026"
 date-format: "YYYY"
-image: "../images/CodeBook.png"
 codelink: "https://github.com/LorcanMcLaren/codebook-lab"
 format:
   html:
@@ -13,7 +12,7 @@ format:
 
 CodeBook Lab is an LLM annotation pipeline for computational social science. It is designed to help researchers run, compare, and evaluate annotation experiments without writing custom annotation infrastructure for each new project.
 
-Used alongside CodeBook Studio, it allows researchers to define an annotation task once and then use that same codebook to run local or HPC-based LLM workflows. Human annotations serve as the validation benchmark, making it possible to compare model outputs against a researcher-defined gold standard.
+Used alongside [CodeBook Studio](codebook-studio.qmd), it allows researchers to define an annotation task once and then use that same codebook to run local or HPC-based LLM workflows. Human annotations serve as the validation benchmark, making it possible to compare model outputs against a researcher-defined gold standard.
 
 CodeBook Lab supports the main annotation types commonly used in text-as-data workflows:
 
@@ -33,4 +32,4 @@ The repository includes a synthetic starter task and a configuration-driven work
 
 The source code is available on [GitHub](https://github.com/LorcanMcLaren/codebook-lab).
 
-CodeBook Lab is paired with CodeBook Studio, which provides the interface for defining annotation tasks and exporting the `codebook.json` files used by the pipeline.
+CodeBook Lab is paired with [CodeBook Studio](codebook-studio.qmd), which provides the interface for defining annotation tasks and exporting the `codebook.json` files used by the pipeline.

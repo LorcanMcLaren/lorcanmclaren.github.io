@@ -26,6 +26,6 @@ CodeBook Studio provides the following features:
 
 The app is available at [codebook.streamlit.app](https://codebook.streamlit.app/). The source code is available on [GitHub](https://github.com/LorcanMcLaren/codebook-studio).
 
-CodeBook Studio is paired with CodeBook Lab, which runs and evaluates LLM annotation experiments from the same codebook structure.
+CodeBook Studio is paired with [CodeBook Lab](codebook-lab.qmd), which runs and evaluates LLM annotation experiments from the same codebook structure.
 
 Feel free to reach out if you encounter any bugs or need additional features for your annotation workflow.
