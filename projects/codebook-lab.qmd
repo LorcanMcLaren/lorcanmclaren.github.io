@@ -21,6 +21,12 @@ The relationship between the two tools is straightforward: [CodeBook Studio](cod
 ```{=html}
 <style>
 .codebook-flow {
+  --codebook-border: #7a5a65;
+  --codebook-card-bg: #f7f1ec;
+  --codebook-data-bg: #fcf8f5;
+  --codebook-title: #5f3b4a;
+  --codebook-text: #4a3a40;
+  --codebook-shadow: rgba(0, 0, 0, 0.05);
   display: grid;
   grid-template-columns: minmax(220px, 1fr) 80px minmax(220px, 1fr);
   gap: 1.25rem;
@@ -28,18 +34,28 @@ The relationship between the two tools is straightforward: [CodeBook Studio](cod
   margin: 1.5rem 0 1rem 0;
 }
 
+.quarto-dark .codebook-flow {
+  --codebook-border: #b08d99;
+  --codebook-card-bg: #2a2431;
+  --codebook-data-bg: #231f29;
+  --codebook-title: #f3dbe4;
+  --codebook-text: #f2e8ec;
+  --codebook-shadow: rgba(0, 0, 0, 0.22);
+}
+
 .codebook-card {
-  border: 2px solid #7a5a65;
+  border: 2px solid var(--codebook-border);
   border-radius: 12px;
-  background: #f7f1ec;
+  background: var(--codebook-card-bg);
+  color: var(--codebook-text);
   padding: 1rem 1.1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px var(--codebook-shadow);
 }
 
 .codebook-card h3 {
   margin: 0 0 0.6rem 0;
   font-size: 1.15rem;
-  color: #5f3b4a;
+  color: var(--codebook-title);
 }
 
 .codebook-card ul {
@@ -49,13 +65,14 @@ The relationship between the two tools is straightforward: [CodeBook Studio](cod
 
 .codebook-card li {
   margin-bottom: 0.35rem;
+  color: var(--codebook-text);
 }
 
 .codebook-arrow {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #5f3b4a;
+  color: var(--codebook-title);
   font-size: 2rem;
   font-weight: 700;
 }
@@ -70,15 +87,20 @@ The relationship between the two tools is straightforward: [CodeBook Studio](cod
 }
 
 .codebook-data {
-  border: 1.5px dashed #7a5a65;
+  border: 1.5px dashed var(--codebook-border);
   border-radius: 10px;
-  background: #fcf8f5;
+  background: var(--codebook-data-bg);
   padding: 0.85rem 1rem;
-  color: #4a3a40;
+  color: var(--codebook-text);
 }
 
 .codebook-data strong {
-  color: #5f3b4a;
+  color: var(--codebook-title);
+}
+
+.codebook-card code,
+.codebook-data code {
+  color: var(--codebook-text);
 }
 
 @media (max-width: 900px) {
