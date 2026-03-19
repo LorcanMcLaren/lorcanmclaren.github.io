@@ -147,7 +147,3 @@ The pipeline is designed to make it easier to compare tradeoffs across:
 - Runtime, energy use, and estimated carbon emissions
 
 The repository includes a synthetic starter task and a configuration-driven workflow so that most experiments can be controlled through a single `param_grid.yaml` file rather than by editing pipeline code.
-
-The source code is available on [GitHub](https://github.com/LorcanMcLaren/codebook-lab).
-
-CodeBook Lab is paired with [CodeBook Studio](codebook-studio.qmd), which provides the interface for defining annotation tasks, exporting the `codebook.json` files used by the pipeline, and producing the human-annotated CSV that serves as `ground-truth.csv` during evaluation.
