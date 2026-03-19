@@ -124,9 +124,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-date','listing-date-format','listing-image','listing-codelink','listing-path','listing-outputHref','listing-date-modified','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-date','listing-date-format','listing-codelink','listing-path','listing-outputHref','listing-date-modified','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count','listing-image',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-date","listing-date-format","listing-image","listing-codelink","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-date","listing-date-format","listing-codelink","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-image"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -513,18 +513,12 @@ window.Quarto = {
 <div id="listing-wip" class="quarto-listing quarto-listing-container-custom">
 
     <div class="list grid" style="column-gap: 5px;">
-        <div class="g-col-12 g-col-lg-8 g-col-md-9 g-col-sm-9">
+        <div class="g-col-12">
         <b><a href="./wip/codebook-lab.html">CodeBook Lab</a></b><br>
         
     
     <span class="paper-links"><a href="https://github.com/LorcanMcLaren/codebook-lab">Code</a></span>
     
-    </div>
-    
-    <div class="image_list g-col-8 g-col-lg-4 g-col-md-3 g-col-sm-3">
-            <a href="./wip/codebook-lab.html">
-                <img src="./images/CodeBook.png" alt="image" width="100%">
-            </a>
     </div>
     
     <br>
