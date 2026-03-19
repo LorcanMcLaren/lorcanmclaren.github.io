@@ -2,7 +2,8 @@
 title: "CodeBook Studio"
 date: "2026"
 date-format: "YYYY"
-image: "../images/CodeBook.png"
+image: "../images/codebook-studio.png"
+applink: "https://codebook.streamlit.app/"
 codelink: "https://github.com/LorcanMcLaren/codebook-studio"
 format:
   html:

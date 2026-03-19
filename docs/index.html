@@ -68,7 +68,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-date','listing-abstract','listing-coauthors','listing-wplink','listing-slideslink','listing-videolink','listing-codelink','listing-image','listing-note',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      valueNames: ['listing-title','listing-date','listing-abstract','listing-coauthors','listing-wplink','listing-slideslink','listing-videolink','listing-applink','listing-codelink','listing-image','listing-note',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
       searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-date","listing-date-format","listing-coauthors","listing-abstract","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
@@ -117,20 +117,20 @@ ul.task-list li input[type="checkbox"] {
   
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-wip .list');
+    const listingTargetEl = window.document.querySelector('#listing-projects .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-date','listing-date-format','listing-codelink','listing-path','listing-outputHref','listing-date-modified','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count','listing-image',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      valueNames: ['listing-title','listing-date','listing-abstract','listing-coauthors','listing-wplink','listing-slideslink','listing-videolink','listing-applink','listing-codelink','listing-image','listing-note',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-date","listing-date-format","listing-codelink","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-image"],
+      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-date","listing-date-format","listing-codelink","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-image","listing-applink"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-wip'] = new List('listing-wip', options);
+    window['quarto-listings']['listing-projects'] = new List('listing-projects', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -377,6 +377,10 @@ window.Quarto = {
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./#projects"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./#teaching"> 
 <span class="menu-text">Teaching</span></a>
   </li>  
@@ -486,7 +490,7 @@ window.Quarto = {
         <b><a href="./pub/mclaren_heuristic_2020.html">A Heuristic Method for Automatic Gaze Detection in Constrained Multi-Modal Dialogue Corpora</a></b><br>
     <span class="coauthors">with <a href="https://scholar.google.com/citations?user=cv3DJe4AAAAJ&amp;hl=en">Maria Koutsombogera</a> and <a href="https://www.tcd.ie/research/profiles/?profile=vogel">Carl Vogel</a>.</span><br>
     <span class="journal"><em>Proceedings of the 11th IEEE International Conference on Cognitive Infocommunications (CogInfoCom)</em>, 2020.</span><br>
-    <span class="paper-links"><a href="https://ieeexplore.ieee.org/abstract/document/9237883">Paper</a> | <a href="http://www.tara.tcd.ie/bitstream/handle/2262/94040/28.pdf">Open Access</a> | <a href="https://github.com/LorcanMcLaren/gaze-direction-detection">Code</a></span>
+    <span class="paper-links"><a href="https://ieeexplore.ieee.org/abstract/document/9237883">Paper</a> | <a href="http://www.tara.tcd.ie/bitstream/handle/2262/94040/28.pdf">Open Access</a> | <a href="https://github.com/LorcanMcLaren/gaze-direction-detection">Source Code</a></span>
     </div>
     
     <br>
@@ -508,16 +512,17 @@ window.Quarto = {
 <div class="listing-no-matching d-none">No matching items</div>
 </div>
 </section>
-<section id="projects" class="level4">
-<h4 class="anchored" data-anchor-id="projects">Projects</h4>
-<div id="listing-wip" class="quarto-listing quarto-listing-container-custom">
+</section>
+<section id="projects" class="level2">
+<h2 class="anchored" data-anchor-id="projects">Projects</h2>
+<div id="listing-projects" class="quarto-listing quarto-listing-container-custom">
 
     <div class="list grid" style="column-gap: 5px;">
         <div class="g-col-12">
-        <b><a href="./wip/codebook-lab.html">CodeBook Lab</a></b><br>
+        <b><a href="./projects/codebook-lab.html">CodeBook Lab</a></b><br>
         
     
-    <span class="paper-links"><a href="https://github.com/LorcanMcLaren/codebook-lab">Code</a></span>
+    <span class="paper-links"><a href="https://github.com/LorcanMcLaren/codebook-lab">Source Code</a></span>
     
     </div>
     
@@ -527,16 +532,16 @@ window.Quarto = {
 
     <div class="list grid" style="column-gap: 5px;">
         <div class="g-col-12 g-col-lg-8 g-col-md-9 g-col-sm-9">
-        <b><a href="./wip/codebook-studio.html">CodeBook Studio</a></b><br>
+        <b><a href="./projects/codebook-studio.html">CodeBook Studio</a></b><br>
         
     
-    <span class="paper-links"><a href="https://github.com/LorcanMcLaren/codebook-studio">Code</a></span>
+    <span class="paper-links"><a href="https://codebook.streamlit.app/">App</a> | <a href="https://github.com/LorcanMcLaren/codebook-studio">Source Code</a></span>
     
     </div>
     
     <div class="image_list g-col-8 g-col-lg-4 g-col-md-3 g-col-sm-3">
-            <a href="./wip/codebook-studio.html">
-                <img src="./images/CodeBook.png" alt="image" width="100%">
+            <a href="./projects/codebook-studio.html">
+                <img src="./images/codebook-studio.png" alt="image" width="100%">
             </a>
     </div>
     
@@ -546,7 +551,6 @@ window.Quarto = {
 
 <div class="listing-no-matching d-none">No matching items</div>
 </div>
-</section>
 </section>
 <section id="teaching" class="level2">
 <h2 class="anchored" data-anchor-id="teaching">Teaching</h2>

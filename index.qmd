@@ -6,19 +6,20 @@ listing: # this determines different lists with respective options. These are ac
     contents: "wp/*.qmd" # from which folder to take the contents. Here, take all .qmd files from the wp folder.
     sort: "date desc" # how to sort the contents.
     template: ejs/wp.ejs  # how to display contents. Here, use the customized wp.ejs in the ejs folder.
-    fields: [title, date, abstract, coauthors, wplink, slideslink, videolink, codelink, image, note]
+    fields: [title, date, abstract, coauthors, wplink, slideslink, videolink, applink, codelink, image, note]
   - id: pub
     sort: 
       - "date desc"
       - "title"
     contents: "pub/*.qmd"
     template: ejs/pub.ejs
-  - id: wip
+  - id: projects
     sort: 
       - "date desc"
       - "title"
-    contents: "wip/*.qmd"
+    contents: "projects/*.qmd"
     template: ejs/wp.ejs
+    fields: [title, date, abstract, coauthors, wplink, slideslink, videolink, applink, codelink, image, note]
 
 ---
 
@@ -35,7 +36,7 @@ I am a PhD researcher in computational social science at [University College Dub
 
 Prior to my doctoral studies, I completed a BA in Computer Science, Linguistics and French at Trinity College Dublin and an MSc in Politics and Data Science at University College Dublin, complemented by two years of industry experience as a data analyst.
 
-## Research
+## Research {#research}
 #### Working Papers 
 
 :::{#wp}
@@ -46,9 +47,9 @@ Prior to my doctoral studies, I completed a BA in Computer Science, Linguistics 
 :::{#pub}
 :::
 
-#### Projects
+## Projects {#projects}
 
-:::{#wip}
+:::{#projects}
 :::
 
 ## Teaching

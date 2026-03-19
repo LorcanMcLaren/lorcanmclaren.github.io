@@ -1,0 +1,153 @@
+---
+title: "CodeBook Lab"
+date: "2026"
+date-format: "YYYY"
+codelink: "https://github.com/LorcanMcLaren/codebook-lab"
+format:
+  html:
+    page-layout: article
+    template-partials:
+      - "../partials/title-block.html"
+---
+
+CodeBook Lab is an LLM annotation pipeline for computational social science. It is designed to help researchers run, compare, and evaluate annotation experiments without writing custom annotation infrastructure for each new project.
+
+Used alongside [CodeBook Studio](codebook-studio.qmd), it allows researchers to define an annotation task once and then use that same codebook to run local or HPC-based LLM workflows. Human annotations serve as the validation benchmark, making it possible to compare model outputs against a researcher-defined gold standard.
+
+## How Studio and Lab Fit Together
+
+The relationship between the two tools is straightforward: [CodeBook Studio](codebook-studio.qmd) is where the annotation task is defined, while CodeBook Lab is where the LLM experiment is run and evaluated.
+
+```{=html}
+<style>
+.codebook-flow {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 80px minmax(220px, 1fr);
+  gap: 1.25rem;
+  align-items: center;
+  margin: 1.5rem 0 1rem 0;
+}
+
+.codebook-card {
+  border: 2px solid #7a5a65;
+  border-radius: 12px;
+  background: #f7f1ec;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.codebook-card h3 {
+  margin: 0 0 0.6rem 0;
+  font-size: 1.15rem;
+  color: #5f3b4a;
+}
+
+.codebook-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.codebook-card li {
+  margin-bottom: 0.35rem;
+}
+
+.codebook-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #5f3b4a;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.codebook-bridge {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  gap: 1.25rem;
+  align-items: center;
+  margin-top: -0.25rem;
+}
+
+.codebook-data {
+  border: 1.5px dashed #7a5a65;
+  border-radius: 10px;
+  background: #fcf8f5;
+  padding: 0.85rem 1rem;
+  color: #4a3a40;
+}
+
+.codebook-data strong {
+  color: #5f3b4a;
+}
+
+@media (max-width: 900px) {
+  .codebook-flow,
+  .codebook-bridge {
+    grid-template-columns: 1fr;
+  }
+
+  .codebook-arrow {
+    transform: rotate(90deg);
+  }
+}
+</style>
+
+<div class="codebook-flow">
+  <div class="codebook-card">
+    <h3>CodeBook Studio</h3>
+    <ul>
+      <li>Define the annotation task</li>
+      <li>Annotate texts with humans</li>
+      <li>Export <code>codebook.json</code></li>
+    </ul>
+  </div>
+
+  <div class="codebook-arrow" aria-hidden="true">→</div>
+
+  <div class="codebook-card">
+    <h3>CodeBook Lab</h3>
+    <ul>
+      <li>Run LLM annotation experiments</li>
+      <li>Compare models, prompts, and settings</li>
+      <li>Evaluate outputs against human labels</li>
+    </ul>
+  </div>
+
+  <div class="codebook-bridge">
+    <div class="codebook-data">
+      <strong>Outputs from Studio</strong><br>
+      <code>codebook.json</code>, annotation design, and human-coded data
+    </div>
+
+    <div class="codebook-arrow" aria-hidden="true">→</div>
+
+    <div class="codebook-data">
+      <strong>Evaluation in Lab</strong><br>
+      Accuracy, agreement, runtime, energy, and emissions tradeoffs
+    </div>
+  </div>
+</div>
+
+<p><em>CodeBook Studio defines the task; CodeBook Lab runs and evaluates the experiment.</em></p>
+```
+
+CodeBook Lab supports the main annotation types commonly used in text-as-data workflows:
+
+- Binary labels
+- Categorical labels
+- Likert-scale ordinal labels
+- Open-ended text responses
+
+The pipeline is designed to make it easier to compare tradeoffs across:
+
+- Models available through Ollama
+- Prompt styles and example use
+- Hyperparameter settings such as temperature and top-p
+- Runtime, energy use, and estimated carbon emissions
+
+The repository includes a synthetic starter task and a configuration-driven workflow so that most experiments can be controlled through a single `param_grid.yaml` file rather than by editing pipeline code.
+
+The source code is available on [GitHub](https://github.com/LorcanMcLaren/codebook-lab).
+
+CodeBook Lab is paired with [CodeBook Studio](codebook-studio.qmd), which provides the interface for defining annotation tasks and exporting the `codebook.json` files used by the pipeline.
