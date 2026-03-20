@@ -65,13 +65,13 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="../styles.css">
 <meta property="og:title" content="CodeBook Studio – Lorcan McLaren">
-<meta property="og:description" content="">
+<meta property="og:description" content="A browser-based annotation tool for computational social science. Define a codebook, annotate texts, and export labelled data for LLM benchmarking in CodeBook Lab.">
 <meta property="og:image" content="https://lorcanmclaren.com/images/codebook-studio.png">
 <meta property="og:site_name" content="Lorcan McLaren">
 <meta property="og:image:height" content="1532">
 <meta property="og:image:width" content="2932">
 <meta name="twitter:title" content="CodeBook Studio – Lorcan McLaren">
-<meta name="twitter:description" content="">
+<meta name="twitter:description" content="A browser-based annotation tool for computational social science. Define a codebook, annotate texts, and export labelled data for LLM benchmarking in CodeBook Lab.">
 <meta name="twitter:image" content="https://lorcanmclaren.com/images/codebook-studio.png">
 <meta name="twitter:creator" content="@LorcanMcLaren">
 <meta name="twitter:image-height" content="1532">
@@ -306,25 +306,42 @@ ul.task-list li input[type="checkbox"] {
     <h1 class="title display-7">CodeBook Studio</h1>
     <p>
         
+    </p>
+        <div class="abstract">
+        <div class="abstract-title">Abstract</div>
+        <div class="abstract-text">A browser-based annotation tool for computational social science. Define a codebook, annotate texts, and export labelled data for LLM benchmarking in CodeBook Lab.</div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var abstractText = document.querySelector('.abstract .abstract-text');
+            if (abstractText) {
+                var html = abstractText.innerHTML;
+                if (html.includes(' || ')) {
+                    var paragraphs = html.split(' || ');
+                    abstractText.innerHTML = paragraphs.map(function(p) { return '<p>' + p + '</p>'; }).join('');
+                }
+            }
+        });
+    </script>
+        <p>
     <span class="paper-links paper-links-auto"><a href="https://codebook.streamlit.app/">App</a><a href="https://github.com/LorcanMcLaren/codebook-studio">Source Code</a></span>
     </p>
     <p>
         <img src="../images/codebook-studio.png" alt="image" class="img-fluid" style="max-width: 80%; height: auto;">
     </p>
-    </header>
+</header>
 
 
-<p>CodeBook Studio is a codebook-driven text annotation tool for computational social science. It lets researchers define an annotation task, annotate texts, export the task as <code>codebook.json</code>, and save the human-annotated data as <code>ground-truth.csv</code> for downstream LLM evaluation.</p>
-<p>It is designed to reduce the overhead of building annotation workflows from scratch. Researchers can define a task once, use it for human annotation, preview the corresponding LLM prompts, and carry the same codebook plus the human-coded <code>ground-truth.csv</code> directly into <a href="../projects/codebook-lab.html">CodeBook Lab</a> for model-based experiments.</p>
-<p>CodeBook Studio provides the following features:</p>
+<p>CodeBook Studio is a browser-based text annotation tool for computational social science. Researchers define an annotation task once — with sections, instructions, examples, and response formats — annotate texts in the browser, and export the codebook and labelled data for downstream use, including systematic LLM benchmarking in <a href="../projects/codebook-lab.html">CodeBook Lab</a>.</p>
 <ul>
-<li>Consistent experience for teams of annotators</li>
-<li>Multiple annotation types: binary, categorical, Likert-scale, and open-ended text</li>
-<li>Fully customisable codebook editor with integrated instructions and examples</li>
-<li>Codebook export in LaTeX and Markdown formats for easy rendering in papers and appendices</li>
-<li>LLM prompt preview and export for pipeline integration</li>
+<li>Binary, categorical, Likert-scale, and open-ended text annotation types</li>
+<li>Codebook editor with integrated instructions, examples, and live annotation preview</li>
+<li>Consistent annotation interface for teams of coders</li>
+<li>Codebook export in JSON, LaTeX, and Markdown for papers and appendices</li>
+<li>LLM prompt preview for checking how the task will be presented to models</li>
 <li>CSV input and output for interoperability</li>
 </ul>
+<p>For a step-by-step walkthrough covering both tools, see the <a href="../codebook-tutorial.html">CodeBook Studio &amp; Lab Tutorial</a>.</p>
 <p>The app is available at <a href="https://codebook.streamlit.app/">codebook.streamlit.app</a>. Feel free to reach out if you encounter any bugs or need additional features for your annotation workflow.</p>
 
 

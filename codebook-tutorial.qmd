@@ -1,0 +1,318 @@
+---
+title: "CodeBook Studio & Lab: Tutorial"
+subtitle: "Define a coding task once. Annotate in the browser. Benchmark LLMs against your labels."
+format:
+  html:
+    page-layout: article
+    toc: true
+    toc-depth: 3
+    number-sections: true
+---
+
+## Overview
+
+Text annotation and LLM-based classification usually live in separate workflows. You build a codebook, hand it to annotators, collect labels, then start again from scratch when you want to test whether an LLM can replicate the same judgements. [CodeBook Studio](projects/codebook-studio.qmd) closes that gap: you define the task once, annotate in the browser, and export a codebook and labelled dataset that plug directly into [CodeBook Lab](projects/codebook-lab.qmd) for systematic comparison across model choice, model size, prompt style, zero-shot versus few-shot learning, and sampling hyperparameters — all benchmarked against your human labels.
+
+This tutorial walks through each step:
+
+1. Prepare a CSV.
+2. Build a codebook in CodeBook Studio.
+3. Annotate your data in the browser.
+4. Export the codebook and labelled data.
+5. Run LLM experiments in CodeBook Lab and evaluate model performance against the human annotations.
+
+## What You Need
+
+Before starting, you should have:
+
+- a CSV file containing the texts you want to annotate
+- at least one column containing the text itself
+- optionally, a column containing a title, ID, headline, or other row label
+
+You do **not** need to use fixed column names such as `text` or `id`. CodeBook Studio lets you choose which columns should be treated as:
+
+- the **text column**: the main content to annotate
+- the **header column**: the short identifier shown above the text during annotation
+
+## Prepare Your CSV
+
+### Minimum format
+
+Your CSV only needs one row per text unit and one column containing the text to annotate.
+
+For example:
+
+| doc_id | title | text |
+|---|---|---|
+| 1 | Speech 1 | We need stronger climate action and more public investment. |
+| 2 | Speech 2 | The proposal is too expensive and should be delayed. |
+| 3 | Speech 3 | The minister welcomed the report but avoided committing to reform. |
+
+This is often a good structure:
+
+- `doc_id`: a unique identifier
+- `title`: a short label or headline
+- `text`: the full text to annotate
+
+### Good practical rules
+
+- Keep one observation per row.
+- Keep the annotation target in a single text column.
+- Keep IDs stable if you want to merge outputs back into other datasets later.
+- Include a short header column if the texts are long, because it makes navigation easier during annotation.
+
+### What CodeBook Studio will add later
+
+When you start annotating, CodeBook Studio adds new columns to hold annotation outputs. Their names are constructed from the section name and annotation name in your codebook.
+
+That means the uploaded CSV does **not** need annotation columns in advance.
+
+## Start in CodeBook Studio
+
+Open CodeBook Studio and go to the landing page.
+
+You will see:
+
+- an upload area for your CSV
+- an optional upload area for an existing codebook JSON file
+- a main action button that changes depending on what you upload
+
+### Two common starting points
+
+#### Option 1: Start from raw data
+
+If you upload a CSV **without** a codebook, the main button becomes **Create CodeBook**.
+
+This is the usual path when you are designing a task from scratch.
+
+#### Option 2: Start from an existing codebook
+
+If you upload both:
+
+- a CSV
+- a previously exported `codebook.json`
+
+the main button becomes **Start Annotating**.
+
+This is useful when you want to:
+
+- reuse an existing annotation scheme
+- continue annotation on new data
+- resume a task definition that already exists
+
+## Build a Codebook
+
+If you start with a CSV only, CodeBook Studio will take you to the codebook editor.
+
+The codebook defines:
+
+- which column is used as the header
+- which column is used as the text to annotate
+- how annotations are grouped into sections
+- what questions annotators answer
+- what response formats are valid
+- what instructions and examples support each annotation
+
+### Choose the header and text columns
+
+At the top of the codebook editor, select:
+
+- **Header column**: the short label or identifier shown during annotation
+- **Text column**: the actual text the annotator will read
+
+The preview updates from these choices immediately, so this is the first point where you can check that the right text is being shown.
+
+### Add sections
+
+Sections help organise related annotations.
+
+For example, you might create a section called:
+
+- `Sentiment`
+- `Policy Position`
+- `Environmental Impacts`
+- `Moral Foundations`
+
+Each section can also include **section instructions**. These appear in the annotation interface and are automatically incorporated into the LLM prompt when the task is run in CodeBook Lab.
+
+### Add annotation items
+
+Inside each section, you add one or more annotation items.
+
+CodeBook Studio currently supports four annotation types:
+
+- **Checkbox**: binary yes/no judgement
+- **Dropdown**: select one option from a predefined list
+- **Likert**: choose a value from a bounded numeric scale
+- **Textbox**: enter a short free-text response
+
+Each annotation item should have:
+
+- a clear **name**
+- a useful **description**
+- any type-specific settings it needs
+
+For example:
+
+- a dropdown needs a list of valid options
+- a Likert item needs a minimum and maximum value
+- a textbox needs no extra response settings
+
+### Add examples after the annotation is defined
+
+In the focused editor, examples come **after** the annotation definition itself. This is deliberate: it lets you define the valid response space first, and then attach examples that use valid responses.
+
+For example:
+
+- checkbox examples can use only `Yes` or `No`
+- dropdown examples can use only the listed dropdown options
+- Likert examples can use only values inside the configured scale
+
+This makes examples more reliable for both human annotation and downstream LLM prompting.
+
+### Use the workflow preview as your QA surface
+
+One of the most useful parts of the editor is the **Annotation Workflow Preview** above the builder.
+
+Use it to check:
+
+- whether the right text column is showing
+- whether the section names are intuitive
+- whether instructions are too long or too vague
+- whether examples make sense
+- whether annotators will see a clean, compact interface
+
+If something feels confusing in the preview, it will probably feel confusing in the real annotation flow too.
+
+## Move Into Annotation
+
+When your codebook is ready, click **Start Annotating**.
+
+CodeBook Studio will create the annotation columns it needs and take you into the annotation workspace.
+
+### What annotators see
+
+The annotation interface is designed around a compact two-column layout:
+
+- **Left pane**: the text being annotated
+- **Right pane**: the currently active annotation section
+
+At the top, there is a navigation bar showing:
+
+- the current item
+- progress through the dataset
+- previous/next navigation
+
+Within the section pane, annotators work through section instructions, annotation widgets, and optional examples. The app autosaves session state as you navigate, so you can resume later from the landing page.
+
+### Tips for efficient annotation
+
+- Keep section instructions concise.
+- Use examples sparingly but strategically.
+- Break large tasks into sections so annotators only focus on one cluster of judgements at a time.
+- Use the header column to help orient annotators when the texts are long or similar.
+
+## Export Your Outputs
+
+Once you have annotated your data, open **Utilities** in the annotation flow.
+
+You can download:
+
+- **Annotated Data**: downloads as `ground-truth.csv`
+- **CodeBook**: downloads as `codebook.zip`, containing `codebook.json`, `codebook.md`, and `codebook.tex`
+
+The JSON and CSV are what CodeBook Lab needs. The Markdown and LaTeX exports are mainly for documentation, appendices, and reporting.
+
+## Move the Task Into CodeBook Lab
+
+Inside [CodeBook Lab](projects/codebook-lab.qmd), create a task folder and copy the two exported files into it:
+
+```text
+tasks/my-task/
+├── ground-truth.csv
+└── codebook.json
+```
+
+CodeBook Lab reads the task definition from `codebook.json` and the human labels from `ground-truth.csv`. Before sending text to the LLM, it automatically strips out the annotation columns, so the model sees only the original text. The human labels are then used as ground truth when scoring model performance.
+
+## Configure Experiments in CodeBook Lab
+
+Most experiment setup happens through `param_grid.yaml`.
+
+A minimal example looks like this:
+
+```yaml
+# Environment setting
+country_iso_code: "USA"
+
+# Experiment sweep settings
+tasks: ["my-task"]                # which task folders to run
+models: ["gemma3:270m"]           # which Ollama models to compare
+use_examples: ["false"]           # include codebook examples in the prompt?
+prompt_types: ["standard"]        # prompt wrapper: standard, persona, or CoT
+temperatures: []                  # sampling hyperparameters to sweep over
+top_ps: []                        # nucleus sampling hyperparameters to sweep over
+process_textboxes: ["true"]       # generate and score textbox annotations?
+```
+
+Because the codebook and labelled data stay constant across runs, you can isolate the effect of each choice: swap in a different model or model size, switch prompt style from standard to chain-of-thought, toggle between zero-shot and few-shot learning, or vary sampling hyperparameters like temperature and top-p — and compare every combination against the same human labels.
+
+## Run the Experiment
+
+From inside CodeBook Lab:
+
+1. create and activate the Python environment
+2. make sure Ollama is available
+3. run the local script
+
+Typical local run steps look like:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+ollama serve
+bash scripts/run_local.sh
+```
+
+If you are using a cluster or remote machine, you would adapt the corresponding HPC workflow instead.
+
+## Inspect the Outputs
+
+Each CodeBook Lab run creates a timestamped experiment directory under `outputs/<task>/`.
+
+Typical outputs include:
+
+- `output.csv`: row-level model annotations
+- `config.json`: run configuration
+- `classification_reports.txt`: evaluation summaries
+- `timing_data.json`: inference timing
+- `char_counts.json`: prompt and response character counts
+- `emissions.csv`: CodeCarbon tracking output
+
+Aggregate metrics are also appended to:
+
+```text
+outputs/metrics/<task>_metrics_log.csv
+```
+
+This lets you compare model performance not only in terms of annotation quality against human labels, but also in terms of runtime, prompt/response length, energy consumption, and emissions.
+
+## Common Pitfalls
+
+### Using the wrong text column
+
+If the wrong column is selected, both human annotators and the LLM will be reading the wrong content. Always confirm the text column in the codebook editor preview before starting annotation.
+
+### Renaming exported files
+
+CodeBook Lab expects `ground-truth.csv` and `codebook.json` by name. If you rename these, the workflow becomes harder to reproduce and document.
+
+### Letting examples drift from valid responses
+
+Examples are most useful when they obey the same response logic as the annotation item itself. Define the response type and valid response space first, then add examples.
+
+### Making instructions too long
+
+Detailed guidance is useful, but very long instructions can slow both human annotation and prompt interpretation. Try to keep the core decision rule visible quickly.

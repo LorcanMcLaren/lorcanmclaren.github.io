@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>CodeBook Studio &amp; Lab: Tutorial – Lorcan McLaren</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<link href="./images/icon.png" rel="icon" type="image/png">
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-7840c37257943da5aebf19eaffffff77.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d44e49af5e7d8a02f6f831aa6488ea46.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-7840c37257943da5aebf19eaffffff77.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="CodeBook Studio &amp; Lab: Tutorial – Lorcan McLaren">
+<meta property="og:description" content="Define a coding task once. Annotate in the browser. Benchmark LLMs against your labels.">
+<meta property="og:site_name" content="Lorcan McLaren">
+<meta name="twitter:title" content="CodeBook Studio &amp; Lab: Tutorial – Lorcan McLaren">
+<meta name="twitter:description" content="Define a coding task once. Annotate in the browser. Benchmark LLMs against your labels.">
+<meta name="twitter:creator" content="@LorcanMcLaren">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Lorcan McLaren</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./#research"> 
+<span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./#projects"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./#teaching"> 
+<span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./#contact"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="././cv"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
+  <li><a href="#what-you-need" id="toc-what-you-need" class="nav-link" data-scroll-target="#what-you-need"><span class="header-section-number">2</span> What You Need</a></li>
+  <li><a href="#prepare-your-csv" id="toc-prepare-your-csv" class="nav-link" data-scroll-target="#prepare-your-csv"><span class="header-section-number">3</span> Prepare Your CSV</a>
+  <ul class="collapse">
+  <li><a href="#minimum-format" id="toc-minimum-format" class="nav-link" data-scroll-target="#minimum-format"><span class="header-section-number">3.1</span> Minimum format</a></li>
+  <li><a href="#good-practical-rules" id="toc-good-practical-rules" class="nav-link" data-scroll-target="#good-practical-rules"><span class="header-section-number">3.2</span> Good practical rules</a></li>
+  <li><a href="#what-codebook-studio-will-add-later" id="toc-what-codebook-studio-will-add-later" class="nav-link" data-scroll-target="#what-codebook-studio-will-add-later"><span class="header-section-number">3.3</span> What CodeBook Studio will add later</a></li>
+  </ul></li>
+  <li><a href="#start-in-codebook-studio" id="toc-start-in-codebook-studio" class="nav-link" data-scroll-target="#start-in-codebook-studio"><span class="header-section-number">4</span> Start in CodeBook Studio</a>
+  <ul class="collapse">
+  <li><a href="#two-common-starting-points" id="toc-two-common-starting-points" class="nav-link" data-scroll-target="#two-common-starting-points"><span class="header-section-number">4.1</span> Two common starting points</a></li>
+  </ul></li>
+  <li><a href="#build-a-codebook" id="toc-build-a-codebook" class="nav-link" data-scroll-target="#build-a-codebook"><span class="header-section-number">5</span> Build a Codebook</a>
+  <ul class="collapse">
+  <li><a href="#choose-the-header-and-text-columns" id="toc-choose-the-header-and-text-columns" class="nav-link" data-scroll-target="#choose-the-header-and-text-columns"><span class="header-section-number">5.1</span> Choose the header and text columns</a></li>
+  <li><a href="#add-sections" id="toc-add-sections" class="nav-link" data-scroll-target="#add-sections"><span class="header-section-number">5.2</span> Add sections</a></li>
+  <li><a href="#add-annotation-items" id="toc-add-annotation-items" class="nav-link" data-scroll-target="#add-annotation-items"><span class="header-section-number">5.3</span> Add annotation items</a></li>
+  <li><a href="#add-examples-after-the-annotation-is-defined" id="toc-add-examples-after-the-annotation-is-defined" class="nav-link" data-scroll-target="#add-examples-after-the-annotation-is-defined"><span class="header-section-number">5.4</span> Add examples after the annotation is defined</a></li>
+  <li><a href="#use-the-workflow-preview-as-your-qa-surface" id="toc-use-the-workflow-preview-as-your-qa-surface" class="nav-link" data-scroll-target="#use-the-workflow-preview-as-your-qa-surface"><span class="header-section-number">5.5</span> Use the workflow preview as your QA surface</a></li>
+  </ul></li>
+  <li><a href="#move-into-annotation" id="toc-move-into-annotation" class="nav-link" data-scroll-target="#move-into-annotation"><span class="header-section-number">6</span> Move Into Annotation</a>
+  <ul class="collapse">
+  <li><a href="#what-annotators-see" id="toc-what-annotators-see" class="nav-link" data-scroll-target="#what-annotators-see"><span class="header-section-number">6.1</span> What annotators see</a></li>
+  <li><a href="#tips-for-efficient-annotation" id="toc-tips-for-efficient-annotation" class="nav-link" data-scroll-target="#tips-for-efficient-annotation"><span class="header-section-number">6.2</span> Tips for efficient annotation</a></li>
+  </ul></li>
+  <li><a href="#export-your-outputs" id="toc-export-your-outputs" class="nav-link" data-scroll-target="#export-your-outputs"><span class="header-section-number">7</span> Export Your Outputs</a></li>
+  <li><a href="#move-the-task-into-codebook-lab" id="toc-move-the-task-into-codebook-lab" class="nav-link" data-scroll-target="#move-the-task-into-codebook-lab"><span class="header-section-number">8</span> Move the Task Into CodeBook Lab</a></li>
+  <li><a href="#configure-experiments-in-codebook-lab" id="toc-configure-experiments-in-codebook-lab" class="nav-link" data-scroll-target="#configure-experiments-in-codebook-lab"><span class="header-section-number">9</span> Configure Experiments in CodeBook Lab</a></li>
+  <li><a href="#run-the-experiment" id="toc-run-the-experiment" class="nav-link" data-scroll-target="#run-the-experiment"><span class="header-section-number">10</span> Run the Experiment</a></li>
+  <li><a href="#inspect-the-outputs" id="toc-inspect-the-outputs" class="nav-link" data-scroll-target="#inspect-the-outputs"><span class="header-section-number">11</span> Inspect the Outputs</a></li>
+  <li><a href="#common-pitfalls" id="toc-common-pitfalls" class="nav-link" data-scroll-target="#common-pitfalls"><span class="header-section-number">12</span> Common Pitfalls</a>
+  <ul class="collapse">
+  <li><a href="#using-the-wrong-text-column" id="toc-using-the-wrong-text-column" class="nav-link" data-scroll-target="#using-the-wrong-text-column"><span class="header-section-number">12.1</span> Using the wrong text column</a></li>
+  <li><a href="#renaming-exported-files" id="toc-renaming-exported-files" class="nav-link" data-scroll-target="#renaming-exported-files"><span class="header-section-number">12.2</span> Renaming exported files</a></li>
+  <li><a href="#letting-examples-drift-from-valid-responses" id="toc-letting-examples-drift-from-valid-responses" class="nav-link" data-scroll-target="#letting-examples-drift-from-valid-responses"><span class="header-section-number">12.3</span> Letting examples drift from valid responses</a></li>
+  <li><a href="#making-instructions-too-long" id="toc-making-instructions-too-long" class="nav-link" data-scroll-target="#making-instructions-too-long"><span class="header-section-number">12.4</span> Making instructions too long</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">CodeBook Studio &amp; Lab: Tutorial</h1>
+<p class="subtitle lead">Define a coding task once. Annotate in the browser. Benchmark LLMs against your labels.</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
+<p>Text annotation and LLM-based classification usually live in separate workflows. You build a codebook, hand it to annotators, collect labels, then start again from scratch when you want to test whether an LLM can replicate the same judgements. <a href="./projects/codebook-studio.html">CodeBook Studio</a> closes that gap: you define the task once, annotate in the browser, and export a codebook and labelled dataset that plug directly into <a href="./projects/codebook-lab.html">CodeBook Lab</a> for systematic comparison across model choice, model size, prompt style, zero-shot versus few-shot learning, and sampling hyperparameters — all benchmarked against your human labels.</p>
+<p>This tutorial walks through each step:</p>
+<ol type="1">
+<li>Prepare a CSV.</li>
+<li>Build a codebook in CodeBook Studio.</li>
+<li>Annotate your data in the browser.</li>
+<li>Export the codebook and labelled data.</li>
+<li>Run LLM experiments in CodeBook Lab and evaluate model performance against the human annotations.</li>
+</ol>
+</section>
+<section id="what-you-need" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="what-you-need"><span class="header-section-number">2</span> What You Need</h2>
+<p>Before starting, you should have:</p>
+<ul>
+<li>a CSV file containing the texts you want to annotate</li>
+<li>at least one column containing the text itself</li>
+<li>optionally, a column containing a title, ID, headline, or other row label</li>
+</ul>
+<p>You do <strong>not</strong> need to use fixed column names such as <code>text</code> or <code>id</code>. CodeBook Studio lets you choose which columns should be treated as:</p>
+<ul>
+<li>the <strong>text column</strong>: the main content to annotate</li>
+<li>the <strong>header column</strong>: the short identifier shown above the text during annotation</li>
+</ul>
+</section>
+<section id="prepare-your-csv" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="prepare-your-csv"><span class="header-section-number">3</span> Prepare Your CSV</h2>
+<section id="minimum-format" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="minimum-format"><span class="header-section-number">3.1</span> Minimum format</h3>
+<p>Your CSV only needs one row per text unit and one column containing the text to annotate.</p>
+<p>For example:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>doc_id</th>
+<th>title</th>
+<th>text</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Speech 1</td>
+<td>We need stronger climate action and more public investment.</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Speech 2</td>
+<td>The proposal is too expensive and should be delayed.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Speech 3</td>
+<td>The minister welcomed the report but avoided committing to reform.</td>
+</tr>
+</tbody>
+</table>
+<p>This is often a good structure:</p>
+<ul>
+<li><code>doc_id</code>: a unique identifier</li>
+<li><code>title</code>: a short label or headline</li>
+<li><code>text</code>: the full text to annotate</li>
+</ul>
+</section>
+<section id="good-practical-rules" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="good-practical-rules"><span class="header-section-number">3.2</span> Good practical rules</h3>
+<ul>
+<li>Keep one observation per row.</li>
+<li>Keep the annotation target in a single text column.</li>
+<li>Keep IDs stable if you want to merge outputs back into other datasets later.</li>
+<li>Include a short header column if the texts are long, because it makes navigation easier during annotation.</li>
+</ul>
+</section>
+<section id="what-codebook-studio-will-add-later" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="what-codebook-studio-will-add-later"><span class="header-section-number">3.3</span> What CodeBook Studio will add later</h3>
+<p>When you start annotating, CodeBook Studio adds new columns to hold annotation outputs. Their names are constructed from the section name and annotation name in your codebook.</p>
+<p>That means the uploaded CSV does <strong>not</strong> need annotation columns in advance.</p>
+</section>
+</section>
+<section id="start-in-codebook-studio" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="start-in-codebook-studio"><span class="header-section-number">4</span> Start in CodeBook Studio</h2>
+<p>Open CodeBook Studio and go to the landing page.</p>
+<p>You will see:</p>
+<ul>
+<li>an upload area for your CSV</li>
+<li>an optional upload area for an existing codebook JSON file</li>
+<li>a main action button that changes depending on what you upload</li>
+</ul>
+<section id="two-common-starting-points" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="two-common-starting-points"><span class="header-section-number">4.1</span> Two common starting points</h3>
+<section id="option-1-start-from-raw-data" class="level4" data-number="4.1.1">
+<h4 data-number="4.1.1" class="anchored" data-anchor-id="option-1-start-from-raw-data"><span class="header-section-number">4.1.1</span> Option 1: Start from raw data</h4>
+<p>If you upload a CSV <strong>without</strong> a codebook, the main button becomes <strong>Create CodeBook</strong>.</p>
+<p>This is the usual path when you are designing a task from scratch.</p>
+</section>
+<section id="option-2-start-from-an-existing-codebook" class="level4" data-number="4.1.2">
+<h4 data-number="4.1.2" class="anchored" data-anchor-id="option-2-start-from-an-existing-codebook"><span class="header-section-number">4.1.2</span> Option 2: Start from an existing codebook</h4>
+<p>If you upload both:</p>
+<ul>
+<li>a CSV</li>
+<li>a previously exported <code>codebook.json</code></li>
+</ul>
+<p>the main button becomes <strong>Start Annotating</strong>.</p>
+<p>This is useful when you want to:</p>
+<ul>
+<li>reuse an existing annotation scheme</li>
+<li>continue annotation on new data</li>
+<li>resume a task definition that already exists</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="build-a-codebook" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="build-a-codebook"><span class="header-section-number">5</span> Build a Codebook</h2>
+<p>If you start with a CSV only, CodeBook Studio will take you to the codebook editor.</p>
+<p>The codebook defines:</p>
+<ul>
+<li>which column is used as the header</li>
+<li>which column is used as the text to annotate</li>
+<li>how annotations are grouped into sections</li>
+<li>what questions annotators answer</li>
+<li>what response formats are valid</li>
+<li>what instructions and examples support each annotation</li>
+</ul>
+<section id="choose-the-header-and-text-columns" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="choose-the-header-and-text-columns"><span class="header-section-number">5.1</span> Choose the header and text columns</h3>
+<p>At the top of the codebook editor, select:</p>
+<ul>
+<li><strong>Header column</strong>: the short label or identifier shown during annotation</li>
+<li><strong>Text column</strong>: the actual text the annotator will read</li>
+</ul>
+<p>The preview updates from these choices immediately, so this is the first point where you can check that the right text is being shown.</p>
+</section>
+<section id="add-sections" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="add-sections"><span class="header-section-number">5.2</span> Add sections</h3>
+<p>Sections help organise related annotations.</p>
+<p>For example, you might create a section called:</p>
+<ul>
+<li><code>Sentiment</code></li>
+<li><code>Policy Position</code></li>
+<li><code>Environmental Impacts</code></li>
+<li><code>Moral Foundations</code></li>
+</ul>
+<p>Each section can also include <strong>section instructions</strong>. These appear in the annotation interface and are automatically incorporated into the LLM prompt when the task is run in CodeBook Lab.</p>
+</section>
+<section id="add-annotation-items" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="add-annotation-items"><span class="header-section-number">5.3</span> Add annotation items</h3>
+<p>Inside each section, you add one or more annotation items.</p>
+<p>CodeBook Studio currently supports four annotation types:</p>
+<ul>
+<li><strong>Checkbox</strong>: binary yes/no judgement</li>
+<li><strong>Dropdown</strong>: select one option from a predefined list</li>
+<li><strong>Likert</strong>: choose a value from a bounded numeric scale</li>
+<li><strong>Textbox</strong>: enter a short free-text response</li>
+</ul>
+<p>Each annotation item should have:</p>
+<ul>
+<li>a clear <strong>name</strong></li>
+<li>a useful <strong>description</strong></li>
+<li>any type-specific settings it needs</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li>a dropdown needs a list of valid options</li>
+<li>a Likert item needs a minimum and maximum value</li>
+<li>a textbox needs no extra response settings</li>
+</ul>
+</section>
+<section id="add-examples-after-the-annotation-is-defined" class="level3" data-number="5.4">
+<h3 data-number="5.4" class="anchored" data-anchor-id="add-examples-after-the-annotation-is-defined"><span class="header-section-number">5.4</span> Add examples after the annotation is defined</h3>
+<p>In the focused editor, examples come <strong>after</strong> the annotation definition itself. This is deliberate: it lets you define the valid response space first, and then attach examples that use valid responses.</p>
+<p>For example:</p>
+<ul>
+<li>checkbox examples can use only <code>Yes</code> or <code>No</code></li>
+<li>dropdown examples can use only the listed dropdown options</li>
+<li>Likert examples can use only values inside the configured scale</li>
+</ul>
+<p>This makes examples more reliable for both human annotation and downstream LLM prompting.</p>
+</section>
+<section id="use-the-workflow-preview-as-your-qa-surface" class="level3" data-number="5.5">
+<h3 data-number="5.5" class="anchored" data-anchor-id="use-the-workflow-preview-as-your-qa-surface"><span class="header-section-number">5.5</span> Use the workflow preview as your QA surface</h3>
+<p>One of the most useful parts of the editor is the <strong>Annotation Workflow Preview</strong> above the builder.</p>
+<p>Use it to check:</p>
+<ul>
+<li>whether the right text column is showing</li>
+<li>whether the section names are intuitive</li>
+<li>whether instructions are too long or too vague</li>
+<li>whether examples make sense</li>
+<li>whether annotators will see a clean, compact interface</li>
+</ul>
+<p>If something feels confusing in the preview, it will probably feel confusing in the real annotation flow too.</p>
+</section>
+</section>
+<section id="move-into-annotation" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="move-into-annotation"><span class="header-section-number">6</span> Move Into Annotation</h2>
+<p>When your codebook is ready, click <strong>Start Annotating</strong>.</p>
+<p>CodeBook Studio will create the annotation columns it needs and take you into the annotation workspace.</p>
+<section id="what-annotators-see" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="what-annotators-see"><span class="header-section-number">6.1</span> What annotators see</h3>
+<p>The annotation interface is designed around a compact two-column layout:</p>
+<ul>
+<li><strong>Left pane</strong>: the text being annotated</li>
+<li><strong>Right pane</strong>: the currently active annotation section</li>
+</ul>
+<p>At the top, there is a navigation bar showing:</p>
+<ul>
+<li>the current item</li>
+<li>progress through the dataset</li>
+<li>previous/next navigation</li>
+</ul>
+<p>Within the section pane, annotators work through section instructions, annotation widgets, and optional examples. The app autosaves session state as you navigate, so you can resume later from the landing page.</p>
+</section>
+<section id="tips-for-efficient-annotation" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="tips-for-efficient-annotation"><span class="header-section-number">6.2</span> Tips for efficient annotation</h3>
+<ul>
+<li>Keep section instructions concise.</li>
+<li>Use examples sparingly but strategically.</li>
+<li>Break large tasks into sections so annotators only focus on one cluster of judgements at a time.</li>
+<li>Use the header column to help orient annotators when the texts are long or similar.</li>
+</ul>
+</section>
+</section>
+<section id="export-your-outputs" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="export-your-outputs"><span class="header-section-number">7</span> Export Your Outputs</h2>
+<p>Once you have annotated your data, open <strong>Utilities</strong> in the annotation flow.</p>
+<p>You can download:</p>
+<ul>
+<li><strong>Annotated Data</strong>: downloads as <code>ground-truth.csv</code></li>
+<li><strong>CodeBook</strong>: downloads as <code>codebook.zip</code>, containing <code>codebook.json</code>, <code>codebook.md</code>, and <code>codebook.tex</code></li>
+</ul>
+<p>The JSON and CSV are what CodeBook Lab needs. The Markdown and LaTeX exports are mainly for documentation, appendices, and reporting.</p>
+</section>
+<section id="move-the-task-into-codebook-lab" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="move-the-task-into-codebook-lab"><span class="header-section-number">8</span> Move the Task Into CodeBook Lab</h2>
+<p>Inside <a href="./projects/codebook-lab.html">CodeBook Lab</a>, create a task folder and copy the two exported files into it:</p>
+<pre class="text"><code>tasks/my-task/
+├── ground-truth.csv
+└── codebook.json</code></pre>
+<p>CodeBook Lab reads the task definition from <code>codebook.json</code> and the human labels from <code>ground-truth.csv</code>. Before sending text to the LLM, it automatically strips out the annotation columns, so the model sees only the original text. The human labels are then used as ground truth when scoring model performance.</p>
+</section>
+<section id="configure-experiments-in-codebook-lab" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="configure-experiments-in-codebook-lab"><span class="header-section-number">9</span> Configure Experiments in CodeBook Lab</h2>
+<p>Most experiment setup happens through <code>param_grid.yaml</code>.</p>
+<p>A minimal example looks like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Environment setting</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">country_iso_code</span><span class="kw">:</span><span class="at"> </span><span class="st">"USA"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Experiment sweep settings</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tasks</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"my-task"</span><span class="kw">]</span><span class="co">                # which task folders to run</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">models</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"gemma3:270m"</span><span class="kw">]</span><span class="co">           # which Ollama models to compare</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">use_examples</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"false"</span><span class="kw">]</span><span class="co">           # include codebook examples in the prompt?</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">prompt_types</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"standard"</span><span class="kw">]</span><span class="co">        # prompt wrapper: standard, persona, or CoT</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">temperatures</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span><span class="co">                  # sampling hyperparameters to sweep over</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">top_ps</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span><span class="co">                        # nucleus sampling hyperparameters to sweep over</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">process_textboxes</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"true"</span><span class="kw">]</span><span class="co">       # generate and score textbox annotations?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Because the codebook and labelled data stay constant across runs, you can isolate the effect of each choice: swap in a different model or model size, switch prompt style from standard to chain-of-thought, toggle between zero-shot and few-shot learning, or vary sampling hyperparameters like temperature and top-p — and compare every combination against the same human labels.</p>
+</section>
+<section id="run-the-experiment" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="run-the-experiment"><span class="header-section-number">10</span> Run the Experiment</h2>
+<p>From inside CodeBook Lab:</p>
+<ol type="1">
+<li>create and activate the Python environment</li>
+<li>make sure Ollama is available</li>
+<li>run the local script</li>
+</ol>
+<p>Typical local run steps look like:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pip</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> serve</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/run_local.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you are using a cluster or remote machine, you would adapt the corresponding HPC workflow instead.</p>
+</section>
+<section id="inspect-the-outputs" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="inspect-the-outputs"><span class="header-section-number">11</span> Inspect the Outputs</h2>
+<p>Each CodeBook Lab run creates a timestamped experiment directory under <code>outputs/&lt;task&gt;/</code>.</p>
+<p>Typical outputs include:</p>
+<ul>
+<li><code>output.csv</code>: row-level model annotations</li>
+<li><code>config.json</code>: run configuration</li>
+<li><code>classification_reports.txt</code>: evaluation summaries</li>
+<li><code>timing_data.json</code>: inference timing</li>
+<li><code>char_counts.json</code>: prompt and response character counts</li>
+<li><code>emissions.csv</code>: CodeCarbon tracking output</li>
+</ul>
+<p>Aggregate metrics are also appended to:</p>
+<pre class="text"><code>outputs/metrics/&lt;task&gt;_metrics_log.csv</code></pre>
+<p>This lets you compare model performance not only in terms of annotation quality against human labels, but also in terms of runtime, prompt/response length, energy consumption, and emissions.</p>
+</section>
+<section id="common-pitfalls" class="level2" data-number="12">
+<h2 data-number="12" class="anchored" data-anchor-id="common-pitfalls"><span class="header-section-number">12</span> Common Pitfalls</h2>
+<section id="using-the-wrong-text-column" class="level3" data-number="12.1">
+<h3 data-number="12.1" class="anchored" data-anchor-id="using-the-wrong-text-column"><span class="header-section-number">12.1</span> Using the wrong text column</h3>
+<p>If the wrong column is selected, both human annotators and the LLM will be reading the wrong content. Always confirm the text column in the codebook editor preview before starting annotation.</p>
+</section>
+<section id="renaming-exported-files" class="level3" data-number="12.2">
+<h3 data-number="12.2" class="anchored" data-anchor-id="renaming-exported-files"><span class="header-section-number">12.2</span> Renaming exported files</h3>
+<p>CodeBook Lab expects <code>ground-truth.csv</code> and <code>codebook.json</code> by name. If you rename these, the workflow becomes harder to reproduce and document.</p>
+</section>
+<section id="letting-examples-drift-from-valid-responses" class="level3" data-number="12.3">
+<h3 data-number="12.3" class="anchored" data-anchor-id="letting-examples-drift-from-valid-responses"><span class="header-section-number">12.3</span> Letting examples drift from valid responses</h3>
+<p>Examples are most useful when they obey the same response logic as the annotation item itself. Define the response type and valid response space first, then add examples.</p>
+</section>
+<section id="making-instructions-too-long" class="level3" data-number="12.4">
+<h3 data-number="12.4" class="anchored" data-anchor-id="making-instructions-too-long"><span class="header-section-number">12.4</span> Making instructions too long</h3>
+<p>Detailed guidance is useful, but very long instructions can slow both human annotation and prompt interpretation. Try to keep the core decision rule visible quickly.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/lorcanmclaren\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<a href="https://lorcanmclaren.com">Lorcan McLaren</a> · ©
+<script>document.write(new Date().getFullYear())</script>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

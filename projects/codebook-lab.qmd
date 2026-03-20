@@ -2,6 +2,7 @@
 title: "CodeBook Lab"
 date: "2026"
 date-format: "YYYY"
+abstract: "An LLM annotation experiment pipeline for computational social science. Benchmark local models against human labels across model choice, model size, prompt style, zero-shot versus few-shot learning, and sampling hyperparameters."
 codelink: "https://github.com/LorcanMcLaren/codebook-lab"
 format:
   html:
@@ -10,13 +11,14 @@ format:
       - "../partials/title-block.html"
 ---
 
-CodeBook Lab is an LLM annotation pipeline for computational social science. It is designed to help researchers run, compare, and evaluate annotation experiments without writing custom annotation infrastructure for each new project.
+CodeBook Lab is an experiment pipeline that lets researchers benchmark LLM annotation performance against human labels. It takes a codebook and labelled dataset from [CodeBook Studio](codebook-studio.qmd) and runs structured experiments across the dimensions that matter for text-as-data research:
 
-Used alongside [CodeBook Studio](codebook-studio.qmd), it allows researchers to define an annotation task once and then use that same codebook plus a human-annotated `ground-truth.csv` to run local or HPC-based LLM workflows. Human annotations serve as the validation benchmark, and CodeBook Lab strips the codebook-defined label columns from `ground-truth.csv` before sending text to the LLM, making it possible to compare model outputs against a researcher-defined gold standard.
+- **Model choice and model size**: compare any models available through Ollama
+- **Prompt style**: standard, persona, or chain-of-thought wrappers
+- **Zero-shot versus few-shot learning**: toggle codebook examples on or off
+- **Sampling hyperparameters**: sweep over temperature and top-p settings
 
-## How Studio and Lab Fit Together
-
-The relationship between the two tools is straightforward: [CodeBook Studio](codebook-studio.qmd) is where the annotation task is defined, while CodeBook Lab is where the LLM experiment is run and evaluated.
+Experiments are controlled through a single `param_grid.yaml` file rather than by editing pipeline code. Because the codebook and labelled data stay constant across runs, each dimension can be isolated and compared against the same human labels.
 
 ```{=html}
 <style>
@@ -138,7 +140,7 @@ The relationship between the two tools is straightforward: [CodeBook Studio](cod
     <ul>
       <li>Define the annotation task</li>
       <li>Annotate texts with humans</li>
-      <li>Export <code>codebook.json</code></li>
+      <li>Export <code>codebook.json</code> and <code>ground-truth.csv</code></li>
     </ul>
   </div>
 
@@ -148,41 +150,27 @@ The relationship between the two tools is straightforward: [CodeBook Studio](cod
     <h3>CodeBook Lab</h3>
     <ul>
       <li>Run LLM annotation experiments</li>
-      <li>Compare models, prompts, and settings</li>
-      <li>Evaluate outputs against human labels</li>
+      <li>Isolate model, prompt, and hyperparameter effects</li>
+      <li>Score outputs against human labels</li>
     </ul>
   </div>
 
   <div class="codebook-bridge">
     <div class="codebook-data">
-      <strong>Outputs from Studio</strong><br>
-      <code>codebook.json</code> and a human-annotated <code>ground-truth.csv</code>
+      <strong>Shared inputs</strong><br>
+      <code>codebook.json</code> + human-annotated <code>ground-truth.csv</code>
     </div>
 
     <div class="codebook-arrow" aria-hidden="true">→</div>
 
     <div class="codebook-data">
-      <strong>Evaluation in Lab</strong><br>
-      Accuracy, agreement, runtime, energy, and emissions tradeoffs
+      <strong>Experiment outputs</strong><br>
+      Accuracy, agreement, runtime, energy, and emissions metrics
     </div>
   </div>
 </div>
-
-<p><em>CodeBook Studio defines the task; CodeBook Lab runs and evaluates the experiment.</em></p>
 ```
 
-CodeBook Lab supports the main annotation types commonly used in text-as-data workflows:
+CodeBook Lab also tracks runtime, prompt and response length, energy consumption, and estimated carbon emissions for each run, with aggregate metrics logged to a single CSV for cross-experiment comparison.
 
-- Binary labels
-- Categorical labels
-- Likert-scale ordinal labels
-- Open-ended text responses
-
-The pipeline is designed to make it easier to compare tradeoffs across:
-
-- Models available through Ollama
-- Prompt styles and example use
-- Hyperparameter settings such as temperature and top-p
-- Runtime, energy use, and estimated carbon emissions
-
-The repository includes a synthetic starter task and a configuration-driven workflow so that most experiments can be controlled through a single `param_grid.yaml` file rather than by editing pipeline code.
+The repository includes a synthetic starter task so you can test the pipeline before plugging in your own data. For a step-by-step walkthrough covering both tools, see the [CodeBook Studio & Lab Tutorial](../codebook-tutorial.qmd).

@@ -2,6 +2,7 @@
 title: "CodeBook Studio"
 date: "2026"
 date-format: "YYYY"
+abstract: "A browser-based annotation tool for computational social science. Define a codebook, annotate texts, and export labelled data for LLM benchmarking in CodeBook Lab."
 image: "../images/codebook-studio.png"
 applink: "https://codebook.streamlit.app/"
 codelink: "https://github.com/LorcanMcLaren/codebook-studio"
@@ -12,17 +13,15 @@ format:
       - "../partials/title-block.html"
 ---
 
-CodeBook Studio is a codebook-driven text annotation tool for computational social science. It lets researchers define an annotation task, annotate texts, export the task as `codebook.json`, and save the human-annotated data as `ground-truth.csv` for downstream LLM evaluation.
+CodeBook Studio is a browser-based text annotation tool for computational social science. Researchers define an annotation task once — with sections, instructions, examples, and response formats — annotate texts in the browser, and export the codebook and labelled data for downstream use, including systematic LLM benchmarking in [CodeBook Lab](codebook-lab.qmd).
 
-It is designed to reduce the overhead of building annotation workflows from scratch. Researchers can define a task once, use it for human annotation, preview the corresponding LLM prompts, and carry the same codebook plus the human-coded `ground-truth.csv` directly into [CodeBook Lab](codebook-lab.qmd) for model-based experiments.
-
-CodeBook Studio provides the following features:
-
-- Consistent experience for teams of annotators
-- Multiple annotation types: binary, categorical, Likert-scale, and open-ended text
-- Fully customisable codebook editor with integrated instructions and examples
-- Codebook export in LaTeX and Markdown formats for easy rendering in papers and appendices
-- LLM prompt preview and export for pipeline integration
+- Binary, categorical, Likert-scale, and open-ended text annotation types
+- Codebook editor with integrated instructions, examples, and live annotation preview
+- Consistent annotation interface for teams of coders
+- Codebook export in JSON, LaTeX, and Markdown for papers and appendices
+- LLM prompt preview for checking how the task will be presented to models
 - CSV input and output for interoperability
+
+For a step-by-step walkthrough covering both tools, see the [CodeBook Studio & Lab Tutorial](../codebook-tutorial.qmd).
 
 The app is available at [codebook.streamlit.app](https://codebook.streamlit.app/). Feel free to reach out if you encounter any bugs or need additional features for your annotation workflow.
