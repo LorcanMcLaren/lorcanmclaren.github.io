@@ -3,6 +3,7 @@ title: "CodeBook Lab"
 date: "2026"
 date-format: "YYYY"
 abstract: "An LLM annotation experiment pipeline for computational social science. Benchmark local models against human labels across model choice, model size, prompt style, zero-shot versus few-shot learning, and sampling hyperparameters."
+hide-abstract: true
 codelink: "https://github.com/LorcanMcLaren/codebook-lab"
 format:
   html:

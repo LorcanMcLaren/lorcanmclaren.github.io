@@ -306,29 +306,12 @@ ul.task-list li input[type="checkbox"] {
     <h1 class="title display-7">CodeBook Studio</h1>
     <p>
         
-    </p>
-        <div class="abstract">
-        <div class="abstract-title">Abstract</div>
-        <div class="abstract-text">A browser-based annotation tool for computational social science. Define a codebook, annotate texts, and export labelled data for LLM benchmarking in CodeBook Lab.</div>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var abstractText = document.querySelector('.abstract .abstract-text');
-            if (abstractText) {
-                var html = abstractText.innerHTML;
-                if (html.includes(' || ')) {
-                    var paragraphs = html.split(' || ');
-                    abstractText.innerHTML = paragraphs.map(function(p) { return '<p>' + p + '</p>'; }).join('');
-                }
-            }
-        });
-    </script>
-        <p>
     <span class="paper-links paper-links-auto"><a href="https://codebook.streamlit.app/">App</a><a href="https://github.com/LorcanMcLaren/codebook-studio">Source Code</a></span>
     </p>
     <p>
         <img src="../images/codebook-studio.png" alt="image" class="img-fluid" style="max-width: 80%; height: auto;">
     </p>
+    
 </header>
 
 

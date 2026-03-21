@@ -24,8 +24,12 @@
         <br/>
     $endif$
     $if(journ)$$if(issue)$<i>$journ$</i>, $date$, $issue$.<br/>$endif$$endif$
+    <span class="paper-links paper-links-auto">$if(publink)$<a href="$publink$">Paper</a>$endif$$if(openlink)$<a href="$openlink$">Open Access</a>$endif$$if(videolink)$<a href="$videolink$">Video</a>$endif$$if(applink)$<a href="$applink$">App</a>$endif$$if(codelink)$<a href="$codelink$">Source Code</a>$endif$$if(slideslink)$<a href="$slideslink$">Slides</a>$endif$$if(wplink)$<a href="$wplink$">Draft Paper</a>$endif$</span>
     </p>
-    $if(abstract)$
+    <p>
+        $if(image)$<img src="$image$" alt="image" class="img-fluid" style="max-width: 80%; height: auto;"/>$endif$
+    </p>
+    $if(abstract)$$if(hide-abstract)$$else$
     <div class="abstract">
         <div class="abstract-title">$abstract-title$</div>
         <div class="abstract-text">$abstract$</div>
@@ -42,11 +46,5 @@
             }
         });
     </script>
-    $endif$
-    <p>
-    <span class="paper-links paper-links-auto">$if(publink)$<a href="$publink$">Paper</a>$endif$$if(openlink)$<a href="$openlink$">Open Access</a>$endif$$if(videolink)$<a href="$videolink$">Video</a>$endif$$if(applink)$<a href="$applink$">App</a>$endif$$if(codelink)$<a href="$codelink$">Source Code</a>$endif$$if(slideslink)$<a href="$slideslink$">Slides</a>$endif$$if(wplink)$<a href="$wplink$">Draft Paper</a>$endif$</span>
-    </p>
-    <p>
-        $if(image)$<img src="$image$" alt="image" class="img-fluid" style="max-width: 80%; height: auto;"/>$endif$
-    </p>
+    $endif$$endif$
 </header>

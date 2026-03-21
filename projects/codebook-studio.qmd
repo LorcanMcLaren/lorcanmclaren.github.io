@@ -3,6 +3,7 @@ title: "CodeBook Studio"
 date: "2026"
 date-format: "YYYY"
 abstract: "A browser-based annotation tool for computational social science. Define a codebook, annotate texts, and export labelled data for LLM benchmarking in CodeBook Lab."
+hide-abstract: true
 image: "../images/codebook-studio.png"
 applink: "https://codebook.streamlit.app/"
 codelink: "https://github.com/LorcanMcLaren/codebook-studio"
