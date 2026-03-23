@@ -225,45 +225,23 @@ The JSON and CSV are what CodeBook Lab needs. The Markdown and LaTeX exports are
 
 ## Move the Task Into CodeBook Lab
 
-Inside [CodeBook Lab](projects/codebook-lab.qmd), create a task folder and copy the two exported files into it:
+Create a local task folder and copy the two exported files into it:
 
 ```text
-tasks/my-task/
+tasks/<task>/
 ├── ground-truth.csv
 └── codebook.json
 ```
+
+You can name the task folder however you like. For example, if your project is about climate speeches, you might use `tasks/climate-speeches/`; if it is about manifesto pledges, you might use `tasks/manifesto-promises/`.
 
 CodeBook Lab reads the task definition from `codebook.json` and the human labels from `ground-truth.csv`. Before sending text to the LLM, it automatically strips out the annotation columns, so the model sees only the original text. The human labels are then used as ground truth when scoring model performance.
 
 ## Configure Experiments in CodeBook Lab
 
-Most experiment setup happens through `param_grid.yaml`.
+The most straightforward way to use CodeBook Lab is to start with a **single experiment**, inspect the results, and only then move on to larger comparisons.
 
-A minimal example looks like this:
-
-```yaml
-# Environment setting
-country_iso_code: "USA"
-
-# Experiment sweep settings
-tasks: ["my-task"]                # which task folders to run
-models: ["gemma3:270m"]           # which Ollama models to compare
-use_examples: ["false"]           # include codebook examples in the prompt?
-prompt_types: ["standard"]        # prompt wrapper: standard, persona, or CoT
-temperatures: []                  # sampling hyperparameters to sweep over
-top_ps: []                        # nucleus sampling hyperparameters to sweep over
-process_textboxes: ["true"]       # generate and score textbox annotations?
-```
-
-Because the codebook and labelled data stay constant across runs, you can isolate the effect of each choice: swap in a different model or model size, switch prompt style from standard to chain-of-thought, toggle between zero-shot and few-shot learning, or vary sampling hyperparameters like temperature and top-p — and compare every combination against the same human labels.
-
-## Run the Experiment
-
-From inside CodeBook Lab:
-
-1. create and activate the Python environment
-2. make sure Ollama is available
-3. run the local script
+Install the package, make sure Ollama is available, and then run experiments from Python.
 
 Typical local run steps look like:
 
@@ -271,12 +249,154 @@ Typical local run steps look like:
 python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install codebook-lab
 ollama serve
-bash scripts/run_local.sh
 ```
 
-If you are using a cluster or remote machine, you would adapt the corresponding HPC workflow instead.
+If your task includes textbox annotations and you want the full textbox metric suite, install the optional extras instead:
+
+```bash
+pip install "codebook-lab[textbox]"
+```
+
+### Start with one experiment
+
+For most users, the best first step is one simple run against one task and one model.
+
+```python
+from codebook_lab import ExperimentSpec, run_experiment
+
+result = run_experiment(
+    ExperimentSpec(
+        task="<task>",
+        model="gemma3:270m",
+        use_examples=False,
+        prompt_type="standard",
+        temperature=None,
+        top_p=None,
+        process_textbox=True,
+        country_iso_code="USA",
+    ),
+    task_root="tasks",
+    output_root="outputs",
+)
+
+print(result.experiment_directory)
+print(result.metrics.summary_text)
+```
+
+This is enough to answer a basic question such as: *How well does one local model reproduce my human labels on this task?*
+
+### Compare multiple experiments
+
+Once a single run is working, you can scale up to structured comparisons. A common next step is to compare:
+
+- two or more models
+- zero-shot versus few-shot prompting
+- different prompt wrappers
+- different temperature or top-p settings
+
+One clear way to do that is to define a small list of experiment specifications:
+
+```python
+from codebook_lab import ExperimentSpec, run_experiment_grid
+
+specs = [
+    ExperimentSpec(
+        task="<task>",
+        model="gemma3:270m",
+        use_examples=False,
+        prompt_type="standard",
+        country_iso_code="USA",
+    ),
+    ExperimentSpec(
+        task="<task>",
+        model="gemma3:270m",
+        use_examples=True,
+        prompt_type="standard",
+        country_iso_code="USA",
+    ),
+    ExperimentSpec(
+        task="<task>",
+        model="llama3.2:3b",
+        use_examples=False,
+        prompt_type="persona",
+        country_iso_code="USA",
+    ),
+]
+
+results = run_experiment_grid(
+    specs=specs,
+    task_root="tasks",
+    output_root="outputs",
+)
+
+print(f"Completed {len(results)} runs")
+```
+
+Because the codebook and labelled data stay constant across runs, you can isolate the effect of each choice and compare every setup against the same human labels.
+
+If you want to iterate through many combinations at once, you can also use a parameter grid:
+
+```python
+from codebook_lab import run_experiment_grid
+
+results = run_experiment_grid(
+    param_grid={
+        "country_iso_code": "IRL",
+        "tasks": ["policy-sentiment"],
+        "models": ["gemma3:270m", "llama3.2:3b"],
+        "use_examples": ["false", "true"],
+        "prompt_types": ["standard", "persona"],
+        "temperatures": ["None", "0.2"],
+        "top_ps": ["None"],
+        "process_textboxes": ["true"],
+    },
+    output_root="outputs",
+)
+
+print(f"Completed {len(results)} runs")
+```
+
+### Add a custom prompt style
+
+If the built-in prompt wrappers are not enough, you can register your own.
+
+This is useful when you want to test a specific instruction style, persona framing, or response structure that fits your substantive domain.
+
+```python
+from codebook_lab import (
+    ExperimentSpec,
+    PromptContext,
+    register_prompt_wrapper,
+    run_experiment,
+)
+
+def concise_wrapper(context: PromptContext) -> str:
+    return (
+        "You are helping with a social science annotation task.\n\n"
+        f"{context.core_prompt}\n\n"
+        f'Text:\n"{context.text}"\n\n'
+        "Return JSON only.\n"
+    )
+
+register_prompt_wrapper("concise", concise_wrapper)
+
+result = run_experiment(
+    ExperimentSpec(
+        task="<task>",
+        model="gemma3:270m",
+        prompt_type="concise",
+        country_iso_code="USA",
+    ),
+    task_root="tasks",
+    output_root="outputs",
+)
+```
+
+This makes it possible to test not just different models, but different theories of prompting.
+
+If you are using a cluster or remote machine, you would adapt the same Python calls to your batch or job-scheduler workflow instead.
 
 ## Inspect the Outputs
 

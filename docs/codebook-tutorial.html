@@ -353,15 +353,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#export-your-outputs" id="toc-export-your-outputs" class="nav-link" data-scroll-target="#export-your-outputs"><span class="header-section-number">7</span> Export Your Outputs</a></li>
   <li><a href="#move-the-task-into-codebook-lab" id="toc-move-the-task-into-codebook-lab" class="nav-link" data-scroll-target="#move-the-task-into-codebook-lab"><span class="header-section-number">8</span> Move the Task Into CodeBook Lab</a></li>
-  <li><a href="#configure-experiments-in-codebook-lab" id="toc-configure-experiments-in-codebook-lab" class="nav-link" data-scroll-target="#configure-experiments-in-codebook-lab"><span class="header-section-number">9</span> Configure Experiments in CodeBook Lab</a></li>
-  <li><a href="#run-the-experiment" id="toc-run-the-experiment" class="nav-link" data-scroll-target="#run-the-experiment"><span class="header-section-number">10</span> Run the Experiment</a></li>
-  <li><a href="#inspect-the-outputs" id="toc-inspect-the-outputs" class="nav-link" data-scroll-target="#inspect-the-outputs"><span class="header-section-number">11</span> Inspect the Outputs</a></li>
-  <li><a href="#common-pitfalls" id="toc-common-pitfalls" class="nav-link" data-scroll-target="#common-pitfalls"><span class="header-section-number">12</span> Common Pitfalls</a>
+  <li><a href="#configure-experiments-in-codebook-lab" id="toc-configure-experiments-in-codebook-lab" class="nav-link" data-scroll-target="#configure-experiments-in-codebook-lab"><span class="header-section-number">9</span> Configure Experiments in CodeBook Lab</a>
   <ul class="collapse">
-  <li><a href="#using-the-wrong-text-column" id="toc-using-the-wrong-text-column" class="nav-link" data-scroll-target="#using-the-wrong-text-column"><span class="header-section-number">12.1</span> Using the wrong text column</a></li>
-  <li><a href="#renaming-exported-files" id="toc-renaming-exported-files" class="nav-link" data-scroll-target="#renaming-exported-files"><span class="header-section-number">12.2</span> Renaming exported files</a></li>
-  <li><a href="#letting-examples-drift-from-valid-responses" id="toc-letting-examples-drift-from-valid-responses" class="nav-link" data-scroll-target="#letting-examples-drift-from-valid-responses"><span class="header-section-number">12.3</span> Letting examples drift from valid responses</a></li>
-  <li><a href="#making-instructions-too-long" id="toc-making-instructions-too-long" class="nav-link" data-scroll-target="#making-instructions-too-long"><span class="header-section-number">12.4</span> Making instructions too long</a></li>
+  <li><a href="#start-with-one-experiment" id="toc-start-with-one-experiment" class="nav-link" data-scroll-target="#start-with-one-experiment"><span class="header-section-number">9.1</span> Start with one experiment</a></li>
+  <li><a href="#compare-multiple-experiments" id="toc-compare-multiple-experiments" class="nav-link" data-scroll-target="#compare-multiple-experiments"><span class="header-section-number">9.2</span> Compare multiple experiments</a></li>
+  <li><a href="#add-a-custom-prompt-style" id="toc-add-a-custom-prompt-style" class="nav-link" data-scroll-target="#add-a-custom-prompt-style"><span class="header-section-number">9.3</span> Add a custom prompt style</a></li>
+  </ul></li>
+  <li><a href="#inspect-the-outputs" id="toc-inspect-the-outputs" class="nav-link" data-scroll-target="#inspect-the-outputs"><span class="header-section-number">10</span> Inspect the Outputs</a></li>
+  <li><a href="#common-pitfalls" id="toc-common-pitfalls" class="nav-link" data-scroll-target="#common-pitfalls"><span class="header-section-number">11</span> Common Pitfalls</a>
+  <ul class="collapse">
+  <li><a href="#using-the-wrong-text-column" id="toc-using-the-wrong-text-column" class="nav-link" data-scroll-target="#using-the-wrong-text-column"><span class="header-section-number">11.1</span> Using the wrong text column</a></li>
+  <li><a href="#renaming-exported-files" id="toc-renaming-exported-files" class="nav-link" data-scroll-target="#renaming-exported-files"><span class="header-section-number">11.2</span> Renaming exported files</a></li>
+  <li><a href="#letting-examples-drift-from-valid-responses" id="toc-letting-examples-drift-from-valid-responses" class="nav-link" data-scroll-target="#letting-examples-drift-from-valid-responses"><span class="header-section-number">11.3</span> Letting examples drift from valid responses</a></li>
+  <li><a href="#making-instructions-too-long" id="toc-making-instructions-too-long" class="nav-link" data-scroll-target="#making-instructions-too-long"><span class="header-section-number">11.4</span> Making instructions too long</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -630,48 +634,149 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="move-the-task-into-codebook-lab" class="level2" data-number="8">
 <h2 data-number="8" class="anchored" data-anchor-id="move-the-task-into-codebook-lab"><span class="header-section-number">8</span> Move the Task Into CodeBook Lab</h2>
-<p>Inside <a href="./projects/codebook-lab.html">CodeBook Lab</a>, create a task folder and copy the two exported files into it:</p>
-<pre class="text"><code>tasks/my-task/
+<p>Create a local task folder and copy the two exported files into it:</p>
+<pre class="text"><code>tasks/&lt;task&gt;/
 ├── ground-truth.csv
 └── codebook.json</code></pre>
+<p>You can name the task folder however you like. For example, if your project is about climate speeches, you might use <code>tasks/climate-speeches/</code>; if it is about manifesto pledges, you might use <code>tasks/manifesto-promises/</code>.</p>
 <p>CodeBook Lab reads the task definition from <code>codebook.json</code> and the human labels from <code>ground-truth.csv</code>. Before sending text to the LLM, it automatically strips out the annotation columns, so the model sees only the original text. The human labels are then used as ground truth when scoring model performance.</p>
 </section>
 <section id="configure-experiments-in-codebook-lab" class="level2" data-number="9">
 <h2 data-number="9" class="anchored" data-anchor-id="configure-experiments-in-codebook-lab"><span class="header-section-number">9</span> Configure Experiments in CodeBook Lab</h2>
-<p>Most experiment setup happens through <code>param_grid.yaml</code>.</p>
-<p>A minimal example looks like this:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Environment setting</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">country_iso_code</span><span class="kw">:</span><span class="at"> </span><span class="st">"USA"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Experiment sweep settings</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tasks</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"my-task"</span><span class="kw">]</span><span class="co">                # which task folders to run</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">models</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"gemma3:270m"</span><span class="kw">]</span><span class="co">           # which Ollama models to compare</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">use_examples</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"false"</span><span class="kw">]</span><span class="co">           # include codebook examples in the prompt?</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">prompt_types</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"standard"</span><span class="kw">]</span><span class="co">        # prompt wrapper: standard, persona, or CoT</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">temperatures</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span><span class="co">                  # sampling hyperparameters to sweep over</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">top_ps</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span><span class="co">                        # nucleus sampling hyperparameters to sweep over</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">process_textboxes</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"true"</span><span class="kw">]</span><span class="co">       # generate and score textbox annotations?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Because the codebook and labelled data stay constant across runs, you can isolate the effect of each choice: swap in a different model or model size, switch prompt style from standard to chain-of-thought, toggle between zero-shot and few-shot learning, or vary sampling hyperparameters like temperature and top-p — and compare every combination against the same human labels.</p>
-</section>
-<section id="run-the-experiment" class="level2" data-number="10">
-<h2 data-number="10" class="anchored" data-anchor-id="run-the-experiment"><span class="header-section-number">10</span> Run the Experiment</h2>
-<p>From inside CodeBook Lab:</p>
-<ol type="1">
-<li>create and activate the Python environment</li>
-<li>make sure Ollama is available</li>
-<li>run the local script</li>
-</ol>
+<p>The most straightforward way to use CodeBook Lab is to start with a <strong>single experiment</strong>, inspect the results, and only then move on to larger comparisons.</p>
+<p>Install the package, make sure Ollama is available, and then run experiments from Python.</p>
 <p>Typical local run steps look like:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pip</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> serve</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/run_local.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If you are using a cluster or remote machine, you would adapt the corresponding HPC workflow instead.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pip</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install codebook-lab</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> serve</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If your task includes textbox annotations and you want the full textbox metric suite, install the optional extras instead:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">"codebook-lab[textbox]"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="start-with-one-experiment" class="level3" data-number="9.1">
+<h3 data-number="9.1" class="anchored" data-anchor-id="start-with-one-experiment"><span class="header-section-number">9.1</span> Start with one experiment</h3>
+<p>For most users, the best first step is one simple run against one task and one model.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> ExperimentSpec, run_experiment</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> run_experiment(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    ExperimentSpec(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        task<span class="op">=</span><span class="st">"&lt;task&gt;"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"gemma3:270m"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        use_examples<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        prompt_type<span class="op">=</span><span class="st">"standard"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        temperature<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        top_p<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        process_textbox<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        country_iso_code<span class="op">=</span><span class="st">"USA"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    task_root<span class="op">=</span><span class="st">"tasks"</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    output_root<span class="op">=</span><span class="st">"outputs"</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.experiment_directory)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.metrics.summary_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is enough to answer a basic question such as: <em>How well does one local model reproduce my human labels on this task?</em></p>
 </section>
-<section id="inspect-the-outputs" class="level2" data-number="11">
-<h2 data-number="11" class="anchored" data-anchor-id="inspect-the-outputs"><span class="header-section-number">11</span> Inspect the Outputs</h2>
+<section id="compare-multiple-experiments" class="level3" data-number="9.2">
+<h3 data-number="9.2" class="anchored" data-anchor-id="compare-multiple-experiments"><span class="header-section-number">9.2</span> Compare multiple experiments</h3>
+<p>Once a single run is working, you can scale up to structured comparisons. A common next step is to compare:</p>
+<ul>
+<li>two or more models</li>
+<li>zero-shot versus few-shot prompting</li>
+<li>different prompt wrappers</li>
+<li>different temperature or top-p settings</li>
+</ul>
+<p>One clear way to do that is to define a small list of experiment specifications:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> ExperimentSpec, run_experiment_grid</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>specs <span class="op">=</span> [</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    ExperimentSpec(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        task<span class="op">=</span><span class="st">"&lt;task&gt;"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"gemma3:270m"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        use_examples<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        prompt_type<span class="op">=</span><span class="st">"standard"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        country_iso_code<span class="op">=</span><span class="st">"USA"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    ExperimentSpec(</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        task<span class="op">=</span><span class="st">"&lt;task&gt;"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"gemma3:270m"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        use_examples<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        prompt_type<span class="op">=</span><span class="st">"standard"</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        country_iso_code<span class="op">=</span><span class="st">"USA"</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    ExperimentSpec(</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        task<span class="op">=</span><span class="st">"&lt;task&gt;"</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"llama3.2:3b"</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        use_examples<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        prompt_type<span class="op">=</span><span class="st">"persona"</span>,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        country_iso_code<span class="op">=</span><span class="st">"USA"</span>,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> run_experiment_grid(</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    specs<span class="op">=</span>specs,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    task_root<span class="op">=</span><span class="st">"tasks"</span>,</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    output_root<span class="op">=</span><span class="st">"outputs"</span>,</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Completed </span><span class="sc">{</span><span class="bu">len</span>(results)<span class="sc">}</span><span class="ss"> runs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Because the codebook and labelled data stay constant across runs, you can isolate the effect of each choice and compare every setup against the same human labels.</p>
+<p>If you want to iterate through many combinations at once, you can also use a parameter grid:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> run_experiment_grid</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> run_experiment_grid(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    param_grid<span class="op">=</span>{</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"country_iso_code"</span>: <span class="st">"IRL"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tasks"</span>: [<span class="st">"policy-sentiment"</span>],</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"models"</span>: [<span class="st">"gemma3:270m"</span>, <span class="st">"llama3.2:3b"</span>],</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"use_examples"</span>: [<span class="st">"false"</span>, <span class="st">"true"</span>],</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"prompt_types"</span>: [<span class="st">"standard"</span>, <span class="st">"persona"</span>],</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"temperatures"</span>: [<span class="st">"None"</span>, <span class="st">"0.2"</span>],</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"top_ps"</span>: [<span class="st">"None"</span>],</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"process_textboxes"</span>: [<span class="st">"true"</span>],</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    output_root<span class="op">=</span><span class="st">"outputs"</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Completed </span><span class="sc">{</span><span class="bu">len</span>(results)<span class="sc">}</span><span class="ss"> runs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="add-a-custom-prompt-style" class="level3" data-number="9.3">
+<h3 data-number="9.3" class="anchored" data-anchor-id="add-a-custom-prompt-style"><span class="header-section-number">9.3</span> Add a custom prompt style</h3>
+<p>If the built-in prompt wrappers are not enough, you can register your own.</p>
+<p>This is useful when you want to test a specific instruction style, persona framing, or response structure that fits your substantive domain.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> (</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ExperimentSpec,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    PromptContext,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    register_prompt_wrapper,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    run_experiment,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> concise_wrapper(context: PromptContext) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"You are helping with a social science annotation task.</span><span class="ch">\n\n</span><span class="st">"</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>context<span class="sc">.</span>core_prompt<span class="sc">}</span><span class="ch">\n\n</span><span class="ss">"</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'Text:</span><span class="ch">\n</span><span class="ss">"</span><span class="sc">{</span>context<span class="sc">.</span>text<span class="sc">}</span><span class="ss">"</span><span class="ch">\n\n</span><span class="ss">'</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Return JSON only.</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>register_prompt_wrapper(<span class="st">"concise"</span>, concise_wrapper)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> run_experiment(</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    ExperimentSpec(</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        task<span class="op">=</span><span class="st">"&lt;task&gt;"</span>,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"gemma3:270m"</span>,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        prompt_type<span class="op">=</span><span class="st">"concise"</span>,</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>        country_iso_code<span class="op">=</span><span class="st">"USA"</span>,</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    task_root<span class="op">=</span><span class="st">"tasks"</span>,</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    output_root<span class="op">=</span><span class="st">"outputs"</span>,</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This makes it possible to test not just different models, but different theories of prompting.</p>
+<p>If you are using a cluster or remote machine, you would adapt the same Python calls to your batch or job-scheduler workflow instead.</p>
+</section>
+</section>
+<section id="inspect-the-outputs" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="inspect-the-outputs"><span class="header-section-number">10</span> Inspect the Outputs</h2>
 <p>Each CodeBook Lab run creates a timestamped experiment directory under <code>outputs/&lt;task&gt;/</code>.</p>
 <p>Typical outputs include:</p>
 <ul>
@@ -686,22 +791,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre class="text"><code>outputs/metrics/&lt;task&gt;_metrics_log.csv</code></pre>
 <p>This lets you compare model performance not only in terms of annotation quality against human labels, but also in terms of runtime, prompt/response length, energy consumption, and emissions.</p>
 </section>
-<section id="common-pitfalls" class="level2" data-number="12">
-<h2 data-number="12" class="anchored" data-anchor-id="common-pitfalls"><span class="header-section-number">12</span> Common Pitfalls</h2>
-<section id="using-the-wrong-text-column" class="level3" data-number="12.1">
-<h3 data-number="12.1" class="anchored" data-anchor-id="using-the-wrong-text-column"><span class="header-section-number">12.1</span> Using the wrong text column</h3>
+<section id="common-pitfalls" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="common-pitfalls"><span class="header-section-number">11</span> Common Pitfalls</h2>
+<section id="using-the-wrong-text-column" class="level3" data-number="11.1">
+<h3 data-number="11.1" class="anchored" data-anchor-id="using-the-wrong-text-column"><span class="header-section-number">11.1</span> Using the wrong text column</h3>
 <p>If the wrong column is selected, both human annotators and the LLM will be reading the wrong content. Always confirm the text column in the codebook editor preview before starting annotation.</p>
 </section>
-<section id="renaming-exported-files" class="level3" data-number="12.2">
-<h3 data-number="12.2" class="anchored" data-anchor-id="renaming-exported-files"><span class="header-section-number">12.2</span> Renaming exported files</h3>
+<section id="renaming-exported-files" class="level3" data-number="11.2">
+<h3 data-number="11.2" class="anchored" data-anchor-id="renaming-exported-files"><span class="header-section-number">11.2</span> Renaming exported files</h3>
 <p>CodeBook Lab expects <code>ground-truth.csv</code> and <code>codebook.json</code> by name. If you rename these, the workflow becomes harder to reproduce and document.</p>
 </section>
-<section id="letting-examples-drift-from-valid-responses" class="level3" data-number="12.3">
-<h3 data-number="12.3" class="anchored" data-anchor-id="letting-examples-drift-from-valid-responses"><span class="header-section-number">12.3</span> Letting examples drift from valid responses</h3>
+<section id="letting-examples-drift-from-valid-responses" class="level3" data-number="11.3">
+<h3 data-number="11.3" class="anchored" data-anchor-id="letting-examples-drift-from-valid-responses"><span class="header-section-number">11.3</span> Letting examples drift from valid responses</h3>
 <p>Examples are most useful when they obey the same response logic as the annotation item itself. Define the response type and valid response space first, then add examples.</p>
 </section>
-<section id="making-instructions-too-long" class="level3" data-number="12.4">
-<h3 data-number="12.4" class="anchored" data-anchor-id="making-instructions-too-long"><span class="header-section-number">12.4</span> Making instructions too long</h3>
+<section id="making-instructions-too-long" class="level3" data-number="11.4">
+<h3 data-number="11.4" class="anchored" data-anchor-id="making-instructions-too-long"><span class="header-section-number">11.4</span> Making instructions too long</h3>
 <p>Detailed guidance is useful, but very long instructions can slow both human annotation and prompt interpretation. Try to keep the core decision rule visible quickly.</p>
 
 
