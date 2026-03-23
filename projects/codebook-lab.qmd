@@ -2,8 +2,9 @@
 title: "CodeBook Lab"
 date: "2026"
 date-format: "YYYY"
-abstract: "An LLM annotation experiment pipeline for computational social science. Benchmark local models against human labels across model choice, model size, prompt style, zero-shot versus few-shot learning, and sampling hyperparameters."
+abstract: "A Python package for computational social science that benchmarks local LLM annotation runs against human labels across model choice, model size, prompt style, zero-shot versus few-shot learning, and sampling hyperparameters."
 hide-abstract: true
+packagelink: "https://pypi.org/project/codebook-lab/"
 codelink: "https://github.com/LorcanMcLaren/codebook-lab"
 format:
   html:
@@ -12,14 +13,14 @@ format:
       - "../partials/title-block.html"
 ---
 
-CodeBook Lab is an experiment pipeline that lets researchers benchmark LLM annotation performance against human labels. It takes a codebook and labelled dataset from [CodeBook Studio](codebook-studio.qmd) and runs structured experiments across the dimensions that matter for text-as-data research:
+CodeBook Lab is a Python package for running LLM annotation experiments against human-coded benchmark data. It takes a codebook and labelled dataset exported from [CodeBook Studio](codebook-studio.qmd) and lets researchers evaluate local models systematically across the dimensions that matter for text-as-data research:
 
 - **Model choice and model size**: compare any models available through Ollama
 - **Prompt style**: standard, persona, or chain-of-thought wrappers
 - **Zero-shot versus few-shot learning**: toggle codebook examples on or off
 - **Sampling hyperparameters**: sweep over temperature and top-p settings
 
-Experiments are controlled through a single `param_grid.yaml` file rather than by editing pipeline code. Because the codebook and labelled data stay constant across runs, each dimension can be isolated and compared against the same human labels.
+Experiments are controlled from Python, so users can start with a single run, scale up to multiple experiment specifications, or iterate through larger parameter grids when needed. Because the codebook and labelled data stay constant across runs, each dimension can be isolated and compared against the same human labels.
 
 ```{=html}
 <style>
@@ -174,4 +175,4 @@ Experiments are controlled through a single `param_grid.yaml` file rather than b
 
 CodeBook Lab also tracks runtime, prompt and response length, energy consumption, and estimated carbon emissions for each run, with aggregate metrics logged to a single CSV for cross-experiment comparison.
 
-The repository includes a synthetic starter task so you can test the pipeline before plugging in your own data. For a step-by-step walkthrough covering both tools, see the [CodeBook Studio & Lab Tutorial](../codebook-tutorial.qmd).
+The package ships with a bundled starter task so you can test the workflow before plugging in your own data. For a step-by-step walkthrough covering both tools, see the [CodeBook Studio & Lab Tutorial](../codebook-tutorial.qmd).

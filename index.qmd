@@ -6,7 +6,7 @@ listing: # this determines different lists with respective options. These are ac
     contents: "wp/*.qmd" # from which folder to take the contents. Here, take all .qmd files from the wp folder.
     sort: "date desc" # how to sort the contents.
     template: ejs/wp.ejs  # how to display contents. Here, use the customized wp.ejs in the ejs folder.
-    fields: [title, date, abstract, coauthors, wplink, slideslink, videolink, applink, codelink, image, note]
+    fields: [title, date, abstract, coauthors, wplink, slideslink, videolink, applink, packagelink, codelink, image, note]
   - id: pub
     sort: 
       - "date desc"
@@ -19,7 +19,7 @@ listing: # this determines different lists with respective options. These are ac
       - "title"
     contents: "projects/*.qmd"
     template: ejs/wp.ejs
-    fields: [title, date, abstract, coauthors, wplink, slideslink, videolink, applink, codelink, image, note]
+    fields: [title, date, abstract, coauthors, wplink, slideslink, videolink, applink, packagelink, codelink, image, note]
 
 ---
 

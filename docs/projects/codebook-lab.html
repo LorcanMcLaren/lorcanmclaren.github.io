@@ -65,10 +65,10 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="../styles.css">
 <meta property="og:title" content="CodeBook Lab – Lorcan McLaren">
-<meta property="og:description" content="An LLM annotation experiment pipeline for computational social science. Benchmark local models against human labels across model choice, model size, prompt style, zero-shot versus few-shot learning, and sampling hyperparameters.">
+<meta property="og:description" content="A Python package for computational social science that benchmarks local LLM annotation runs against human labels across model choice, model size, prompt style, zero-shot versus few-shot learning, and sampling hyperparameters.">
 <meta property="og:site_name" content="Lorcan McLaren">
 <meta name="twitter:title" content="CodeBook Lab – Lorcan McLaren">
-<meta name="twitter:description" content="An LLM annotation experiment pipeline for computational social science. Benchmark local models against human labels across model choice, model size, prompt style, zero-shot versus few-shot learning, and sampling hyperparameters.">
+<meta name="twitter:description" content="A Python package for computational social science that benchmarks local LLM annotation runs against human labels across model choice, model size, prompt style, zero-shot versus few-shot learning, and sampling hyperparameters.">
 <meta name="twitter:creator" content="@LorcanMcLaren">
 <meta name="twitter:card" content="summary">
 </head>
@@ -300,7 +300,7 @@ ul.task-list li input[type="checkbox"] {
     <h1 class="title display-7">CodeBook Lab</h1>
     <p>
         
-    <span class="paper-links paper-links-auto"><a href="https://github.com/LorcanMcLaren/codebook-lab">Source Code</a></span>
+    <span class="paper-links paper-links-auto"><a href="https://pypi.org/project/codebook-lab/">Python Package</a><a href="https://github.com/LorcanMcLaren/codebook-lab">Source Code</a></span>
     </p>
     <p>
         
@@ -309,14 +309,14 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>CodeBook Lab is an experiment pipeline that lets researchers benchmark LLM annotation performance against human labels. It takes a codebook and labelled dataset from <a href="../projects/codebook-studio.html">CodeBook Studio</a> and runs structured experiments across the dimensions that matter for text-as-data research:</p>
+<p>CodeBook Lab is a Python package for running LLM annotation experiments against human-coded benchmark data. It takes a codebook and labelled dataset exported from <a href="../projects/codebook-studio.html">CodeBook Studio</a> and lets researchers evaluate local models systematically across the dimensions that matter for text-as-data research:</p>
 <ul>
 <li><strong>Model choice and model size</strong>: compare any models available through Ollama</li>
 <li><strong>Prompt style</strong>: standard, persona, or chain-of-thought wrappers</li>
 <li><strong>Zero-shot versus few-shot learning</strong>: toggle codebook examples on or off</li>
 <li><strong>Sampling hyperparameters</strong>: sweep over temperature and top-p settings</li>
 </ul>
-<p>Experiments are controlled through a single <code>param_grid.yaml</code> file rather than by editing pipeline code. Because the codebook and labelled data stay constant across runs, each dimension can be isolated and compared against the same human labels.</p>
+<p>Experiments are controlled from Python, so users can start with a single run, scale up to multiple experiment specifications, or iterate through larger parameter grids when needed. Because the codebook and labelled data stay constant across runs, each dimension can be isolated and compared against the same human labels.</p>
 <style>
 .codebook-flow {
   --codebook-border: #7a5a65;
@@ -466,7 +466,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </div>
 <p>CodeBook Lab also tracks runtime, prompt and response length, energy consumption, and estimated carbon emissions for each run, with aggregate metrics logged to a single CSV for cross-experiment comparison.</p>
-<p>The repository includes a synthetic starter task so you can test the pipeline before plugging in your own data. For a step-by-step walkthrough covering both tools, see the <a href="../codebook-tutorial.html">CodeBook Studio &amp; Lab Tutorial</a>.</p>
+<p>The package ships with a bundled starter task so you can test the workflow before plugging in your own data. For a step-by-step walkthrough covering both tools, see the <a href="../codebook-tutorial.html">CodeBook Studio &amp; Lab Tutorial</a>.</p>
 
 
 

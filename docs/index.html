@@ -68,7 +68,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-date','listing-abstract','listing-coauthors','listing-wplink','listing-slideslink','listing-videolink','listing-applink','listing-codelink','listing-image','listing-note',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      valueNames: ['listing-title','listing-date','listing-abstract','listing-coauthors','listing-wplink','listing-slideslink','listing-videolink','listing-applink','listing-packagelink','listing-codelink','listing-image','listing-note',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
       searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-date","listing-date-format","listing-coauthors","listing-abstract","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
@@ -124,9 +124,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-date','listing-abstract','listing-coauthors','listing-wplink','listing-slideslink','listing-videolink','listing-applink','listing-codelink','listing-image','listing-note',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      valueNames: ['listing-title','listing-date','listing-abstract','listing-coauthors','listing-wplink','listing-slideslink','listing-videolink','listing-applink','listing-packagelink','listing-codelink','listing-image','listing-note',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-date","listing-date-format","listing-abstract","listing-hide-abstract","listing-codelink","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-image","listing-applink"],
+      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-date","listing-date-format","listing-abstract","listing-hide-abstract","listing-packagelink","listing-codelink","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-image","listing-applink"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -522,10 +522,10 @@ window.Quarto = {
         <b><a href="./projects/codebook-lab.html">CodeBook Lab</a></b><br>
         
     
-    <span class="paper-links"><a class="abstract-toggle" data-bs-toggle="collapse" href="#abstract-projectscodebooklabqmd" role="button" aria-expanded="false">Abstract</a> | <a href="https://github.com/LorcanMcLaren/codebook-lab">Source Code</a></span>
+    <span class="paper-links"><a class="abstract-toggle" data-bs-toggle="collapse" href="#abstract-projectscodebooklabqmd" role="button" aria-expanded="false">Abstract</a> | <a href="https://pypi.org/project/codebook-lab/">Python Package</a> | <a href="https://github.com/LorcanMcLaren/codebook-lab">Source Code</a></span>
     
     <div class="collapse abstract-content" id="abstract-projectscodebooklabqmd">
-        <div class="abstract-text"><p>An LLM annotation experiment pipeline for computational social science. Benchmark local models against human labels across model choice, model size, prompt style, zero-shot versus few-shot learning, and sampling hyperparameters.</p></div>
+        <div class="abstract-text"><p>A Python package for computational social science that benchmarks local LLM annotation runs against human labels across model choice, model size, prompt style, zero-shot versus few-shot learning, and sampling hyperparameters.</p></div>
     </div>
     
     </div>
