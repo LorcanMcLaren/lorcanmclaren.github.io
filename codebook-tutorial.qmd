@@ -77,6 +77,8 @@ You will see:
 - an optional upload area for an existing codebook JSON file
 - a main action button that changes depending on what you upload
 
+![](images/codebook-tutorial/studio-landing-page.png){fig-alt="CodeBook Studio landing page with the CSV uploader, optional codebook uploader, and the main action button." fig-cap="CodeBook Studio landing page."}
+
 ### Two common starting points
 
 #### Option 1: Start from raw data
@@ -100,6 +102,8 @@ This is useful when you want to:
 - continue annotation on new data
 - resume a task definition that already exists
 
+![](images/codebook-tutorial/upload-paths.gif){fig-alt="Short animation showing the landing page flow for uploading a CSV alone versus uploading a CSV together with a codebook JSON." fig-cap="Two common starting paths in CodeBook Studio."}
+
 ## Build a Codebook
 
 If you start with a CSV only, CodeBook Studio will take you to the codebook editor.
@@ -112,6 +116,8 @@ The codebook defines:
 - what questions annotators answer
 - what response formats are valid
 - what instructions and examples support each annotation
+
+![](images/codebook-tutorial/codebook-editor-overview.png){fig-alt="CodeBook Studio codebook editor showing the header and text column selectors, annotation sections, and workflow preview." fig-cap="The codebook editor."}
 
 ### Choose the header and text columns
 
@@ -157,6 +163,8 @@ For example:
 - a dropdown needs a list of valid options
 - a Likert item needs a minimum and maximum value
 - a textbox needs no extra response settings
+
+![](images/codebook-tutorial/add-annotation-and-example.png){fig-alt="An annotation being added in the codebook editor, configured, and then given an example." fig-cap="Adding an annotation item and then attaching a valid example."}
 
 ### Add examples after the annotation is defined
 
@@ -205,6 +213,8 @@ At the top, there is a navigation bar showing:
 
 Within the section pane, annotators work through section instructions, annotation widgets, and optional examples. The app autosaves session state as you navigate, so you can resume later from the landing page.
 
+![](images/codebook-tutorial/annotation-workspace.gif){fig-alt="Short animation showing the CodeBook Studio annotation workspace with the text on the left and the active annotation section on the right." fig-cap="The annotation workspace."}
+
 ### Tips for efficient annotation
 
 - Keep section instructions concise.
@@ -220,6 +230,8 @@ You can download:
 
 - **Annotated Data**: downloads as `ground-truth.csv`
 - **CodeBook**: downloads as `codebook.zip`, containing `codebook.json`, `codebook.md`, and `codebook.tex`
+
+![](images/codebook-tutorial/export-utilities.png){fig-alt="Utilities panel in CodeBook Studio showing download buttons for annotated data and the codebook bundle." fig-cap="Exporting annotated data and codebook files."}
 
 The JSON and CSV are what CodeBook Lab needs. The Markdown and LaTeX exports are mainly for documentation, appendices, and reporting.
 
