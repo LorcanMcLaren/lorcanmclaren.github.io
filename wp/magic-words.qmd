@@ -2,7 +2,7 @@
 title: "Magic Words or Methodical Work? Challenging Conventional Wisdom in LLM-Based Political Text Annotation"
 date: "2025"
 date-format: "YYYY"
-# wplink: "../files/magic-words.pdf"
+wplink: "https://arxiv.org/abs/2603.26898"
 # codelink: "https://github.com/"
 coauthors:
   - name: "James P. Cross"
