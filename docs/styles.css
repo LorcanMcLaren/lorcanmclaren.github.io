@@ -34,6 +34,13 @@ i {
   color: #555;
 }
 
+.paper-status {
+  display: inline-block;
+  font-size: 0.9em;
+  color: #555;
+  font-style: italic;
+}
+
 .paper-links {
   display: inline-block;
   margin-top: 0.4em;

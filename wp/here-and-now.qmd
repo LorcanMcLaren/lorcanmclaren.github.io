@@ -2,6 +2,7 @@
 title: "Here and Now or There and Then? The Psychological Distance of Climate Change in Parliamentary Speech"
 date: "2024"
 date-format: "YYYY"
+paper-status: "Under Review"
 # wplink: "../files/taking-the-green-pill.pdf"
 # image: "../images/green-pill.png"
 # codelink: "https://github.com/"

@@ -2,6 +2,7 @@
 title: "When Climate Change Hits Home: Natural Disasters and Climate Rhetoric in the European Parliament"
 date: "2025"
 date-format: "YYYY"
+paper-status: "Draft Available"
 # wplink: "../files/climate-disasters.pdf"
 # codelink: "https://github.com/"
 coauthors:
