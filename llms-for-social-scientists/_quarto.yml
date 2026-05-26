@@ -57,6 +57,7 @@ format:
         - custom-dark.scss
     fontsize: 110%
     linestretch: 1.5
+    css: styles.css
     link-external-newwindow: true
     header-includes:
       - <link rel="preconnect" href="https://fonts.googleapis.com">

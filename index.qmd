@@ -29,7 +29,7 @@ listing: # this determines different lists with respective options. These are ac
   <span style="font-weight: 400">PhD Researcher</span><br>
   <span style="font-weight: 400">[University College Dublin](https://www.ucd.ie/)</span>
 
-[LinkedIn](https://www.linkedin.com/in/lorcanmclaren/) | [GitHub](https://github.com/LorcanMcLaren) | [Scholar](https://scholar.google.com/citations?user=vnNon38AAAAJ&hl=en&oi=ao) | [Email](mailto:lorcan.mclaren@ucdconnect.ie)
+<span class="paper-links bio-links"><a href="https://www.linkedin.com/in/lorcanmclaren/">LinkedIn</a><a href="https://github.com/LorcanMcLaren">GitHub</a><a href="https://scholar.google.com/citations?user=vnNon38AAAAJ&hl=en&oi=ao">Scholar</a><a href="mailto:lorcan.mclaren@ucdconnect.ie">Email</a></span>
 </div>
 
 I am a PhD researcher in computational social science at [University College Dublin](https://www.ucd.ie/spire/), funded by a Taighde Éireann - Research Ireland Government of Ireland scholarship. Based in the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/) under the supervision of [James P. Cross](https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&hl=en&oi=ao), my research employs text-as-data approaches to examine political communication, with a particular focus on the climate crisis. Previously, I was supported by the Iseult Honohan scholarship and served as a Climate Fellow at the UCD Earth Institute.
@@ -54,7 +54,7 @@ Prior to my doctoral studies, I completed a BA in Computer Science, Linguistics 
 
 ## Teaching
 #### Module Instructor
-- AI and Large Language Models, Postgraduate (Spring 2025, 2026) <br/><span class="paper-links"><a href="files/ai-llms-syllabus.pdf">Syllabus</a> | <a href="llms-for-social-scientists/">Course Website</a></span>
+- AI and Large Language Models, Postgraduate (Spring 2025, 2026) <br/><span class="paper-links"><a href="files/ai-llms-syllabus.pdf">Syllabus</a><a href="llms-for-social-scientists/">Course Website</a></span>
 
 #### Teaching Assistant
 - Introduction to EU Politics, Undergraduate (Autumn 2023, 2024)

@@ -1,0 +1,70 @@
+:root {
+  --inline-code-color: #4a3a40;
+  --inline-code-bg: rgba(95, 59, 74, 0.08);
+  --inline-code-border: rgba(122, 90, 101, 0.22);
+}
+
+p code,
+li code,
+td code,
+dd code,
+dt code,
+figcaption code,
+blockquote code {
+  color: var(--inline-code-color) !important;
+  background: var(--inline-code-bg) !important;
+  border: 1px solid var(--inline-code-border);
+  border-radius: 0.45rem;
+  padding: 0.08rem 0.35rem;
+}
+
+.quarto-dark {
+  --inline-code-color: #d7e6f3;
+  --inline-code-bg: #13212d;
+  --inline-code-border: rgba(183, 208, 228, 0.18);
+  --code-block-bg: #111a28;
+  --code-block-color: #e7edf5;
+  --code-block-border: rgba(164, 194, 217, 0.24);
+  --code-block-muted: #94a9bb;
+}
+
+.quarto-dark div.sourceCode,
+.quarto-dark div.sourceCode pre.sourceCode {
+  color: var(--code-block-color);
+  background-color: var(--code-block-bg);
+  border-color: var(--code-block-border);
+}
+
+.quarto-dark div.sourceCode {
+  border: 1px solid var(--code-block-border);
+  border-radius: 0.35rem;
+}
+
+.quarto-dark pre.text {
+  color: var(--code-block-color);
+}
+
+.quarto-dark pre.text code {
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.quarto-dark div.sourceCode pre.sourceCode {
+  margin-bottom: 0;
+}
+
+.quarto-dark div.sourceCode code,
+.quarto-dark div.sourceCode code span {
+  background: transparent;
+}
+
+.quarto-dark div.sourceCode .code-copy-button {
+  color: var(--code-block-muted);
+}
+
+.quarto-dark div.sourceCode .code-copy-button:hover,
+.quarto-dark div.sourceCode .code-copy-button:focus {
+  color: var(--code-block-color);
+}

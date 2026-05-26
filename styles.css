@@ -36,25 +36,48 @@ i {
 
 .paper-status {
   display: inline-block;
-  font-size: 0.9em;
-  color: #555;
+  font-size: 0.86em;
+  color: #6f625c;
   font-style: italic;
 }
 
 .paper-links {
-  display: inline-block;
-  margin-top: 0.4em;
-  font-size: 0.9em;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+  font-size: 0;
+}
+
+.bio-links {
+  justify-content: center;
+  margin-top: 0rem;
 }
 
 .paper-links a {
-  text-decoration: underline;
+  display: inline-block;
+  color: #8a5945;
+  background: #f4ece6;
+  border: 1px solid #ddcbbf;
+  border-radius: 999px;
+  padding: 0.16rem 0.58rem;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.paper-links a:hover,
+.paper-links a:focus {
+  color: #6f4636;
+  background: #efe4dc;
+  border-color: #cfb9aa;
+  text-decoration: none;
 }
 
 .paper-links-auto a + a::before {
-  content: " | ";
-  text-decoration: none;
-  color: #333;
+  content: none;
 }
 
 .abstract-toggle {
@@ -142,8 +165,25 @@ blockquote code {
   color: #aaa;
 }
 
+.quarto-dark .paper-status {
+  color: #a9bfce;
+}
+
+.quarto-dark .paper-links a {
+  color: #c4d8e8;
+  background: rgba(143, 180, 208, 0.12);
+  border-color: rgba(196, 216, 232, 0.22);
+}
+
+.quarto-dark .paper-links a:hover,
+.quarto-dark .paper-links a:focus {
+  color: #e0edf7;
+  background: rgba(143, 180, 208, 0.2);
+  border-color: rgba(224, 237, 247, 0.34);
+}
+
 .quarto-dark .paper-links-auto a + a::before {
-  color: #aaa;
+  content: none;
 }
 
 .quarto-dark .abstract-content {
@@ -158,6 +198,51 @@ blockquote code {
   --inline-code-color: #d7e6f3;
   --inline-code-bg: #13212d;
   --inline-code-border: rgba(183, 208, 228, 0.18);
+  --code-block-bg: #111a28;
+  --code-block-color: #e7edf5;
+  --code-block-border: rgba(164, 194, 217, 0.24);
+  --code-block-muted: #94a9bb;
+}
+
+.quarto-dark div.sourceCode,
+.quarto-dark div.sourceCode pre.sourceCode {
+  color: var(--code-block-color);
+  background-color: var(--code-block-bg);
+  border-color: var(--code-block-border);
+}
+
+.quarto-dark div.sourceCode {
+  border: 1px solid var(--code-block-border);
+  border-radius: 0.35rem;
+}
+
+.quarto-dark pre.text {
+  color: var(--code-block-color);
+}
+
+.quarto-dark pre.text code {
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.quarto-dark div.sourceCode pre.sourceCode {
+  margin-bottom: 0;
+}
+
+.quarto-dark div.sourceCode code,
+.quarto-dark div.sourceCode code span {
+  background: transparent;
+}
+
+.quarto-dark div.sourceCode .code-copy-button {
+  color: var(--code-block-muted);
+}
+
+.quarto-dark div.sourceCode .code-copy-button:hover,
+.quarto-dark div.sourceCode .code-copy-button:focus {
+  color: var(--code-block-color);
 }
 
 /* ---- CV page styles ---- */
