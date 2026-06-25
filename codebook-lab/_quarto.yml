@@ -33,7 +33,7 @@ website:
       - text: "Tutorials"
         href: experiments.qmd
       - text: "Reference"
-        href: reference/index.qmd
+        href: reference/index.html
       - text: "Changelog"
         href: changelog.qmd
     right:

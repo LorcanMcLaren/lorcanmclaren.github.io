@@ -11,11 +11,11 @@
 
 .PHONY: version reference render preview clean
 
-# Write the installed package version into a CSS variable (navbar badge) and a
+# Write the current release version into a CSS variable (navbar badge) and a
 # Quarto variable (citation page), so both stay in sync with codebook_lab.
 # Regenerated on every build.
 version:
-	@python -c "from importlib.metadata import version as v; ver=v('codebook-lab'); open('_version.css','w').write(':root{--pkg-version:\"v'+ver+'\";}\n'); open('_variables.yml','w').write('version: '+ver+'\n')"
+	@python -c 'from importlib.metadata import version as package_version; from pathlib import Path; import re; changelog = Path("changelog.qmd"); text = changelog.read_text(encoding="utf-8") if changelog.exists() else ""; match = re.search(r"^##\s+([0-9]+(?:\.[0-9]+)*)\s*$$", text, re.M); ver = match.group(1) if match else package_version("codebook-lab"); Path("_version.css").write_text(f":root{{--pkg-version:\"v{ver}\";}}\n", encoding="utf-8"); Path("_variables.yml").write_text(f"version: {ver}\n", encoding="utf-8")'
 
 # Regenerate the API reference from the package docstrings.
 reference:

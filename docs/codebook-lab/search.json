@@ -808,7 +808,7 @@
     "href": "citation.html#software",
     "title": "Citation",
     "section": "Software",
-    "text": "Software\nAPSR style:\nMcLaren, Lorcan. 2026. CodeBook Lab (Version v1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19185921.\nBibTeX:\n@software{mclaren_codebook_lab_2026,\n  author = {McLaren, Lorcan},\n  title = {CodeBook Lab},\n  year = {2026},\n  version = {v1.0.0},\n  doi = {10.5281/zenodo.19185921},\n  url = {https://doi.org/10.5281/zenodo.19185921}\n}"
+    "text": "Software\nAPSR style:\nMcLaren, Lorcan. 2026. CodeBook Lab (Version v1.4.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19185921.\nBibTeX:\n@software{mclaren_codebook_lab_2026,\n  author = {McLaren, Lorcan},\n  title = {CodeBook Lab},\n  year = {2026},\n  version = {v1.4.0},\n  doi = {10.5281/zenodo.19185921},\n  url = {https://doi.org/10.5281/zenodo.19185921}\n}"
   },
   {
     "objectID": "citation.html#preprint",
