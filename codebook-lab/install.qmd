@@ -1,0 +1,60 @@
+---
+title: "Installation"
+---
+
+## Python Environment
+
+CodeBook Lab supports Python 3.10 and newer. A virtual environment keeps package dependencies separate from the rest of your system.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install codebook-lab
+```
+
+If you plan to generate or score textbox annotations, install the optional textbox dependencies:
+
+```bash
+python -m pip install "codebook-lab[textbox]"
+```
+
+Those extras enable ROUGE, embedding-based cosine similarity, and BERTScore. Normalized Levenshtein similarity and BLEU are available without the optional extras.
+
+## Ollama
+
+CodeBook Lab runs local models through Ollama. Install Ollama, then make sure the server is available:
+
+```bash
+ollama serve
+```
+
+Experiment runs try to start the default local Ollama server when needed, and pull the requested model automatically before the first run — so you do not need to `ollama pull` it yourself:
+
+```python
+from codebook_lab import ExperimentSpec, run_experiment
+
+result = run_experiment(
+    ExperimentSpec(
+        task="policy-sentiment",
+        model="gemma3:270m",
+        country_iso_code="IRL",
+    )
+)
+```
+
+The `country_iso_code` value should be the three-letter ISO 3166-1 alpha-3 code for where the computation physically runs, such as `IRL`, `USA`, or `DEU`. CodeCarbon uses this to estimate emissions from energy consumption.
+
+## Development Install
+
+For package development, clone the repository and install it in editable mode:
+
+```bash
+git clone https://github.com/LorcanMcLaren/codebook-lab.git
+cd codebook-lab
+python -m pip install -e ".[dev]"
+pytest
+```
+
+Use `python -m pip install -e ".[all,dev]"` if you also want the optional textbox metric dependencies in the development environment.
+

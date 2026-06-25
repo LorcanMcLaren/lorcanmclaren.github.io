@@ -4,6 +4,7 @@ project:
   render:
     - "*.qmd"
     - "!llms-for-social-scientists/"  # course is a separate Quarto book project, rendered independently
+    - "!codebook-lab/"  # package docs are a separate Quarto book project, rendered independently
   resources: # here we need to add any files that users should be able to download
     - files/taking-the-green-pill.pdf
     - docs/cv/index.pdf
@@ -56,4 +57,3 @@ format:
       - <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
       - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 # mainfont: Montserrat
-

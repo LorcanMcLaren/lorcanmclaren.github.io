@@ -1,0 +1,12 @@
+/.quarto/
+
+# API reference is generated from codebook_lab docstrings by `quartodoc build`
+# (run via the Makefile before rendering). Don't commit the generated source;
+# it is rebuilt on every render.
+/reference/
+
+# Version files generated from the installed package by `make version`:
+# the navbar badge CSS and the Quarto variable used on the citation page.
+/_version.css
+/_variables.yml
+

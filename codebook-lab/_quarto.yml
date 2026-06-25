@@ -1,0 +1,246 @@
+project:
+  type: website
+  output-dir: ../docs/codebook-lab
+
+# The API reference under reference/ is generated from codebook_lab's docstrings
+# by `quartodoc build`. Run it before rendering (see the Makefile / README) —
+# NOT as a Quarto pre-render hook, because quartodoc rewrites reference/ and the
+# watched _sidebar.yml on every pass, which sends `quarto preview` into an
+# endless re-render loop.
+metadata-files:
+  - reference/_sidebar.yml
+
+website:
+  title: "CodeBook Lab"
+  site-url: https://lorcanmclaren.com/codebook-lab
+  repo-url: https://github.com/LorcanMcLaren/codebook-lab
+  page-footer:
+    left: |
+      <a href="citation.html">Citation</a>
+    center: |
+      <a href="https://lorcanmclaren.com">Lorcan McLaren</a> · © <span id="cb-year">2026</span> · <a href="https://github.com/LorcanMcLaren/codebook-lab/blob/main/LICENSE">AGPL-3.0</a>
+    right: |
+      <a href="#" data-feedback-open>Send Feedback</a>
+  navbar:
+    title: "CodeBook Lab"
+    left:
+      - text: "Studio"
+        href: studio.qmd
+      - text: "Get Started"
+        href: index.qmd
+      - text: "Examples"
+        href: examples.qmd
+      - text: "Tutorials"
+        href: experiments.qmd
+      - text: "Reference"
+        href: reference/index.qmd
+      - text: "Changelog"
+        href: changelog.qmd
+    right:
+      - icon: github
+        href: https://github.com/LorcanMcLaren/codebook-lab
+        aria-label: "CodeBook Lab on GitHub"
+  sidebar:
+    - id: get-started
+      title: "Get Started"
+      collapse-level: 4
+      contents:
+        - section: "Overview"
+          href: index.qmd
+          contents:
+            - text: "What the package does"
+              href: index.qmd#what-the-package-does
+            - text: "Where to start"
+              href: index.qmd#where-to-start
+        - section: "Installation"
+          href: install.qmd
+          contents:
+            - text: "Python environment"
+              href: install.qmd#python-environment
+            - text: "Ollama"
+              href: install.qmd#ollama
+            - text: "Development install"
+              href: install.qmd#development-install
+        - section: "Concepts"
+          contents:
+            - section: "Tasks"
+              href: tasks.qmd
+              contents:
+                - text: "Codebook Fields"
+                  href: tasks.qmd#codebook-fields
+                - text: "Ground Truth CSV"
+                  href: tasks.qmd#ground-truth-csv
+                - text: "Bundled Example Tasks"
+                  href: tasks.qmd#bundled-example-tasks
+                - text: "Custom Task Checklist"
+                  href: tasks.qmd#custom-task-checklist
+            - section: "Annotation Types"
+              href: annotation-types.qmd
+              contents:
+                - text: "Checkbox"
+                  href: annotation-types.qmd#checkbox
+                - text: "Dropdown"
+                  href: annotation-types.qmd#dropdown
+                - text: "Likert"
+                  href: annotation-types.qmd#likert
+                - text: "Textbox"
+                  href: annotation-types.qmd#textbox
+                - text: "Span"
+                  href: annotation-types.qmd#span
+                - text: "Built-In Example Coverage"
+                  href: annotation-types.qmd#built-in-example-coverage
+            - section: "Conditionals And Retries"
+              href: conditionals-retries.qmd
+              contents:
+                - text: "Conditional Annotations"
+                  href: conditionals-retries.qmd#conditional-annotations
+                - text: "Response Validation"
+                  href: conditionals-retries.qmd#response-validation
+                - text: "Retry Strategies"
+                  href: conditionals-retries.qmd#retry-strategies
+            - section: "Outputs And Metrics"
+              href: outputs-metrics.qmd
+              contents:
+                - text: "Per-Run Files"
+                  href: outputs-metrics.qmd#per-run-files
+                - text: "Tidy Metrics Tables"
+                  href: outputs-metrics.qmd#tidy-metrics-tables
+                - text: "Linking the two tables"
+                  href: outputs-metrics.qmd#linking-the-two-tables
+                - text: "Choosing Metrics"
+                  href: outputs-metrics.qmd#choosing-metrics
+            - section: "Human Reliability"
+              href: human-reliability.qmd
+              contents:
+                - text: "Calculate Reliability"
+                  href: human-reliability.qmd#calculate-reliability
+                - text: "Assignments"
+                  href: human-reliability.qmd#assignments
+                - text: "Build Ground Truth"
+                  href: human-reliability.qmd#build-ground-truth
+    - id: examples
+      title: "Examples"
+      contents:
+        - examples.qmd
+    - id: tutorials
+      title: "Tutorials"
+      contents:
+        - experiments.qmd
+    - id: studio
+      title: "Studio"
+      collapse-level: 4
+      contents:
+        - section: "CodeBook Studio"
+          href: studio.qmd
+          contents:
+            - text: "Getting started"
+              href: studio.qmd#getting-started
+            - text: "Preparing your data"
+              href: studio.qmd#preparing-your-data
+            - text: "The codebook editor"
+              href: studio.qmd#the-codebook-editor
+            - text: "Annotation types"
+              href: studio.qmd#annotation-types
+            - text: "Conditional annotations"
+              href: studio.qmd#conditional-annotations
+            - text: "Worked examples"
+              href: studio.qmd#worked-examples
+            - text: "Version history"
+              href: studio.qmd#version-history
+            - text: "Previewing LLM prompts"
+              href: studio.qmd#previewing-llm-prompts
+            - text: "Annotating in the browser"
+              href: studio.qmd#annotating-in-the-browser
+            - text: "Exporting your work"
+              href: studio.qmd#exporting-your-work
+            - text: "Adjudicating disagreements"
+              href: studio.qmd#adjudicating-disagreements
+            - text: "Data security and persistence"
+              href: studio.qmd#data-security-and-persistence
+            - text: "Running locally"
+              href: studio.qmd#running-locally
+            - text: "Hand off to CodeBook Lab"
+              href: studio.qmd#hand-off-to-codebook-lab
+
+quartodoc:
+  package: codebook_lab
+  dir: reference
+  title: "API Reference"
+  style: pkgdown
+  parser: google
+  render_interlinks: false
+  sidebar: reference/_sidebar.yml
+  sections:
+    - title: "Experiment Types"
+      desc: "Dataclasses describing experiment specs and the results each run returns."
+      contents:
+        - ExperimentSpec
+        - ExperimentRunResult
+        - AnnotationRunResult
+        - MetricsRunResult
+        - HumanReliabilityResult
+        - HumanGroundTruthResult
+    - title: "Experiment Functions"
+      desc: "High-level entry points for running and sweeping experiments."
+      contents:
+        - run_experiment
+        - run_experiment_grid
+        - expand_param_grid
+        - resolve_task_dir
+    - title: "Lower-Level Workflow"
+      desc: "Run annotation, scoring, and human-reliability steps independently."
+      contents:
+        - run_annotation
+        - run_metrics
+        - calculate_human_reliability
+        - build_human_ground_truth
+    - title: "Validation and Retry Helpers"
+      desc: "Response parsing and retry utilities used inside the annotation loop."
+      contents:
+        - annotate.extract_json_response
+        - annotate.normalize_retry_strategy
+        - annotate.classify_text
+    - title: "Example Tasks"
+      desc: "Discover and copy the bundled starter tasks."
+      contents:
+        - list_example_tasks
+        - get_example_task_dir
+        - get_example_task_files
+        - copy_example_task
+    - title: "Prompts"
+      desc: "Inspect built-in prompt wrappers and register custom ones."
+      contents:
+        - list_prompt_wrappers
+        - get_prompt_wrapper
+        - register_prompt_wrapper
+        - PromptContext
+    - title: "Ollama Helpers"
+      desc: "Check on and start the local Ollama server and models."
+      contents:
+        - ensure_ollama_available
+        - ensure_ollama_model
+        - get_ollama_base_url
+
+format:
+  html:
+    theme:
+      light:
+        - simplex
+        - ../custom-light.scss
+      dark:
+        - simplex
+        - ../custom-dark.scss
+    fontsize: 110%
+    linestretch: 1.5
+    css:
+      - styles.css
+      - _version.css
+    toc: true
+    toc-depth: 3
+    page-navigation: false
+    link-external-newwindow: true
+    include-after-body: _feedback.html
+    header-includes:
+      - <link rel="preconnect" href="https://fonts.googleapis.com">
+      - <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      - <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">

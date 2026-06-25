@@ -1,0 +1,132 @@
+---
+title: "Examples"
+---
+
+A worked, end-to-end run on the bundled `policy-sentiment` task: get the data,
+run a model, read the row-level output, and score it against the human labels.
+Everything here works against the task shipped with the package, so you can
+follow along before plugging in your own data.
+
+## The policy-sentiment task
+
+`policy-sentiment` asks four questions about short political texts, one of each
+annotation type:
+
+| Field | Type | Values |
+|---|---|---|
+| `Policy Sentiment_Explicit evaluation` | checkbox | `1` / `0` |
+| `Policy Sentiment_Direction` | dropdown | positive · negative · mixed · no clear sentiment |
+| `Policy Sentiment_Intensity` | Likert | `1`–`5` |
+| `Policy Sentiment_Evidence` | textbox | short free text |
+
+The `ground-truth.csv` holds the human labels in those columns, plus metadata
+(`doc_id`, `title`, `topic`, `speaker_type`) and the `text` to annotate.
+
+## 1. Get the task
+
+Copy the bundled task into a local folder you control:
+
+```python
+from codebook_lab import copy_example_task
+
+copy_example_task("policy-sentiment", "tasks/policy-sentiment")
+```
+
+This writes `tasks/policy-sentiment/codebook.json` and
+`tasks/policy-sentiment/ground-truth.csv`.
+
+## 2. Run one experiment
+
+```python
+from codebook_lab import ExperimentSpec, run_experiment
+
+result = run_experiment(
+    ExperimentSpec(
+        task="policy-sentiment",
+        model="gemma3:270m",
+        use_examples=False,
+        prompt_type="standard",
+        process_textbox=True,
+        country_iso_code="IRL",
+    ),
+    task_root="tasks",
+)
+
+print(result.experiment_directory)
+print(result.metrics.summary_text)
+```
+
+Lab strips the human label columns before prompting, runs the model on each row,
+writes the outputs to a timestamped directory, and scores the predictions
+against the held-out labels.
+
+## 3. Inspect the row-level output
+
+`output.csv` keeps the metadata and text, with the model's predictions in the
+same annotation columns (illustrative):
+
+| doc_id | Policy Sentiment_Explicit evaluation | Policy Sentiment_Direction | Policy Sentiment_Intensity | Policy Sentiment_Evidence |
+|---|---|---|---|---|
+| ps_001 | 1 | positive | 5 | "sensible compromise" |
+| ps_002 | 1 | negative | 2 | "financing assumptions are unrealistic" |
+| ps_003 | 0 | no clear sentiment | 3 | "" |
+
+Because the columns match the codebook, you can merge `output.csv` back against
+`ground-truth.csv` on `doc_id` to inspect individual disagreements.
+
+## 4. Read the metrics
+
+`result.metrics.summary_text` prints a quick overview, and the full results land
+in the tidy metrics tables under `outputs/metrics/` (illustrative):
+
+```text
+outputs/metrics/policy-sentiment_metrics_log.csv
+```
+
+| run_id | column | metric | value |
+|---|---|---|---|
+| run_a1b2 | Policy Sentiment_Direction | f1_macro | 0.71 |
+| run_a1b2 | Policy Sentiment_Direction | percentage_agreement | 0.80 |
+| run_a1b2 | Policy Sentiment_Intensity | quadratic_kappa | 0.66 |
+| run_a1b2 | Policy Sentiment_Evidence | norm_levenshtein | 0.52 |
+
+The companion `policy-sentiment_metrics_log_runs.csv` carries one row per run
+with the model, prompt, and sampling configuration alongside runtime, character
+counts, energy, and emissions — joined back to the metrics via `run_id`. See
+[Outputs & Metrics](outputs-metrics.qmd) for the full field list and guidance on
+[choosing metrics](outputs-metrics.qmd#choosing-metrics).
+
+## 5. Compare configurations
+
+The point of CodeBook Lab is comparison. Because the codebook and labels stay
+fixed, you can isolate one variable at a time — here, zero-shot versus few-shot
+across two models:
+
+```python
+from codebook_lab import run_experiment_grid
+
+results = run_experiment_grid(
+    param_grid={
+        "country_iso_code": "IRL",
+        "tasks": ["policy-sentiment"],
+        "models": ["gemma3:270m", "llama3.2:3b"],
+        "use_examples": [False, True],
+        "prompt_types": ["standard"],
+        "process_textboxes": [True],
+    },
+    task_root="tasks",
+    output_root="outputs",
+)
+
+print(f"Completed {len(results)} runs")
+```
+
+Each run appends to the same metrics log, so the four runs above are directly
+comparable on the same human labels.
+
+## Next steps
+
+- [Tasks](tasks.qmd) — the `codebook.json` / `ground-truth.csv` format for your own data.
+- [Annotation Types](annotation-types.qmd) — checkbox, dropdown, Likert, textbox, and span fields.
+- [Experiments](experiments.qmd) — single runs, sweeps, custom prompt wrappers, and running without ground truth.
+- [CodeBook Studio](studio.qmd) — designing a codebook and annotating in the browser.

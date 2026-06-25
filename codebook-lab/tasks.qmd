@@ -1,0 +1,95 @@
+---
+title: "Tasks"
+---
+
+A CodeBook Lab task is a folder with two files:
+
+- `codebook.json`: the annotation scheme exported from CodeBook Studio
+- `ground-truth.csv`: the same items with human annotation columns filled in
+
+For example:
+
+```text
+my_tasks/
+  policy-sentiment/
+    codebook.json
+    ground-truth.csv
+```
+
+## Codebook Fields
+
+The codebook tells Lab which column contains the text, which metadata columns should be preserved, and which annotation fields should be generated:
+
+```json
+{
+  "header_column": "title",
+  "text_column": "text",
+  "metadata_columns": ["speaker", "source"],
+  "section_1": {
+    "section_name": "Policy Sentiment",
+    "section_instruction": "Read the short text and assess whether it expresses an evaluative stance.",
+    "annotations": {
+      "annotation_1": {
+        "name": "Direction",
+        "type": "dropdown",
+        "options": ["positive", "negative", "mixed", "no clear sentiment"]
+      }
+    }
+  }
+}
+```
+
+Annotation output columns are named from the section and annotation names. In this example, the output column is `Policy Sentiment_Direction`.
+
+`metadata_columns` is optional. Lab preserves non-annotation columns in output files either way, but explicit metadata is useful when coordinating with CodeBook Studio and human-reliability workflows.
+
+## Ground Truth CSV
+
+The CSV should include the source text column named by `text_column`, plus the human annotation columns implied by the codebook.
+
+```csv
+doc_id,title,text,Policy Sentiment_Direction
+ps_001,Carbon Border Reform,The reform is a sensible compromise.,positive
+ps_002,Housing Plan Criticism,The plan has an admirable goal but unrealistic financing.,negative
+```
+
+When Lab runs annotation, it drops the human label columns before prompting the model. This prevents the model from seeing the answers it will later be scored against.
+
+## Bundled Example Tasks
+
+The package ships with example tasks so you can test the workflow immediately:
+
+```python
+from codebook_lab import copy_example_task, list_example_tasks
+
+print(list_example_tasks())
+copy_example_task("policy-sentiment", "./my_tasks", overwrite=True)
+```
+
+Then point an experiment at the copied task root:
+
+```python
+from codebook_lab import ExperimentSpec, run_experiment
+
+result = run_experiment(
+    ExperimentSpec(
+        task="policy-sentiment",
+        model="gemma3:270m",
+        country_iso_code="IRL",
+    ),
+    task_root="my_tasks",
+)
+```
+
+## Custom Task Checklist
+
+Before running a custom task, check:
+
+- the codebook has a valid `text_column`
+- the CSV contains that text column
+- every human label column matches the codebook-derived column name
+- checkbox values are stored as `0` or `1`
+- dropdown values match one of the allowed options
+- Likert values are inside the configured numeric range
+- span values are JSON lists of `start`, `end`, `text`, and optional `label` objects
+- conditional child fields are blank when the parent condition is not satisfied

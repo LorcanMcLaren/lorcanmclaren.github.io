@@ -1,0 +1,93 @@
+---
+title: "Conditionals And Retries"
+---
+
+Newer CodeBook Lab workflows support conditional annotations and invalid-response retries. These features make Lab closer to CodeBook Studio's annotation behavior while keeping model outputs auditable.
+
+## Conditional Annotations
+
+An annotation can depend on a previous annotation. Lab evaluates the condition row by row and skips inactive fields. Here a checkbox parent (`annotation_1`) gates a dropdown child (`annotation_2`): the model is only asked for a stance when the text is marked evaluative.
+
+```json
+{
+  "annotation_1": {
+    "name": "Is evaluative",
+    "type": "checkbox",
+    "tooltip": "Tick if the text expresses a stance toward the policy."
+  },
+  "annotation_2": {
+    "name": "Stance",
+    "type": "dropdown",
+    "options": ["Positive", "Negative"],
+    "condition": {
+      "section_key": "section_1",
+      "annotation_key": "annotation_1",
+      "value": "Yes"
+    }
+  }
+}
+```
+
+The condition `value` is normalized the same way as the parent's response, so for a checkbox parent `"Yes"`, `true`, and `1` are all equivalent triggers.
+
+If the parent annotation does not satisfy the condition, Lab stores a blank value for the child field and does not send the child prompt to the model. Metrics also ignore rows where the field is not applicable, so skipped conditionals do not count as model errors.
+
+Conditions can point across sections and are evaluated in codebook order. If a condition target is missing or cyclic, Lab falls back to permissive behavior rather than crashing a run.
+
+## Response Validation
+
+Lab does not silently invent defaults for invalid model responses.
+
+- dropdown values must match a configured option after normalization
+- checkbox values must parse to yes/no or `1`/`0`
+- Likert values must parse to a number in the configured scale
+- textbox values must be non-empty
+- span values must parse to a JSON array or `{"response": [...]}` object with valid offsets
+
+If no valid value can be extracted, Lab records a blank cell after retry attempts are exhausted.
+
+## Retry Strategies
+
+`run_annotation()` supports invalid-response retries:
+
+```python
+from codebook_lab import run_annotation
+
+annotation = run_annotation(
+    model="gemma3:270m",
+    csv_path="texts.csv",
+    codebook_path="codebook.json",
+    output_path="outputs/model-labels.csv",
+    experiment_directory="outputs/run-001",
+    country_iso_code="IRL",
+    retries=2,
+    retry_strategy="reprompt",
+)
+```
+
+Available strategies:
+
+`identical`
+: Re-run the same prompt and model configuration. This is the default.
+
+`reprompt`
+: Append a short format reminder to the prompt before retrying.
+
+`temperature`
+: Retry with a second model chain at `retry_temperature`, useful when the main run is deterministic.
+
+```python
+annotation = run_annotation(
+    model="gemma3:270m",
+    csv_path="texts.csv",
+    codebook_path="codebook.json",
+    output_path="outputs/model-labels.csv",
+    experiment_directory="outputs/run-001",
+    retries=1,
+    retry_strategy="temperature",
+    retry_temperature=0.3,
+)
+```
+
+Experiment runs currently expose retry behavior through the lower-level `run_annotation()` path. `run_experiment()` uses the package defaults when it calls annotation internally.
+

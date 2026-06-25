@@ -1,0 +1,90 @@
+---
+title: "Human Reliability"
+---
+
+CodeBook Lab can validate multiple human coder CSVs, calculate inter-coder reliability, surface disagreements, and build a consensus `ground-truth.csv`.
+
+## Calculate Reliability
+
+```python
+from codebook_lab import calculate_human_reliability
+
+coder_csvs = {
+    "coder1": "annotations/coder1.csv",
+    "coder2": "annotations/coder2.csv",
+    "coder3": "annotations/coder3.csv",
+}
+
+reliability = calculate_human_reliability(
+    codebook_path="codebook.json",
+    coder_csvs=coder_csvs,
+    output_dir="outputs/human_reliability",
+)
+
+print(reliability.summary_text)
+```
+
+Outputs include:
+
+- `validation_issues.csv`
+- `pairwise_icr.csv`
+- `multirater_icr.csv`
+- `disagreements.csv`
+- `summary.md`
+
+Each coder CSV must contain a stable item identifier column. The default is `sample_id`; pass `id_column="..."` if your data uses a different identifier.
+
+Validation catches duplicate coder-item rows, missing assigned items, unexpected items, unexpected coder assignments, invalid labels, missing required fields, and filled child fields whose condition is not satisfied.
+
+## Assignments
+
+By default, Lab infers coder assignments from the submitted files. To validate expected coverage, pass an assignment CSV.
+
+Long format:
+
+```csv
+sample_id,coder_id
+001,coder1
+001,coder2
+002,coder2
+002,coder3
+```
+
+Wide format:
+
+```csv
+sample_id,ra_1,ra_2
+001,coder1,coder2
+002,coder2,coder3
+```
+
+## Build Ground Truth
+
+Use `build_human_ground_truth()` to create a consensus label file. Rows without a strict majority are written to an adjudication queue.
+
+```python
+from codebook_lab import build_human_ground_truth
+
+ground_truth = build_human_ground_truth(
+    codebook_path="codebook.json",
+    coder_csvs=coder_csvs,
+    output_dir="outputs/ground_truth",
+)
+```
+
+Outputs include:
+
+- `ground-truth.csv`
+- `adjudication_queue.csv`
+- `validation_issues.csv`
+
+Open `adjudication_queue.csv` in CodeBook Studio's adjudication mode, fill unresolved blanks, export the completed queue, then rebuild:
+
+```python
+resolved = build_human_ground_truth(
+    codebook_path="codebook.json",
+    coder_csvs=coder_csvs,
+    adjudications_csv="adjudication_queue.csv",
+    output_dir="outputs/ground_truth_resolved",
+)
+```

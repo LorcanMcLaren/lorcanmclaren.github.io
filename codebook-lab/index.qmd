@@ -1,0 +1,75 @@
+---
+title: "CodeBook Lab"
+---
+
+CodeBook Lab is a Python package for running local LLM annotation experiments against human-coded benchmark data. It takes a CodeBook Studio codebook and labelled CSV, removes the human labels before annotation, runs one or more Ollama models, and scores the model outputs against the held-out human labels.
+
+The package is built for computational social science workflows where the core question is not simply "can a model label this text?", but which model, prompt, examples, and sampling settings reproduce a human codebook most reliably.
+
+```{=html}
+<div class="hero-note">
+  <p>These docs intentionally go beyond the package README. They cover conditionals, span annotations, response validation, retry strategies, tidy metrics logs, human reliability checks, and adjudication workflows.</p>
+</div>
+```
+
+```{=html}
+<div class="doc-grid">
+  <div class="doc-card">
+    <h3>Define once</h3>
+    <p>Use CodeBook Studio to design the annotation task, collect human labels, and export <code>codebook.json</code> plus <code>ground-truth.csv</code>.</p>
+  </div>
+  <div class="doc-card">
+    <h3>Run locally</h3>
+    <p>Use Ollama-backed models from Python, including small local models for quick tests and larger models for benchmark runs.</p>
+  </div>
+  <div class="doc-card">
+    <h3>Compare systematically</h3>
+    <p>Sweep over models, prompt wrappers, examples, temperature, top-p, textbox processing, span processing, and run metadata.</p>
+  </div>
+</div>
+```
+
+## What The Package Does
+
+CodeBook Lab gives you a reproducible path from human-coded data to model evaluation:
+
+1. Load a task folder containing `codebook.json` and `ground-truth.csv`.
+2. Strip annotation columns from the input before sending text to the model.
+3. Prompt a local Ollama model for each applicable annotation field.
+4. Save row-level model outputs and run metadata.
+5. Compare model labels with human labels using metrics appropriate to each annotation type.
+6. Log aggregate quality, runtime, energy, and emissions metrics for comparison across runs.
+
+Supported annotation types include checkbox, dropdown, Likert, textbox, and span annotations. Lab also respects conditional annotations, validates model responses before storing them, retries invalid answers, and keeps skipped conditional fields out of metric denominators.
+
+Categorical and ordinal fields receive classification and agreement metrics; textbox fields can receive lexical and embedding-based similarity metrics; span fields receive token F1, exact-match F1, and character IoU.
+
+## Where To Start
+
+If you want the shortest path, begin with [Installation](install.qmd), then run the bundled `policy-sentiment` task in [Experiments](experiments.qmd). If you already have CodeBook Studio exports, go straight to [Tasks](tasks.qmd) and [Annotation Types](annotation-types.qmd) to check the expected codebook and CSV formats.
+
+The upstream annotation workflow — designing a codebook and labelling data — is covered in the [CodeBook Studio](studio.qmd) guide.
+
+## License & Developers
+
+```{=html}
+<div class="doc-grid doc-grid-meta">
+  <div class="doc-card">
+    <h3>License</h3>
+    <p><a href="https://github.com/LorcanMcLaren/codebook-lab/blob/main/LICENSE">GNU AGPL v3.0</a> — a strong copyleft license. You may use, modify, and distribute CodeBook Lab, including over a network, provided derivative works remain under the same license.</p>
+  </div>
+  <div class="doc-card">
+    <h3>Developers</h3>
+    <p class="developer-line">Lorcan McLaren <a class="orcid-link" href="https://orcid.org/0009-0002-3828-3395" aria-label="ORCID iD: 0009-0002-3828-3395">
+      <svg class="orcid-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-hidden="true" focusable="false">
+        <circle cx="128" cy="128" r="128" fill="#A6CE39"/>
+        <path fill="#FFFFFF" d="M86.3 186.2H70.9V79.1h15.4v107.1z"/>
+        <path fill="#FFFFFF" d="M108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.4h24.5c34.9 0 42.9-26.5 42.9-39.8 0-21.5-13.7-39.8-43.7-39.8h-23.7v79.6z"/>
+        <path fill="#FFFFFF" d="M88.7 56.8c0 5.5-4.5 10.1-10.1 10.1s-10.1-4.6-10.1-10.1c0-5.6 4.5-10.1 10.1-10.1s10.1 4.5 10.1 10.1z"/>
+      </svg>
+    </a> — author, maintainer</p>
+  </div>
+</div>
+```
+
+To cite CodeBook Lab in research, see the [Citation](citation.qmd) page.

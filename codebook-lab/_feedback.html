@@ -1,0 +1,94 @@
+<!-- Site-wide "Send Feedback" dialog. Mirrors CodeBook Studio's feedback form
+     (type + description + contact) and opens a pre-filled GitHub issue, so no
+     server-side token is needed. Triggered by any [data-feedback-open] element. -->
+<div id="cb-feedback" hidden>
+  <div class="cb-fb-overlay" data-feedback-close></div>
+  <div class="cb-fb-modal" role="dialog" aria-modal="true" aria-labelledby="cb-fb-title">
+    <h3 id="cb-fb-title">Send Feedback</h3>
+    <p class="cb-fb-sub">Opens a pre-filled issue on GitHub — you review and submit it there.</p>
+    <label for="cb-fb-type">Type</label>
+    <select id="cb-fb-type">
+      <option value="bug">Bug report</option>
+      <option value="enhancement">Feature request</option>
+      <option value="feedback" selected>General feedback</option>
+    </select>
+    <label for="cb-fb-desc">Description</label>
+    <textarea id="cb-fb-desc" rows="5" placeholder="Tell us what happened or what you'd like to see..."></textarea>
+    <label for="cb-fb-contact">Contact (optional)</label>
+    <input id="cb-fb-contact" type="text" placeholder="Email or GitHub username for follow-up">
+    <p class="cb-fb-error" id="cb-fb-error" hidden>Please add a description.</p>
+    <div class="cb-fb-actions">
+      <button type="button" class="cb-fb-btn cb-fb-cancel" data-feedback-close>Cancel</button>
+      <button type="button" class="cb-fb-btn cb-fb-submit" id="cb-fb-submit">Open issue on GitHub</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  #cb-feedback[hidden] { display: none; }
+  #cb-feedback { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; }
+  .cb-fb-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); }
+  .cb-fb-modal {
+    position: relative; width: min(440px, 92vw); max-height: 90vh; overflow: auto;
+    background: #fffdf8; border: 1px solid var(--doc-card-border, #ddd); border-radius: 12px;
+    padding: 1.25rem 1.4rem; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    font-family: "Libre Franklin", sans-serif; font-size: 0.9rem; line-height: 1.45;
+  }
+  .quarto-dark .cb-fb-modal { background: #1a1a2e; }
+  .cb-fb-modal h3 { margin: 0 0 0.25rem; font-family: "Lora", serif; font-size: 1.4rem; color: var(--doc-accent-strong); }
+  .cb-fb-sub { margin: 0 0 1rem; font-size: 0.85rem; color: var(--doc-muted); }
+  .cb-fb-modal label { display: block; font-weight: 600; font-size: 0.85rem; margin: 0.7rem 0 0.25rem; }
+  .cb-fb-modal select, .cb-fb-modal textarea, .cb-fb-modal input {
+    width: 100%; box-sizing: border-box; padding: 0.45rem 0.55rem;
+    border: 1px solid var(--doc-card-border, #ccc); border-radius: 6px;
+    background: var(--code-block-bg, #fff); color: inherit; font: inherit;
+  }
+  .cb-fb-modal textarea { resize: vertical; }
+  .cb-fb-error { color: #c0392b; font-size: 0.8rem; margin: 0.5rem 0 0; }
+  .cb-fb-actions { display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 1.1rem; }
+  .cb-fb-btn { padding: 0.45rem 0.9rem; border-radius: 6px; border: 1px solid var(--doc-card-border, #ccc); cursor: pointer; font: inherit; font-weight: 600; }
+  .cb-fb-cancel { background: transparent; color: var(--doc-muted); }
+  .cb-fb-submit { background: var(--doc-accent); color: #fff; border-color: var(--doc-accent); }
+</style>
+
+<script>
+(function () {
+  var REPO = "LorcanMcLaren/codebook-lab";
+  // Keep the footer copyright year current (no inline footer script, which
+  // would split the centre footer line across two paragraphs).
+  var yearEl = document.getElementById("cb-year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  var modal = document.getElementById("cb-feedback");
+  if (!modal) return;
+  var typeEl = document.getElementById("cb-fb-type");
+  var descEl = document.getElementById("cb-fb-desc");
+  var contactEl = document.getElementById("cb-fb-contact");
+  var errEl = document.getElementById("cb-fb-error");
+
+  function open() { modal.hidden = false; setTimeout(function () { descEl.focus(); }, 0); }
+  function close() { modal.hidden = true; errEl.hidden = true; }
+
+  document.addEventListener("click", function (e) {
+    if (e.target.closest("[data-feedback-open]")) { e.preventDefault(); open(); return; }
+    if (e.target.closest("[data-feedback-close]")) { close(); }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !modal.hidden) close();
+  });
+
+  document.getElementById("cb-fb-submit").addEventListener("click", function () {
+    var desc = descEl.value.trim();
+    if (!desc) { errEl.hidden = false; descEl.focus(); return; }
+    var label = typeEl.value;
+    var typeText = typeEl.options[typeEl.selectedIndex].text;
+    var title = "[" + typeText + "] " + desc.slice(0, 80);
+    var body = "**Type:** " + typeText + "\n\n**Description:**\n" + desc;
+    var contact = contactEl.value.trim();
+    if (contact) body += "\n\n**Contact:** " + contact;
+    var url = "https://github.com/" + REPO + "/issues/new?labels=" + encodeURIComponent(label) +
+              "&title=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(body);
+    window.open(url, "_blank", "noopener");
+    close();
+  });
+})();
+</script>

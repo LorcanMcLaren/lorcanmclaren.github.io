@@ -1,0 +1,348 @@
+:root {
+  --inline-code-color: #4a3a40;
+  --inline-code-bg: rgba(95, 59, 74, 0.08);
+  --inline-code-border: rgba(122, 90, 101, 0.22);
+  --doc-card-bg: #f4ece6;
+  --doc-card-border: #ddcbbf;
+  --doc-accent: #8a5945;
+  --doc-accent-soft: #f4ece6;
+  --doc-accent-warmer: #efe4dc;
+  --doc-accent-strong: #6f4636;
+  --doc-muted: #6f625c;
+}
+
+p code,
+li code,
+td code,
+dd code,
+dt code,
+figcaption code,
+blockquote code {
+  color: var(--inline-code-color) !important;
+  background: var(--inline-code-bg) !important;
+  border: 1px solid var(--inline-code-border);
+  border-radius: 0.45rem;
+  padding: 0.08rem 0.35rem;
+}
+
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.9rem;
+  margin: 1.25rem 0;
+}
+
+/* Metadata cards (License / Developers) size to their own content instead of
+   stretching to the tallest card in the row, which left dead space. */
+.doc-grid-meta {
+  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}
+
+.doc-card {
+  border: 1px solid var(--doc-card-border);
+  border-radius: 8px;
+  background: var(--doc-card-bg);
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(111, 70, 54, 0.05);
+}
+
+/* Keep the centre footer line (name · year · license) from wrapping. */
+.nav-footer-center {
+  white-space: nowrap;
+}
+
+.doc-card h3 {
+  margin: 0;
+  padding: 0.55rem 0.85rem;
+  background: var(--doc-accent);
+  color: #f9f6f1;
+  font-family: "Lora", serif;
+  font-size: 1.05rem;
+}
+
+.doc-card p {
+  margin-bottom: 0;
+  padding: 0.85rem 0.95rem 1rem;
+}
+
+.developer-line {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  font-size: 0.92rem;
+  gap: 0.18rem;
+  white-space: nowrap;
+}
+
+.orcid-link {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.orcid-logo {
+  display: block;
+  height: 0.9rem;
+  width: 0.9rem;
+}
+
+@media (max-width: 360px) {
+  .developer-line {
+    font-size: 0.76rem;
+    gap: 0.08rem;
+  }
+
+  .orcid-logo {
+    height: 0.68rem;
+    width: 0.68rem;
+  }
+}
+
+.hero-note {
+  border-left: 4px solid var(--doc-accent);
+  background: var(--doc-accent-soft);
+  border-radius: 0 8px 8px 0;
+  padding: 0.85rem 1rem;
+  margin: 1rem 0 1.35rem;
+}
+
+/* Placeholder for a screenshot to be added later. */
+.screenshot {
+  border: 1px dashed var(--doc-card-border);
+  border-radius: 8px;
+  background: var(--doc-accent-soft);
+  color: var(--doc-muted);
+  padding: 1.75rem 1rem;
+  text-align: center;
+  font-style: italic;
+  font-size: 0.9rem;
+  margin: 1.25rem 0;
+}
+
+.screenshot::before {
+  content: "Screenshot";
+  display: block;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--doc-accent-strong);
+  margin-bottom: 0.4rem;
+}
+
+.hero-note p {
+  margin-bottom: 0;
+}
+
+.sidebar-title {
+  color: var(--doc-accent-strong);
+}
+
+.navbar {
+  font-family: "Lora", serif !important;
+  letter-spacing: 0;
+}
+
+.navbar-brand .navbar-title {
+  color: var(--doc-accent-strong);
+  font-family: "Lora", serif !important;
+  font-weight: 700 !important;
+}
+
+.navbar-brand .navbar-title::after {
+  content: "docs";
+  display: inline-block;
+  margin-left: 0.6rem;
+  padding: 0.1rem 0.45rem;
+  border: 1px solid var(--doc-card-border);
+  border-radius: 999px;
+  color: var(--doc-accent-strong);
+  background: var(--doc-accent-soft);
+  font-family: "Lora", serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.2;
+  vertical-align: middle;
+}
+
+/* Package version badge next to the brand. The string comes from --pkg-version,
+   written by `make version` from the installed codebook_lab, so it stays in
+   sync with the package. Falls back to nothing if the file wasn't generated. */
+.navbar-brand::after {
+  content: var(--pkg-version, "");
+  margin-left: 0.5rem;
+  font-family: "Libre Franklin", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--doc-muted);
+  vertical-align: middle;
+}
+
+.navbar-nav .nav-link,
+.navbar-nav .dropdown-item {
+  font-family: "Lora", serif !important;
+  font-weight: 400 !important;
+}
+
+/* Studio is the entry point of the workflow, so keep its nav link bold. */
+.navbar-nav .nav-link[href$="studio.html"] {
+  font-weight: 700 !important;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus,
+.navbar-nav .dropdown-item:hover,
+.navbar-nav .dropdown-item:focus {
+  color: var(--doc-accent-strong) !important;
+}
+
+.navbar .dropdown-menu {
+  border-color: var(--doc-card-border);
+  border-radius: 8px;
+  background: #fffdf8;
+  padding: 0.3rem;
+}
+
+/* Dropdown items: the default theme renders a brown-on-brown highlight that is
+   hard to read. Give the active (current page) item a solid accent fill with
+   light text, and the hover/focus state a soft tint with accent text. */
+.navbar .dropdown-menu .dropdown-item {
+  border-radius: 6px;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover,
+.navbar .dropdown-menu .dropdown-item:focus {
+  background-color: var(--doc-accent-soft) !important;
+  color: var(--doc-accent-strong) !important;
+}
+
+.navbar .dropdown-menu .dropdown-item.active,
+.navbar .dropdown-menu .dropdown-item:active {
+  background-color: var(--doc-accent) !important;
+  color: #f9f6f1 !important;
+}
+
+/* Left sidebar (quartodoc API reference navigation). */
+.sidebar-navigation .sidebar-item a.active,
+.sidebar-navigation .sidebar-item .active {
+  color: var(--doc-accent-strong);
+  font-weight: 600;
+}
+
+.sidebar-navigation .sidebar-link:hover {
+  color: var(--doc-accent-strong);
+}
+
+/* Section labels ("Experiment Types", "Prompts", ...) get the brand serif and
+   accent colour so the sidebar reads as grouped sections, not a flat list. */
+.sidebar-navigation .sidebar-item-section > .sidebar-item-container .sidebar-item-text {
+  font-family: "Lora", serif;
+  font-weight: 600;
+  color: var(--doc-accent-strong);
+  letter-spacing: 0.01em;
+}
+
+.sidebar-navigation .sidebar-item-section > .sidebar-item-container .sidebar-item-toggle .bi {
+  color: var(--doc-accent);
+}
+
+.toc-actions a,
+#TOC a.active,
+#toc-title {
+  color: var(--doc-accent-strong);
+}
+
+/* Keep the content column from ballooning into the margin TOC when it holds an
+   intrinsically wide child (a long signature or a many-column table): grid
+   cells default to min-width: auto, so let this one shrink to its track. */
+main.content {
+  min-width: 0;
+}
+
+/* Long signatures and wide example blocks should scroll within the content
+   column rather than widen the page into the table of contents. */
+main.content div.sourceCode,
+main.content pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Wide content tables (e.g. the Examples output preview) scroll within the
+   content column instead of overflowing into the margin TOC. */
+main.content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* quartodoc parameter tables: give the Name/Type columns room to breathe so
+   identifiers like ExperimentSpec don't break across many lines, and only wrap
+   long union types at their delimiters. */
+main.content .doc-section-parameters td,
+main.content .doc-section-returns td {
+  vertical-align: top;
+}
+
+main.content .doc-section-parameters td:nth-child(2),
+main.content .doc-section-returns td:nth-child(2) {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.quarto-dark {
+  --inline-code-color: #d7e6f3;
+  --inline-code-bg: #13212d;
+  --inline-code-border: rgba(183, 208, 228, 0.18);
+  --code-block-bg: #111a28;
+  --code-block-color: #e7edf5;
+  --code-block-border: rgba(164, 194, 217, 0.24);
+  --doc-card-bg: rgba(255, 255, 255, 0.05);
+  --doc-card-border: rgba(196, 216, 232, 0.22);
+  /* The light-mode brown accent looks incongruous on the dark-blue theme, so
+     match the main site and use its desaturated blue accent in dark mode. */
+  --doc-accent: #8fb4d0;
+  --doc-accent-soft: rgba(143, 180, 208, 0.18);
+  --doc-accent-warmer: rgba(143, 180, 208, 0.28);
+  --doc-accent-strong: #c4d8e8;
+  --doc-muted: #aab7c2;
+}
+
+.quarto-dark .doc-card h3 {
+  color: #1a1a2e;
+}
+
+.quarto-dark .navbar .dropdown-menu {
+  background: #1a1a2e;
+}
+
+.quarto-dark div.sourceCode,
+.quarto-dark div.sourceCode pre.sourceCode {
+  color: var(--code-block-color);
+  background-color: var(--code-block-bg);
+  border-color: var(--code-block-border);
+}
+
+.quarto-dark div.sourceCode {
+  border: 1px solid var(--code-block-border);
+  border-radius: 0.35rem;
+}
+
+/* Plain (non-highlighted) code blocks — e.g. the ```text file trees and
+   ```csv samples — default to dark text and are unreadable on the dark
+   background. Mirror the main site's fix and give them the light code colour. */
+.quarto-dark pre.text,
+.quarto-dark pre.csv {
+  color: var(--code-block-color);
+}
+
+.quarto-dark pre.text code,
+.quarto-dark pre.csv code {
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}

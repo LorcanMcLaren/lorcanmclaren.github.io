@@ -23,6 +23,6 @@ CodeBook Studio is a browser-based text annotation tool for computational social
 - LLM prompt preview for checking how the task will be presented to models
 - CSV input and output for interoperability
 
-For a step-by-step walkthrough covering both tools, see the [CodeBook Studio & Lab Tutorial](../codebook-tutorial.qmd).
+For a full guide to CodeBook Studio's features, see the [CodeBook Studio documentation](../codebook-lab/studio.html).
 
 The app is available at [codebook.streamlit.app](https://codebook.streamlit.app/). Feel free to reach out if you encounter any bugs or need additional features for your annotation workflow.

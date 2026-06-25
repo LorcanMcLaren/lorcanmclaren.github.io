@@ -1,0 +1,4 @@
+# Build-time dependencies for the CodeBook Lab docs site.
+# quartodoc introspects codebook_lab's docstrings to generate reference/.
+quartodoc>=0.11
+codebook-lab
