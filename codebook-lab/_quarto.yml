@@ -18,7 +18,7 @@ website:
     left: |
       <a href="citation.html">Citation</a>
     center: |
-      <a href="https://lorcanmclaren.com">Lorcan McLaren</a> · © <span id="cb-year"></span><script>document.getElementById("cb-year").textContent=new Date().getFullYear();</script> · <a href="https://github.com/LorcanMcLaren/codebook-lab/blob/main/LICENSE">AGPL-3.0</a>
+      <a href="https://lorcanmclaren.com">Lorcan McLaren</a> · © <span id="cb-year">2026</span> · <a href="https://github.com/LorcanMcLaren/codebook-lab/blob/main/LICENSE">AGPL-3.0</a>
     right: |
       <a href="#" data-feedback-open>Send Feedback</a>
   navbar:

@@ -638,15 +638,14 @@ ul.task-list li input[type="checkbox"] {
   </div>
   <div class="doc-card">
     <h3 class="anchored">Developers</h3>
-    <p><strong>Lorcan McLaren</strong> — author, maintainer<br>
-    <a href="https://orcid.org/0009-0002-3828-3395" aria-label="ORCID iD: 0009-0002-3828-3395" style="display:inline-flex;align-items:center;margin-top:0.35rem;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 256 256" width="22" height="22" role="img" aria-hidden="true" focusable="false">
+    <p class="developer-line">Lorcan McLaren <a class="orcid-link" href="https://orcid.org/0009-0002-3828-3395" aria-label="ORCID iD: 0009-0002-3828-3395">
+      <svg class="orcid-logo" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 256 256" role="img" aria-hidden="true" focusable="false">
         <circle cx="128" cy="128" r="128" fill="#A6CE39"></circle>
         <path fill="#FFFFFF" d="M86.3 186.2H70.9V79.1h15.4v107.1z"></path>
         <path fill="#FFFFFF" d="M108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.4h24.5c34.9 0 42.9-26.5 42.9-39.8 0-21.5-13.7-39.8-43.7-39.8h-23.7v79.6z"></path>
         <path fill="#FFFFFF" d="M88.7 56.8c0 5.5-4.5 10.1-10.1 10.1s-10.1-4.6-10.1-10.1c0-5.6 4.5-10.1 10.1-10.1s10.1 4.5 10.1 10.1z"></path>
       </svg>
-    </a></p>
+    </a> — author, maintainer</p>
   </div>
 </div>
 <p>To cite CodeBook Lab in research, see the <a href="./citation.html">Citation</a> page.</p>
@@ -711,6 +710,10 @@ ul.task-list li input[type="checkbox"] {
 <script>
 (function () {
   var REPO = "LorcanMcLaren/codebook-lab";
+  // Keep the footer copyright year current (no inline footer script, which
+  // would split the centre footer line across two paragraphs).
+  var yearEl = document.getElementById("cb-year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
   var modal = document.getElementById("cb-feedback");
   if (!modal) return;
   var typeEl = document.getElementById("cb-fb-type");
@@ -1169,9 +1172,7 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="citation.html">Citation</a></p>
 </div>   
     <div class="nav-footer-center">
-<a href="https://lorcanmclaren.com">Lorcan McLaren</a> · © <span id="cb-year"></span>
-<script>document.getElementById("cb-year").textContent=new Date().getFullYear();</script>
-<p>· <a href="https://github.com/LorcanMcLaren/codebook-lab/blob/main/LICENSE">AGPL-3.0</a></p>
+<p><a href="https://lorcanmclaren.com">Lorcan McLaren</a> · © <span id="cb-year">2026</span> · <a href="https://github.com/LorcanMcLaren/codebook-lab/blob/main/LICENSE">AGPL-3.0</a></p>
 </div>
     <div class="nav-footer-right">
 <p><a href="#" data-feedback-open="">Send Feedback</a></p>

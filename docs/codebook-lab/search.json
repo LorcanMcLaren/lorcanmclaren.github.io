@@ -650,7 +650,7 @@
     "href": "index.html#license-developers",
     "title": "CodeBook Lab",
     "section": "License & Developers",
-    "text": "License & Developers\n\n  \n    License\n    GNU AGPL v3.0 — a strong copyleft license. You may use, modify, and distribute CodeBook Lab, including over a network, provided derivative works remain under the same license.\n  \n  \n    Developers\n    Lorcan McLaren — author, maintainer\n    \n      \n        \n        \n        \n        \n      \n    \n  \n\nTo cite CodeBook Lab in research, see the Citation page.",
+    "text": "License & Developers\n\n  \n    License\n    GNU AGPL v3.0 — a strong copyleft license. You may use, modify, and distribute CodeBook Lab, including over a network, provided derivative works remain under the same license.\n  \n  \n    Developers\n    Lorcan McLaren \n      \n        \n        \n        \n        \n      \n     — author, maintainer\n  \n\nTo cite CodeBook Lab in research, see the Citation page.",
     "crumbs": [
       "Get Started",
       "Overview"
@@ -808,7 +808,7 @@
     "href": "citation.html#software",
     "title": "Citation",
     "section": "Software",
-    "text": "Software\nAPSR style:\nMcLaren, Lorcan. 2026. CodeBook Lab (Version v1.4.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19185921.\nBibTeX:\n@software{mclaren_codebook_lab_2026,\n  author = {McLaren, Lorcan},\n  title = {CodeBook Lab},\n  year = {2026},\n  version = {v1.4.0},\n  doi = {10.5281/zenodo.19185921},\n  url = {https://doi.org/10.5281/zenodo.19185921}\n}"
+    "text": "Software\nAPSR style:\nMcLaren, Lorcan. 2026. CodeBook Lab (Version v1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19185921.\nBibTeX:\n@software{mclaren_codebook_lab_2026,\n  author = {McLaren, Lorcan},\n  title = {CodeBook Lab},\n  year = {2026},\n  version = {v1.0.0},\n  doi = {10.5281/zenodo.19185921},\n  url = {https://doi.org/10.5281/zenodo.19185921}\n}"
   },
   {
     "objectID": "citation.html#preprint",

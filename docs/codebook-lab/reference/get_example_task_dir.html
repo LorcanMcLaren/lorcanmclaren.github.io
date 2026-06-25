@@ -741,6 +741,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script>
 (function () {
   var REPO = "LorcanMcLaren/codebook-lab";
+  // Keep the footer copyright year current (no inline footer script, which
+  // would split the centre footer line across two paragraphs).
+  var yearEl = document.getElementById("cb-year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
   var modal = document.getElementById("cb-feedback");
   if (!modal) return;
   var typeEl = document.getElementById("cb-fb-type");
@@ -1199,9 +1203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="citation.html">Citation</a></p>
 </div>   
     <div class="nav-footer-center">
-<a href="https://lorcanmclaren.com">Lorcan McLaren</a> · © <span id="cb-year"></span>
-<script>document.getElementById("cb-year").textContent=new Date().getFullYear();</script>
-<p>· <a href="https://github.com/LorcanMcLaren/codebook-lab/blob/main/LICENSE">AGPL-3.0</a></p>
+<p><a href="https://lorcanmclaren.com">Lorcan McLaren</a> · © <span id="cb-year">2026</span> · <a href="https://github.com/LorcanMcLaren/codebook-lab/blob/main/LICENSE">AGPL-3.0</a></p>
 </div>
     <div class="nav-footer-right">
 <p><a href="#" data-feedback-open="">Send Feedback</a></p>
