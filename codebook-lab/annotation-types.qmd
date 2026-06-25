@@ -1,0 +1,123 @@
+---
+title: "Annotation Types"
+---
+
+CodeBook Lab reads annotation definitions from the CodeBook Studio `codebook.json` format. It currently supports five annotation types.
+
+## Checkbox
+
+Checkbox annotations are binary yes/no judgements. Lab stores them as `1` for yes and `0` for no.
+
+```json
+{
+  "name": "Explicit evaluation",
+  "type": "checkbox",
+  "tooltip": "Tick this if the text clearly expresses an evaluative stance."
+}
+```
+
+Valid model responses include JSON booleans, `1`/`0`, and common yes/no strings. Invalid responses are retried and then stored as blank if no valid answer is found.
+
+## Dropdown
+
+Dropdown annotations require one value from a fixed option set.
+
+```json
+{
+  "name": "Direction",
+  "type": "dropdown",
+  "options": ["positive", "negative", "mixed", "no clear sentiment"]
+}
+```
+
+Lab normalizes dropdown responses case-insensitively against the configured options. A model response such as `" Positive "` is stored as `positive` if that is the exact option in the codebook.
+
+## Likert
+
+Likert annotations require a whole number inside a configured range.
+
+```json
+{
+  "name": "Intensity",
+  "type": "likert",
+  "min_value": 1,
+  "max_value": 5
+}
+```
+
+JSON numeric responses are converted to integers and clamped to the configured range. If a non-JSON response contains an in-range number, Lab can recover that number; otherwise the response is invalid and eligible for retry.
+
+## Textbox
+
+Textbox annotations store short free-text responses.
+
+```json
+{
+  "name": "Evidence",
+  "type": "textbox",
+  "tooltip": "Provide a short phrase from the text that supports the judgement."
+}
+```
+
+Textbox generation and scoring are opt-in because the optional metrics can be heavier:
+
+```python
+ExperimentSpec(
+    task="policy-sentiment",
+    model="gemma3:270m",
+    process_textbox=True,
+)
+```
+
+Install `codebook-lab[textbox]` for the full textbox metric suite.
+
+## Span
+
+Span annotations store character offsets into the original text. They can be unlabelled highlights or labelled spans.
+
+Unlabelled span:
+
+```json
+{
+  "name": "Evidence",
+  "type": "span",
+  "tooltip": "Highlight the phrase that supports your judgement.",
+  "label_options": []
+}
+```
+
+Labelled span:
+
+```json
+{
+  "name": "Emotion markers",
+  "type": "span",
+  "tooltip": "Tag each highlight with the emotion it conveys.",
+  "label_options": ["joy", "sadness", "anger", "fear", "surprise", "disgust"]
+}
+```
+
+Span generation and scoring are opt-in:
+
+```python
+ExperimentSpec(
+    task="discrete-emotions",
+    model="gemma3:270m",
+    process_span=True,
+)
+```
+
+Span cells are CSV-safe JSON strings:
+
+```json
+[
+  {"start": 38, "end": 55, "text": "her heart pounded", "label": "fear"}
+]
+```
+
+Lab validates offsets, drops out-of-range spans, fills missing `text` from the source string when possible, and strips labels that are not in `label_options`.
+
+## Built-In Example Coverage
+
+The bundled `policy-sentiment` task exercises checkbox, dropdown, Likert, and textbox annotations. The bundled `discrete-emotions` task exercises dropdown, Likert, unlabelled span, and labelled span annotations.
+

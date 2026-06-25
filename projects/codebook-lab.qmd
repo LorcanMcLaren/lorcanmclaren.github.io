@@ -6,6 +6,7 @@ abstract: "A Python package for computational social science that benchmarks loc
 hide-abstract: true
 packagelink: "https://pypi.org/project/codebook-lab/"
 codelink: "https://github.com/LorcanMcLaren/codebook-lab"
+docslink: "/codebook-lab/"
 format:
   html:
     page-layout: article
@@ -175,4 +176,6 @@ Experiments are controlled from Python, so users can start with a single run, sc
 
 CodeBook Lab also tracks runtime, prompt and response length, energy consumption, and estimated carbon emissions for each run, with aggregate metrics logged to a single CSV for cross-experiment comparison.
 
-The package ships with a bundled starter task so you can test the workflow before plugging in your own data. For a step-by-step walkthrough covering both tools, see the [CodeBook Studio & Lab Tutorial](../codebook-tutorial.qmd).
+The package ships with a bundled starter task so you can test the workflow before plugging in your own data. For installation, experiments, and the full API, see the [CodeBook Lab documentation](../codebook-lab/).
+
+Full package documentation is available at [lorcanmclaren.com/codebook-lab](/codebook-lab/).

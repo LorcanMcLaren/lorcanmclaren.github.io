@@ -1,0 +1,50 @@
+---
+title: "Citation"
+---
+
+If you use CodeBook Lab in research, please cite the software package and the associated preprint.
+
+## Software
+
+APSR style:
+
+McLaren, Lorcan. 2026. *CodeBook Lab* (Version v{{< var version >}}) [Computer software]. Zenodo. <https://doi.org/10.5281/zenodo.19185921>.
+
+BibTeX:
+
+```bibtex
+@software{mclaren_codebook_lab_2026,
+  author = {McLaren, Lorcan},
+  title = {CodeBook Lab},
+  year = {2026},
+  version = {v{{< var version >}}},
+  doi = {10.5281/zenodo.19185921},
+  url = {https://doi.org/10.5281/zenodo.19185921}
+}
+```
+
+## Preprint
+
+APSR style:
+
+McLaren, Lorcan, James P. Cross, Zuzanna Krakowska, Robin Rauner, and Martijn Schoonvelde. 2026. *Magic Words or Methodical Work? Challenging Conventional Wisdom in LLM-Based Political Text Annotation*. arXiv preprint arXiv:2603.26898. <https://arxiv.org/abs/2603.26898>.
+
+BibTeX:
+
+```bibtex
+@misc{mclaren_magic_words_2026,
+  author = {McLaren, Lorcan and Cross, James P. and Krakowska, Zuzanna and Rauner, Robin and Schoonvelde, Martijn},
+  title = {Magic Words or Methodical Work? Challenging Conventional Wisdom in LLM-Based Political Text Annotation},
+  year = {2026},
+  eprint = {2603.26898},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.CL},
+  doi = {10.48550/arXiv.2603.26898},
+  url = {https://arxiv.org/abs/2603.26898}
+}
+```
+
+## License
+
+CodeBook Lab is released under the [GNU Affero General Public License v3.0](https://github.com/LorcanMcLaren/codebook-lab/blob/main/LICENSE). You are free to use, modify, and distribute it — including over a network — provided derivative works are licensed under the same terms.
+

@@ -1,0 +1,111 @@
+---
+title: "Changelog"
+toc-depth: 2
+---
+
+Notable changes to CodeBook Lab, newest first. Versions follow the package
+releases on [PyPI](https://pypi.org/project/codebook-lab/) and
+[GitHub](https://github.com/LorcanMcLaren/codebook-lab/releases).
+
+## 1.4.0
+
+*2026-06-25*
+
+### New features
+
+- **Chat continuation modes.** `chat_mode` controls how annotation calls share
+  chat history within a run — `per_text` (one chat per row), `per_query` (a
+  fresh chat per query), or `continuous` (one chat for the whole run). See
+  [Chat continuation modes](experiments.qmd#chat-continuation-modes).
+- **Model reasoning.** `reasoning=True`/`False`/`None` is passed through to
+  `ChatOllama`; Lab captures the model's reasoning (structured
+  `reasoning_content`, falling back to `<think>…</think>`) and writes per-query
+  traces to `reasoning_traces.jsonl`. See
+  [Model reasoning](experiments.qmd#model-reasoning).
+
+### Changes
+
+- **Sensible classification defaults.** `ExperimentSpec` now defaults to
+  `temperature=0.0`, `use_examples=True`, `chat_mode="per_text"`, and
+  `reasoning=None`, and the default retry strategy is now `reprompt`.
+- **Run-ID output folders.** Runs are written to `outputs/<task>/<run_id>/`
+  instead of long configuration-based folder names; the full configuration is
+  stored in `config.json`, and the runs metrics table now records `chat_mode`
+  and `reasoning`. See [Outputs & Metrics](outputs-metrics.qmd).
+
+### Internal changes
+
+- Updated tests, README, and example scripts.
+
+## 1.3.0
+
+*2026-06-24*
+
+### New features
+
+- **Span annotations.** Labelled and unlabelled character-span coding, scored
+  with token F1, exact-match F1, and character IoU. Adds the bundled
+  `discrete-emotions` demo task. See [Annotation Types](annotation-types.qmd#span).
+- **Tidy metrics output.** Results are written as two linked tables — a long
+  `<task>_metrics_log.csv` (one row per run × column × metric) and a
+  `<task>_metrics_log_runs.csv` of per-run configuration and per-query
+  efficiency. See [Outputs & Metrics](outputs-metrics.qmd#tidy-metrics-tables).
+
+### Bug fixes
+
+- Harmonised invalid-response handling across annotation types: invalid model
+  responses are retried and then stored as null, rather than silently defaulted.
+  See [Conditionals & Retries](conditionals-retries.qmd#response-validation).
+
+### Internal changes
+
+- Added unit tests for span value parsing, response extraction, and metrics
+  integration.
+
+## 1.2.0
+
+*2026-06-24*
+
+### New features
+
+- **Human reliability and adjudication.** `calculate_human_reliability()` and
+  `build_human_ground_truth()` validate coder CSVs, compute inter-coder
+  reliability, surface disagreements, and build a consensus ground truth with an
+  adjudication queue. See [Human Reliability](human-reliability.qmd).
+
+### Internal changes
+
+- A GitHub Release is now created automatically on tag push.
+
+## 1.1.1
+
+*2026-06-08*
+
+### New features
+
+- `generate_response()` now uses Ollama's JSON-schema structured-output method
+  for more reliable parsing of model responses.
+
+### Internal changes
+
+- Added a PyPI publish workflow, README badges, and the preprint reference.
+
+## 1.1.0
+
+*2026-03-23*
+
+### Internal changes
+
+- First packaged distribution, with a Zenodo DOI and citation metadata.
+
+## 1.0.0
+
+*2026-03-23*
+
+### New features
+
+- Initial release: codebook-driven LLM annotation and benchmarking against human
+  labels. `run_experiment()` and `run_experiment_grid()` sweep model, prompt
+  style, examples, and sampling settings; classification, agreement, and textbox
+  metrics; built-in `standard`, `persona`, and `CoT` prompt wrappers; and the
+  bundled `policy-sentiment` task.

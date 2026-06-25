@@ -1,0 +1,103 @@
+---
+title: "Outputs And Metrics"
+---
+
+Each run creates a directory named by a short **run ID** under
+`outputs/<task>/<run_id>/`. Run-ID folders keep paths compact; the full set of
+choices for the run lives in `config.json` and in the runs metrics table.
+
+```text
+outputs/
+  policy-sentiment/
+    a1b2c3d4/
+      output.csv
+      config.json
+      classification_reports.txt
+      emissions.csv
+      timing_data.json
+      char_counts.json
+      reasoning_traces.jsonl
+  metrics/
+    policy-sentiment_metrics_log.csv
+    policy-sentiment_metrics_log_runs.csv
+```
+
+## Per-Run Files
+
+`output.csv`
+: Row-level model annotations.
+
+`config.json`
+: The full run configuration — model, prompt, sampling, chat mode, reasoning, and task paths — so a run-ID folder can always be traced back to its settings.
+
+`classification_reports.txt`
+: Human-readable evaluation summaries by annotation field.
+
+`emissions.csv`
+: CodeCarbon energy and emissions output.
+
+`timing_data.json`
+: Total inference time, average inference time, and request counts.
+
+`char_counts.json`
+: Total input and output characters sent to and returned from the model.
+
+`reasoning_traces.jsonl`
+: One record per query capturing the model's reasoning content, when the model returns it (see [Model reasoning](experiments.qmd#model-reasoning)).
+
+## Tidy Metrics Tables
+
+Aggregate metrics are written as two linked tidy tables:
+
+`<task>_metrics_log.csv`
+: The long table — one row per `(run_id, annotation column, annotation type, metric)` with the metric value.
+
+`<task>_metrics_log_runs.csv`
+: The runs table — one row per `run_id` with model, prompt, sampling, **chat mode, and reasoning** configuration, task paths, inference counts, character counts, energy use, emissions, CPU/GPU metadata, and per-query averages.
+
+This split keeps metric values long and analysis-friendly while avoiding repeated run metadata on every metric row.
+
+Depending on the annotation types in your codebook, metrics can include:
+
+- accuracy, precision, recall, F1, and percentage agreement
+- Cohen's kappa and Krippendorff's alpha
+- Spearman correlation and quadratic weighted kappa for Likert fields
+- normalized Levenshtein similarity and BLEU for textbox fields
+- ROUGE, embedding cosine similarity, and BERTScore when optional textbox extras are installed
+- token F1, exact-match F1, and character IoU for span fields
+- total inference time, average inference time, number of queries, character counts, energy use, and emissions
+
+## Linking the two tables
+
+`run_id` is the key shared by both tables, so you can join metric values to the
+configuration that produced them with a single merge:
+
+```python
+import pandas as pd
+
+metrics = pd.read_csv("outputs/metrics/policy-sentiment_metrics_log.csv")
+runs = pd.read_csv("outputs/metrics/policy-sentiment_metrics_log_runs.csv")
+
+joined = metrics.merge(runs, on="run_id")
+
+# e.g. macro-F1 on Direction by model and chat mode
+view = joined[
+    (joined["column"] == "Policy Sentiment_Direction")
+    & (joined["metric"] == "f1_macro")
+]
+print(view[["model_id", "chat_mode", "reasoning", "use_examples", "value"]])
+```
+
+Because every metric row carries a `run_id`, you can pivot, group, and compare
+runs along any configuration dimension — model, prompt, examples, chat mode,
+reasoning, or sampling — all scored against the same human labels.
+
+## Choosing Metrics
+
+For checkbox and dropdown annotations, start with F1 and percentage agreement. For imbalanced labels, inspect per-class precision and recall in `classification_reports.txt`.
+
+For Likert annotations, report ordinal-aware metrics alongside exact agreement. A model that predicts adjacent categories may be less wrong than one that jumps from one end of the scale to the other.
+
+For textbox annotations, treat similarity metrics as diagnostics rather than a single ground-truth measure. Short evidence extracts can be semantically equivalent while using different words.
+
+For span annotations, `token_f1` is the headline score for most comparisons because it rewards overlap at the token level. Use `exact_match_f1` when boundary precision matters and `char_iou` when near misses should still be visible.

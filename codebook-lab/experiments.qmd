@@ -1,0 +1,178 @@
+---
+title: "Experiments"
+---
+
+CodeBook Lab experiments are controlled from Python. The main object is `ExperimentSpec`, which describes one model/task configuration.
+
+## Single Run
+
+```python
+from codebook_lab import ExperimentSpec, run_experiment
+
+result = run_experiment(
+    ExperimentSpec(
+        task="policy-sentiment",
+        model="gemma3:270m",
+        use_examples=False,
+        prompt_type="standard",
+        temperature=None,
+        top_p=None,
+        process_textbox=True,
+        country_iso_code="IRL",
+    ),
+    output_root="outputs",
+)
+
+print(result.experiment_directory)
+print(result.metrics.summary_text)
+```
+
+Important fields:
+
+- `task`: task folder name, such as `policy-sentiment`
+- `model`: Ollama model identifier, such as `gemma3:270m`
+- `use_examples`: include worked examples from the codebook prompt
+- `prompt_type`: one of the registered prompt wrappers
+- `temperature`: optional sampling temperature
+- `top_p`: optional nucleus sampling value
+- `chat_mode`: how annotation calls share chat history — see [Chat continuation modes](#chat-continuation-modes)
+- `reasoning`: enable, disable, or defer to the model's [reasoning mode](#model-reasoning)
+- `process_textbox`: generate and score textbox annotations
+- `process_span`: generate and score span annotations
+- `country_iso_code`: three-letter country code for CodeCarbon emissions estimates
+
+Only `task` and `model` are required — the rest fall back to sensible
+classification defaults, so the example above can be as short as:
+
+```python
+result = run_experiment(
+    ExperimentSpec(task="policy-sentiment", model="gemma3:270m"),
+    output_root="outputs",
+)
+```
+
+The defaults are `temperature=0.0`, `use_examples=True`, `prompt_type="standard"`,
+`chat_mode="per_text"`, `reasoning=None`, and `country_iso_code="USA"`. Invalid
+model responses are retried with the `reprompt` strategy by default (see
+[Conditionals & Retries](conditionals-retries.qmd#retry-strategies)).
+
+`run_experiment()` uses the high-level end-to-end path: annotation first, metrics second. It resolves the task directory, checks that `codebook.json` and `ground-truth.csv` exist, optionally pulls the Ollama model, writes per-run sidecar files, and appends tidy metrics rows.
+
+## Parameter Sweep
+
+Use `run_experiment_grid()` when you want a Cartesian-product sweep across multiple settings.
+
+```python
+from codebook_lab import run_experiment_grid
+
+results = run_experiment_grid(
+    param_grid={
+        "country_iso_code": "IRL",
+        "tasks": ["policy-sentiment"],
+        "models": ["gemma3:270m", "llama3.2:3b"],
+        "use_examples": [False, True],
+        "prompt_types": ["standard", "persona"],
+        "temperatures": [0.0, 0.2],
+        "top_ps": [None],
+        "chat_modes": ["per_text"],
+        "reasoning": [None],
+        "process_textboxes": [True],
+        "process_spans": [False],
+    },
+    output_root="outputs",
+)
+
+print(f"Completed {len(results)} runs")
+```
+
+For a quick smoke test, keep one small model and one value in each field. For a benchmark, add one experimental dimension at a time so results are easier to interpret.
+
+The grid accepts Python booleans and `None` values directly. CLI-style strings such as `"true"`, `"false"`, and `"None"` are normalized internally, which is helpful when experiment grids come from config files.
+
+## Prompt Wrappers
+
+Built-in prompt wrappers include `standard`, `persona`, and `CoT`. You can inspect available wrappers from Python:
+
+```python
+from codebook_lab import list_prompt_wrappers
+
+print(list_prompt_wrappers())
+```
+
+You can register a custom wrapper without editing package internals:
+
+```python
+from codebook_lab import PromptContext, register_prompt_wrapper
+
+def concise_wrapper(context: PromptContext) -> str:
+    return (
+        "Annotate the text as carefully as possible.\n\n"
+        f"{context.core_prompt}\n\n"
+        f'Text:\n"{context.text}"\n\n'
+        "Response:\n"
+    )
+
+register_prompt_wrapper("concise", concise_wrapper)
+```
+
+Then pass `prompt_type="concise"` in the experiment spec.
+
+## Chat continuation modes
+
+`chat_mode` controls how much chat history is shared across the annotation calls
+within a run — a dimension that can change how a model behaves when a text has
+several annotations.
+
+`per_text`
+: One chat per text row, shared across that row's annotations, so later
+  annotations can see earlier answers for the same text. This is the default.
+
+`per_query`
+: A fresh chat for every annotation query — each judgement is made
+  independently, with no memory of other answers.
+
+`continuous`
+: A single chat for the whole run, carrying history across every text and
+  annotation.
+
+```python
+ExperimentSpec(task="policy-sentiment", model="gemma3:270m", chat_mode="per_query")
+```
+
+Sweep it like any other dimension with `"chat_modes": ["per_text", "per_query"]`
+in a parameter grid. The chosen mode is recorded in the runs metrics table.
+
+## Model reasoning
+
+For models that support a reasoning/thinking mode through Ollama, `reasoning`
+controls whether it is used:
+
+- `reasoning=None` (default) keeps the model's own default behaviour.
+- `reasoning=True` enables reasoning; `reasoning=False` disables it.
+
+```python
+ExperimentSpec(task="policy-sentiment", model="qwen3:8b", reasoning=True)
+```
+
+The value is passed through to `ChatOllama`. When the model returns reasoning,
+Lab captures it — reading the structured `reasoning_content` when available and
+otherwise parsing a `<think>…</think>` block — and writes one record per query
+to `reasoning_traces.jsonl` in the run directory, so you can audit how the model
+arrived at each label. The chosen mode is recorded in the runs metrics table.
+
+## Running Without Ground Truth
+
+If you are still designing a task and do not yet have human-coded labels, use `run_annotation()` directly on an unlabeled CSV. Later, add a `ground-truth.csv` and score the outputs with `run_metrics()`.
+
+```python
+from codebook_lab import run_annotation
+
+annotation = run_annotation(
+    model="gemma3:270m",
+    csv_path="texts.csv",
+    codebook_path="codebook.json",
+    output_path="outputs/model-labels.csv",
+    experiment_directory="outputs/run-001",
+    country_iso_code="IRL",
+)
+```

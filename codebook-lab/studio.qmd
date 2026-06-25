@@ -1,0 +1,250 @@
+---
+title: "CodeBook Studio"
+---
+
+[CodeBook Studio](https://codebook.streamlit.app/) is the browser-based
+annotation tool that pairs with CodeBook Lab. You define a codebook once — with
+sections, instructions, tooltips, and worked examples — annotate texts in the
+browser, and export a codebook and labelled dataset that drop straight into Lab
+for [benchmarking against your human labels](examples.qmd). The same codebook
+drives both human annotation and LLM prompting, so model outputs can be compared
+directly against the human labels.
+
+```{=html}
+<div class="hero-note">
+  <p>Studio runs in the browser at <a href="https://codebook.streamlit.app/">codebook.streamlit.app</a> — nothing to install. This page is the full guide to its features; you can also <a href="#running-locally">run it locally</a> for sensitive data.</p>
+</div>
+```
+
+## Getting started
+
+The landing page is where every task begins. You can:
+
+- **Upload a CSV** of texts to annotate.
+- **Upload an existing `codebook.json`** alongside it to reuse an annotation
+  scheme, continue on new data, or resume a task definition.
+- **Try a demo** — bundled tasks (`policy_sentiment`, `discrete_emotions`,
+  `campaign_rhetoric`, `migration_framing`) load instantly so you can explore
+  the whole workflow with no data of your own.
+- **Resume a session** — Studio autosaves your work to the browser, so if you
+  return later you can pick **Resume Session** to continue, or **Start Fresh**.
+
+What the main action button does depends on what you uploaded:
+
+- **CSV only** → **Create CodeBook** (design a task from scratch).
+- **CSV + codebook** → choose **Annotate data** or **Adjudicate disagreements**,
+  then **Start Annotating**.
+
+::: {.screenshot}
+The landing page: CSV uploader, optional codebook uploader, demo tasks, and the
+context-dependent main action button.
+:::
+
+## Preparing your data
+
+Studio works with any CSV and does not require fixed column names. You need one
+row per text unit and one column containing the text to annotate. A short
+header/title column is optional but makes navigation easier when texts are long
+or similar. You do **not** add annotation columns yourself — Studio creates them
+from the codebook when you start annotating, named `<section name>_<annotation
+name>`. The sample files in the app's `data/` folder are good for a first try.
+
+## The codebook editor
+
+Choosing **Create CodeBook** opens the editor, where a codebook is built up from:
+
+- **Header and text columns** — selected at the top. The text column is the
+  content annotators read; the header column is the short label shown above it.
+- **Metadata columns** — optional columns (e.g. document ID, date, speaker) that
+  are not annotated but are carried through to the output and shown to
+  annotators for context as a labelled chip strip above the text.
+- **Sections** — groups of related annotations (e.g. *Sentiment*, *Policy
+  Position*, *Moral Foundations*). Use **Add New Section** / **Delete Section**
+  to manage them. Each section carries a **section instruction** that appears in
+  the annotation interface and is folded into the LLM prompt automatically.
+- **Annotation items** — one or more per section, each with a name, a tooltip
+  (the guidance annotators see), a type, and type-specific settings.
+
+A live **Annotation Workflow Preview** sits alongside the builder and updates as
+you edit — use it as your QA surface to catch the wrong text column, unclear
+section names, over-long instructions, or confusing examples before any
+annotation happens. You can leave and re-enter the editor at any time with
+**Edit CodeBook**.
+
+::: {.screenshot}
+The codebook editor: header/text column selectors on the left, the section and
+annotation builder in the centre, and the live workflow preview.
+:::
+
+## Annotation types
+
+Studio supports the annotation types researchers most commonly need. Each is
+generated for human coders and scored by Lab in the same way.
+
+| Type | Use for | Settings |
+|---|---|---|
+| **Checkbox** | a binary yes/no label | — |
+| **Dropdown** | one option from a fixed set | list of options |
+| **Likert** | an ordinal rating | min and max value |
+| **Textbox** | a short open-ended response | — |
+| **Span** | a character highlight in the text | optional label set |
+
+**Span** annotations are highlighted directly on the source text. A span can be
+an unlabelled highlight (just mark the relevant phrase) or, if you provide a set
+of labels, a tagged highlight (e.g. tag phrases as *joy*, *anger*, *fear*).
+Spans round-trip through the CSV as JSON, with character offsets, the
+highlighted text, and any label.
+
+::: {.screenshot}
+The annotation-item editor showing the type selector and the type-specific
+settings (dropdown options / Likert range / span labels).
+:::
+
+## Conditional annotations
+
+An annotation can be made **conditional** on a previous one, so it is only shown
+when a parent annotation has a particular value — for example, only ask for a
+*stance* when an *Is evaluative* checkbox is ticked. Studio stores the
+dependency in the codebook, the annotation interface hides inactive questions,
+and Lab skips the same fields when prompting and scoring (see
+[Conditionals & Retries](conditionals-retries.qmd)). The condition is also
+described in plain language in the Markdown and LaTeX exports.
+
+## Worked examples
+
+Each annotation can carry worked examples. In the editor, examples come **after**
+the annotation is defined — this is deliberate, so the valid response space is
+fixed first and examples can only use valid responses: checkbox examples use
+`Yes`/`No`, dropdown examples use the listed options, Likert examples stay inside
+the configured scale, and span examples highlight phrases. Use **Add Example** /
+**Delete Example** to manage them. Keeping examples consistent with the response
+rules makes them more reliable both for human coders and for few-shot LLM
+prompting in Lab.
+
+## Version history
+
+Codebooks evolve as you pilot them. **Save Version** snapshots the current
+codebook with a label so you can track that history:
+
+- **CodeBook Version History** lists every snapshot with its timestamp and label.
+- **Compare CodeBook Versions** shows a field-level diff between any two
+  versions (or **Compare to current**), reporting added, removed, and changed
+  sections, annotations, options, conditions, and instructions.
+- **Restore** rolls the editor back to any earlier snapshot.
+
+This makes it easy to justify and document codebook revisions during a project.
+
+::: {.screenshot}
+Version history with the list of saved snapshots and a side-by-side comparison
+highlighting what changed between two versions.
+:::
+
+## Previewing LLM prompts
+
+**Preview LLM Prompts** shows exactly what an LLM would receive for each
+annotation in your codebook — the section instruction, the question and tooltip,
+the response instructions appropriate to the type (e.g. *"Respond with a whole
+number from 1 to 5"* for Likert, the option list for dropdown), and any worked
+examples, wrapped around the text. Because this is the same prompt construction
+CodeBook Lab uses, the preview lets you sanity-check and refine prompt wording
+before committing to a benchmarking run.
+
+::: {.screenshot}
+The LLM prompt preview, showing the fully assembled prompt for a selected
+annotation as the model would see it.
+:::
+
+## Annotating in the browser
+
+Clicking **Start Annotating** creates the annotation columns and opens the
+workspace — a compact two-column layout with the text on the left and the active
+annotation section on the right, with any metadata columns shown as a labelled
+chip strip above the text for context. A top bar shows the current item,
+progress through the dataset, and **Prev** / **Next** navigation. Within the
+section, annotators work through the instruction, the annotation widgets, and
+any examples; span annotations are made by highlighting phrases directly in the
+text. Session state autosaves as you move through the data, so you can close the
+tab and **Resume Session** later. The consistent interface gives a team of
+coders the same annotation experience.
+
+::: {.screenshot}
+The annotation workspace: text on the left, the active annotation section with
+its widgets on the right, and the progress/navigation bar on top.
+:::
+
+## Exporting your work
+
+From the annotation flow, **Download CodeBook** produces a `codebook.zip`
+containing:
+
+- `codebook.json` — the machine-readable codebook that CodeBook Lab reads.
+- `codebook.md` — a Markdown rendering of the scheme for documentation.
+- `codebook.tex` — a LaTeX rendering for paper appendices.
+
+Both the Markdown and LaTeX exports lay out every section, its instruction, each
+annotation with its response type and worked examples, and any conditional
+logic in plain language — ready to paste into a methods appendix.
+**Download Annotated Data** saves your human labels as `ground-truth.csv`. The
+JSON and CSV are exactly what Lab needs; the Markdown and LaTeX are for
+reporting.
+
+::: {.screenshot}
+The export panel with the codebook bundle (JSON / Markdown / LaTeX) and the
+annotated-data download.
+:::
+
+## Adjudicating disagreements
+
+When several human coders annotate the same items, CodeBook Lab can build an
+`adjudication_queue.csv` of the rows where coders did not reach a strict
+majority (see [Human Reliability](human-reliability.qmd)). Open that CSV in
+Studio together with the matching `codebook.json`, choose **Adjudicate
+disagreements**, fill the unresolved blank cells, and **Download Adjudication
+Queue**. Passing the completed file back to Lab as `adjudications_csv` produces a
+final, fully resolved `ground-truth.csv`.
+
+## Data security and persistence
+
+CodeBook Studio runs entirely in your browser. There is **no database and no
+server-side storage** — your texts, codebook, and annotations stay in the
+browser session and are cached only in your browser's local storage, which is
+what lets you close the tab and **Resume Session** later.
+
+This is private by design, but it is **not a failsafe backup**. Your work lives
+in one browser on one device, so it will not be there in a different browser, on
+another device, or in a private/incognito window, and clearing your browsing
+data removes it. For anything you cannot afford to lose, **export regularly**
+(Download CodeBook and Download Annotated Data) and keep the files yourself —
+and prefer [running locally](#running-locally) when data sensitivity means
+nothing should leave your machine.
+
+## Running locally
+
+The hosted app is the simplest option, but you can run Studio on your own
+machine — useful for customization or when data sensitivity means everything
+should stay local:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+streamlit run text_annotation_app.py
+```
+
+The app opens in your browser at a local Streamlit URL. See the
+[CodeBook Studio repository](https://github.com/LorcanMcLaren/codebook-studio)
+for details.
+
+## Hand off to CodeBook Lab
+
+Drop the two exported files into a task folder and you are ready to benchmark:
+
+```text
+tasks/<task>/
+  codebook.json
+  ground-truth.csv
+```
+
+From there, follow [Tasks](tasks.qmd) for the expected layout and
+[Examples](examples.qmd) for an end-to-end run against your human labels.
