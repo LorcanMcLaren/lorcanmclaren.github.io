@@ -53,6 +53,12 @@ blockquote code {
   white-space: nowrap;
 }
 
+body:has(.navbar .nav-link.active[href$="studio.html"]) #quarto-margin-sidebar,
+body:has(.navbar .nav-link.active[href$="reference/index.html"]) #quarto-margin-sidebar,
+body:has(#quarto-sidebar .sidebar-link.active[href*="/reference/"]) #quarto-margin-sidebar {
+  display: none;
+}
+
 .doc-card h3 {
   margin: 0;
   padding: 0.55rem 0.85rem;

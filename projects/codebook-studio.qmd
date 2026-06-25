@@ -6,7 +6,6 @@ abstract: "A browser-based annotation tool for computational social science. Def
 hide-abstract: true
 image: "../images/codebook-studio.png"
 applink: "https://codebook.streamlit.app/"
-codelink: "https://github.com/LorcanMcLaren/codebook-studio"
 format:
   html:
     page-layout: article

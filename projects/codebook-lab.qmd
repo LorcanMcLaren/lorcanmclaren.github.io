@@ -5,7 +5,6 @@ date-format: "YYYY"
 abstract: "A Python package for computational social science that benchmarks local LLM annotation runs against human labels across model choice, model size, prompt style, zero-shot versus few-shot learning, and sampling hyperparameters."
 hide-abstract: true
 packagelink: "https://pypi.org/project/codebook-lab/"
-codelink: "https://github.com/LorcanMcLaren/codebook-lab"
 docslink: "/codebook-lab/"
 format:
   html:

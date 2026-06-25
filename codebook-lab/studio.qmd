@@ -1,5 +1,6 @@
 ---
 title: "CodeBook Studio"
+toc: false
 ---
 
 [CodeBook Studio](https://codebook.streamlit.app/) is the browser-based

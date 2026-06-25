@@ -19,7 +19,7 @@ listing: # this determines different lists with respective options. These are ac
       - "title"
     contents: "projects/*.qmd"
     template: ejs/wp.ejs
-    fields: [title, date, abstract, coauthors, wplink, slideslink, videolink, applink, packagelink, codelink, docslink, image, note]
+    fields: [title, date, abstract, coauthors, wplink, slideslink, videolink, applink, docslink, packagelink, codelink, image, note]
 
 ---
 
