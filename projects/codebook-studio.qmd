@@ -2,10 +2,11 @@
 title: "CodeBook Studio"
 date: "2026"
 date-format: "YYYY"
-abstract: "A browser-based annotation tool for computational social science. Define a codebook, annotate texts, and export labelled data for LLM benchmarking in CodeBook Lab."
+abstract: "A browser-based annotation tool for computational social science. Define a codebook, annotate texts, adjudicate disagreements, and export labelled data for LLM benchmarking in CodeBook Lab."
 hide-abstract: true
 image: "../images/codebook-studio.png"
 applink: "https://codebook.streamlit.app/"
+docslink: "/codebook-lab/studio.html"
 format:
   html:
     page-layout: article
@@ -13,15 +14,17 @@ format:
       - "../partials/title-block.html"
 ---
 
-CodeBook Studio is a browser-based text annotation tool for computational social science. Researchers define an annotation task once — with sections, instructions, examples, and response formats — annotate texts in the browser, and export the codebook and labelled data for downstream use, including systematic LLM benchmarking in [CodeBook Lab](codebook-lab.qmd).
+CodeBook Studio is a browser-based text annotation tool for computational social science. Researchers define an annotation task once — with sections, instructions, examples, tooltips, and response formats — annotate texts in the browser, adjudicate unresolved coder disagreements, and export the codebook and labelled data for downstream use, including systematic LLM benchmarking in [CodeBook Lab](codebook-lab.qmd).
 
-- Binary, categorical, Likert-scale, and open-ended text annotation types
+- Checkbox, dropdown, Likert-scale, textbox, and span-style annotation types
 - Codebook editor with integrated instructions, examples, and live annotation preview
 - Consistent annotation interface for teams of coders
 - Codebook export in JSON, LaTeX, and Markdown for papers and appendices
+- Adjudication mode for completing unresolved labels from CodeBook Lab queues
+- Version comparison for checking changes between codebook drafts
 - LLM prompt preview for checking how the task will be presented to models
 - CSV input and output for interoperability
 
 For a full guide to CodeBook Studio's features, see the [CodeBook Studio documentation](../codebook-lab/studio.html).
 
-The app is available at [codebook.streamlit.app](https://codebook.streamlit.app/). Feel free to reach out if you encounter any bugs or need additional features for your annotation workflow.
+The app is available at [codebook.streamlit.app](https://codebook.streamlit.app/). Citation details for CodeBook Studio are available on the [CodeBook citation page](../codebook-lab/citation.html).

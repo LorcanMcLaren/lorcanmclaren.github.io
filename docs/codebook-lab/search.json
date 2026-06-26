@@ -801,7 +801,7 @@
     "href": "citation.html",
     "title": "Citation",
     "section": "",
-    "text": "If you use CodeBook Lab in research, please cite the software package and the associated preprint."
+    "text": "If you use CodeBook Lab or CodeBook Studio in research, please cite the relevant software. If you use the full validation workflow, cite both tools. The associated preprint can be cited for the methodological framework and validation-first approach."
   },
   {
     "objectID": "citation.html#software",
@@ -822,7 +822,7 @@
     "href": "citation.html#license",
     "title": "Citation",
     "section": "License",
-    "text": "License\nCodeBook Lab is released under the GNU Affero General Public License v3.0. You are free to use, modify, and distribute it — including over a network — provided derivative works are licensed under the same terms."
+    "text": "License\nCodeBook Lab and CodeBook Studio are released under the GNU Affero General Public License v3.0. You are free to use, modify, and distribute them — including over a network — provided derivative works remain under the same terms.\n\nCodeBook Lab license\nCodeBook Studio license"
   },
   {
     "objectID": "studio.html",
@@ -1665,5 +1665,19 @@
       "Example Tasks",
       "copy_example_task"
     ]
+  },
+  {
+    "objectID": "citation.html#codebook-lab",
+    "href": "citation.html#codebook-lab",
+    "title": "Citation",
+    "section": "CodeBook Lab",
+    "text": "CodeBook Lab\nAPSR style:\nMcLaren, Lorcan. 2026. CodeBook Lab (Version v1.4.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19185921.\nBibTeX:\n@software{mclaren_codebook_lab_2026,\n  author = {McLaren, Lorcan},\n  title = {CodeBook Lab},\n  year = {2026},\n  version = {v1.4.0},\n  doi = {10.5281/zenodo.19185921},\n  url = {https://doi.org/10.5281/zenodo.19185921}\n}"
+  },
+  {
+    "objectID": "citation.html#codebook-studio",
+    "href": "citation.html#codebook-studio",
+    "title": "Citation",
+    "section": "CodeBook Studio",
+    "text": "CodeBook Studio\nAPSR style:\nMcLaren, Lorcan. 2026. CodeBook Studio (Version v1.2.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19185938.\nBibTeX:\n@software{mclaren_codebook_studio_2026,\n  author = {McLaren, Lorcan},\n  title = {CodeBook Studio},\n  year = {2026},\n  version = {v1.2.1},\n  doi = {10.5281/zenodo.19185938},\n  url = {https://doi.org/10.5281/zenodo.19185938}\n}"
   }
 ]

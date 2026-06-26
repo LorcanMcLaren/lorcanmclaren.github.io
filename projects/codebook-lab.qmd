@@ -2,7 +2,7 @@
 title: "CodeBook Lab"
 date: "2026"
 date-format: "YYYY"
-abstract: "A Python package for computational social science that benchmarks local LLM annotation runs against human labels across model choice, model size, prompt style, zero-shot versus few-shot learning, and sampling hyperparameters."
+abstract: "A Python package for computational social science that benchmarks local LLM annotation runs against human labels across model choice, prompt style, example use, chat mode, reasoning mode, and sampling settings."
 hide-abstract: true
 packagelink: "https://pypi.org/project/codebook-lab/"
 docslink: "/codebook-lab/"
@@ -13,14 +13,16 @@ format:
       - "../partials/title-block.html"
 ---
 
-CodeBook Lab is a Python package for running LLM annotation experiments against human-coded benchmark data. It takes a codebook and labelled dataset exported from [CodeBook Studio](codebook-studio.qmd) and lets researchers evaluate local models systematically across the dimensions that matter for text-as-data research:
+CodeBook Lab is a Python package for running validation-first LLM annotation experiments against human-coded benchmark data. It takes a `codebook.json` and labelled `ground-truth.csv` exported from [CodeBook Studio](codebook-studio.qmd), removes human labels before annotation, and scores model outputs against the held-out labels.
 
-- **Model choice and model size**: compare any models available through Ollama
-- **Prompt style**: standard, persona, or chain-of-thought wrappers
-- **Zero-shot versus few-shot learning**: toggle codebook examples on or off
-- **Sampling hyperparameters**: sweep over temperature and top-p settings
+Researchers can evaluate local Ollama models systematically across the dimensions that matter for text-as-data research:
 
-Experiments are controlled from Python, so users can start with a single run, scale up to multiple experiment specifications, or iterate through larger parameter grids when needed. Because the codebook and labelled data stay constant across runs, each dimension can be isolated and compared against the same human labels.
+- **Model choice and model size**: compare any locally available Ollama models
+- **Prompt style and example use**: compare standard, persona, and chain-of-thought wrappers with or without codebook examples
+- **Chat and reasoning modes**: test fresh chats per query, per-text chats, continuous chats, and model reasoning settings
+- **Sampling settings**: sweep over temperature, top-p, and related generation parameters
+
+Experiments are controlled from Python, so users can start with a single run, scale up to multiple experiment specifications, or iterate through larger parameter grids when needed. Because the codebook and labelled data stay constant across runs, each configuration can be compared against the same human labels.
 
 ```{=html}
 <style>
@@ -152,7 +154,7 @@ Experiments are controlled from Python, so users can start with a single run, sc
     <h3>CodeBook Lab</h3>
     <ul>
       <li>Run LLM annotation experiments</li>
-      <li>Isolate model, prompt, and hyperparameter effects</li>
+      <li>Isolate model, prompt, chat, reasoning, and sampling effects</li>
       <li>Score outputs against human labels</li>
     </ul>
   </div>
@@ -173,8 +175,8 @@ Experiments are controlled from Python, so users can start with a single run, sc
 </div>
 ```
 
-CodeBook Lab also tracks runtime, prompt and response length, energy consumption, and estimated carbon emissions for each run, with aggregate metrics logged to a single CSV for cross-experiment comparison.
+CodeBook Lab also supports human-reliability workflows: it can validate coder CSVs, calculate inter-coder agreement, identify unresolved disagreements, and build an adjudication queue that can be completed in CodeBook Studio. Final outputs include run-level annotation quality, runtime, prompt and response length, energy consumption, and estimated carbon emissions, with aggregate metrics logged for cross-experiment comparison.
 
-The package ships with a bundled starter task so you can test the workflow before plugging in your own data. For installation, experiments, and the full API, see the [CodeBook Lab documentation](../codebook-lab/).
+The package ships with a bundled starter task so you can test the workflow before plugging in your own data. For installation, experiments, human reliability, and the full API, see the [CodeBook Lab documentation](../codebook-lab/). Citation details for both CodeBook Lab and CodeBook Studio are available on the [CodeBook citation page](../codebook-lab/citation.html).
 
 Full package documentation is available at [lorcanmclaren.com/codebook-lab](/codebook-lab/).

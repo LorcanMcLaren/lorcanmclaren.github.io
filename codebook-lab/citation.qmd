@@ -2,9 +2,9 @@
 title: "Citation"
 ---
 
-If you use CodeBook Lab in research, please cite the software package and the associated preprint.
+If you use CodeBook Lab or CodeBook Studio in research, please cite the relevant software. If you use the full validation workflow, cite both tools. The associated preprint can be cited for the methodological framework and validation-first approach.
 
-## Software
+## CodeBook Lab
 
 APSR style:
 
@@ -20,6 +20,25 @@ BibTeX:
   version = {v{{< var version >}}},
   doi = {10.5281/zenodo.19185921},
   url = {https://doi.org/10.5281/zenodo.19185921}
+}
+```
+
+## CodeBook Studio
+
+APSR style:
+
+McLaren, Lorcan. 2026. *CodeBook Studio* (Version v1.2.1) [Computer software]. Zenodo. <https://doi.org/10.5281/zenodo.19185938>.
+
+BibTeX:
+
+```bibtex
+@software{mclaren_codebook_studio_2026,
+  author = {McLaren, Lorcan},
+  title = {CodeBook Studio},
+  year = {2026},
+  version = {v1.2.1},
+  doi = {10.5281/zenodo.19185938},
+  url = {https://doi.org/10.5281/zenodo.19185938}
 }
 ```
 
@@ -46,5 +65,7 @@ BibTeX:
 
 ## License
 
-CodeBook Lab is released under the [GNU Affero General Public License v3.0](https://github.com/LorcanMcLaren/codebook-lab/blob/main/LICENSE). You are free to use, modify, and distribute it — including over a network — provided derivative works are licensed under the same terms.
+CodeBook Lab and CodeBook Studio are released under the GNU Affero General Public License v3.0. You are free to use, modify, and distribute them — including over a network — provided derivative works remain under the same terms.
 
+- [CodeBook Lab license](https://github.com/LorcanMcLaren/codebook-lab/blob/main/LICENSE)
+- [CodeBook Studio license](https://github.com/LorcanMcLaren/codebook-studio/blob/main/LICENSE)
