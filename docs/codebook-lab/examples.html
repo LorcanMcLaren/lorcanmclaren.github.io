@@ -398,7 +398,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>A worked, end-to-end run on the bundled <code>policy-sentiment</code> task: get the data, run a model, read the row-level output, and score it against the human labels. Everything here works against the task shipped with the package, so you can follow along before plugging in your own data.</p>
+<p>A worked, end-to-end run on the bundled <code>policy-sentiment</code> task: get the data, run a model, read the row-level output, score it against the human labels, and compare multiple configurations. Everything here works against the task shipped with the package, so you can follow along before plugging in your own data.</p>
 <section id="the-policy-sentiment-task" class="level2">
 <h2 class="anchored" data-anchor-id="the-policy-sentiment-task">The policy-sentiment task</h2>
 <p><code>policy-sentiment</code> asks four questions about short political texts, one of each annotation type:</p>
@@ -445,7 +445,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Copy the bundled task into a local folder you control:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> copy_example_task</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>copy_example_task(<span class="st">"policy-sentiment"</span>, <span class="st">"tasks/policy-sentiment"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>copy_example_task(<span class="st">"policy-sentiment"</span>, <span class="st">"tasks"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This writes <code>tasks/policy-sentiment/codebook.json</code> and <code>tasks/policy-sentiment/ground-truth.csv</code>.</p>
 </section>
 <section id="run-one-experiment" class="level2">
@@ -558,24 +558,182 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="compare-configurations" class="level2">
 <h2 class="anchored" data-anchor-id="compare-configurations">5. Compare configurations</h2>
-<p>The point of CodeBook Lab is comparison. Because the codebook and labels stay fixed, you can isolate one variable at a time — here, zero-shot versus few-shot across two models:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> run_experiment_grid</span>
+<p>The point of CodeBook Lab is comparison. Because the codebook and labels stay fixed, you can isolate one variable at a time – here, model choice and zero-shot versus few-shot prompting.</p>
+<p>This example runs the full 20-row bundled task with two recent 4B local models: <code>qwen3:4b</code> and <code>gemma3:4b</code>. It disables textbox generation so the benchmark focuses on the checkbox, dropdown, and Likert fields while still using the real metrics and efficiency pipeline. The code below assumes the models are already available locally in Ollama. If needed, run <code>ollama pull qwen3:4b</code> and <code>ollama pull gemma3:4b</code> first.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> ExperimentSpec, copy_example_task, run_experiment</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> run_experiment_grid(</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    param_grid<span class="op">=</span>{</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"country_iso_code"</span>: <span class="st">"IRL"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tasks"</span>: [<span class="st">"policy-sentiment"</span>],</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"models"</span>: [<span class="st">"gemma3:270m"</span>, <span class="st">"llama3.2:3b"</span>],</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"use_examples"</span>: [<span class="va">False</span>, <span class="va">True</span>],</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"prompt_types"</span>: [<span class="st">"standard"</span>],</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"process_textboxes"</span>: [<span class="va">True</span>],</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    task_root<span class="op">=</span><span class="st">"tasks"</span>,</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    output_root<span class="op">=</span><span class="st">"outputs"</span>,</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Completed </span><span class="sc">{</span><span class="bu">len</span>(results)<span class="sc">}</span><span class="ss"> runs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Each run appends to the same metrics log, so the four runs above are directly comparable on the same human labels.</p>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>copy_example_task(<span class="st">"policy-sentiment"</span>, <span class="st">"tasks"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>specs <span class="op">=</span> [</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    ExperimentSpec(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        task<span class="op">=</span><span class="st">"policy-sentiment"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"qwen3:4b"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        use_examples<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        reasoning<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        process_textbox<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        country_iso_code<span class="op">=</span><span class="st">"IRL"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    ExperimentSpec(</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        task<span class="op">=</span><span class="st">"policy-sentiment"</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"qwen3:4b"</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        use_examples<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        reasoning<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        process_textbox<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        country_iso_code<span class="op">=</span><span class="st">"IRL"</span>,</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    ExperimentSpec(</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        task<span class="op">=</span><span class="st">"policy-sentiment"</span>,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"gemma3:4b"</span>,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        use_examples<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        process_textbox<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        country_iso_code<span class="op">=</span><span class="st">"IRL"</span>,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    ExperimentSpec(</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        task<span class="op">=</span><span class="st">"policy-sentiment"</span>,</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"gemma3:4b"</span>,</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        use_examples<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        process_textbox<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        country_iso_code<span class="op">=</span><span class="st">"IRL"</span>,</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> spec <span class="kw">in</span> specs:</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    run_experiment(</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>        spec,</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        task_root<span class="op">=</span><span class="st">"tasks"</span>,</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        output_root<span class="op">=</span><span class="st">"outputs"</span>,</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>        pull_model<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Each run appends to the same two linked metrics tables:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>metrics <span class="op">=</span> pd.read_csv(<span class="st">"outputs/metrics/policy-sentiment_metrics_log.csv"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>runs <span class="op">=</span> pd.read_csv(<span class="st">"outputs/metrics/policy-sentiment_metrics_log_runs.csv"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>joined <span class="op">=</span> metrics.merge(runs, on<span class="op">=</span><span class="st">"run_id"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>field_f1 <span class="op">=</span> joined[</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        joined[<span class="st">"column"</span>].isin(</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            [</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Policy Sentiment_Explicit evaluation"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Policy Sentiment_Direction"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Policy Sentiment_Intensity"</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            ]</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">&amp;</span> (joined[<span class="st">"metric"</span>] <span class="op">==</span> <span class="st">"f1"</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>efficiency <span class="op">=</span> runs[</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"run_id"</span>,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model_id"</span>,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"use_examples"</span>,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"n_queries"</span>,</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"avg_inference_time_per_query_s"</span>,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">"avg_output_chars_per_query"</span>,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">"avg_energy_kwh_per_query"</span>,</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>These are real figures from the full benchmark, run locally with Ollama on an Apple M2. Your exact numbers will vary by machine, model build, and model response validity. The plots are produced from the joined tables with <code>ggplot2</code> and <code>theme_classic()</code>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Run</th>
+<th style="text-align: right;">Explicit evaluation F1</th>
+<th style="text-align: right;">Direction F1</th>
+<th style="text-align: right;">Intensity F1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Qwen 3 4B, zero-shot</td>
+<td style="text-align: right;">0.812</td>
+<td style="text-align: right;">0.896</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td>Qwen 3 4B, examples</td>
+<td style="text-align: right;">0.913</td>
+<td style="text-align: right;">0.896</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td>Gemma 3 4B, zero-shot</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.949</td>
+<td style="text-align: right;">0.575</td>
+</tr>
+<tr class="even">
+<td>Gemma 3 4B, examples</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.908</td>
+<td style="text-align: right;">0.647</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/policy-sentiment-performance.png" class="img-fluid figure-img" alt="Grouped bar chart showing field-level F1 for Qwen 3 4B and Gemma 3 4B, each run zero-shot and with examples, across explicit evaluation, direction, and intensity."></p>
+<figcaption>Field-level F1 scores for four policy-sentiment benchmark runs.</figcaption>
+</figure>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Run</th>
+<th style="text-align: right;">Avg seconds/query</th>
+<th style="text-align: right;">Avg output chars/query</th>
+<th style="text-align: right;">Avg energy/query (kWh)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Qwen 3 4B, zero-shot</td>
+<td style="text-align: right;">2.52</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">0.00000777</td>
+</tr>
+<tr class="even">
+<td>Qwen 3 4B, examples</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">0.00000620</td>
+</tr>
+<tr class="odd">
+<td>Gemma 3 4B, zero-shot</td>
+<td style="text-align: right;">2.06</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">0.00000373</td>
+</tr>
+<tr class="even">
+<td>Gemma 3 4B, examples</td>
+<td style="text-align: right;">2.62</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.00000500</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/policy-sentiment-efficiency.png" class="img-fluid figure-img" alt="Three-panel bar chart comparing average inference time per query, average output characters per query, and average energy consumption per query for the same four runs."></p>
+<figcaption>Efficiency measures for the same four policy-sentiment benchmark runs.</figcaption>
+</figure>
+</div>
+<p>The tradeoff is visible: <code>qwen3:4b</code> scores well on explicit evaluation and direction, but in this run it did not return valid Likert values for intensity, which triggered retries and raised the query count to 80. <code>gemma3:4b</code> completed the same task in 60 model calls and handled all three scored fields. Adding examples improved Qwen’s explicit-evaluation F1 and Gemma’s intensity F1, but it also increased average inference time and prompt size.</p>
+<p>The CSVs used for the tables and plots are included with these docs:</p>
+<ul>
+<li><a href="data/policy-sentiment-comparison-field-f1.csv">Field-level F1 metrics</a></li>
+<li><a href="data/policy-sentiment-comparison-runs.csv">Run configuration and efficiency metrics</a></li>
+</ul>
+<p>The important pattern is the same for larger benchmarks: join on <code>run_id</code>, pick the field and metric you care about, then compare those values against the run configuration and efficiency columns.</p>
 </section>
 <section id="next-steps" class="level2">
 <h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>

@@ -1,0 +1,13 @@
+run_id,run_label,model_id,use_examples,field,annotation_type,metric,value
+run_2026-06-26_14-00-08_5224b29a,"Qwen 3 4B, zero-shot",qwen3:4b_temp0.0_standard,FALSE,Explicit evaluation,checkbox,f1,0.8119122257053292
+run_2026-06-26_14-00-08_5224b29a,"Qwen 3 4B, zero-shot",qwen3:4b_temp0.0_standard,FALSE,Direction,dropdown,f1,0.8958333333333334
+run_2026-06-26_14-00-08_5224b29a,"Qwen 3 4B, zero-shot",qwen3:4b_temp0.0_standard,FALSE,Intensity,likert,f1,0
+run_2026-06-26_14-03-35_dcdd3ff5,"Qwen 3 4B, examples",qwen3:4b_temp0.0_examples_standard,TRUE,Explicit evaluation,checkbox,f1,0.9134199134199136
+run_2026-06-26_14-03-35_dcdd3ff5,"Qwen 3 4B, examples",qwen3:4b_temp0.0_examples_standard,TRUE,Direction,dropdown,f1,0.8958333333333334
+run_2026-06-26_14-03-35_dcdd3ff5,"Qwen 3 4B, examples",qwen3:4b_temp0.0_examples_standard,TRUE,Intensity,likert,f1,0
+run_2026-06-26_14-07-39_71a9ce50,"Gemma 3 4B, zero-shot",gemma3:4b_temp0.0_standard,FALSE,Explicit evaluation,checkbox,f1,1
+run_2026-06-26_14-07-39_71a9ce50,"Gemma 3 4B, zero-shot",gemma3:4b_temp0.0_standard,FALSE,Direction,dropdown,f1,0.9494949494949496
+run_2026-06-26_14-07-39_71a9ce50,"Gemma 3 4B, zero-shot",gemma3:4b_temp0.0_standard,FALSE,Intensity,likert,f1,0.5747474747474748
+run_2026-06-26_14-09-45_63e2ac4e,"Gemma 3 4B, examples",gemma3:4b_temp0.0_examples_standard,TRUE,Explicit evaluation,checkbox,f1,1
+run_2026-06-26_14-09-45_63e2ac4e,"Gemma 3 4B, examples",gemma3:4b_temp0.0_examples_standard,TRUE,Direction,dropdown,f1,0.9078282828282828
+run_2026-06-26_14-09-45_63e2ac4e,"Gemma 3 4B, examples",gemma3:4b_temp0.0_examples_standard,TRUE,Intensity,likert,f1,0.6466666666666667

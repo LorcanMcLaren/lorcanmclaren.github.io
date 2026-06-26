@@ -1,0 +1,5 @@
+run_id,run_label,model_id,use_examples,n_queries,avg_inference_time_per_query_s,avg_output_chars_per_query,avg_energy_kwh_per_query
+run_2026-06-26_14-00-08_5224b29a,"Qwen 3 4B, zero-shot",qwen3:4b_temp0.0_standard,FALSE,80,2.5241225481033327,110.375,7.76728711377875e-6
+run_2026-06-26_14-03-35_dcdd3ff5,"Qwen 3 4B, examples",qwen3:4b_temp0.0_examples_standard,TRUE,80,2.997736614942551,70.7125,6.19985839092375e-6
+run_2026-06-26_14-07-39_71a9ce50,"Gemma 3 4B, zero-shot",gemma3:4b_temp0.0_standard,FALSE,60,2.056329135100047,18.75,3.731875708005e-6
+run_2026-06-26_14-09-45_63e2ac4e,"Gemma 3 4B, examples",gemma3:4b_temp0.0_examples_standard,TRUE,60,2.6245495319366454,19.766666666666666,5.000619065571667e-6
