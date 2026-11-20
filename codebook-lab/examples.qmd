@@ -57,8 +57,9 @@ print(result.metrics.summary_text)
 ```
 
 Lab strips the human label columns before prompting, runs the model on each row,
-writes the outputs to a timestamped directory, and scores the predictions
-against the held-out labels.
+writes the outputs to a new folder named by run ID, and scores the predictions
+against the held-out labels. Textbox scores need the [optional
+dependencies](install.qmd#python-environment).
 
 ## 3. Inspect the row-level output
 
@@ -72,7 +73,8 @@ same annotation columns (illustrative):
 | ps_003 | 0 | no clear sentiment | 3 | "" |
 
 Because the columns match the codebook, you can merge `output.csv` back against
-`ground-truth.csv` on `doc_id` to inspect individual disagreements.
+`ground-truth.csv` on `doc_id` to inspect individual disagreements. (Lab's own
+scoring matches rows by position, so it doesn't need `doc_id`.)
 
 ## 4. Read the metrics
 
@@ -85,10 +87,10 @@ outputs/metrics/policy-sentiment_metrics_log.csv
 
 | run_id | column | metric | value |
 |---|---|---|---|
-| run_a1b2 | Policy Sentiment_Direction | f1_macro | 0.71 |
-| run_a1b2 | Policy Sentiment_Direction | percentage_agreement | 0.80 |
-| run_a1b2 | Policy Sentiment_Intensity | quadratic_kappa | 0.66 |
-| run_a1b2 | Policy Sentiment_Evidence | norm_levenshtein | 0.52 |
+| run_2026-06-26_14-00-08_5224b29a | Policy Sentiment_Direction | f1 | 0.71 |
+| run_2026-06-26_14-00-08_5224b29a | Policy Sentiment_Direction | percentage_agreement | 0.80 |
+| run_2026-06-26_14-00-08_5224b29a | Policy Sentiment_Intensity | quadratic_kappa | 0.66 |
+| run_2026-06-26_14-00-08_5224b29a | Policy Sentiment_Evidence | norm_levenshtein | 0.52 |
 
 The companion `policy-sentiment_metrics_log_runs.csv` carries one row per run
 with the model, prompt, and sampling configuration alongside runtime, character

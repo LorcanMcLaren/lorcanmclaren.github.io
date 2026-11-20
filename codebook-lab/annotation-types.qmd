@@ -2,7 +2,7 @@
 title: "Annotation Types"
 ---
 
-CodeBook Lab reads annotation definitions from the CodeBook Studio `codebook.json` format. It currently supports five annotation types.
+CodeBook Lab reads annotation definitions from the CodeBook Studio `codebook.json` format and supports five annotation types. For each type, this page shows the codebook definition, what the model is asked to return, and how its answer is checked and scored.
 
 ## Checkbox
 
@@ -16,7 +16,9 @@ Checkbox annotations are binary yes/no judgements. Lab stores them as `1` for ye
 }
 ```
 
-Valid model responses include JSON booleans, `1`/`0`, and common yes/no strings. Invalid responses are retried and then stored as blank if no valid answer is found.
+The model is asked to respond with `1` for yes or `0` for no. Lab also accepts JSON booleans and yes/no or true/false strings. Invalid responses are retried and then stored as blank.
+
+When scoring, a blank checkbox counts as `0`, on both the human and the model side. So a model that never gives a valid answer is scored as answering "no" every time, not as missing. Check `output.csv` for blanks if checkbox scores look suspiciously close to the share of "no" labels.
 
 ## Dropdown
 
@@ -30,7 +32,7 @@ Dropdown annotations require one value from a fixed option set.
 }
 ```
 
-Lab normalizes dropdown responses case-insensitively against the configured options. A model response such as `" Positive "` is stored as `positive` if that is the exact option in the codebook.
+The model is asked to respond with one of the listed options. Lab matches its answer to the options ignoring case and surrounding spaces or backticks, so a response such as `" Positive "` is stored as `positive` if that is how the option is spelled in the codebook. Anything that isn't one of the options is invalid and retried.
 
 ## Likert
 
@@ -45,7 +47,9 @@ Likert annotations require a whole number inside a configured range.
 }
 ```
 
-JSON numeric responses are converted to integers and clamped to the configured range. If a non-JSON response contains an in-range number, Lab can recover that number; otherwise the response is invalid and eligible for retry.
+The model is asked for a whole number in the range. Numeric answers are converted to whole numbers by dropping any decimals (so `3.7` becomes `3`) and then clamped to the range (so `7` on a 1–5 scale becomes `5`). If the answer isn't valid JSON but contains a number inside the range, Lab uses that number. Otherwise the answer is invalid and retried.
+
+Likert fields are scored twice: as categories (accuracy, F1, kappa, as for dropdowns) and as ordered values (Spearman correlation and quadratic weighted kappa), so near misses can be told apart from answers at the wrong end of the scale.
 
 ## Textbox
 
@@ -59,7 +63,9 @@ Textbox annotations store short free-text responses.
 }
 ```
 
-Textbox generation and scoring are opt-in because the optional metrics can be heavier:
+The model is asked for a brief text answer. An empty answer is invalid and retried.
+
+Textbox generation and scoring are off by default, because the similarity metrics need optional dependencies. Turn them on per run:
 
 ```python
 ExperimentSpec(
@@ -69,7 +75,7 @@ ExperimentSpec(
 )
 ```
 
-Install `codebook-lab[textbox]` for the full textbox metric suite.
+Install `codebook-lab[textbox]` to score them (see [Installation](install.qmd#python-environment)). Answers are lowercased and trimmed before comparison. Percentage agreement counts exact matches only, so the similarity metrics are the more useful scores for free text.
 
 ## Span
 
@@ -97,7 +103,9 @@ Labelled span:
 }
 ```
 
-Span generation and scoring are opt-in:
+The model is asked for a JSON list of `{"start", "end", "text"}` objects (plus `"label"` for labelled spans), using 0-indexed character offsets into the text, or `[]` if nothing applies.
+
+Span generation and scoring are off by default. Turn them on per run:
 
 ```python
 ExperimentSpec(
@@ -115,7 +123,9 @@ Span cells are CSV-safe JSON strings:
 ]
 ```
 
-Lab validates offsets, drops out-of-range spans, fills missing `text` from the source string when possible, and strips labels that are not in `label_options`.
+Lab validates the offsets and drops spans that fall outside the text or end before they start. It then fills each span's `text` from the source using the offsets, so the stored text always matches the offsets even if the model quoted something else. Labels that are not in `label_options` are removed, leaving an unlabelled span.
+
+An empty list (`[]`, "nothing to highlight") is stored as a blank cell, the same as an answer that could not be parsed at all. The difference only shows up in the run's logs: an unparseable answer is retried, an empty list is not.
 
 ## Built-In Example Coverage
 

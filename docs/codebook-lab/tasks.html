@@ -360,8 +360,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html#what-the-package-does" class="sidebar-item-text sidebar-link">
- <span class="menu-text">What the package does</span></a>
+  <a href="./index.html#how-studio-and-lab-fit-together" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How Studio and Lab fit together</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html#what-lab-does-in-a-run" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">What Lab does in a run</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -627,10 +633,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>A CodeBook Lab task is a folder with two files:</p>
+<p>A CodeBook Lab task is a folder with exactly two files, named exactly as shown:</p>
 <ul>
 <li><code>codebook.json</code>: the annotation scheme exported from CodeBook Studio</li>
-<li><code>ground-truth.csv</code>: the same items with human annotation columns filled in</li>
+<li><code>ground-truth.csv</code>: the texts, with the human labels filled in</li>
 </ul>
 <p>For example:</p>
 <pre class="text"><code>my_tasks/
@@ -639,7 +645,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     ground-truth.csv</code></pre>
 <section id="codebook-fields" class="level2">
 <h2 class="anchored" data-anchor-id="codebook-fields">Codebook Fields</h2>
-<p>The codebook tells Lab which column contains the text, which metadata columns should be preserved, and which annotation fields should be generated:</p>
+<p>The codebook names the column that holds the text and defines the questions, grouped into sections:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"header_column"</span><span class="fu">:</span> <span class="st">"title"</span><span class="fu">,</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"text_column"</span><span class="fu">:</span> <span class="st">"text"</span><span class="fu">,</span></span>
@@ -656,8 +662,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Annotation output columns are named from the section and annotation names. In this example, the output column is <code>Policy Sentiment_Direction</code>.</p>
-<p><code>metadata_columns</code> is optional. Lab preserves non-annotation columns in output files either way, but explicit metadata is useful when coordinating with CodeBook Studio and human-reliability workflows.</p>
+<p>The top-level keys do different jobs in Studio and Lab:</p>
+<dl>
+<dt><code>text_column</code></dt>
+<dd>
+The column with the text to annotate. This is the only column the model sees: each prompt contains the codebook instructions and this text, nothing else from the row.
+</dd>
+<dt><code>header_column</code></dt>
+<dd>
+A short title Studio shows above each text. Lab ignores it.
+</dd>
+<dt><code>metadata_columns</code></dt>
+<dd>
+Optional columns Studio shows to coders for context. Lab ignores this list too. Every non-label column in your CSV, listed here or not, is copied to the model’s output file unchanged, but none of them are sent to the model.
+</dd>
+</dl>
+<p>Sections are the keys that start with <code>section_</code>, and Lab processes them in order. Within a section, questions are ordered by the number at the end of their key (<code>annotation_1</code>, <code>annotation_2</code>, …), the same order Studio shows them in. This order matters for <a href="./conditionals-retries.html#conditional-annotations">conditional questions</a> and, in the default chat mode, for what the model has already answered about a text when it reaches each question.</p>
+<p>Each question’s column is named <code>&lt;section name&gt;_&lt;question name&gt;</code>. In this example the column is <code>Policy Sentiment_Direction</code>. Names are matched exactly, including spaces and capitalisation. If you rename a section or question in Studio after annotating, export the labels again so the column names in <code>ground-truth.csv</code> match the codebook.</p>
 </section>
 <section id="ground-truth-csv" class="level2">
 <h2 class="anchored" data-anchor-id="ground-truth-csv">Ground Truth CSV</h2>
@@ -665,7 +686,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre class="csv"><code>doc_id,title,text,Policy Sentiment_Direction
 ps_001,Carbon Border Reform,The reform is a sensible compromise.,positive
 ps_002,Housing Plan Criticism,The plan has an admirable goal but unrealistic financing.,negative</code></pre>
-<p>When Lab runs annotation, it drops the human label columns before prompting the model. This prevents the model from seeing the answers it will later be scored against.</p>
+<p>When Lab runs annotation, it drops the human label columns before prompting the model, so the model never sees the answers it will be scored against.</p>
+<p>Lab matches each model answer to its human label <strong>by row position</strong>, not by an ID column: row 1 of the output is scored against row 1 of <code>ground-truth.csv</code>, and so on. Lab keeps rows in their original order, so this works as long as you don’t sort, filter or edit <code>ground-truth.csv</code> between running and scoring. A stable ID column (such as <code>doc_id</code> or <code>sample_id</code>) is still worth keeping: it is copied to the output, it lets you inspect individual disagreements, and Lab’s <a href="./human-reliability.html">human reliability</a> tools require one.</p>
 </section>
 <section id="bundled-example-tasks" class="level2">
 <h2 class="anchored" data-anchor-id="bundled-example-tasks">Bundled Example Tasks</h2>
@@ -674,7 +696,7 @@ ps_002,Housing Plan Criticism,The plan has an admirable goal but unrealistic fin
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(list_example_tasks())</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>copy_example_task(<span class="st">"policy-sentiment"</span>, <span class="st">"./my_tasks"</span>, overwrite<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Then point an experiment at the copied task root:</p>
+<p>Then point an experiment at the folder that contains your task folders:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> ExperimentSpec, run_experiment</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> run_experiment(</span>
@@ -685,6 +707,7 @@ ps_002,Housing Plan Criticism,The plan has an admirable goal but unrealistic fin
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    task_root<span class="op">=</span><span class="st">"my_tasks"</span>,</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Lab looks for a task in <code>task_root</code> first. If it isn’t there, Lab falls back to a bundled example task with the same name, if one exists. So a mistyped <code>task_root</code> with <code>task="policy-sentiment"</code> silently runs the bundled copy instead of yours. The <code>codebook_path</code> column of the <a href="./outputs-metrics.html#tidy-metrics-tables">runs table</a> shows which copy each run used.</p>
 </section>
 <section id="custom-task-checklist" class="level2">
 <h2 class="anchored" data-anchor-id="custom-task-checklist">Custom Task Checklist</h2>
@@ -698,6 +721,8 @@ ps_002,Housing Plan Criticism,The plan has an admirable goal but unrealistic fin
 <li>Likert values are inside the configured numeric range</li>
 <li>span values are JSON lists of <code>start</code>, <code>end</code>, <code>text</code>, and optional <code>label</code> objects</li>
 <li>conditional child fields are blank when the parent condition is not satisfied</li>
+<li>a parent question comes before any question that depends on it</li>
+<li>rows are in the same order you will score them in, ideally with an ID column</li>
 </ul>
 
 

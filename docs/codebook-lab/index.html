@@ -325,8 +325,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html#what-the-package-does" class="sidebar-item-text sidebar-link">
- <span class="menu-text">What the package does</span></a>
+  <a href="./index.html#how-studio-and-lab-fit-together" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How Studio and Lab fit together</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html#what-lab-does-in-a-run" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">What Lab does in a run</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -562,7 +568,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-the-package-does" id="toc-what-the-package-does" class="nav-link active" data-scroll-target="#what-the-package-does">What The Package Does</a></li>
+  <li><a href="#how-studio-and-lab-fit-together" id="toc-how-studio-and-lab-fit-together" class="nav-link active" data-scroll-target="#how-studio-and-lab-fit-together">How Studio And Lab Fit Together</a></li>
+  <li><a href="#what-lab-does-in-a-run" id="toc-what-lab-does-in-a-run" class="nav-link" data-scroll-target="#what-lab-does-in-a-run">What Lab Does In A Run</a></li>
   <li><a href="#where-to-start" id="toc-where-to-start" class="nav-link" data-scroll-target="#where-to-start">Where To Start</a></li>
   <li><a href="#license-developers" id="toc-license-developers" class="nav-link" data-scroll-target="#license-developers">License &amp; Developers</a></li>
   </ul>
@@ -591,43 +598,56 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>CodeBook Lab is a Python package for running local LLM annotation experiments against human-coded benchmark data. It takes a CodeBook Studio codebook and labelled CSV, removes the human labels before annotation, runs one or more Ollama models, and scores the model outputs against the held-out human labels.</p>
-<p>The package is built for computational social science workflows where the core question is not simply “can a model label this text?”, but which model, prompt, examples, and sampling settings reproduce a human codebook most reliably.</p>
-<div class="hero-note">
-  <p>These docs intentionally go beyond the package README. They cover conditionals, span annotations, response validation, retry strategies, tidy metrics logs, human reliability checks, and adjudication workflows.</p>
+<p>CodeBook Studio and CodeBook Lab are two open-source tools for annotating text with large language models (LLMs) and checking the results against human coders. Both read the same codebook, so the instructions human coders follow are the instructions the model receives.</p>
+<ul>
+<li><strong>CodeBook Studio</strong> is a web app for writing a codebook and annotating texts by hand. You upload a CSV, define the questions coders answer (checkboxes, dropdowns, Likert scales, free text and text highlights), annotate in the browser, and export the codebook and your labels. Use it at <a href="https://codebook.streamlit.app/">codebook.streamlit.app</a> or run it on your own machine.</li>
+<li><strong>CodeBook Lab</strong> is a Python package that annotates the same texts with local LLMs through <a href="https://ollama.com/">Ollama</a> and scores the model’s labels against the human ones. It records accuracy and agreement for every field, alongside runtime, energy use and estimated emissions, so you can compare models, prompts and settings on the same task.</li>
+</ul>
+<div class="doc-grid doc-grid-3">
+  <div class="doc-card">
+    <h3 class="anchored">Studio: define and label</h3>
+    <p>Write the codebook, annotate a sample by hand, and export <code>codebook.json</code> plus <code>ground-truth.csv</code>.</p>
+  </div>
+  <div class="doc-card">
+    <h3 class="anchored">Lab: annotate with models</h3>
+    <p>Run local models on the same texts from Python, with the human labels hidden from the model.</p>
+  </div>
+  <div class="doc-card">
+    <h3 class="anchored">Lab: compare runs</h3>
+    <p>Score each run against the human labels and compare models, prompt wrappers, examples, sampling and chat settings.</p>
+  </div>
 </div>
-<div class="doc-grid">
-  <div class="doc-card">
-    <h3 class="anchored">Define once</h3>
-    <p>Use CodeBook Studio to design the annotation task, collect human labels, and export <code>codebook.json</code> plus <code>ground-truth.csv</code>.</p>
-  </div>
-  <div class="doc-card">
-    <h3 class="anchored">Run locally</h3>
-    <p>Use Ollama-backed models from Python, including small local models for quick tests and larger models for benchmark runs.</p>
-  </div>
-  <div class="doc-card">
-    <h3 class="anchored">Compare systematically</h3>
-    <p>Sweep over models, prompt wrappers, examples, temperature, top-p, textbox processing, span processing, and run metadata.</p>
-  </div>
-</div>
-<section id="what-the-package-does" class="level2">
-<h2 class="anchored" data-anchor-id="what-the-package-does">What The Package Does</h2>
-<p>CodeBook Lab gives you a reproducible path from human-coded data to model evaluation:</p>
+<section id="how-studio-and-lab-fit-together" class="level2">
+<h2 class="anchored" data-anchor-id="how-studio-and-lab-fit-together">How Studio And Lab Fit Together</h2>
+<p>A typical project moves through these steps:</p>
 <ol type="1">
-<li>Load a task folder containing <code>codebook.json</code> and <code>ground-truth.csv</code>.</li>
-<li>Strip annotation columns from the input before sending text to the model.</li>
-<li>Prompt a local Ollama model for each applicable annotation field.</li>
-<li>Save row-level model outputs and run metadata.</li>
-<li>Compare model labels with human labels using metrics appropriate to each annotation type.</li>
-<li>Log aggregate quality, runtime, energy, and emissions metrics for comparison across runs.</li>
+<li><strong>Write the codebook in Studio.</strong> Group questions into sections, add instructions and worked examples, and make questions conditional on earlier answers where needed.</li>
+<li><strong>Annotate a sample by hand.</strong> One coder can annotate in Studio directly. With several coders, Lab measures their agreement and builds a consensus label file, and you resolve the remaining disagreements in Studio (see <a href="./human-reliability.html">Human Reliability</a>).</li>
+<li><strong>Export two files</strong>: <code>codebook.json</code> and <code>ground-truth.csv</code>. Together they form a Lab <a href="./tasks.html">task</a>.</li>
+<li><strong>Run experiments in Lab.</strong> Each run sends every text to a model, one question at a time, and saves the model’s answers.</li>
+<li><strong>Compare the results.</strong> Lab scores each run against the human labels and appends the scores to two tidy tables you can analyse in Python or R.</li>
 </ol>
-<p>Supported annotation types include checkbox, dropdown, Likert, textbox, and span annotations. Lab also respects conditional annotations, validates model responses before storing them, retries invalid answers, and keeps skipped conditional fields out of metric denominators.</p>
-<p>Categorical and ordinal fields receive classification and agreement metrics; textbox fields can receive lexical and embedding-based similarity metrics; span fields receive token F1, exact-match F1, and character IoU.</p>
+</section>
+<section id="what-lab-does-in-a-run" class="level2">
+<h2 class="anchored" data-anchor-id="what-lab-does-in-a-run">What Lab Does In A Run</h2>
+<p>For each experiment, Lab:</p>
+<ol type="1">
+<li>Loads the task folder: <code>codebook.json</code> and <code>ground-truth.csv</code>.</li>
+<li>Removes the human label columns, so the model never sees the answers it is scored against.</li>
+<li>Builds a prompt for each question from the codebook (section instruction, question, guidance, allowed answers and, optionally, worked examples) and sends it to the model with the text. See <a href="./experiments.html#what-the-model-sees">What the model sees</a>.</li>
+<li>Checks each answer against the codebook. Invalid answers are retried, and recorded as blank if they still fail.</li>
+<li>Saves the model’s labels and the run settings in a folder of its own.</li>
+<li>Scores the labels against the human ones with metrics suited to each question type, and logs runtime, characters sent and received, energy use and estimated emissions.</li>
+</ol>
+<p>Lab supports the same five question types as Studio: checkbox, dropdown, Likert, textbox and span. Conditional questions are skipped when they don’t apply, both when prompting and when scoring. Textbox and span questions are only run when you switch them on, because their metrics need extra dependencies or source texts.</p>
 </section>
 <section id="where-to-start" class="level2">
 <h2 class="anchored" data-anchor-id="where-to-start">Where To Start</h2>
-<p>If you want the shortest path, begin with <a href="./install.html">Installation</a>, then run the bundled <code>policy-sentiment</code> task in <a href="./experiments.html">Experiments</a>. If you already have CodeBook Studio exports, go straight to <a href="./tasks.html">Tasks</a> and <a href="./annotation-types.html">Annotation Types</a> to check the expected codebook and CSV formats.</p>
-<p>The upstream annotation workflow — designing a codebook and labelling data — is covered in the <a href="./studio.html">CodeBook Studio</a> guide.</p>
+<ul>
+<li><strong>To try the whole workflow quickly</strong>, follow <a href="./install.html">Installation</a>, then run the bundled <code>policy-sentiment</code> task in <a href="./examples.html">Examples</a>.</li>
+<li><strong>If you already have Studio exports</strong>, check them against <a href="./tasks.html">Tasks</a> and <a href="./annotation-types.html">Annotation Types</a>, then run them as in <a href="./experiments.html">Experiments</a>.</li>
+<li><strong>If you are starting a new annotation project</strong>, begin with the <a href="./studio.html">CodeBook Studio</a> guide.</li>
+</ul>
 </section>
 <section id="license-developers" class="level2">
 <h2 class="anchored" data-anchor-id="license-developers">License &amp; Developers</h2>

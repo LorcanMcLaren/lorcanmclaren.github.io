@@ -2,53 +2,56 @@
 title: "CodeBook Lab"
 ---
 
-CodeBook Lab is a Python package for running local LLM annotation experiments against human-coded benchmark data. It takes a CodeBook Studio codebook and labelled CSV, removes the human labels before annotation, runs one or more Ollama models, and scores the model outputs against the held-out human labels.
+CodeBook Studio and CodeBook Lab are two open-source tools for annotating text with large language models (LLMs) and checking the results against human coders. Both read the same codebook, so the instructions human coders follow are the instructions the model receives.
 
-The package is built for computational social science workflows where the core question is not simply "can a model label this text?", but which model, prompt, examples, and sampling settings reproduce a human codebook most reliably.
-
-```{=html}
-<div class="hero-note">
-  <p>These docs intentionally go beyond the package README. They cover conditionals, span annotations, response validation, retry strategies, tidy metrics logs, human reliability checks, and adjudication workflows.</p>
-</div>
-```
+- **CodeBook Studio** is a web app for writing a codebook and annotating texts by hand. You upload a CSV, define the questions coders answer (checkboxes, dropdowns, Likert scales, free text and text highlights), annotate in the browser, and export the codebook and your labels. Use it at [codebook.streamlit.app](https://codebook.streamlit.app/) or run it on your own machine.
+- **CodeBook Lab** is a Python package that annotates the same texts with local LLMs through [Ollama](https://ollama.com/) and scores the model's labels against the human ones. It records accuracy and agreement for every field, alongside runtime, energy use and estimated emissions, so you can compare models, prompts and settings on the same task.
 
 ```{=html}
-<div class="doc-grid">
+<div class="doc-grid doc-grid-3">
   <div class="doc-card">
-    <h3>Define once</h3>
-    <p>Use CodeBook Studio to design the annotation task, collect human labels, and export <code>codebook.json</code> plus <code>ground-truth.csv</code>.</p>
+    <h3>Studio: define and label</h3>
+    <p>Write the codebook, annotate a sample by hand, and export <code>codebook.json</code> plus <code>ground-truth.csv</code>.</p>
   </div>
   <div class="doc-card">
-    <h3>Run locally</h3>
-    <p>Use Ollama-backed models from Python, including small local models for quick tests and larger models for benchmark runs.</p>
+    <h3>Lab: annotate with models</h3>
+    <p>Run local models on the same texts from Python, with the human labels hidden from the model.</p>
   </div>
   <div class="doc-card">
-    <h3>Compare systematically</h3>
-    <p>Sweep over models, prompt wrappers, examples, temperature, top-p, textbox processing, span processing, and run metadata.</p>
+    <h3>Lab: compare runs</h3>
+    <p>Score each run against the human labels and compare models, prompt wrappers, examples, sampling and chat settings.</p>
   </div>
 </div>
 ```
 
-## What The Package Does
+## How Studio And Lab Fit Together
 
-CodeBook Lab gives you a reproducible path from human-coded data to model evaluation:
+A typical project moves through these steps:
 
-1. Load a task folder containing `codebook.json` and `ground-truth.csv`.
-2. Strip annotation columns from the input before sending text to the model.
-3. Prompt a local Ollama model for each applicable annotation field.
-4. Save row-level model outputs and run metadata.
-5. Compare model labels with human labels using metrics appropriate to each annotation type.
-6. Log aggregate quality, runtime, energy, and emissions metrics for comparison across runs.
+1. **Write the codebook in Studio.** Group questions into sections, add instructions and worked examples, and make questions conditional on earlier answers where needed.
+2. **Annotate a sample by hand.** One coder can annotate in Studio directly. With several coders, Lab measures their agreement and builds a consensus label file, and you resolve the remaining disagreements in Studio (see [Human Reliability](human-reliability.qmd)).
+3. **Export two files**: `codebook.json` and `ground-truth.csv`. Together they form a Lab [task](tasks.qmd).
+4. **Run experiments in Lab.** Each run sends every text to a model, one question at a time, and saves the model's answers.
+5. **Compare the results.** Lab scores each run against the human labels and appends the scores to two tidy tables you can analyse in Python or R.
 
-Supported annotation types include checkbox, dropdown, Likert, textbox, and span annotations. Lab also respects conditional annotations, validates model responses before storing them, retries invalid answers, and keeps skipped conditional fields out of metric denominators.
+## What Lab Does In A Run
 
-Categorical and ordinal fields receive classification and agreement metrics; textbox fields can receive lexical and embedding-based similarity metrics; span fields receive token F1, exact-match F1, and character IoU.
+For each experiment, Lab:
+
+1. Loads the task folder: `codebook.json` and `ground-truth.csv`.
+2. Removes the human label columns, so the model never sees the answers it is scored against.
+3. Builds a prompt for each question from the codebook (section instruction, question, guidance, allowed answers and, optionally, worked examples) and sends it to the model with the text. See [What the model sees](experiments.qmd#what-the-model-sees).
+4. Checks each answer against the codebook. Invalid answers are retried, and recorded as blank if they still fail.
+5. Saves the model's labels and the run settings in a folder of its own.
+6. Scores the labels against the human ones with metrics suited to each question type, and logs runtime, characters sent and received, energy use and estimated emissions.
+
+Lab supports the same five question types as Studio: checkbox, dropdown, Likert, textbox and span. Conditional questions are skipped when they don't apply, both when prompting and when scoring. Textbox and span questions are only run when you switch them on, because their metrics need extra dependencies or source texts.
 
 ## Where To Start
 
-If you want the shortest path, begin with [Installation](install.qmd), then run the bundled `policy-sentiment` task in [Experiments](experiments.qmd). If you already have CodeBook Studio exports, go straight to [Tasks](tasks.qmd) and [Annotation Types](annotation-types.qmd) to check the expected codebook and CSV formats.
-
-The upstream annotation workflow — designing a codebook and labelling data — is covered in the [CodeBook Studio](studio.qmd) guide.
+- **To try the whole workflow quickly**, follow [Installation](install.qmd), then run the bundled `policy-sentiment` task in [Examples](examples.qmd).
+- **If you already have Studio exports**, check them against [Tasks](tasks.qmd) and [Annotation Types](annotation-types.qmd), then run them as in [Experiments](experiments.qmd).
+- **If you are starting a new annotation project**, begin with the [CodeBook Studio](studio.qmd) guide.
 
 ## License & Developers
 

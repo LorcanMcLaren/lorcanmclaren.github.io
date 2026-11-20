@@ -2,15 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lorcanmclaren.com/codebook-lab/install.html</loc>
-    <lastmod>2026-11-20T12:36:35.299Z</lastmod>
+    <lastmod>2026-11-20T17:42:53.307Z</lastmod>
   </url>
   <url>
     <loc>https://lorcanmclaren.com/codebook-lab/experiments.html</loc>
-    <lastmod>2026-11-20T12:36:35.298Z</lastmod>
+    <lastmod>2026-11-20T17:44:11.424Z</lastmod>
   </url>
   <url>
     <loc>https://lorcanmclaren.com/codebook-lab/index.html</loc>
-    <lastmod>2026-11-20T12:36:35.299Z</lastmod>
+    <lastmod>2026-11-20T17:49:08.630Z</lastmod>
   </url>
   <url>
     <loc>https://lorcanmclaren.com/codebook-lab/changelog.html</loc>
@@ -74,23 +74,23 @@
   </url>
   <url>
     <loc>https://lorcanmclaren.com/codebook-lab/human-reliability.html</loc>
-    <lastmod>2026-11-20T12:36:35.298Z</lastmod>
+    <lastmod>2026-11-20T17:45:29.604Z</lastmod>
   </url>
   <url>
     <loc>https://lorcanmclaren.com/codebook-lab/tasks.html</loc>
-    <lastmod>2026-11-20T12:36:35.299Z</lastmod>
+    <lastmod>2026-11-20T17:47:35.595Z</lastmod>
   </url>
   <url>
     <loc>https://lorcanmclaren.com/codebook-lab/conditionals-retries.html</loc>
-    <lastmod>2026-11-20T12:36:35.298Z</lastmod>
+    <lastmod>2026-11-20T17:43:55.615Z</lastmod>
   </url>
   <url>
     <loc>https://lorcanmclaren.com/codebook-lab/studio.html</loc>
-    <lastmod>2026-11-20T12:36:35.299Z</lastmod>
+    <lastmod>2026-11-20T18:02:21.331Z</lastmod>
   </url>
   <url>
     <loc>https://lorcanmclaren.com/codebook-lab/examples.html</loc>
-    <lastmod>2026-11-20T12:36:35.298Z</lastmod>
+    <lastmod>2026-11-20T17:45:07.655Z</lastmod>
   </url>
   <url>
     <loc>https://lorcanmclaren.com/codebook-lab/reference/MetricsRunResult.html</loc>
@@ -134,7 +134,7 @@
   </url>
   <url>
     <loc>https://lorcanmclaren.com/codebook-lab/reference/index.html</loc>
-    <lastmod>2026-11-20T17:15:53.269Z</lastmod>
+    <lastmod>2026-11-20T17:48:23.749Z</lastmod>
   </url>
   <url>
     <loc>https://lorcanmclaren.com/codebook-lab/reference/ensure_ollama_model.html</loc>
@@ -158,10 +158,10 @@
   </url>
   <url>
     <loc>https://lorcanmclaren.com/codebook-lab/annotation-types.html</loc>
-    <lastmod>2026-11-20T12:36:35.298Z</lastmod>
+    <lastmod>2026-11-20T17:43:27.574Z</lastmod>
   </url>
   <url>
     <loc>https://lorcanmclaren.com/codebook-lab/outputs-metrics.html</loc>
-    <lastmod>2026-11-20T12:36:35.299Z</lastmod>
+    <lastmod>2026-11-20T17:45:01.643Z</lastmod>
   </url>
 </urlset>

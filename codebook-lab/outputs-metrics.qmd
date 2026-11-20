@@ -2,14 +2,15 @@
 title: "Outputs And Metrics"
 ---
 
-Each run creates a directory named by a short **run ID** under
-`outputs/<task>/<run_id>/`. Run-ID folders keep paths compact; the full set of
-choices for the run lives in `config.json` and in the runs metrics table.
+Each run creates a folder `outputs/<task>/<run_id>/`. The run ID is the start
+time plus a random suffix, such as `run_2026-06-26_14-00-08_5224b29a`, so runs
+sort by time and never overwrite each other. The run's settings are stored in
+`config.json` and in the runs table.
 
 ```text
 outputs/
   policy-sentiment/
-    a1b2c3d4/
+    run_2026-06-26_14-00-08_5224b29a/
       output.csv
       config.json
       classification_reports.txt
@@ -25,10 +26,10 @@ outputs/
 ## Per-Run Files
 
 `output.csv`
-: Row-level model annotations.
+: The input rows with the model's answers in the annotation columns. Every non-label column from `ground-truth.csv` is kept. Blank cells are skipped conditional questions or answers that stayed invalid after retries. The file is rewritten after each row, so an interrupted run keeps the rows it finished.
 
 `config.json`
-: The full run configuration — model, prompt, sampling, chat mode, reasoning, and task paths — so a run-ID folder can always be traced back to its settings.
+: The run's settings: model, prompt wrapper, examples, temperature, top-p, chat mode, reasoning, textbox and span switches, country code, task name and retry settings.
 
 `classification_reports.txt`
 : Human-readable evaluation summaries by annotation field.
@@ -43,7 +44,7 @@ outputs/
 : Total input and output characters sent to and returned from the model.
 
 `reasoning_traces.jsonl`
-: One record per query capturing the model's reasoning content, when the model returns it (see [Model reasoning](experiments.qmd#model-reasoning)).
+: One record per query with the model's reasoning, written only when the model returns reasoning (see [Model reasoning](experiments.qmd#model-reasoning)).
 
 ## Tidy Metrics Tables
 
@@ -55,7 +56,29 @@ Aggregate metrics are written as two linked tidy tables:
 `<task>_metrics_log_runs.csv`
 : The runs table — one row per `run_id` with model, prompt, sampling, **chat mode, and reasoning** configuration, task paths, inference counts, character counts, energy use, emissions, CPU/GPU metadata, and per-query averages.
 
-This split keeps metric values long and analysis-friendly while avoiding repeated run metadata on every metric row.
+This split keeps metric values long and analysis-friendly while avoiding repeated run metadata on every metric row. Both files are appended to, never overwritten, so every run of a task accumulates in the same two tables. The runs table also has a `model_id` column that combines the main settings in one label, such as `gemma3:4b_temp0.0_examples_standard`.
+
+## Metric Names
+
+The `metric` column uses these names:
+
+| Question type | Metrics |
+|---|---|
+| Checkbox, dropdown | `percentage_agreement`, `accuracy`, `precision`, `recall`, `f1`, `cohen_kappa`, `krippendorff_alpha` |
+| Likert | the above, plus `spearman_corr` and `quadratic_kappa` |
+| Textbox | `percentage_agreement`, `norm_levenshtein`, `bleu`, `rouge1_f`, `rouge2_f`, `rougeL_f`, `cosine_similarity`, `bertscore_precision`, `bertscore_recall`, `bertscore_f1` |
+| Span | `token_f1`, `exact_match_f1`, `char_iou` |
+
+`precision`, `recall` and `f1` are macro-averaged: computed for each answer category and then averaged, so rare categories count as much as common ones. Per-category figures are in `classification_reports.txt`.
+
+Textbox and span metrics are only computed when those questions are switched on for the run, and textbox similarity metrics need the [optional dependencies](install.qmd#python-environment). Metrics that weren't computed are left blank.
+
+## How Rows And Blanks Are Scored
+
+- **Rows are matched by position.** Row *n* of `output.csv` is scored against row *n* of `ground-truth.csv`. Don't reorder either file between annotation and scoring.
+- **Conditional questions** are scored only on rows where the human answer to the parent meets the condition (see [Conditional Annotations](conditionals-retries.qmd#conditional-annotations)).
+- **Blank answers count as wrong answers.** For dropdown and Likert questions, a blank model answer is compared with the human label like any other value, so it lowers accuracy and F1.
+- **Blank checkboxes count as "no"**, on both sides. See [Checkbox](annotation-types.qmd#checkbox).
 
 Depending on the annotation types in your codebook, metrics can include:
 
@@ -80,10 +103,10 @@ runs = pd.read_csv("outputs/metrics/policy-sentiment_metrics_log_runs.csv")
 
 joined = metrics.merge(runs, on="run_id")
 
-# e.g. macro-F1 on Direction by model and chat mode
+# e.g. macro-averaged F1 on Direction by model and chat mode
 view = joined[
     (joined["column"] == "Policy Sentiment_Direction")
-    & (joined["metric"] == "f1_macro")
+    & (joined["metric"] == "f1")
 ]
 print(view[["model_id", "chat_mode", "reasoning", "use_examples", "value"]])
 ```
@@ -94,7 +117,7 @@ reasoning, or sampling — all scored against the same human labels.
 
 ## Choosing Metrics
 
-For checkbox and dropdown annotations, start with F1 and percentage agreement. For imbalanced labels, inspect per-class precision and recall in `classification_reports.txt`.
+For checkbox and dropdown annotations, start with macro F1 and percentage agreement. For imbalanced labels, inspect per-class precision and recall in `classification_reports.txt`.
 
 For Likert annotations, report ordinal-aware metrics alongside exact agreement. A model that predicts adjacent categories may be less wrong than one that jumps from one end of the scale to the other.
 

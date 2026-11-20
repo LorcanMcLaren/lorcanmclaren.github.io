@@ -13,23 +13,20 @@ python -m pip install --upgrade pip
 python -m pip install codebook-lab
 ```
 
-If you plan to generate or score textbox annotations, install the optional textbox dependencies:
+If you plan to score textbox annotations, install the optional textbox dependencies:
 
 ```bash
 python -m pip install "codebook-lab[textbox]"
 ```
 
-Those extras enable ROUGE, embedding-based cosine similarity, and BERTScore. Normalized Levenshtein similarity and BLEU are available without the optional extras.
+Every textbox metric needs these extras: normalized Levenshtein similarity (`python-Levenshtein`), BLEU (`nltk`), ROUGE (`rouge-score`), embedding cosine similarity (`sentence-transformers`) and BERTScore (`bert-score`, `torch`). Without them, textbox fields are still generated and get a percentage-agreement score, but their similarity metrics are left blank and `classification_reports.txt` lists the missing packages. The extras include PyTorch, so they are a large download. Checkbox, dropdown, Likert and span metrics need nothing extra.
 
 ## Ollama
 
-CodeBook Lab runs local models through Ollama. Install Ollama, then make sure the server is available:
+CodeBook Lab runs models through [Ollama](https://ollama.com/download), which you install separately. Once it is installed, you don't need to start it or download models yourself:
 
-```bash
-ollama serve
-```
-
-Experiment runs try to start the default local Ollama server when needed, and pull the requested model automatically before the first run — so you do not need to `ollama pull` it yourself:
+- **Starting the server.** If Ollama isn't running, each run starts it in the background with `ollama serve`. This only happens for a server on the default local address (`http://127.0.0.1:11434`). To use Ollama on another machine, set the `OLLAMA_HOST` environment variable to its address and start that server yourself.
+- **Downloading models.** `run_experiment()` calls `ollama pull` for the model before every run. For a model you already have, this only checks for updates, which is usually quick but needs an internet connection: if the pull fails, the run stops with an error. Pass `pull_model=False` (or `pull_models=False` for a sweep) to skip the check, for example when working offline or to keep a model version fixed during a benchmark.
 
 ```python
 from codebook_lab import ExperimentSpec, run_experiment
@@ -43,7 +40,7 @@ result = run_experiment(
 )
 ```
 
-The `country_iso_code` value should be the three-letter ISO 3166-1 alpha-3 code for where the computation physically runs, such as `IRL`, `USA`, or `DEU`. CodeCarbon uses this to estimate emissions from energy consumption.
+`country_iso_code` is the three-letter ISO 3166-1 alpha-3 code for where the computation physically runs, such as `IRL`, `USA` or `DEU`. CodeCarbon uses it to look up the electricity grid's carbon intensity when converting energy use to emissions. It defaults to `USA`, so set it whenever you run elsewhere, or the emissions estimates will be wrong. Energy use itself is measured on your machine and does not depend on this setting.
 
 ## Development Install
 
