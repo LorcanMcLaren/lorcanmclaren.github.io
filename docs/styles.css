@@ -746,3 +746,9 @@ p:has(mark.code-software:focus) mark.code-software {
 .cv-page #title-block-header {
   display: none;
 }
+
+/* Listing thumbnails (e.g. app screenshots): a thin frame so white images keep an edge */
+.image_list img {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
