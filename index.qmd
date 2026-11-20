@@ -32,9 +32,11 @@ listing: # this determines different lists with respective options. These are ac
 <span class="paper-links bio-links"><a href="https://www.linkedin.com/in/lorcanmclaren/">LinkedIn</a><a href="https://github.com/LorcanMcLaren">GitHub</a><a href="https://scholar.google.com/citations?user=vnNon38AAAAJ&hl=en&oi=ao">Scholar</a><a href="mailto:lorcan.mclaren@ucdconnect.ie">Email</a></span>
 </div>
 
-I am a PhD researcher in computational social science at [University College Dublin](https://www.ucd.ie/spire/), funded by a Taighde Éireann - Research Ireland Government of Ireland scholarship. Based in the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/) under the supervision of [James P. Cross](https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&hl=en&oi=ao), my research employs text-as-data approaches to examine political communication, with a particular focus on the climate crisis. Previously, I was supported by the Iseult Honohan scholarship and served as a Climate Fellow at the UCD Earth Institute.
+I am a PhD researcher in computational social science at [University College Dublin](https://www.ucd.ie/spire/), funded by a Taighde Éireann – Research Ireland Government of Ireland scholarship, and based in the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/) under the supervision of [James P. Cross](https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&hl=en&oi=ao). My research focuses on political communication, climate politics and public opinion, combining text-as-data methods, large language models and survey experiments. I also work on best practice for LLM-based text annotation and develop open-source tools for it.
 
 Prior to my doctoral studies, I completed a BA in Computer Science, Linguistics and French at Trinity College Dublin and an MSc in Politics and Data Science at University College Dublin, complemented by two years of industry experience as a data analyst.
+
+**I will be on the academic job market in 2027, for positions starting in the 2027/28 academic year.**
 
 ## Research {#research}
 #### Working Papers 
