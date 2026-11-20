@@ -491,8 +491,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>CSV only</strong> → <strong>Create CodeBook</strong> (design a task from scratch).</li>
 <li><strong>CSV + codebook</strong> → choose <strong>Annotate data</strong> or <strong>Adjudicate disagreements</strong>, then <strong>Start Annotating</strong>.</li>
 </ul>
-<div class="screenshot">
-<p>The landing page: CSV uploader, optional codebook uploader, demo tasks, and the context-dependent main action button.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/studio-landing.png" class="studio-shot img-fluid figure-img" alt="The landing page, with the CSV uploader on the right. A codebook can be attached after the CSV is uploaded, and demo tasks are further down the page."></p>
+<figcaption>The landing page, with the CSV uploader on the right. A codebook can be attached after the CSV is uploaded, and demo tasks are further down the page.</figcaption>
+</figure>
 </div>
 </section>
 <section id="preparing-your-data" class="level2">
@@ -510,8 +513,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Annotation items</strong> — one or more per section, each with a name, a tooltip (the guidance annotators see), a type, and type-specific settings. The section and item names become the CSV column names, so renaming either one after you have started annotating starts a new column: labels made under the old name stay in the old column, which the renamed codebook no longer uses.</li>
 </ul>
 <p>A live <strong>Annotation Workflow Preview</strong> sits alongside the builder and updates as you edit — use it as your QA surface to catch the wrong text column, unclear section names, over-long instructions, or confusing examples before any annotation happens. You can leave and re-enter the editor at any time with <strong>Edit CodeBook</strong>.</p>
-<div class="screenshot">
-<p>The codebook editor: header/text column selectors on the left, the section and annotation builder in the centre, and the live workflow preview.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/studio-editor.png" class="studio-shot img-fluid figure-img" alt="The codebook editor: column selectors at the top, then the live Annotation Workflow Preview, which shows a sample text exactly as coders will see it."></p>
+<figcaption>The codebook editor: column selectors at the top, then the live Annotation Workflow Preview, which shows a sample text exactly as coders will see it.</figcaption>
+</figure>
 </div>
 </section>
 <section id="annotation-types" class="level2">
@@ -554,8 +560,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p><strong>Span</strong> annotations are highlighted directly on the source text. A span can be an unlabelled highlight (just mark the relevant phrase) or, if you provide a set of labels, a tagged highlight (e.g.&nbsp;tag phrases as <em>joy</em>, <em>anger</em>, <em>fear</em>). Spans round-trip through the CSV as JSON, with character offsets, the highlighted text, and any label.</p>
-<div class="screenshot">
-<p>The annotation-item editor showing the type selector and the type-specific settings (dropdown options / Likert range / span labels).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/studio-item-editor.png" class="studio-shot img-fluid figure-img" alt="Editing a section: the Add buttons for each annotation type, the list of annotations in the section, and the focused editor for one dropdown annotation with its options."></p>
+<figcaption>Editing a section: the Add buttons for each annotation type, the list of annotations in the section, and the focused editor for one dropdown annotation with its options.</figcaption>
+</figure>
 </div>
 </section>
 <section id="conditional-annotations" class="level2">
@@ -575,22 +584,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Restore</strong> rolls the editor back to any earlier snapshot.</li>
 </ul>
 <p>This makes it easy to justify and document codebook revisions during a project.</p>
-<div class="screenshot">
-<p>Version history with the list of saved snapshots and a side-by-side comparison highlighting what changed between two versions.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/studio-versions.png" class="studio-shot img-fluid figure-img" alt="Comparing two saved versions of a codebook: removed words are struck through in red and added words are highlighted in green."></p>
+<figcaption>Comparing two saved versions of a codebook: removed words are struck through in red and added words are highlighted in green.</figcaption>
+</figure>
 </div>
 </section>
 <section id="previewing-llm-prompts" class="level2">
 <h2 class="anchored" data-anchor-id="previewing-llm-prompts">Previewing LLM prompts</h2>
 <p><strong>Preview LLM Prompts</strong> shows exactly what an LLM would receive for each annotation in your codebook — the section instruction, the question and tooltip, the response instructions appropriate to the type (e.g.&nbsp;<em>“Respond with a whole number from 1 to 5”</em> for Likert, the option list for dropdown), and any worked examples, wrapped around the text. It builds prompts the same way CodeBook Lab does for Lab’s three built-in prompt wrappers (<code>standard</code>, <code>persona</code> and <code>CoT</code>), so you can check and refine the wording before a benchmarking run. Custom wrappers registered in Lab can’t be previewed here. See <a href="./experiments.html#what-the-model-sees">What the model sees</a> for how Lab uses these prompts.</p>
-<div class="screenshot">
-<p>The LLM prompt preview, showing the fully assembled prompt for a selected annotation as the model would see it.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/studio-prompts.png" class="studio-shot img-fluid figure-img" alt="The LLM prompt preview, showing the full prompt for each annotation with the standard wrapper."></p>
+<figcaption>The LLM prompt preview, showing the full prompt for each annotation with the standard wrapper.</figcaption>
+</figure>
 </div>
 </section>
 <section id="annotating-in-the-browser" class="level2">
 <h2 class="anchored" data-anchor-id="annotating-in-the-browser">Annotating in the browser</h2>
 <p>Clicking <strong>Start Annotating</strong> (or choosing a demo) creates the annotation columns and opens the workspace — a compact two-column layout with the text on the left and the active annotation section on the right, with any metadata columns shown as a labelled chip strip above the text for context. A top bar shows the current item, progress through the dataset, and <strong>Prev</strong> / <strong>Next</strong> navigation. Within the section, annotators work through the instruction, the annotation widgets, and any examples; span annotations are made by highlighting phrases directly in the text. A checkbox you leave unticked on an item you have visited is saved as <code>0</code> (“no”). Session state autosaves as you move through the data, so you can close the tab and <strong>Resume Session</strong> later. The consistent interface gives a team of coders the same annotation experience.</p>
-<div class="screenshot">
-<p>The annotation workspace: text on the left, the active annotation section with its widgets on the right, and the progress/navigation bar on top.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/studio-workspace.png" class="studio-shot img-fluid figure-img" alt="The annotation workspace: the text on the left, the active section with its question and worked examples on the right, and navigation through the items at the top."></p>
+<figcaption>The annotation workspace: the text on the left, the active section with its question and worked examples on the right, and navigation through the items at the top.</figcaption>
+</figure>
 </div>
 </section>
 <section id="exporting-your-work" class="level2">
@@ -602,8 +620,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>codebook.tex</code> — a LaTeX rendering for paper appendices.</li>
 </ul>
 <p>Both the Markdown and LaTeX exports lay out every section, its instruction, each annotation with its response type and worked examples, and any conditional logic in plain language — ready to paste into a methods appendix. <strong>Download Annotated Data</strong> saves your human labels as <code>ground-truth.csv</code>. It contains every row of your CSV, including rows nobody has annotated yet, which have blank label cells. Before using the file as a Lab task, finish annotating or remove the unannotated rows: Lab scores every row, so a blank human label would count against the model. The JSON and CSV are exactly what Lab needs; the Markdown and LaTeX are for reporting.</p>
-<div class="screenshot">
-<p>The export panel with the codebook bundle (JSON / Markdown / LaTeX) and the annotated-data download.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/studio-export.png" class="studio-shot img-fluid figure-img" alt="The Utilities panel below the workspace, with the two downloads under Export."></p>
+<figcaption>The Utilities panel below the workspace, with the two downloads under Export.</figcaption>
+</figure>
 </div>
 </section>
 <section id="adjudicating-disagreements" class="level2">
