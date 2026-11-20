@@ -267,10 +267,6 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../#contact"> 
-<span class="menu-text">Contact</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href=".././cv"> 
 <span class="menu-text">CV</span></a>
   </li>  
@@ -296,6 +292,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#industry-experience" id="toc-industry-experience" class="nav-link" data-scroll-target="#industry-experience">Industry Experience</a></li>
   <li><a href="#working-papers" id="toc-working-papers" class="nav-link" data-scroll-target="#working-papers">Working Papers</a></li>
   <li><a href="#peer-reviewed-publications" id="toc-peer-reviewed-publications" class="nav-link" data-scroll-target="#peer-reviewed-publications">Peer-Reviewed Publications</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
   <li><a href="#presentations" id="toc-presentations" class="nav-link" data-scroll-target="#presentations">Presentations</a></li>
   <li><a href="#teaching" id="toc-teaching" class="nav-link" data-scroll-target="#teaching">Teaching</a></li>
   <li><a href="#scholarships-grants" id="toc-scholarships-grants" class="nav-link" data-scroll-target="#scholarships-grants">Scholarships &amp; Grants</a></li>
@@ -330,18 +327,20 @@ ul.task-list li input[type="checkbox"] {
 <div class="cv-header">
   <h1 class="cv-name">Lorcan McLaren</h1>
   <p class="cv-position">PhD Researcher in Quantitative &amp; Computational Social Science</p>
-  <p class="cv-affiliation">Connected_Politics Lab · UCD School of Politics &amp; International Relations</p>
-  <p class="cv-links">
-    <a href="mailto:lorcan.mclaren@ucdconnect.ie">lorcan.mclaren@ucdconnect.ie</a>
-    <span class="cv-sep">|</span>
-    <a href="https://www.lorcanmclaren.com">lorcanmclaren.com</a>
-    <span class="cv-sep">|</span>
-    <a href="https://github.com/lorcanmclaren">GitHub</a>
-    <span class="cv-sep">|</span>
-    <a href="https://www.linkedin.com/in/lorcanmclaren">LinkedIn</a>
-  </p>
+  <p class="cv-affiliation">Connected_Politics Lab · UCD School of Politics &amp; International
+Relations</p>
+  <p class="cv-links"><a href="mailto:lorcan.mclaren@ucdconnect.ie">lorcan.mclaren@ucdconnect.ie</a> <span class="cv-sep">|</span> <a href="https://www.lorcanmclaren.com">lorcanmclaren.com</a> <span class="cv-sep">|</span> <a href="https://github.com/lorcanmclaren">GitHub</a> <span class="cv-sep">|</span> <a href="https://www.linkedin.com/in/lorcanmclaren">LinkedIn</a></p>
   <p class="cv-download"><a href="index.pdf"><i class="fa-solid fa-download"></i> Download PDF</a></p>
 </div>
+<!--
+Each section is written once and rendered to both the web page and the PDF
+by cv.lua (in this folder). Building blocks:
+
+  ::: {.cv-entry title="Organisation" position="Role" date="Dates"}   + optional bullet list
+  ::: {.cv-rows}      a table of  date | detail  (| amount)
+  ::: {.cv-total label="..."}   sum of the amounts column across all cv-rows tables
+  ::: {.cv-pubs}      one paragraph per publication
+-->
 <section id="education" class="level2">
 <h2 class="anchored" data-anchor-id="education">Education</h2>
 <div class="cv-entry">
@@ -354,12 +353,12 @@ ul.task-list li input[type="checkbox"] {
       <span class="cv-entry-date">since September 2023</span>
     </div>
   </div>
-  <ul class="cv-items">
-    <li><strong>Thesis:</strong> Taking the Green Pill – Moral Language, Emotion, and Persuasion in the Climate Crisis</li>
-    <li><strong>Advisor:</strong> Dr. James P. Cross</li>
-  </ul>
+<ul class="cv-items">
+<li><strong>Thesis:</strong> Closer to Home? The Psychological Distance
+of Climate Change in Elite Rhetoric and Public Opinion</li>
+<li><strong>Advisor:</strong> Dr.&nbsp;James P. Cross</li>
+</ul>
 </div>
-
 <div class="cv-entry">
   <div class="cv-entry-header">
     <div class="cv-entry-left">
@@ -370,12 +369,11 @@ ul.task-list li input[type="checkbox"] {
       <span class="cv-entry-date">2021 – 2022</span>
     </div>
   </div>
-  <ul class="cv-items">
-    <li><strong>Thesis:</strong> Polarising Rhetoric and Twitter Rage</li>
-    <li><strong>Advisor:</strong> Dr. James P. Cross</li>
-  </ul>
+<ul class="cv-items">
+<li><strong>Thesis:</strong> Polarising Rhetoric and Twitter Rage</li>
+<li><strong>Advisor:</strong> Dr.&nbsp;James P. Cross</li>
+</ul>
 </div>
-
 <div class="cv-entry">
   <div class="cv-entry-header">
     <div class="cv-entry-left">
@@ -386,10 +384,11 @@ ul.task-list li input[type="checkbox"] {
       <span class="cv-entry-date">2016 – 2020</span>
     </div>
   </div>
-  <ul class="cv-items">
-    <li><strong>Thesis:</strong> Automatic Gaze Annotation and Conversational Dominance in the MULTISIMO Corpus</li>
-    <li><strong>Advisor:</strong> Dr. Carl Vogel</li>
-  </ul>
+<ul class="cv-items">
+<li><strong>Thesis:</strong> Automatic Gaze Annotation and
+Conversational Dominance in the MULTISIMO Corpus</li>
+<li><strong>Advisor:</strong> Dr.&nbsp;Carl Vogel</li>
+</ul>
 </div>
 </section>
 <section id="research-experience" class="level2">
@@ -405,7 +404,6 @@ ul.task-list li input[type="checkbox"] {
     </div>
   </div>
 </div>
-
 <div class="cv-entry">
   <div class="cv-entry-header">
     <div class="cv-entry-left">
@@ -417,7 +415,6 @@ ul.task-list li input[type="checkbox"] {
     </div>
   </div>
 </div>
-
 <div class="cv-entry">
   <div class="cv-entry-header">
     <div class="cv-entry-left">
@@ -442,14 +439,16 @@ ul.task-list li input[type="checkbox"] {
       <span class="cv-entry-date">2022 – 2023</span>
     </div>
   </div>
-  <ul class="cv-items">
-    <li>Built ingests to exploit new data sources via APIs and web scraping</li>
-    <li>Developed automated workflows for data extraction, transformation, and quality assurance in consultation with subject matter experts</li>
-    <li>Built, maintained, and updated visualisation dashboards and tools to monitor data health</li>
-    <li>Developed protocols to systematise processes for future work</li>
-  </ul>
+<ul class="cv-items">
+<li>Built ingests to exploit new data sources via APIs and web
+scraping</li>
+<li>Developed automated workflows for data extraction, transformation,
+and quality assurance in consultation with subject matter experts</li>
+<li>Built, maintained, and updated visualisation dashboards and tools to
+monitor data health</li>
+<li>Developed protocols to systematise processes for future work</li>
+</ul>
 </div>
-
 <div class="cv-entry">
   <div class="cv-entry-header">
     <div class="cv-entry-left">
@@ -459,26 +458,55 @@ ul.task-list li input[type="checkbox"] {
       <span class="cv-entry-date">2021 – 2022</span>
     </div>
   </div>
-  <ul class="cv-items">
-    <li>Monitored streams of potentially newsworthy content from around the globe and alerted clients on breaking news</li>
-    <li>Developed new techniques for discovering breaking news events using social media and other publicly available data</li>
-    <li>Tracked misinformation related to COVID-19 and election integrity across multiple jurisdictions in a variety of languages</li>
-  </ul>
+<ul class="cv-items">
+<li>Monitored streams of potentially newsworthy content from around the
+globe and alerted clients on breaking news</li>
+<li>Developed new techniques for discovering breaking news events using
+social media and other publicly available data</li>
+<li>Tracked misinformation related to COVID-19 and election integrity
+across multiple jurisdictions in a variety of languages</li>
+</ul>
 </div>
 </section>
 <section id="working-papers" class="level2">
 <h2 class="anchored" data-anchor-id="working-papers">Working Papers</h2>
 <div class="cv-pubs">
-  <p class="cv-pub"><strong>McLaren, L.</strong>, Cross, J.P., Krakowska, Z., Rauner, R. and Schoonvelde, M. (2025) 'Magic Words or Methodical Work? Challenging Conventional Wisdom in LLM-Based Political Text Annotation'.</p>
-  <p class="cv-pub"><strong>McLaren, L.</strong> (2025) 'When Climate Change Hits Home: Natural Disasters and Climate Rhetoric in the European Parliament'.</p>
-  <p class="cv-pub"><strong>McLaren, L.</strong> (2024) 'Here and Now or There and Then? The Psychological Distance of Climate Change in Parliamentary Speech'.</p>
+  <p class="cv-pub"><strong>McLaren, L.</strong>, Cross, J.P., Krakowska, Z., Rauner, R. and
+Schoonvelde, M. (2026) ‘What to Compare and When to Stop: LLM Pipelines
+for Text Annotation in Political Science’. <em>Revise &amp; resubmit,
+Political Analysis.</em> [<a href="https://arxiv.org/abs/2603.26898">Preprint, earlier version</a>]</p>
+  <p class="cv-pub"><strong>McLaren, L.</strong> (2024) ‘Here and Now or There and Then? The
+Psychological Distance of Climate Change in Parliamentary Speech’.
+<em>Under review.</em></p>
+  <p class="cv-pub"><strong>McLaren, L.</strong> (2026) ‘When Climate Change Hits Home:
+Extreme Weather and Climate Rhetoric in the European Parliament’.</p>
+  <p class="cv-pub"><strong>McLaren, L.</strong> and Cross, J.P. (2026) ‘Near or Distant?
+Elite Climate Rhetoric and Public Opinion in Ireland’.
+<em>Pre-registered survey experiment.</em></p>
 </div>
 </section>
 <section id="peer-reviewed-publications" class="level2">
 <h2 class="anchored" data-anchor-id="peer-reviewed-publications">Peer-Reviewed Publications</h2>
 <div class="cv-pubs">
-  <p class="cv-pub"><strong>McLaren, L.</strong>, Koutsombogera, M. and Vogel, C. (2020) 'A Heuristic Method for Automatic Gaze Detection in Constrained Multi-Modal Dialogue Corpora', in <em>2020 11th IEEE International Conference on Cognitive Infocommunications</em>, pp. 55–60.</p>
-  <p class="cv-pub"><strong>McLaren, L.</strong>, Koutsombogera, M. and Vogel, C. (2020) 'Gaze, Dominance and Dialogue Role in the MULTISIMO Corpus', in <em>2020 11th IEEE International Conference on Cognitive Infocommunications</em>, pp. 83–88.</p>
+  <p class="cv-pub"><strong>McLaren, L.</strong>, Koutsombogera, M. and Vogel, C. (2020) ‘A
+Heuristic Method for Automatic Gaze Detection in Constrained Multi-Modal
+Dialogue Corpora’, in <em>2020 11th IEEE International Conference on
+Cognitive Infocommunications</em>, pp.&nbsp;55–60.</p>
+  <p class="cv-pub"><strong>McLaren, L.</strong>, Koutsombogera, M. and Vogel, C. (2020)
+‘Gaze, Dominance and Dialogue Role in the MULTISIMO Corpus’, in <em>2020
+11th IEEE International Conference on Cognitive Infocommunications</em>,
+pp.&nbsp;83–88.</p>
+</div>
+</section>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<div class="cv-pubs">
+  <p class="cv-pub"><strong>CodeBook Lab</strong> (2026). Python package for benchmarking
+local LLM annotation pipelines against human labels across models,
+prompts and inference settings. [<a href="https://pypi.org/project/codebook-lab/">PyPI</a> · <a href="https://lorcanmclaren.com/codebook-lab/">Docs</a>]</p>
+  <p class="cv-pub"><strong>CodeBook Studio</strong> (2026). Browser-based tool for codebook
+development, human annotation and adjudication, with export to CodeBook
+Lab. [<a href="https://codebook.streamlit.app/">App</a> · <a href="https://lorcanmclaren.com/codebook-lab/studio.html">Docs</a>]</p>
 </div>
 </section>
 <section id="presentations" class="level2">
@@ -488,88 +516,122 @@ ul.task-list li input[type="checkbox"] {
 <div class="cv-honors cv-presentations">
   <div class="cv-honor-row">
     <span class="cv-honor-date">2026</span>
-    <span class="cv-honor-detail">EU Climate Politics and Policy Workshop, Dublin; European Consortium for Political Research Joint Sessions of Workshops, Innsbruck; COMPTEXT Conference, Birmingham; European Political Science Society Conference, Belfast; European Consortium for Political Research General Conference, Krakow</span>
+    <span class="cv-honor-detail">EU Climate Politics and Policy Workshop, Dublin; European Consortium for
+Political Research Joint Sessions of Workshops, Innsbruck; COMPTEXT
+Conference, Birmingham; European Political Science Society Conference,
+Belfast; European Consortium for Political Research General Conference,
+Krakow</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2025</span>
-    <span class="cv-honor-detail">COMPTEXT Conference, Vienna; European Consortium for Political Research Joint Sessions of Workshops, Prague; Una Europa PhD Summer School on Artificial Intelligence and Creativity, Paris; Political Studies Association of Ireland Annual Conference, Galway</span>
+    <span class="cv-honor-detail">COMPTEXT Conference, Vienna; European Consortium for Political Research
+Joint Sessions of Workshops, Prague; Una Europa PhD Summer School on
+Artificial Intelligence and Creativity, Paris; Political Studies
+Association of Ireland Annual Conference, Galway</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2024</span>
-    <span class="cv-honor-detail">COMPTEXT Conference, Amsterdam; Political Studies Association of Ireland Annual Conference, Dublin; SPIRe PhD Workshop, Dublin; Political Studies Association of Ireland Postgraduate Conference, Dublin</span>
+    <span class="cv-honor-detail">COMPTEXT Conference, Amsterdam; Political Studies Association of Ireland
+Annual Conference, Dublin; SPIRe PhD Workshop, Dublin; Political Studies
+Association of Ireland Postgraduate Conference, Dublin</span>
   </div>
 </div>
 </section>
 </section>
 <section id="teaching" class="level2">
 <h2 class="anchored" data-anchor-id="teaching">Teaching</h2>
+<section id="modules" class="level3">
+<h3 class="anchored" data-anchor-id="modules">Modules</h3>
 <div class="cv-honors">
   <div class="cv-honor-row">
     <span class="cv-honor-date">Spring 2025, 2026</span>
-    <span class="cv-honor-detail"><strong>AI and Large Language Models</strong>, Postgraduate, Module Instructor</span>
+    <span class="cv-honor-detail"><strong>AI and Large Language Models</strong>, Postgraduate, Module
+Instructor</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">Autumn 2023, 2024</span>
-    <span class="cv-honor-detail"><strong>Introduction to EU Politics</strong>, Undergraduate, Teaching Assistant</span>
+    <span class="cv-honor-detail"><strong>Introduction to EU Politics</strong>, Undergraduate, Teaching
+Assistant</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">Spring 2024</span>
-    <span class="cv-honor-detail"><strong>Research Methods in Political Science</strong>, Undergraduate, Teaching Assistant</span>
+    <span class="cv-honor-detail"><strong>Research Methods in Political Science</strong>, Undergraduate,
+Teaching Assistant</span>
   </div>
 </div>
 </section>
+<section id="workshops-short-courses" class="level3">
+<h3 class="anchored" data-anchor-id="workshops-short-courses">Workshops &amp; Short Courses</h3>
+<div class="cv-honors">
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">October 2026</span>
+    <span class="cv-honor-detail"><strong>LLMs for Text Annotation in Political Science</strong>,
+Political Studies Association of Ireland Annual Conference
+pre-conference workshop, Cork, Instructor</span>
+  </div>
+</div>
+</section>
+</section>
 <section id="scholarships-grants" class="level2">
 <h2 class="anchored" data-anchor-id="scholarships-grants">Scholarships &amp; Grants</h2>
-<p class="cv-funding-total">Total funding attracted: <strong id="cv-funding-total"></strong></p>
-<div class="cv-honors" id="cv-grants">
+<p class="cv-funding-total">Total funding attracted: <strong>€217,090</strong></p>
+<section id="scholarships-fellowships" class="level3">
+<h3 class="anchored" data-anchor-id="scholarships-fellowships">Scholarships &amp; Fellowships</h3>
+<div class="cv-honors">
   <div class="cv-honor-row">
     <span class="cv-honor-date">2025 – 2027</span>
     <span class="cv-honor-detail"><strong>Government of Ireland Scholarship</strong>, Research Ireland</span>
-    <span class="cv-honor-amount" data-amount="68000">€68,000</span>
-  </div>
-  <div class="cv-honor-row">
-    <span class="cv-honor-date">2025</span>
-    <span class="cv-honor-detail"><strong>PEC Travel Funding</strong>, Political Studies Association of Ireland</span>
-    <span class="cv-honor-amount" data-amount="400">€400</span>
+    <span class="cv-honor-amount">€68,000</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2024 – 2025</span>
     <span class="cv-honor-detail"><strong>Climate Fellowship</strong>, UCD Earth Institute</span>
-    <span class="cv-honor-amount" data-amount="1000">€1,000</span>
-  </div>
-  <div class="cv-honor-row">
-    <span class="cv-honor-date">2023 – 2025</span>
-    <span class="cv-honor-detail"><strong>SPIRe Research Committee Funding</strong>, UCD School of Politics &amp; International Relations</span>
-    <span class="cv-honor-amount" data-amount="3000">€3,000</span>
+    <span class="cv-honor-amount">€1,000</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2023 – 2027</span>
-    <span class="cv-honor-detail"><strong>Iseult Honohan Scholarship</strong>, UCD School of Politics &amp; International Relations</span>
-    <span class="cv-honor-amount" data-amount="124190">€124,190</span>
+    <span class="cv-honor-detail"><strong>Iseult Honohan Scholarship</strong>, UCD School of Politics
+&amp; International Relations</span>
+    <span class="cv-honor-amount">€124,190</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2020</span>
     <span class="cv-honor-detail"><strong>Erasmus Mundus Scholarship</strong>, European Commission</span>
-    <span class="cv-honor-amount" data-amount="17250">€17,250</span>
+    <span class="cv-honor-amount">€17,250</span>
   </div>
 </div>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var total = 0;
-    document.querySelectorAll("#cv-grants .cv-honor-amount[data-amount]").forEach(function(el) {
-      total += parseInt(el.getAttribute("data-amount"), 10);
-    });
-    document.getElementById("cv-funding-total").textContent =
-      "€" + total.toLocaleString("en-IE");
-  });
-</script>
+</section>
+<section id="research-travel-grants" class="level3">
+<h3 class="anchored" data-anchor-id="research-travel-grants">Research &amp; Travel Grants</h3>
+<div class="cv-honors">
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">2026</span>
+    <span class="cv-honor-detail"><strong>Specialist Group Funding</strong>, Political Studies Association
+of Ireland</span>
+    <span class="cv-honor-amount">€2,500</span>
+  </div>
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">2023 – 2026</span>
+    <span class="cv-honor-detail"><strong>SPIRe Research Committee Funding</strong>, UCD School of
+Politics &amp; International Relations</span>
+    <span class="cv-honor-amount">€3,750</span>
+  </div>
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">2025</span>
+    <span class="cv-honor-detail"><strong>PEC Travel Funding</strong>, Political Studies Association of
+Ireland</span>
+    <span class="cv-honor-amount">€400</span>
+  </div>
+</div>
+</section>
 </section>
 <section id="awards" class="level2">
 <h2 class="anchored" data-anchor-id="awards">Awards</h2>
 <div class="cv-honors">
   <div class="cv-honor-row">
     <span class="cv-honor-date">2020</span>
-    <span class="cv-honor-detail"><strong>Best Paper Award</strong>, IEEE International Conference on Cognitive Infocommunications</span>
+    <span class="cv-honor-detail"><strong>Best Paper Award</strong>, IEEE International Conference on
+Cognitive Infocommunications</span>
   </div>
 </div>
 </section>
@@ -579,20 +641,35 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="service-leadership">Service &amp; Leadership</h3>
 <div class="cv-honors">
   <div class="cv-honor-row">
-    <span class="cv-honor-date">since 2024</span>
+    <span class="cv-honor-date">2024 – 2026</span>
     <span class="cv-honor-detail"><strong>Convenor</strong>, PSAI Computational Methods Specialist Group</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2017 – 2018</span>
-    <span class="cv-honor-detail"><strong>Student Convenor</strong>, TCD School of Computer Science &amp; Statistics</span>
+    <span class="cv-honor-detail"><strong>Student Convenor</strong>, TCD School of Computer Science &amp;
+Statistics</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date"></span>
-    <span class="cv-honor-detail"><strong>Deputy Chair</strong>, TCD Students' Union Lobby Group</span>
+    <span class="cv-honor-detail"><strong>Deputy Chair</strong>, TCD Students’ Union Lobby Group</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2016 – 2017</span>
-    <span class="cv-honor-detail"><strong>Student Convenor</strong>, TCD School of Linguistic, Speech &amp; Communication Sciences</span>
+    <span class="cv-honor-detail"><strong>Student Convenor</strong>, TCD School of Linguistic, Speech
+&amp; Communication Sciences</span>
+  </div>
+</div>
+</section>
+<section id="peer-review" class="level3">
+<h3 class="anchored" data-anchor-id="peer-review">Peer Review</h3>
+<div class="cv-honors">
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">Journals</span>
+    <span class="cv-honor-detail"><em>Humanities and Social Sciences Communications</em></span>
+  </div>
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">Workshops</span>
+    <span class="cv-honor-detail">MultiDems Workshop, EACL 2027</span>
   </div>
 </div>
 </section>

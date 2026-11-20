@@ -1,14 +1,15 @@
 ---
-title: "When Climate Change Hits Home: Natural Disasters and Climate Rhetoric in the European Parliament"
-date: "2025"
+title: "When Climate Change Hits Home: Extreme Weather and Climate Rhetoric in the European Parliament"
+date: "2026"
 date-format: "YYYY"
+order: 3
 paper-status: "Draft Available"
 # wplink: "../files/climate-disasters.pdf"
 # codelink: "https://github.com/"
 coauthors:
   # - name: "Jane Doe"
   #   link: "https://link.to.website/"
-abstract: "Climate change is often cast as a psychologically distant threat, diffuse in cause, remote in its worst consequences, and weak in its everyday experiential signal. This paper asks whether nearby extreme weather changes how Members of the European Parliament (MEPs) frame climate change: not whether they discuss it more, but whether they present its impacts as proximate, near in space and time, attached to identifiable European communities, rather than as distant problems for faraway people and future generations. || The central argument distinguishes the meteorological signal of extreme weather from the social-impact narrative that disaster recording produces. Heatwaves that were meteorologically real but never crystallised into a recorded disaster are followed by a gradual shift toward more proximate and more specific climate framing among nearby MEPs, surfacing with a lag of two to three years. Heatwaves that did produce a recorded disaster, the kind of recorded-disaster set a conventional disaster-politics design would analyse, produce no comparable response. What activates legislators' climate framing is the regional footprint of a hot summer travelling through weather coverage and lived experience, not the discrete-event impact narrative that dominates standard disaster registers, and it works on how climate is narrated, not how much. The political signal of climate change, on this evidence, reaches elite rhetoric through the slow metabolism of climate-coded weather rather than through the acute focusing events the literature has emphasised."
+abstract: "Climate change is often understood as a psychologically distant threat. This paper asks whether extreme weather near a politician\u2019s geographic home changes how climate impacts are described in parliamentary speech. I combine sentence-level annotations of 28,448 European Parliament speeches with two exposure registers: a meteorological record of locally unusual warm spells and a disaster impact register of recorded floods, storms, and other climate-related events. Both are analysed at the MEP-speech-day level using three adjacent 30-day pre-speech windows, a 30-day future-exposure placebo, MEP and calendar-date fixed effects, and country-clustered inference. The primary meteorological estimate is small and statistically indistinguishable from zero (0.059 percentage points; p = 0.151); its 90% confidence interval excludes effects larger than 0.026 outcome standard deviations. The summer-heat specification is also null. In the disaster register, the primary occurrence-and-impact dose combines event frequency with the logged number of people affected and killed. Its immediate proximity estimate is positive but uncertain (0.060 percentage points; clustered p = 0.099; wild-cluster p = 0.112), with an equivalence bound of 0.024 outcome standard deviations. An unweighted event-count robustness is nominally significant (p = 0.030) but does not survive adjustment across temporal windows. The evidence rules out large changes in elite climate framing and provides limited evidence of a small immediate association following nearby recorded disasters."
 
 format:
   html:

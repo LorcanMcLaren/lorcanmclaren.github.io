@@ -2,9 +2,10 @@
   {
     "listing": "/index.html",
     "items": [
-      "/wp/climate-disasters.html",
       "/wp/magic-words.html",
       "/wp/here-and-now.html",
+      "/wp/climate-disasters.html",
+      "/wp/near-or-distant.html",
       "/pub/mclaren_heuristic_2020.html",
       "/pub/mclaren_gaze_2020.html",
       "/projects/codebook-lab.html",

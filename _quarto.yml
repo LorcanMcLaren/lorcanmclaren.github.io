@@ -6,7 +6,6 @@ project:
     - "!llms-for-social-scientists/"  # course is a separate Quarto book project, rendered independently
     - "!codebook-lab/"  # package docs are a separate Quarto book project, rendered independently
   resources: # here we need to add any files that users should be able to download
-    - files/taking-the-green-pill.pdf
     - docs/cv/index.pdf
     - workshop/
 
@@ -27,8 +26,6 @@ website:
         text: Projects
       - href: "#teaching"
         text: Teaching
-      - href: "#contact"
-        text: Contact
       - href: ./cv
         text: CV
   search: false
