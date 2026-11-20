@@ -30,12 +30,12 @@
   .cb-fb-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); }
   .cb-fb-modal {
     position: relative; width: min(440px, 92vw); max-height: 90vh; overflow: auto;
-    background: #fffdf8; border: 1px solid var(--doc-card-border, #ddd); border-radius: 12px;
+    background: var(--doc-bg, #ffffff); border: 1px solid var(--doc-card-border, #ddd); border-radius: 6px;
     padding: 1.25rem 1.4rem; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-    font-family: "Libre Franklin", sans-serif; font-size: 0.9rem; line-height: 1.45;
+    font-family: "Literata", serif; font-size: 0.9rem; line-height: 1.45;
   }
-  .quarto-dark .cb-fb-modal { background: #1a1a2e; }
-  .cb-fb-modal h3 { margin: 0 0 0.25rem; font-family: "Lora", serif; font-size: 1.4rem; color: var(--doc-accent-strong); }
+  .quarto-dark .cb-fb-modal { background: var(--doc-bg, #17181b); }
+  .cb-fb-modal h3 { margin: 0 0 0.25rem; font-family: "Schibsted Grotesk", sans-serif; font-size: 1.4rem; color: var(--doc-accent-strong); }
   .cb-fb-sub { margin: 0 0 1rem; font-size: 0.85rem; color: var(--doc-muted); }
   .cb-fb-modal label { display: block; font-weight: 600; font-size: 0.85rem; margin: 0.7rem 0 0.25rem; }
   .cb-fb-modal select, .cb-fb-modal textarea, .cb-fb-modal input {
@@ -48,7 +48,7 @@
   .cb-fb-actions { display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 1.1rem; }
   .cb-fb-btn { padding: 0.45rem 0.9rem; border-radius: 6px; border: 1px solid var(--doc-card-border, #ccc); cursor: pointer; font: inherit; font-weight: 600; }
   .cb-fb-cancel { background: transparent; color: var(--doc-muted); }
-  .cb-fb-submit { background: var(--doc-accent); color: #fff; border-color: var(--doc-accent); }
+  .cb-fb-submit { background: var(--doc-accent); color: var(--doc-bg, #fff); border-color: var(--doc-accent); }
 </style>
 
 <script>

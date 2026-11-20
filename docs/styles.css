@@ -597,35 +597,39 @@ body.nav-fixed {
   }
 }
 
-/* ---- homepage hero ---- */
+/* ---- homepage hero ----
+   Desktop: photo beside a block of name, role and links.
+   Phone: small photo beside the name on one line; role and links run full width below. */
 .hero {
   display: grid;
-  grid-template-columns: 128px 1fr;
-  gap: 1.5rem;
+  grid-template-columns: 112px 1fr;
+  column-gap: 1.4rem;
   align-items: center;
-  margin: 1rem 0 1.8rem 0;
+  margin: 0.8rem 0 1.6rem 0;
 }
 
 .hero-photo {
-  width: 128px;
-  height: 128px;
+  width: 112px;
+  height: 112px;
   border-radius: 6px;
   object-fit: cover;
   object-position: top;
+  filter: grayscale(1);
 }
 
 .hero-name {
   font-family: "Schibsted Grotesk", sans-serif;
   font-weight: 800;
-  font-size: 2.8rem;
+  font-size: 2.3rem;
   letter-spacing: -0.03em;
   line-height: 1;
-  margin: 0 0 0.4rem 0;
+  margin: 0 0 0.35rem 0;
 }
 
 .hero-role {
   margin: 0 0 0.3rem 0;
   font-size: 1rem;
+  line-height: 1.45;
   color: var(--ink-muted);
 }
 
@@ -635,16 +639,37 @@ body.nav-fixed {
 
 @media (max-width: 600px) {
   .hero {
-    grid-template-columns: 76px 1fr;
-    gap: 1rem;
-    align-items: start;
+    grid-template-columns: 56px 1fr;
+    grid-template-areas:
+      "photo name"
+      "role  role"
+      "links links";
+    column-gap: 0.85rem;
+    row-gap: 0.55rem;
+    margin: 0.4rem 0 1.4rem 0;
+  }
+  .hero > div {
+    display: contents;
   }
   .hero-photo {
-    width: 76px;
-    height: 76px;
+    grid-area: photo;
+    width: 56px;
+    height: 56px;
+    border-radius: 4px;
   }
   .hero-name {
-    font-size: 1.9rem;
+    grid-area: name;
+    font-size: 1.65rem;
+    margin: 0;
+  }
+  .hero-role {
+    grid-area: role;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  .hero .bio-links {
+    grid-area: links;
+    margin-top: 0;
   }
   .navbar-logo {
     height: 22px !important;

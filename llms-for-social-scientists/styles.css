@@ -1,7 +1,12 @@
 :root {
-  --inline-code-color: #4a3a40;
-  --inline-code-bg: rgba(95, 59, 74, 0.08);
-  --inline-code-border: rgba(122, 90, 101, 0.22);
+  --inline-code-color: #2b2b2e;
+  --inline-code-bg: rgba(29, 29, 31, 0.06);
+  --inline-code-border: rgba(29, 29, 31, 0.14);
+  /* Palette shared with lorcanmclaren.com: ink on white, highlighter accents. */
+  --hl: rgba(255, 205, 40, 0.55);
+  --hl-soft: rgba(255, 205, 40, 0.22);
+  --link-underline: rgba(200, 150, 0, 0.85);
+  --rule: rgba(29, 29, 31, 0.14);
 }
 
 p code,
@@ -19,13 +24,17 @@ blockquote code {
 }
 
 .quarto-dark {
-  --inline-code-color: #d7e6f3;
-  --inline-code-bg: #13212d;
-  --inline-code-border: rgba(183, 208, 228, 0.18);
-  --code-block-bg: #111a28;
-  --code-block-color: #e7edf5;
-  --code-block-border: rgba(164, 194, 217, 0.24);
-  --code-block-muted: #94a9bb;
+  --inline-code-color: #e4e4e6;
+  --inline-code-bg: rgba(255, 255, 255, 0.08);
+  --inline-code-border: rgba(255, 255, 255, 0.14);
+  --code-block-bg: #202226;
+  --code-block-color: #ececec;
+  --code-block-border: rgba(255, 255, 255, 0.14);
+  --code-block-muted: #a8a8ad;
+  --hl: rgba(255, 205, 40, 0.30);
+  --hl-soft: rgba(255, 205, 40, 0.14);
+  --link-underline: rgba(255, 205, 40, 0.75);
+  --rule: rgba(236, 236, 236, 0.16);
 }
 
 .quarto-dark div.sourceCode,
@@ -67,4 +76,63 @@ blockquote code {
 .quarto-dark div.sourceCode .code-copy-button:hover,
 .quarto-dark div.sourceCode .code-copy-button:focus {
   color: var(--code-block-color);
+}
+
+/* ---- shared look with lorcanmclaren.com ---- */
+body {
+  line-height: 1.65;
+}
+
+h1, h2, h3, h4, h5, .title, .navbar, .sidebar-item-text {
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, .title {
+  font-weight: 700;
+}
+
+.navbar, .sidebar-navigation, #TOC, #toc-title {
+  font-family: "Schibsted Grotesk", sans-serif;
+}
+
+/* Links in running text: ink with a highlighter-coloured underline. */
+main.content p a,
+main.content li a,
+main.content td a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--link-underline);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+main.content p a:hover,
+main.content li a:hover,
+main.content td a:hover {
+  background: var(--hl-soft);
+  text-decoration: none;
+}
+
+/* Current chapter and section: highlighter mark instead of a colour change. */
+.sidebar-navigation .sidebar-link.active {
+  color: inherit !important;
+  font-weight: 600;
+}
+
+.sidebar-navigation .sidebar-link.active .menu-text {
+  background: linear-gradient(transparent 55%, var(--hl) 55%);
+}
+
+#TOC a.active {
+  color: inherit !important;
+  font-weight: 600;
+  border-left-color: rgba(255, 205, 40, 0.95) !important;
+}
+
+.sidebar-navigation .sidebar-link:hover .menu-text {
+  background: var(--hl-soft);
+}
+
+.navbar, #quarto-sidebar {
+  border-color: var(--rule) !important;
 }
