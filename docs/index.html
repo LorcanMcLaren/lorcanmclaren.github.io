@@ -25,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
-<link href="./images/icon.png" rel="icon" type="image/png">
+<link href="./images/favicon.svg" rel="icon" type="image/svg+xml">
 <script src="site_libs/quarto-listing/list.min.js"></script>
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -40,9 +40,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c41e6a140ad3b1ab41c1c9e641a31fbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-9f6bb9e13f154ffd51192f86b171abbc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-c41e6a140ad3b1ab41c1c9e641a31fbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3f0337d31683ca9105c0281c76a218d9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-6081869067656ebef8d352934b5ce777.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-3f0337d31683ca9105c0281c76a218d9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -145,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&amp;family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -183,10 +183,12 @@ window.Quarto = {
 <meta property="og:description" content="">
 <meta property="og:image" content="https://lorcanmclaren.com/images/profile.jpg">
 <meta property="og:site_name" content="Lorcan McLaren">
+<meta property="og:image:alt" content="Portrait of Lorcan McLaren">
 <meta name="twitter:title" content="Lorcan McLaren">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://lorcanmclaren.com/images/profile.jpg">
 <meta name="twitter:creator" content="@LorcanMcLaren">
+<meta name="twitter:image:alt" content="Portrait of Lorcan McLaren">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -359,6 +361,9 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/hemicycle-logo.svg" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Lorcan McLaren</span>
     </a>
@@ -408,12 +413,15 @@ window.Quarto = {
 
 
 
-<img src="images/profile.jpg" class="round-image centre img-fluid" width="250">
-<div style="text-align: center; font-family: 'Lora', serif;">
-<p><span style="font-weight: 600">Lorcan McLaren</span><br> <span style="font-weight: 400">PhD Researcher in Computational Social Science</span><br> <span style="font-weight: 400"><a href="https://www.ucd.ie/">University College Dublin</a></span></p>
-<p><span class="paper-links bio-links"><a href="https://www.linkedin.com/in/lorcanmclaren/">LinkedIn</a><a href="https://github.com/LorcanMcLaren">GitHub</a><a href="https://scholar.google.com/citations?user=vnNon38AAAAJ&amp;hl=en&amp;oi=ao">Scholar</a><a href="mailto:lorcan.mclaren@ucdconnect.ie">Email</a></span></p>
+<div class="hero">
+  <img src="images/profile.jpg" class="hero-photo" alt="Portrait of Lorcan McLaren">
+  <div>
+    <p class="hero-name">Lorcan McLaren</p>
+    <p class="hero-role">PhD Researcher in Computational Social Science<br><a href="https://www.ucd.ie/">University College Dublin</a></p>
+    <span class="paper-links bio-links"><a href="https://www.linkedin.com/in/lorcanmclaren/">LinkedIn</a><a href="https://github.com/LorcanMcLaren">GitHub</a><a href="https://scholar.google.com/citations?user=vnNon38AAAAJ&amp;hl=en&amp;oi=ao">Scholar</a><a href="mailto:lorcan.mclaren@ucdconnect.ie">Email</a></span>
+  </div>
 </div>
-<p>I am a PhD researcher in computational social science at <a href="https://www.ucd.ie/spire/">University College Dublin</a>, funded by a Taighde Éireann – Research Ireland Government of Ireland scholarship, and based in the <a href="https://www.ucd.ie/connected_politics/">Connected_Politics Lab</a> under the supervision of <a href="https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&amp;hl=en&amp;oi=ao">James P. Cross</a>. My research focuses on political communication, climate politics and public opinion, combining text-as-data methods, large language models and survey experiments. I also work on best practice for LLM-based text annotation and develop open-source tools for it.</p>
+<p>I am a PhD researcher in computational social science at <a href="https://www.ucd.ie/spire/">University College Dublin</a>, funded by a Taighde Éireann – Research Ireland Government of Ireland scholarship, and based in the <a href="https://www.ucd.ie/connected_politics/">Connected_Politics Lab</a> under the supervision of <a href="https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&amp;hl=en&amp;oi=ao">James P. Cross</a>. My research focuses on <mark class="code code-topic" data-code="topic" tabindex="0">political communication</mark>, <mark class="code code-topic" data-code="topic" tabindex="0">climate politics</mark> and <mark class="code code-topic" data-code="topic" tabindex="0">public opinion</mark>, combining <mark class="code code-method" data-code="method" tabindex="0">text-as-data methods</mark>, <mark class="code code-method" data-code="method" tabindex="0">large language models</mark> and <mark class="code code-method" data-code="method" tabindex="0">survey experiments</mark>. I also work on best practice for LLM-based text annotation and develop <mark class="code code-software" data-code="software" tabindex="0">open-source tools</mark> for it.</p>
 <p>Prior to my doctoral studies, I completed a BA in Computer Science, Linguistics and French at Trinity College Dublin and an MSc in Politics and Data Science at University College Dublin, complemented by two years of industry experience as a data analyst.</p>
 <p><strong>I will be on the academic job market in 2027.</strong></p>
 <section id="research" class="level2">

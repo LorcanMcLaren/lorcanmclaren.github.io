@@ -27,14 +27,14 @@ Experiments are controlled from Python, so users can start with a single run, sc
 ```{=html}
 <style>
 .codebook-flow {
-  --codebook-border: #7a5a65;
-  --codebook-card-bg: #f7f1ec;
-  --codebook-data-bg: #fcf8f5;
-  --codebook-title: #5f3b4a;
-  --codebook-text: #4a3a40;
-  --codebook-code-bg: rgba(95, 59, 74, 0.08);
-  --codebook-code-border: rgba(122, 90, 101, 0.22);
-  --codebook-shadow: rgba(0, 0, 0, 0.05);
+  --codebook-border: rgba(29, 29, 31, 0.55);
+  --codebook-card-bg: rgba(120, 190, 255, 0.10);
+  --codebook-data-bg: #ffffff;
+  --codebook-title: #1d1d1f;
+  --codebook-text: #2b2b2e;
+  --codebook-code-bg: rgba(29, 29, 31, 0.06);
+  --codebook-code-border: rgba(29, 29, 31, 0.14);
+  --codebook-shadow: rgba(0, 0, 0, 0.0);
   display: grid;
   grid-template-columns: minmax(220px, 1fr) 80px minmax(220px, 1fr);
   gap: 1.25rem;
@@ -43,14 +43,14 @@ Experiments are controlled from Python, so users can start with a single run, sc
 }
 
 .quarto-dark .codebook-flow {
-  --codebook-border: #7b9bb5;
-  --codebook-card-bg: #253544;
-  --codebook-data-bg: #1f2d3a;
-  --codebook-title: #b7d0e4;
-  --codebook-text: #d7e6f3;
-  --codebook-code-bg: #13212d;
-  --codebook-code-border: rgba(183, 208, 228, 0.18);
-  --codebook-shadow: rgba(0, 0, 0, 0.22);
+  --codebook-border: rgba(236, 236, 236, 0.45);
+  --codebook-card-bg: rgba(120, 190, 255, 0.10);
+  --codebook-data-bg: #17181b;
+  --codebook-title: #ececec;
+  --codebook-text: #dcdcde;
+  --codebook-code-bg: rgba(255, 255, 255, 0.08);
+  --codebook-code-border: rgba(255, 255, 255, 0.14);
+  --codebook-shadow: rgba(0, 0, 0, 0.0);
 }
 
 .codebook-card {

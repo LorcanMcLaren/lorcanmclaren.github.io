@@ -1,26 +1,11 @@
 /*-- scss:defaults --*/
-$font-family-sans-serif: "Libre Franklin", sans-serif;
-$headings-font-family: "Lora", serif;
+$font-family-sans-serif: "Literata", serif;
+$headings-font-family: "Schibsted Grotesk", sans-serif;
 
-$body-bg: #1a1a2e;
-$body-color: #f0f0f0;
-$primary: #8fb4d0;
-$link-color: #8fb4d0;
+$body-bg: #17181b;
+$body-color: #ececec;
+$primary: #ececec;
+$link-color: #ececec;
 
-$navbar-bg: #1a1a2e;
-$navbar-fg: #d4d4d4;
-
-/*-- scss:rules --*/
-.navbar {
-    font-family: "Lora", serif !important;
-    font-weight: 600;
-    border-bottom: 1px solid #555555;
-}
-
-.navbar-brand {
-    font-weight: 700 !important;
-}
-
-.navbar-nav .nav-link {
-    font-weight: 400 !important;
-}
+$navbar-bg: #17181b;
+$navbar-fg: #ececec;
