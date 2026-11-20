@@ -58,7 +58,7 @@ by cv.lua (in this folder). Building blocks:
 ## Education
 
 ::: {.cv-entry title="University College Dublin" position="PhD Quantitative & Computational Social Science" date="since September 2023"}
-- **Thesis:** Taking the Green Pill – Moral Language, Emotion, and Persuasion in the Climate Crisis
+- **Thesis:** Closer to Home? The Psychological Distance of Climate Change in Elite Rhetoric and Public Opinion
 - **Advisor:** Dr. James P. Cross
 :::
 
