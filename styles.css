@@ -602,15 +602,15 @@ body.nav-fixed {
    Phone: small photo beside the name on one line; role and links run full width below. */
 .hero {
   display: grid;
-  grid-template-columns: 112px 1fr;
+  grid-template-columns: 96px 1fr;
   column-gap: 1.4rem;
   align-items: center;
   margin: 0.8rem 0 1.6rem 0;
 }
 
 .hero-photo {
-  width: 112px;
-  height: 112px;
+  width: 96px;
+  height: 96px;
   border-radius: 6px;
   object-fit: cover;
   object-position: top;
@@ -619,9 +619,9 @@ body.nav-fixed {
 
 .hero-name {
   font-family: "Schibsted Grotesk", sans-serif;
-  font-weight: 800;
-  font-size: 2.3rem;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
   line-height: 1;
   margin: 0 0 0.35rem 0;
 }
@@ -659,7 +659,7 @@ body.nav-fixed {
   }
   .hero-name {
     grid-area: name;
-    font-size: 1.65rem;
+    font-size: 1.35rem;
     margin: 0;
   }
   .hero-role {
