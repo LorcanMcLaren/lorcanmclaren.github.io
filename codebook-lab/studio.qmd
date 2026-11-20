@@ -12,7 +12,7 @@ same codebook to language models and scores their answers against your labels.
 
 ```{=html}
 <div class="hero-note">
-  <p>Studio runs in the browser at <a href="https://codebook.streamlit.app/">codebook.streamlit.app</a>, with nothing to install. You can also <a href="#running-locally">run it on your own machine</a>, for example for sensitive data.</p>
+  <p>Use Studio in your browser at <a href="https://codebook.streamlit.app/">codebook.streamlit.app</a>, with nothing to install. You can also <a href="#running-locally">run it on your own machine</a>, for example for sensitive data.</p>
 </div>
 ```
 
@@ -223,19 +223,24 @@ final, fully resolved `ground-truth.csv`.
 
 ## Data security and persistence
 
-CodeBook Studio runs entirely in your browser. There is **no database and no
-server-side storage** — your texts, codebook, and annotations stay in the
-browser session and are cached only in your browser's local storage, which is
-what lets you close the tab and **Resume Session** later.
+CodeBook Studio is a [Streamlit](https://streamlit.io/) app: you use it in your
+browser, but its Python code runs on a server. On the hosted version at
+codebook.streamlit.app, that server is Streamlit Community Cloud, so your texts
+and annotations are sent to it while you work. Studio has **no database and does
+not keep your data on the server** after your session ends. Your saved work is
+stored in your browser's local storage, which is what lets you close the tab and
+**Resume Session** later.
 
-This is private by design, but it is **not a failsafe backup**. Your work lives
+If your texts must not leave your own machine (for example under a data
+protection agreement), [run Studio locally](#running-locally) instead: then the
+server is your own computer.
+
+Browser storage is **not a failsafe backup**. Your work lives
 in one browser on one device, so it will not be there in a different browser, on
 another device, or in a private/incognito window, and clearing your browsing
 data removes it. Saved codebook versions are stored the same way. Studio warns you
 if a session grows beyond 5 MB, which some browsers can't store. For anything you cannot afford to lose, **export regularly**
-(Download CodeBook and Download Annotated Data) and keep the files yourself —
-and prefer [running locally](#running-locally) when data sensitivity means
-nothing should leave your machine.
+(Download CodeBook and Download Annotated Data) and keep the files yourself.
 
 ## Running locally
 
