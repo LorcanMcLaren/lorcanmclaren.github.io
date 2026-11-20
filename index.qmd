@@ -23,16 +23,18 @@ listing: # this determines different lists with respective options. These are ac
 
 ---
 
-![](images/profile.jpg){.round-image .centre width=250}
-<div style="text-align: center; font-family: 'Lora', serif;">
-  <span style="font-weight: 600">Lorcan McLaren</span><br>
-  <span style="font-weight: 400">PhD Researcher in Computational Social Science</span><br>
-  <span style="font-weight: 400">[University College Dublin](https://www.ucd.ie/)</span>
-
-<span class="paper-links bio-links"><a href="https://www.linkedin.com/in/lorcanmclaren/">LinkedIn</a><a href="https://github.com/LorcanMcLaren">GitHub</a><a href="https://scholar.google.com/citations?user=vnNon38AAAAJ&hl=en&oi=ao">Scholar</a><a href="mailto:lorcan.mclaren@ucdconnect.ie">Email</a></span>
+```{=html}
+<div class="hero">
+  <img src="images/profile.jpg" class="hero-photo" alt="Portrait of Lorcan McLaren">
+  <div>
+    <p class="hero-name">Lorcan McLaren</p>
+    <p class="hero-role">PhD Researcher in Computational Social Science<br><a href="https://www.ucd.ie/">University College Dublin</a></p>
+    <span class="paper-links bio-links"><a href="https://www.linkedin.com/in/lorcanmclaren/">LinkedIn</a><a href="https://github.com/LorcanMcLaren">GitHub</a><a href="https://scholar.google.com/citations?user=vnNon38AAAAJ&hl=en&oi=ao">Scholar</a><a href="mailto:lorcan.mclaren@ucdconnect.ie">Email</a></span>
+  </div>
 </div>
+```
 
-I am a PhD researcher in computational social science at [University College Dublin](https://www.ucd.ie/spire/), funded by a Taighde Éireann – Research Ireland Government of Ireland scholarship, and based in the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/) under the supervision of [James P. Cross](https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&hl=en&oi=ao). My research focuses on political communication, climate politics and public opinion, combining text-as-data methods, large language models and survey experiments. I also work on best practice for LLM-based text annotation and develop open-source tools for it.
+I am a PhD researcher in computational social science at [University College Dublin](https://www.ucd.ie/spire/), funded by a Taighde Éireann – Research Ireland Government of Ireland scholarship, and based in the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/) under the supervision of [James P. Cross](https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&hl=en&oi=ao). My research focuses on <mark class="code code-topic" data-code="topic" tabindex="0">political communication</mark>, <mark class="code code-topic" data-code="topic" tabindex="0">climate politics</mark> and <mark class="code code-topic" data-code="topic" tabindex="0">public opinion</mark>, combining <mark class="code code-method" data-code="method" tabindex="0">text-as-data methods</mark>, <mark class="code code-method" data-code="method" tabindex="0">large language models</mark> and <mark class="code code-method" data-code="method" tabindex="0">survey experiments</mark>. I also work on best practice for LLM-based text annotation and develop <mark class="code code-software" data-code="software" tabindex="0">open-source tools</mark> for it.
 
 Prior to my doctoral studies, I completed a BA in Computer Science, Linguistics and French at Trinity College Dublin and an MSc in Politics and Data Science at University College Dublin, complemented by two years of industry experience as a data analyst.
 
