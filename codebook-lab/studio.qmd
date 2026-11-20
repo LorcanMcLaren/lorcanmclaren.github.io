@@ -37,10 +37,7 @@ What the main action button does depends on what you uploaded:
 - **CSV + codebook** → choose **Annotate data** or **Adjudicate disagreements**,
   then **Start Annotating**.
 
-::: {.screenshot}
-The landing page: CSV uploader, optional codebook uploader, demo tasks, and the
-context-dependent main action button.
-:::
+![The landing page, with the CSV uploader on the right. A codebook can be attached after the CSV is uploaded, and demo tasks are further down the page.](images/studio-landing.png){.studio-shot fig-alt="The landing page, with the CSV uploader on the right. A codebook can be attached after the CSV is uploaded, and demo tasks are further down the page."}
 
 ## Preparing your data
 
@@ -81,10 +78,7 @@ section names, over-long instructions, or confusing examples before any
 annotation happens. You can leave and re-enter the editor at any time with
 **Edit CodeBook**.
 
-::: {.screenshot}
-The codebook editor: header/text column selectors on the left, the section and
-annotation builder in the centre, and the live workflow preview.
-:::
+![The codebook editor: column selectors at the top, then the live Annotation Workflow Preview, which shows a sample text exactly as coders will see it.](images/studio-editor.png){.studio-shot fig-alt="The codebook editor: column selectors at the top, then the live Annotation Workflow Preview, which shows a sample text exactly as coders will see it."}
 
 ## Annotation types
 
@@ -105,10 +99,7 @@ of labels, a tagged highlight (e.g. tag phrases as *joy*, *anger*, *fear*).
 Spans round-trip through the CSV as JSON, with character offsets, the
 highlighted text, and any label.
 
-::: {.screenshot}
-The annotation-item editor showing the type selector and the type-specific
-settings (dropdown options / Likert range / span labels).
-:::
+![Editing a section: the Add buttons for each annotation type, the list of annotations in the section, and the focused editor for one dropdown annotation with its options.](images/studio-item-editor.png){.studio-shot fig-alt="Editing a section: the Add buttons for each annotation type, the list of annotations in the section, and the focused editor for one dropdown annotation with its options."}
 
 ## Conditional annotations
 
@@ -146,10 +137,7 @@ codebook with a label so you can track that history:
 
 This makes it easy to justify and document codebook revisions during a project.
 
-::: {.screenshot}
-Version history with the list of saved snapshots and a side-by-side comparison
-highlighting what changed between two versions.
-:::
+![Comparing two saved versions of a codebook: removed words are struck through in red and added words are highlighted in green.](images/studio-versions.png){.studio-shot fig-alt="Comparing two saved versions of a codebook: removed words are struck through in red and added words are highlighted in green."}
 
 ## Previewing LLM prompts
 
@@ -163,10 +151,7 @@ so you can check and refine the wording before a benchmarking run. Custom
 wrappers registered in Lab can't be previewed here. See [What the model
 sees](experiments.qmd#what-the-model-sees) for how Lab uses these prompts.
 
-::: {.screenshot}
-The LLM prompt preview, showing the fully assembled prompt for a selected
-annotation as the model would see it.
-:::
+![The LLM prompt preview, showing the full prompt for each annotation with the standard wrapper.](images/studio-prompts.png){.studio-shot fig-alt="The LLM prompt preview, showing the full prompt for each annotation with the standard wrapper."}
 
 ## Annotating in the browser
 
@@ -182,10 +167,7 @@ text. A checkbox you leave unticked on an item you have visited is saved as
 close the tab and **Resume Session** later. The consistent interface gives a team of
 coders the same annotation experience.
 
-::: {.screenshot}
-The annotation workspace: text on the left, the active annotation section with
-its widgets on the right, and the progress/navigation bar on top.
-:::
+![The annotation workspace: the text on the left, the active section with its question and worked examples on the right, and navigation through the items at the top.](images/studio-workspace.png){.studio-shot fig-alt="The annotation workspace: the text on the left, the active section with its question and worked examples on the right, and navigation through the items at the top."}
 
 ## Exporting your work
 
@@ -206,10 +188,7 @@ or remove the unannotated rows: Lab scores every row, so a blank human label
 would count against the model. The JSON and CSV are exactly what Lab needs; the
 Markdown and LaTeX are for reporting.
 
-::: {.screenshot}
-The export panel with the codebook bundle (JSON / Markdown / LaTeX) and the
-annotated-data download.
-:::
+![The Utilities panel below the workspace, with the two downloads under Export.](images/studio-export.png){.studio-shot fig-alt="The Utilities panel below the workspace, with the two downloads under Export."}
 
 ## Adjudicating disagreements
 

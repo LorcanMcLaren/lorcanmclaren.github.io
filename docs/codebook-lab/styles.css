@@ -420,3 +420,16 @@ main.content td a:hover {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+/* Studio guide screenshots: a light frame so white app screens separate from the page */
+.studio-shot,
+img.studio-shot {
+  border: 1px solid var(--doc-card-border);
+  border-radius: 6px;
+}
+
+.quarto-figure:has(img.studio-shot) figcaption {
+  font-family: "Schibsted Grotesk", sans-serif;
+  font-size: 0.85rem;
+  color: var(--doc-muted);
+}
