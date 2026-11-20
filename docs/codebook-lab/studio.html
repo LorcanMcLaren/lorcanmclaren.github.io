@@ -473,9 +473,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><a href="https://codebook.streamlit.app/">CodeBook Studio</a> is the browser-based annotation tool that pairs with CodeBook Lab. You define a codebook once — with sections, instructions, tooltips, and worked examples — annotate texts in the browser, and export a codebook and labelled dataset that drop straight into Lab for <a href="./examples.html">benchmarking against your human labels</a>. The same codebook drives both human annotation and LLM prompting, so model outputs can be compared directly against the human labels.</p>
+<p><a href="https://codebook.streamlit.app/">CodeBook Studio</a> is a web app for writing a codebook and annotating texts by hand. You upload a CSV of texts, define the questions coders answer (with sections, instructions, guidance and worked examples), annotate in the browser, and download the codebook and your labels. Those two files are a ready-made <a href="./tasks.html">CodeBook Lab task</a>: Lab sends the same codebook to language models and scores their answers against your labels.</p>
 <div class="hero-note">
-  <p>Studio runs in the browser at <a href="https://codebook.streamlit.app/">codebook.streamlit.app</a> — nothing to install. This page is the full guide to its features; you can also <a href="#running-locally">run it locally</a> for sensitive data.</p>
+  <p>Studio runs in the browser at <a href="https://codebook.streamlit.app/">codebook.streamlit.app</a>, with nothing to install. You can also <a href="#running-locally">run it on your own machine</a>, for example for sensitive data.</p>
 </div>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
@@ -483,7 +483,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><strong>Upload a CSV</strong> of texts to annotate.</li>
 <li><strong>Upload an existing <code>codebook.json</code></strong> alongside it to reuse an annotation scheme, continue on new data, or resume a task definition.</li>
-<li><strong>Try a demo</strong> — bundled tasks (<code>policy_sentiment</code>, <code>discrete_emotions</code>, <code>campaign_rhetoric</code>, <code>migration_framing</code>) load instantly so you can explore the whole workflow with no data of your own.</li>
+<li><strong>Try a demo.</strong> Four ready-made tasks (policy sentiment, discrete emotions, campaign rhetoric and migration framing) open straight into the annotation workspace with a codebook already set up, so you can explore the whole workflow with no data of your own. Use <strong>Edit CodeBook</strong> to see how each one is built.</li>
 <li><strong>Resume a session</strong> — Studio autosaves your work to the browser, so if you return later you can pick <strong>Resume Session</strong> to continue, or <strong>Start Fresh</strong>.</li>
 </ul>
 <p>What the main action button does depends on what you uploaded:</p>
@@ -497,7 +497,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="preparing-your-data" class="level2">
 <h2 class="anchored" data-anchor-id="preparing-your-data">Preparing your data</h2>
-<p>Studio works with any CSV and does not require fixed column names. You need one row per text unit and one column containing the text to annotate. A short header/title column is optional but makes navigation easier when texts are long or similar. You do <strong>not</strong> add annotation columns yourself — Studio creates them from the codebook when you start annotating, named <code>&lt;section name&gt;_&lt;annotation name&gt;</code>. The sample files in the app’s <code>data/</code> folder are good for a first try.</p>
+<p>Studio works with any CSV and does not require fixed column names. You need one row per text unit and one column containing the text to annotate. A short header/title column is optional but makes navigation easier when texts are long or similar. You do <strong>not</strong> add annotation columns yourself: Studio creates them from the codebook when you start annotating, named <code>&lt;section name&gt;_&lt;annotation name&gt;</code>.</p>
+<p><strong>Add an ID column</strong> (for example <code>sample_id</code>) if more than one person will annotate the same texts. Studio doesn’t create one, and CodeBook Lab needs it to match each item across coders’ files (see <a href="./human-reliability.html">Human Reliability</a>).</p>
 </section>
 <section id="the-codebook-editor" class="level2">
 <h2 class="anchored" data-anchor-id="the-codebook-editor">The codebook editor</h2>
@@ -506,7 +507,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Header and text columns</strong> — selected at the top. The text column is the content annotators read; the header column is the short label shown above it.</li>
 <li><strong>Metadata columns</strong> — optional columns (e.g.&nbsp;document ID, date, speaker) that are not annotated but are carried through to the output and shown to annotators for context as a labelled chip strip above the text.</li>
 <li><strong>Sections</strong> — groups of related annotations (e.g.&nbsp;<em>Sentiment</em>, <em>Policy Position</em>, <em>Moral Foundations</em>). Use <strong>Add New Section</strong> / <strong>Delete Section</strong> to manage them. Each section carries a <strong>section instruction</strong> that appears in the annotation interface and is folded into the LLM prompt automatically.</li>
-<li><strong>Annotation items</strong> — one or more per section, each with a name, a tooltip (the guidance annotators see), a type, and type-specific settings.</li>
+<li><strong>Annotation items</strong> — one or more per section, each with a name, a tooltip (the guidance annotators see), a type, and type-specific settings. The section and item names become the CSV column names, so renaming either one after you have started annotating starts a new column: labels made under the old name stay in the old column, which the renamed codebook no longer uses.</li>
 </ul>
 <p>A live <strong>Annotation Workflow Preview</strong> sits alongside the builder and updates as you edit — use it as your QA surface to catch the wrong text column, unclear section names, over-long instructions, or confusing examples before any annotation happens. You can leave and re-enter the editor at any time with <strong>Edit CodeBook</strong>.</p>
 <div class="screenshot">
@@ -563,7 +564,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="worked-examples" class="level2">
 <h2 class="anchored" data-anchor-id="worked-examples">Worked examples</h2>
-<p>Each annotation can carry worked examples. In the editor, examples come <strong>after</strong> the annotation is defined — this is deliberate, so the valid response space is fixed first and examples can only use valid responses: checkbox examples use <code>Yes</code>/<code>No</code>, dropdown examples use the listed options, Likert examples stay inside the configured scale, and span examples highlight phrases. Use <strong>Add Example</strong> / <strong>Delete Example</strong> to manage them. Keeping examples consistent with the response rules makes them more reliable both for human coders and for few-shot LLM prompting in Lab.</p>
+<p>Each annotation can carry worked examples. Coders see them under the question, and Lab adds them to the model’s prompt when examples are switched on (the default). In the editor, examples come <strong>after</strong> the annotation is defined — this is deliberate, so the valid response space is fixed first and examples can only use valid responses: checkbox examples use <code>Yes</code>/<code>No</code>, dropdown examples use the listed options, Likert examples stay inside the configured scale, and span examples highlight phrases. Use <strong>Add Example</strong> / <strong>Delete Example</strong> to manage them. Keeping examples consistent with the response rules makes them more reliable both for human coders and for few-shot LLM prompting in Lab.</p>
 </section>
 <section id="version-history" class="level2">
 <h2 class="anchored" data-anchor-id="version-history">Version history</h2>
@@ -580,27 +581,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="previewing-llm-prompts" class="level2">
 <h2 class="anchored" data-anchor-id="previewing-llm-prompts">Previewing LLM prompts</h2>
-<p><strong>Preview LLM Prompts</strong> shows exactly what an LLM would receive for each annotation in your codebook — the section instruction, the question and tooltip, the response instructions appropriate to the type (e.g.&nbsp;<em>“Respond with a whole number from 1 to 5”</em> for Likert, the option list for dropdown), and any worked examples, wrapped around the text. Because this is the same prompt construction CodeBook Lab uses, the preview lets you sanity-check and refine prompt wording before committing to a benchmarking run.</p>
+<p><strong>Preview LLM Prompts</strong> shows exactly what an LLM would receive for each annotation in your codebook — the section instruction, the question and tooltip, the response instructions appropriate to the type (e.g.&nbsp;<em>“Respond with a whole number from 1 to 5”</em> for Likert, the option list for dropdown), and any worked examples, wrapped around the text. It builds prompts the same way CodeBook Lab does for Lab’s three built-in prompt wrappers (<code>standard</code>, <code>persona</code> and <code>CoT</code>), so you can check and refine the wording before a benchmarking run. Custom wrappers registered in Lab can’t be previewed here. See <a href="./experiments.html#what-the-model-sees">What the model sees</a> for how Lab uses these prompts.</p>
 <div class="screenshot">
 <p>The LLM prompt preview, showing the fully assembled prompt for a selected annotation as the model would see it.</p>
 </div>
 </section>
 <section id="annotating-in-the-browser" class="level2">
 <h2 class="anchored" data-anchor-id="annotating-in-the-browser">Annotating in the browser</h2>
-<p>Clicking <strong>Start Annotating</strong> creates the annotation columns and opens the workspace — a compact two-column layout with the text on the left and the active annotation section on the right, with any metadata columns shown as a labelled chip strip above the text for context. A top bar shows the current item, progress through the dataset, and <strong>Prev</strong> / <strong>Next</strong> navigation. Within the section, annotators work through the instruction, the annotation widgets, and any examples; span annotations are made by highlighting phrases directly in the text. Session state autosaves as you move through the data, so you can close the tab and <strong>Resume Session</strong> later. The consistent interface gives a team of coders the same annotation experience.</p>
+<p>Clicking <strong>Start Annotating</strong> (or choosing a demo) creates the annotation columns and opens the workspace — a compact two-column layout with the text on the left and the active annotation section on the right, with any metadata columns shown as a labelled chip strip above the text for context. A top bar shows the current item, progress through the dataset, and <strong>Prev</strong> / <strong>Next</strong> navigation. Within the section, annotators work through the instruction, the annotation widgets, and any examples; span annotations are made by highlighting phrases directly in the text. A checkbox you leave unticked on an item you have visited is saved as <code>0</code> (“no”). Session state autosaves as you move through the data, so you can close the tab and <strong>Resume Session</strong> later. The consistent interface gives a team of coders the same annotation experience.</p>
 <div class="screenshot">
 <p>The annotation workspace: text on the left, the active annotation section with its widgets on the right, and the progress/navigation bar on top.</p>
 </div>
 </section>
 <section id="exporting-your-work" class="level2">
 <h2 class="anchored" data-anchor-id="exporting-your-work">Exporting your work</h2>
-<p>From the annotation flow, <strong>Download CodeBook</strong> produces a <code>codebook.zip</code> containing:</p>
+<p>Both downloads are in the <strong>Utilities</strong> panel below the annotation workspace. <strong>Download CodeBook</strong> produces a <code>codebook.zip</code> containing:</p>
 <ul>
 <li><code>codebook.json</code> — the machine-readable codebook that CodeBook Lab reads.</li>
 <li><code>codebook.md</code> — a Markdown rendering of the scheme for documentation.</li>
 <li><code>codebook.tex</code> — a LaTeX rendering for paper appendices.</li>
 </ul>
-<p>Both the Markdown and LaTeX exports lay out every section, its instruction, each annotation with its response type and worked examples, and any conditional logic in plain language — ready to paste into a methods appendix. <strong>Download Annotated Data</strong> saves your human labels as <code>ground-truth.csv</code>. The JSON and CSV are exactly what Lab needs; the Markdown and LaTeX are for reporting.</p>
+<p>Both the Markdown and LaTeX exports lay out every section, its instruction, each annotation with its response type and worked examples, and any conditional logic in plain language — ready to paste into a methods appendix. <strong>Download Annotated Data</strong> saves your human labels as <code>ground-truth.csv</code>. It contains every row of your CSV, including rows nobody has annotated yet, which have blank label cells. Before using the file as a Lab task, finish annotating or remove the unannotated rows: Lab scores every row, so a blank human label would count against the model. The JSON and CSV are exactly what Lab needs; the Markdown and LaTeX are for reporting.</p>
 <div class="screenshot">
 <p>The export panel with the codebook bundle (JSON / Markdown / LaTeX) and the annotated-data download.</p>
 </div>
@@ -612,21 +613,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-security-and-persistence" class="level2">
 <h2 class="anchored" data-anchor-id="data-security-and-persistence">Data security and persistence</h2>
 <p>CodeBook Studio runs entirely in your browser. There is <strong>no database and no server-side storage</strong> — your texts, codebook, and annotations stay in the browser session and are cached only in your browser’s local storage, which is what lets you close the tab and <strong>Resume Session</strong> later.</p>
-<p>This is private by design, but it is <strong>not a failsafe backup</strong>. Your work lives in one browser on one device, so it will not be there in a different browser, on another device, or in a private/incognito window, and clearing your browsing data removes it. For anything you cannot afford to lose, <strong>export regularly</strong> (Download CodeBook and Download Annotated Data) and keep the files yourself — and prefer <a href="#running-locally">running locally</a> when data sensitivity means nothing should leave your machine.</p>
+<p>This is private by design, but it is <strong>not a failsafe backup</strong>. Your work lives in one browser on one device, so it will not be there in a different browser, on another device, or in a private/incognito window, and clearing your browsing data removes it. Saved codebook versions are stored the same way. Studio warns you if a session grows beyond 5 MB, which some browsers can’t store. For anything you cannot afford to lose, <strong>export regularly</strong> (Download CodeBook and Download Annotated Data) and keep the files yourself — and prefer <a href="#running-locally">running locally</a> when data sensitivity means nothing should leave your machine.</p>
 </section>
 <section id="running-locally" class="level2">
 <h2 class="anchored" data-anchor-id="running-locally">Running locally</h2>
 <p>The hosted app is the simplest option, but you can run Studio on your own machine — useful for customization or when data sensitivity means everything should stay local:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pip</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run text_annotation_app.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/LorcanMcLaren/codebook-studio.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> codebook-studio</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-r</span> requirements.txt</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run text_annotation_app.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The app opens in your browser at a local Streamlit URL. See the <a href="https://github.com/LorcanMcLaren/codebook-studio">CodeBook Studio repository</a> for details.</p>
 </section>
 <section id="hand-off-to-codebook-lab" class="level2">
 <h2 class="anchored" data-anchor-id="hand-off-to-codebook-lab">Hand off to CodeBook Lab</h2>
-<p>Drop the two exported files into a task folder and you are ready to benchmark:</p>
+<p>Unzip <code>codebook.zip</code> and put <code>codebook.json</code> and <code>ground-truth.csv</code> together in a task folder named after your task:</p>
 <pre class="text"><code>tasks/&lt;task&gt;/
   codebook.json
   ground-truth.csv</code></pre>

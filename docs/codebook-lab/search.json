@@ -4,7 +4,7 @@
     "href": "install.html",
     "title": "Installation",
     "section": "",
-    "text": "CodeBook Lab supports Python 3.10 and newer. A virtual environment keeps package dependencies separate from the rest of your system.\npython3 -m venv .venv\nsource .venv/bin/activate\npython -m pip install --upgrade pip\npython -m pip install codebook-lab\nIf you plan to generate or score textbox annotations, install the optional textbox dependencies:\npython -m pip install \"codebook-lab[textbox]\"\nThose extras enable ROUGE, embedding-based cosine similarity, and BERTScore. Normalized Levenshtein similarity and BLEU are available without the optional extras.",
+    "text": "CodeBook Lab supports Python 3.10 and newer. A virtual environment keeps package dependencies separate from the rest of your system.\npython3 -m venv .venv\nsource .venv/bin/activate\npython -m pip install --upgrade pip\npython -m pip install codebook-lab\nIf you plan to score textbox annotations, install the optional textbox dependencies:\npython -m pip install \"codebook-lab[textbox]\"\nEvery textbox metric needs these extras: normalized Levenshtein similarity (python-Levenshtein), BLEU (nltk), ROUGE (rouge-score), embedding cosine similarity (sentence-transformers) and BERTScore (bert-score, torch). Without them, textbox fields are still generated and get a percentage-agreement score, but their similarity metrics are left blank and classification_reports.txt lists the missing packages. The extras include PyTorch, so they are a large download. Checkbox, dropdown, Likert and span metrics need nothing extra.",
     "crumbs": [
       "Get Started",
       "Installation"
@@ -15,7 +15,7 @@
     "href": "install.html#python-environment",
     "title": "Installation",
     "section": "",
-    "text": "CodeBook Lab supports Python 3.10 and newer. A virtual environment keeps package dependencies separate from the rest of your system.\npython3 -m venv .venv\nsource .venv/bin/activate\npython -m pip install --upgrade pip\npython -m pip install codebook-lab\nIf you plan to generate or score textbox annotations, install the optional textbox dependencies:\npython -m pip install \"codebook-lab[textbox]\"\nThose extras enable ROUGE, embedding-based cosine similarity, and BERTScore. Normalized Levenshtein similarity and BLEU are available without the optional extras.",
+    "text": "CodeBook Lab supports Python 3.10 and newer. A virtual environment keeps package dependencies separate from the rest of your system.\npython3 -m venv .venv\nsource .venv/bin/activate\npython -m pip install --upgrade pip\npython -m pip install codebook-lab\nIf you plan to score textbox annotations, install the optional textbox dependencies:\npython -m pip install \"codebook-lab[textbox]\"\nEvery textbox metric needs these extras: normalized Levenshtein similarity (python-Levenshtein), BLEU (nltk), ROUGE (rouge-score), embedding cosine similarity (sentence-transformers) and BERTScore (bert-score, torch). Without them, textbox fields are still generated and get a percentage-agreement score, but their similarity metrics are left blank and classification_reports.txt lists the missing packages. The extras include PyTorch, so they are a large download. Checkbox, dropdown, Likert and span metrics need nothing extra.",
     "crumbs": [
       "Get Started",
       "Installation"
@@ -26,7 +26,7 @@
     "href": "install.html#ollama",
     "title": "Installation",
     "section": "Ollama",
-    "text": "Ollama\nCodeBook Lab runs local models through Ollama. Install Ollama, then make sure the server is available:\nollama serve\nExperiment runs try to start the default local Ollama server when needed, and pull the requested model automatically before the first run — so you do not need to ollama pull it yourself:\nfrom codebook_lab import ExperimentSpec, run_experiment\n\nresult = run_experiment(\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:270m\",\n        country_iso_code=\"IRL\",\n    )\n)\nThe country_iso_code value should be the three-letter ISO 3166-1 alpha-3 code for where the computation physically runs, such as IRL, USA, or DEU. CodeCarbon uses this to estimate emissions from energy consumption.",
+    "text": "Ollama\nCodeBook Lab runs models through Ollama, which you install separately. Once it is installed, you don’t need to start it or download models yourself:\n\nStarting the server. If Ollama isn’t running, each run starts it in the background with ollama serve. This only happens for a server on the default local address (http://127.0.0.1:11434). To use Ollama on another machine, set the OLLAMA_HOST environment variable to its address and start that server yourself.\nDownloading models. run_experiment() calls ollama pull for the model before every run. For a model you already have, this only checks for updates, which is usually quick but needs an internet connection: if the pull fails, the run stops with an error. Pass pull_model=False (or pull_models=False for a sweep) to skip the check, for example when working offline or to keep a model version fixed during a benchmark.\n\nfrom codebook_lab import ExperimentSpec, run_experiment\n\nresult = run_experiment(\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:270m\",\n        country_iso_code=\"IRL\",\n    )\n)\ncountry_iso_code is the three-letter ISO 3166-1 alpha-3 code for where the computation physically runs, such as IRL, USA or DEU. CodeCarbon uses it to look up the electricity grid’s carbon intensity when converting energy use to emissions. It defaults to USA, so set it whenever you run elsewhere, or the emissions estimates will be wrong. Energy use itself is measured on your machine and does not depend on this setting.",
     "crumbs": [
       "Get Started",
       "Installation"
@@ -59,7 +59,18 @@
     "href": "experiments.html#single-run",
     "title": "Experiments",
     "section": "Single Run",
-    "text": "Single Run\nfrom codebook_lab import ExperimentSpec, run_experiment\n\nresult = run_experiment(\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:270m\",\n        use_examples=False,\n        prompt_type=\"standard\",\n        temperature=None,\n        top_p=None,\n        process_textbox=True,\n        country_iso_code=\"IRL\",\n    ),\n    output_root=\"outputs\",\n)\n\nprint(result.experiment_directory)\nprint(result.metrics.summary_text)\nImportant fields:\n\ntask: task folder name, such as policy-sentiment\nmodel: Ollama model identifier, such as gemma3:270m\nuse_examples: include worked examples from the codebook prompt\nprompt_type: one of the registered prompt wrappers\ntemperature: optional sampling temperature\ntop_p: optional nucleus sampling value\nchat_mode: how annotation calls share chat history — see Chat continuation modes\nreasoning: enable, disable, or defer to the model’s reasoning mode\nprocess_textbox: generate and score textbox annotations\nprocess_span: generate and score span annotations\ncountry_iso_code: three-letter country code for CodeCarbon emissions estimates\n\nOnly task and model are required — the rest fall back to sensible classification defaults, so the example above can be as short as:\nresult = run_experiment(\n    ExperimentSpec(task=\"policy-sentiment\", model=\"gemma3:270m\"),\n    output_root=\"outputs\",\n)\nThe defaults are temperature=0.0, use_examples=True, prompt_type=\"standard\", chat_mode=\"per_text\", reasoning=None, and country_iso_code=\"USA\". Invalid model responses are retried with the reprompt strategy by default (see Conditionals & Retries).\nrun_experiment() uses the high-level end-to-end path: annotation first, metrics second. It resolves the task directory, checks that codebook.json and ground-truth.csv exist, optionally pulls the Ollama model, writes per-run sidecar files, and appends tidy metrics rows.",
+    "text": "Single Run\nfrom codebook_lab import ExperimentSpec, run_experiment\n\nresult = run_experiment(\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:270m\",\n        use_examples=False,\n        prompt_type=\"standard\",\n        temperature=None,\n        top_p=None,\n        process_textbox=True,\n        country_iso_code=\"IRL\",\n    ),\n    output_root=\"outputs\",\n)\n\nprint(result.experiment_directory)\nprint(result.metrics.summary_text)\nImportant fields:\n\ntask: task folder name, such as policy-sentiment\nmodel: Ollama model identifier, such as gemma3:270m\nuse_examples: include worked examples from the codebook prompt\nprompt_type: one of the registered prompt wrappers\ntemperature: optional sampling temperature\ntop_p: optional nucleus sampling value\nchat_mode: how annotation calls share chat history — see Chat continuation modes\nreasoning: enable, disable, or defer to the model’s reasoning mode\nprocess_textbox: generate and score textbox annotations\nprocess_span: generate and score span annotations\ncountry_iso_code: three-letter country code for CodeCarbon emissions estimates\n\nOnly task and model are required — the rest fall back to sensible classification defaults, so the example above can be as short as:\nresult = run_experiment(\n    ExperimentSpec(task=\"policy-sentiment\", model=\"gemma3:270m\"),\n    output_root=\"outputs\",\n)\nThe defaults are temperature=0.0, use_examples=True, prompt_type=\"standard\", chat_mode=\"per_text\", reasoning=None, and country_iso_code=\"USA\". Invalid model responses are retried with the reprompt strategy by default (see Conditionals & Retries).\nrun_experiment() runs annotation and then scoring. It finds the task folder (see Tasks for how), checks that codebook.json and ground-truth.csv exist, pulls the model with Ollama unless you pass pull_model=False, writes the run’s files to a new folder, and appends its scores to the metrics tables. Retry behaviour can’t be set in ExperimentSpec; see Retry Strategies.",
+    "crumbs": [
+      "Tutorials",
+      "Experiments"
+    ]
+  },
+  {
+    "objectID": "experiments.html#what-the-model-sees",
+    "href": "experiments.html#what-the-model-sees",
+    "title": "Experiments",
+    "section": "What The Model Sees",
+    "text": "What The Model Sees\nLab sends one prompt per question per text. With the default standard wrapper and examples switched off, the Direction question from the bundled policy-sentiment task looks like this:\nPolicy Sentiment\nRead the short text and assess whether it expresses an evaluative stance toward a public policy, proposal, or political decision.\n\nDirection\nIf the text expresses a stance, identify whether the overall direction is positive, negative, or mixed. Use 'no clear sentiment' only when the text does not convey an evaluative stance.\n\nRespond only with one of the following options: \"positive\", or \"negative\", or \"mixed\", or \"no clear sentiment\".\n\nReturn your response in JSON format, with the key \"response\".\n\n---\n\nText: \n\"The housing plan has an admirable goal, but its financing assumptions are unrealistic and the burden on municipalities is far too high.\"\n\nResponse: \nThe prompt is built from the codebook in this order: section name and instruction, question name and tooltip, a response instruction for the question type, and a request for JSON. Then come the worked examples, when used, and finally the text. Nothing else from the CSV row is included.\nSome details that affect results:\n\nExamples are on by default (use_examples=True). Each question’s example field, a block of worked Text: / Response: pairs written in Studio, is added after the JSON request. An example field that doesn’t contain Text: is treated as extra guidance and added even when use_examples=False.\nAnswers are constrained to JSON. Lab asks Ollama for structured output matching {\"response\": ...} (a list of span objects for span questions). The model’s visible answer is only that JSON. The CoT wrapper asks the model to reason step by step, but that reasoning cannot appear in the answer. To capture reasoning, use a model with a thinking mode and set reasoning=True (see Model reasoning).\nQuestions about the same text share a chat by default (chat_mode=\"per_text\"), so when the model reaches a question it has already seen its earlier prompts and answers for that text. See Chat continuation modes.\n\nCodeBook Studio’s Preview LLM Prompts shows the same prompts for the built-in wrappers, so you can check the wording before running anything.",
     "crumbs": [
       "Tutorials",
       "Experiments"
@@ -103,7 +114,7 @@
     "href": "experiments.html#model-reasoning",
     "title": "Experiments",
     "section": "Model reasoning",
-    "text": "Model reasoning\nFor models that support a reasoning/thinking mode through Ollama, reasoning controls whether it is used:\n\nreasoning=None (default) keeps the model’s own default behaviour.\nreasoning=True enables reasoning; reasoning=False disables it.\n\nExperimentSpec(task=\"policy-sentiment\", model=\"qwen3:8b\", reasoning=True)\nThe value is passed through to ChatOllama. When the model returns reasoning, Lab captures it — reading the structured reasoning_content when available and otherwise parsing a &lt;think&gt;…&lt;/think&gt; block — and writes one record per query to reasoning_traces.jsonl in the run directory, so you can audit how the model arrived at each label. The chosen mode is recorded in the runs metrics table.",
+    "text": "Model reasoning\nFor models that support a reasoning/thinking mode through Ollama, reasoning controls whether it is used:\n\nreasoning=None (default) keeps the model’s own default behaviour.\nreasoning=True enables reasoning; reasoning=False disables it.\nOther values, such as \"low\", \"medium\" or \"high\" for models that support reasoning levels, are passed to Ollama unchanged.\n\nExperimentSpec(task=\"policy-sentiment\", model=\"qwen3:8b\", reasoning=True)\nThe value is passed through to ChatOllama. When the model returns reasoning, Lab captures it — reading the structured reasoning_content when available and otherwise parsing a &lt;think&gt;…&lt;/think&gt; block — and writes one record per query to reasoning_traces.jsonl in the run directory, so you can audit how the model arrived at each label. The chosen mode is recorded in the runs metrics table.",
     "crumbs": [
       "Tutorials",
       "Experiments"
@@ -114,7 +125,7 @@
     "href": "experiments.html#running-without-ground-truth",
     "title": "Experiments",
     "section": "Running Without Ground Truth",
-    "text": "Running Without Ground Truth\nIf you are still designing a task and do not yet have human-coded labels, use run_annotation() directly on an unlabeled CSV. Later, add a ground-truth.csv and score the outputs with run_metrics().\nfrom codebook_lab import run_annotation\n\nannotation = run_annotation(\n    model=\"gemma3:270m\",\n    csv_path=\"texts.csv\",\n    codebook_path=\"codebook.json\",\n    output_path=\"outputs/model-labels.csv\",\n    experiment_directory=\"outputs/run-001\",\n    country_iso_code=\"IRL\",\n)",
+    "text": "Running Without Ground Truth\nTo annotate texts that have no human labels yet, or to change settings ExperimentSpec doesn’t cover (such as retries), call run_annotation() directly. It writes the model’s labels and the run files, but doesn’t score them.\nfrom codebook_lab import run_annotation\n\nannotation = run_annotation(\n    model=\"gemma3:270m\",\n    csv_path=\"texts.csv\",\n    codebook_path=\"codebook.json\",\n    output_path=\"outputs/model-labels.csv\",\n    experiment_directory=\"outputs/run-001\",\n    country_iso_code=\"IRL\",\n)\nOnce you have human labels for the same rows, in the same order, score the run with run_metrics(). Pass the run’s sidecar files to include timing, character counts and energy in the runs table:\nfrom codebook_lab import run_metrics\n\nmetrics = run_metrics(\n    ground_truth_csv=\"ground-truth.csv\",\n    llm_output_csv=\"outputs/model-labels.csv\",\n    codebook_path=\"codebook.json\",\n    label=\"my-task\",\n    model_id=\"gemma3:270m\",\n    output_csv=\"outputs/metrics/my-task_metrics_log.csv\",\n    report_file=\"outputs/run-001/classification_reports.txt\",\n    timing_file=\"outputs/run-001/timing_data.json\",\n    char_counts_file=\"outputs/run-001/char_counts.json\",\n    emissions_file=\"outputs/run-001/emissions.csv\",\n    experiment_directory=\"outputs/run-001\",\n)\nprint(metrics.summary_text)\nAdd process_textbox=True or process_span=True to score those questions. The configuration columns of the runs table (temperature, prompt wrapper and so on) are only filled in if you pass them to run_metrics() too. run_experiment() does this for you.",
     "crumbs": [
       "Tutorials",
       "Experiments"
@@ -125,18 +136,29 @@
     "href": "index.html",
     "title": "CodeBook Lab",
     "section": "",
-    "text": "CodeBook Lab is a Python package for running local LLM annotation experiments against human-coded benchmark data. It takes a CodeBook Studio codebook and labelled CSV, removes the human labels before annotation, runs one or more Ollama models, and scores the model outputs against the held-out human labels.\nThe package is built for computational social science workflows where the core question is not simply “can a model label this text?”, but which model, prompt, examples, and sampling settings reproduce a human codebook most reliably.",
+    "text": "CodeBook Studio and CodeBook Lab are two open-source tools for annotating text with large language models (LLMs) and checking the results against human coders. Both read the same codebook, so the instructions human coders follow are the instructions the model receives.",
     "crumbs": [
       "Get Started",
       "Overview"
     ]
   },
   {
-    "objectID": "index.html#what-the-package-does",
-    "href": "index.html#what-the-package-does",
+    "objectID": "index.html#how-studio-and-lab-fit-together",
+    "href": "index.html#how-studio-and-lab-fit-together",
     "title": "CodeBook Lab",
-    "section": "What The Package Does",
-    "text": "What The Package Does\nCodeBook Lab gives you a reproducible path from human-coded data to model evaluation:\n\nLoad a task folder containing codebook.json and ground-truth.csv.\nStrip annotation columns from the input before sending text to the model.\nPrompt a local Ollama model for each applicable annotation field.\nSave row-level model outputs and run metadata.\nCompare model labels with human labels using metrics appropriate to each annotation type.\nLog aggregate quality, runtime, energy, and emissions metrics for comparison across runs.\n\nSupported annotation types include checkbox, dropdown, Likert, textbox, and span annotations. Lab also respects conditional annotations, validates model responses before storing them, retries invalid answers, and keeps skipped conditional fields out of metric denominators.\nCategorical and ordinal fields receive classification and agreement metrics; textbox fields can receive lexical and embedding-based similarity metrics; span fields receive token F1, exact-match F1, and character IoU.",
+    "section": "How Studio And Lab Fit Together",
+    "text": "How Studio And Lab Fit Together\nA typical project moves through these steps:\n\nWrite the codebook in Studio. Group questions into sections, add instructions and worked examples, and make questions conditional on earlier answers where needed.\nAnnotate a sample by hand. One coder can annotate in Studio directly. With several coders, Lab measures their agreement and builds a consensus label file, and you resolve the remaining disagreements in Studio (see Human Reliability).\nExport two files: codebook.json and ground-truth.csv. Together they form a Lab task.\nRun experiments in Lab. Each run sends every text to a model, one question at a time, and saves the model’s answers.\nCompare the results. Lab scores each run against the human labels and appends the scores to two tidy tables you can analyse in Python or R.",
+    "crumbs": [
+      "Get Started",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "index.html#what-lab-does-in-a-run",
+    "href": "index.html#what-lab-does-in-a-run",
+    "title": "CodeBook Lab",
+    "section": "What Lab Does In A Run",
+    "text": "What Lab Does In A Run\nFor each experiment, Lab:\n\nLoads the task folder: codebook.json and ground-truth.csv.\nRemoves the human label columns, so the model never sees the answers it is scored against.\nBuilds a prompt for each question from the codebook (section instruction, question, guidance, allowed answers and, optionally, worked examples) and sends it to the model with the text. See What the model sees.\nChecks each answer against the codebook. Invalid answers are retried, and recorded as blank if they still fail.\nSaves the model’s labels and the run settings in a folder of its own.\nScores the labels against the human ones with metrics suited to each question type, and logs runtime, characters sent and received, energy use and estimated emissions.\n\nLab supports the same five question types as Studio: checkbox, dropdown, Likert, textbox and span. Conditional questions are skipped when they don’t apply, both when prompting and when scoring. Textbox and span questions are only run when you switch them on, because their metrics need extra dependencies or source texts.",
     "crumbs": [
       "Get Started",
       "Overview"
@@ -147,7 +169,7 @@
     "href": "index.html#where-to-start",
     "title": "CodeBook Lab",
     "section": "Where To Start",
-    "text": "Where To Start\nIf you want the shortest path, begin with Installation, then run the bundled policy-sentiment task in Experiments. If you already have CodeBook Studio exports, go straight to Tasks and Annotation Types to check the expected codebook and CSV formats.\nThe upstream annotation workflow — designing a codebook and labelling data — is covered in the CodeBook Studio guide.",
+    "text": "Where To Start\n\nTo try the whole workflow quickly, follow Installation, then run the bundled policy-sentiment task in Examples.\nIf you already have Studio exports, check them against Tasks and Annotation Types, then run them as in Experiments.\nIf you are starting a new annotation project, begin with the CodeBook Studio guide.",
     "crumbs": [
       "Get Started",
       "Overview"
@@ -638,7 +660,7 @@
     "href": "human-reliability.html",
     "title": "Human Reliability",
     "section": "",
-    "text": "CodeBook Lab can validate multiple human coder CSVs, calculate inter-coder reliability, surface disagreements, and build a consensus ground-truth.csv.",
+    "text": "When several people annotate the same texts, CodeBook Lab can check their files, measure how far they agree, list their disagreements, and combine their labels into a single ground-truth.csv for benchmarking models.\nEach coder annotates in CodeBook Studio and downloads their labelled CSV. Studio doesn’t add an item ID column, so give your CSV a unique ID column before coders start (named sample_id by default). Lab uses it to match the same item across coders’ files.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -650,7 +672,7 @@
     "href": "human-reliability.html#calculate-reliability",
     "title": "Human Reliability",
     "section": "Calculate Reliability",
-    "text": "Calculate Reliability\nfrom codebook_lab import calculate_human_reliability\n\ncoder_csvs = {\n    \"coder1\": \"annotations/coder1.csv\",\n    \"coder2\": \"annotations/coder2.csv\",\n    \"coder3\": \"annotations/coder3.csv\",\n}\n\nreliability = calculate_human_reliability(\n    codebook_path=\"codebook.json\",\n    coder_csvs=coder_csvs,\n    output_dir=\"outputs/human_reliability\",\n)\n\nprint(reliability.summary_text)\nOutputs include:\n\nvalidation_issues.csv\npairwise_icr.csv\nmultirater_icr.csv\ndisagreements.csv\nsummary.md\n\nEach coder CSV must contain a stable item identifier column. The default is sample_id; pass id_column=\"...\" if your data uses a different identifier.\nValidation catches duplicate coder-item rows, missing assigned items, unexpected items, unexpected coder assignments, invalid labels, missing required fields, and filled child fields whose condition is not satisfied.",
+    "text": "Calculate Reliability\nfrom codebook_lab import calculate_human_reliability\n\ncoder_csvs = {\n    \"coder1\": \"annotations/coder1.csv\",\n    \"coder2\": \"annotations/coder2.csv\",\n    \"coder3\": \"annotations/coder3.csv\",\n}\n\nreliability = calculate_human_reliability(\n    codebook_path=\"codebook.json\",\n    coder_csvs=coder_csvs,\n    output_dir=\"outputs/human_reliability\",\n)\n\nprint(reliability.summary_text)\ncoder_csvs can also be a list of paths, in which case each coder is named after their file (coder1.csv becomes coder1). Pass id_column=\"...\" if your ID column isn’t called sample_id.\nOutputs include:\n\nvalidation_issues.csv\n\nProblems found in the coder files (see below), one row per issue.\n\npairwise_icr.csv\n\nFor each question and each pair of coders: the number of items both coded, percentage agreement and Cohen’s kappa.\n\nmultirater_icr.csv\n\nFor each question across all coders: Krippendorff’s alpha, Fleiss’ kappa, the share of items where all coders agreed (unanimity rate) and the share where more than half agreed (majority agreement rate). Fleiss’ kappa is only reported when every item has the same number of coders.\n\ndisagreements.csv\n\nEvery item and question where coders gave different labels.\n\nsummary.md\n\nA readable summary of all of the above.\n\n\nEvery question type is included. Labels are compared as categories: Likert ratings count as agreement only when identical, and textbox answers only when they match exactly after trimming spaces. Krippendorff’s alpha uses the nominal level, so a 4 versus a 5 counts as the same disagreement as a 1 versus a 5. For conditional questions, an item counts only when the parent answer makes the question apply for the coders being compared.\nValidation catches duplicate coder-item rows, missing assigned items, unexpected items, unexpected coder assignments, invalid labels, missing required fields, and filled child fields whose condition is not satisfied. Invalid labels are treated as missing in the calculations, so check validation_issues.csv before relying on the scores.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -662,7 +684,7 @@
     "href": "human-reliability.html#assignments",
     "title": "Human Reliability",
     "section": "Assignments",
-    "text": "Assignments\nBy default, Lab infers coder assignments from the submitted files. To validate expected coverage, pass an assignment CSV.\nLong format:\nsample_id,coder_id\n001,coder1\n001,coder2\n002,coder2\n002,coder3\nWide format:\nsample_id,ra_1,ra_2\n001,coder1,coder2\n002,coder2,coder3",
+    "text": "Assignments\nBy default, Lab assumes each coder was meant to code exactly the items in their file. To check that everyone coded what they were assigned, pass an assignment CSV with assignment_csv=\"assignments.csv\", in either of these formats:\nLong format:\nsample_id,coder_id\n001,coder1\n001,coder2\n002,coder2\n002,coder3\nWide format, with columns named ra_1, ra_2, … or coder_1, coder_2, …:\nsample_id,ra_1,ra_2\n001,coder1,coder2\n002,coder2,coder3",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -674,7 +696,7 @@
     "href": "human-reliability.html#build-ground-truth",
     "title": "Human Reliability",
     "section": "Build Ground Truth",
-    "text": "Build Ground Truth\nUse build_human_ground_truth() to create a consensus label file. Rows without a strict majority are written to an adjudication queue.\nfrom codebook_lab import build_human_ground_truth\n\nground_truth = build_human_ground_truth(\n    codebook_path=\"codebook.json\",\n    coder_csvs=coder_csvs,\n    output_dir=\"outputs/ground_truth\",\n)\nOutputs include:\n\nground-truth.csv\nadjudication_queue.csv\nvalidation_issues.csv\n\nOpen adjudication_queue.csv in CodeBook Studio’s adjudication mode, fill unresolved blanks, export the completed queue, then rebuild:\nresolved = build_human_ground_truth(\n    codebook_path=\"codebook.json\",\n    coder_csvs=coder_csvs,\n    adjudications_csv=\"adjudication_queue.csv\",\n    output_dir=\"outputs/ground_truth_resolved\",\n)",
+    "text": "Build Ground Truth\nUse build_human_ground_truth() to combine the coders’ labels into one file. Each question on each item is decided separately: a label is used when more than half of the coders who answered gave it. With two coders, that means any disagreement is unresolved. With three, two out of three is enough.\nfrom codebook_lab import build_human_ground_truth\n\nground_truth = build_human_ground_truth(\n    codebook_path=\"codebook.json\",\n    coder_csvs=coder_csvs,\n    output_dir=\"outputs/ground_truth\",\n)\nOutputs include:\n\nground-truth.csv\n\nOne row per item, with the consensus label for each question. Unresolved questions are blank for now.\n\nadjudication_queue.csv\n\nOnly the items with at least one unresolved question. Resolved questions are already filled in, and the unresolved ones are blank.\n\nvalidation_issues.csv\n\nThe same checks as for reliability.\n\n\nConditional questions follow the consensus answers: if the agreed parent answer doesn’t trigger a child question, the child is left blank and isn’t sent for adjudication.\nOpen adjudication_queue.csv in CodeBook Studio together with the codebook, choose Adjudicate disagreements, fill in the blank cells, and download the completed queue. Then rebuild with it:\nresolved = build_human_ground_truth(\n    codebook_path=\"codebook.json\",\n    coder_csvs=coder_csvs,\n    adjudications_csv=\"adjudication_queue.csv\",\n    output_dir=\"outputs/ground_truth_resolved\",\n)\nLabels in the adjudications file override the majority vote. Blank cells in it are ignored, and an adjudicated label that isn’t valid for its question stops the build with an error naming the item and question. The final ground-truth.csv can go straight into a task folder.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -686,7 +708,7 @@
     "href": "tasks.html",
     "title": "Tasks",
     "section": "",
-    "text": "A CodeBook Lab task is a folder with two files:\nFor example:",
+    "text": "A CodeBook Lab task is a folder with exactly two files, named exactly as shown:\nFor example:",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -698,7 +720,7 @@
     "href": "tasks.html#codebook-fields",
     "title": "Tasks",
     "section": "Codebook Fields",
-    "text": "Codebook Fields\nThe codebook tells Lab which column contains the text, which metadata columns should be preserved, and which annotation fields should be generated:\n{\n  \"header_column\": \"title\",\n  \"text_column\": \"text\",\n  \"metadata_columns\": [\"speaker\", \"source\"],\n  \"section_1\": {\n    \"section_name\": \"Policy Sentiment\",\n    \"section_instruction\": \"Read the short text and assess whether it expresses an evaluative stance.\",\n    \"annotations\": {\n      \"annotation_1\": {\n        \"name\": \"Direction\",\n        \"type\": \"dropdown\",\n        \"options\": [\"positive\", \"negative\", \"mixed\", \"no clear sentiment\"]\n      }\n    }\n  }\n}\nAnnotation output columns are named from the section and annotation names. In this example, the output column is Policy Sentiment_Direction.\nmetadata_columns is optional. Lab preserves non-annotation columns in output files either way, but explicit metadata is useful when coordinating with CodeBook Studio and human-reliability workflows.",
+    "text": "Codebook Fields\nThe codebook names the column that holds the text and defines the questions, grouped into sections:\n{\n  \"header_column\": \"title\",\n  \"text_column\": \"text\",\n  \"metadata_columns\": [\"speaker\", \"source\"],\n  \"section_1\": {\n    \"section_name\": \"Policy Sentiment\",\n    \"section_instruction\": \"Read the short text and assess whether it expresses an evaluative stance.\",\n    \"annotations\": {\n      \"annotation_1\": {\n        \"name\": \"Direction\",\n        \"type\": \"dropdown\",\n        \"options\": [\"positive\", \"negative\", \"mixed\", \"no clear sentiment\"]\n      }\n    }\n  }\n}\nThe top-level keys do different jobs in Studio and Lab:\n\ntext_column\n\nThe column with the text to annotate. This is the only column the model sees: each prompt contains the codebook instructions and this text, nothing else from the row.\n\nheader_column\n\nA short title Studio shows above each text. Lab ignores it.\n\nmetadata_columns\n\nOptional columns Studio shows to coders for context. Lab ignores this list too. Every non-label column in your CSV, listed here or not, is copied to the model’s output file unchanged, but none of them are sent to the model.\n\n\nSections are the keys that start with section_, and Lab processes them in order. Within a section, questions are ordered by the number at the end of their key (annotation_1, annotation_2, …), the same order Studio shows them in. This order matters for conditional questions and, in the default chat mode, for what the model has already answered about a text when it reaches each question.\nEach question’s column is named &lt;section name&gt;_&lt;question name&gt;. In this example the column is Policy Sentiment_Direction. Names are matched exactly, including spaces and capitalisation. If you rename a section or question in Studio after annotating, export the labels again so the column names in ground-truth.csv match the codebook.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -710,7 +732,7 @@
     "href": "tasks.html#ground-truth-csv",
     "title": "Tasks",
     "section": "Ground Truth CSV",
-    "text": "Ground Truth CSV\nThe CSV should include the source text column named by text_column, plus the human annotation columns implied by the codebook.\ndoc_id,title,text,Policy Sentiment_Direction\nps_001,Carbon Border Reform,The reform is a sensible compromise.,positive\nps_002,Housing Plan Criticism,The plan has an admirable goal but unrealistic financing.,negative\nWhen Lab runs annotation, it drops the human label columns before prompting the model. This prevents the model from seeing the answers it will later be scored against.",
+    "text": "Ground Truth CSV\nThe CSV should include the source text column named by text_column, plus the human annotation columns implied by the codebook.\ndoc_id,title,text,Policy Sentiment_Direction\nps_001,Carbon Border Reform,The reform is a sensible compromise.,positive\nps_002,Housing Plan Criticism,The plan has an admirable goal but unrealistic financing.,negative\nWhen Lab runs annotation, it drops the human label columns before prompting the model, so the model never sees the answers it will be scored against.\nLab matches each model answer to its human label by row position, not by an ID column: row 1 of the output is scored against row 1 of ground-truth.csv, and so on. Lab keeps rows in their original order, so this works as long as you don’t sort, filter or edit ground-truth.csv between running and scoring. A stable ID column (such as doc_id or sample_id) is still worth keeping: it is copied to the output, it lets you inspect individual disagreements, and Lab’s human reliability tools require one.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -722,7 +744,7 @@
     "href": "tasks.html#bundled-example-tasks",
     "title": "Tasks",
     "section": "Bundled Example Tasks",
-    "text": "Bundled Example Tasks\nThe package ships with example tasks so you can test the workflow immediately:\nfrom codebook_lab import copy_example_task, list_example_tasks\n\nprint(list_example_tasks())\ncopy_example_task(\"policy-sentiment\", \"./my_tasks\", overwrite=True)\nThen point an experiment at the copied task root:\nfrom codebook_lab import ExperimentSpec, run_experiment\n\nresult = run_experiment(\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:270m\",\n        country_iso_code=\"IRL\",\n    ),\n    task_root=\"my_tasks\",\n)",
+    "text": "Bundled Example Tasks\nThe package ships with example tasks so you can test the workflow immediately:\nfrom codebook_lab import copy_example_task, list_example_tasks\n\nprint(list_example_tasks())\ncopy_example_task(\"policy-sentiment\", \"./my_tasks\", overwrite=True)\nThen point an experiment at the folder that contains your task folders:\nfrom codebook_lab import ExperimentSpec, run_experiment\n\nresult = run_experiment(\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:270m\",\n        country_iso_code=\"IRL\",\n    ),\n    task_root=\"my_tasks\",\n)\nLab looks for a task in task_root first. If it isn’t there, Lab falls back to a bundled example task with the same name, if one exists. So a mistyped task_root with task=\"policy-sentiment\" silently runs the bundled copy instead of yours. The codebook_path column of the runs table shows which copy each run used.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -734,7 +756,7 @@
     "href": "tasks.html#custom-task-checklist",
     "title": "Tasks",
     "section": "Custom Task Checklist",
-    "text": "Custom Task Checklist\nBefore running a custom task, check:\n\nthe codebook has a valid text_column\nthe CSV contains that text column\nevery human label column matches the codebook-derived column name\ncheckbox values are stored as 0 or 1\ndropdown values match one of the allowed options\nLikert values are inside the configured numeric range\nspan values are JSON lists of start, end, text, and optional label objects\nconditional child fields are blank when the parent condition is not satisfied",
+    "text": "Custom Task Checklist\nBefore running a custom task, check:\n\nthe codebook has a valid text_column\nthe CSV contains that text column\nevery human label column matches the codebook-derived column name\ncheckbox values are stored as 0 or 1\ndropdown values match one of the allowed options\nLikert values are inside the configured numeric range\nspan values are JSON lists of start, end, text, and optional label objects\nconditional child fields are blank when the parent condition is not satisfied\na parent question comes before any question that depends on it\nrows are in the same order you will score them in, ideally with an ID column",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -746,7 +768,7 @@
     "href": "conditionals-retries.html",
     "title": "Conditionals And Retries",
     "section": "",
-    "text": "Newer CodeBook Lab workflows support conditional annotations and invalid-response retries. These features make Lab closer to CodeBook Studio’s annotation behavior while keeping model outputs auditable.",
+    "text": "Some questions only make sense after a particular answer to an earlier one, and models sometimes return answers Lab can’t use. This page covers how Lab handles both: conditional questions, which it asks only when they apply, and invalid answers, which it retries and then records as blank.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -758,7 +780,7 @@
     "href": "conditionals-retries.html#conditional-annotations",
     "title": "Conditionals And Retries",
     "section": "Conditional Annotations",
-    "text": "Conditional Annotations\nAn annotation can depend on a previous annotation. Lab evaluates the condition row by row and skips inactive fields. Here a checkbox parent (annotation_1) gates a dropdown child (annotation_2): the model is only asked for a stance when the text is marked evaluative.\n{\n  \"annotation_1\": {\n    \"name\": \"Is evaluative\",\n    \"type\": \"checkbox\",\n    \"tooltip\": \"Tick if the text expresses a stance toward the policy.\"\n  },\n  \"annotation_2\": {\n    \"name\": \"Stance\",\n    \"type\": \"dropdown\",\n    \"options\": [\"Positive\", \"Negative\"],\n    \"condition\": {\n      \"section_key\": \"section_1\",\n      \"annotation_key\": \"annotation_1\",\n      \"value\": \"Yes\"\n    }\n  }\n}\nThe condition value is normalized the same way as the parent’s response, so for a checkbox parent \"Yes\", true, and 1 are all equivalent triggers.\nIf the parent annotation does not satisfy the condition, Lab stores a blank value for the child field and does not send the child prompt to the model. Metrics also ignore rows where the field is not applicable, so skipped conditionals do not count as model errors.\nConditions can point across sections and are evaluated in codebook order. If a condition target is missing or cyclic, Lab falls back to permissive behavior rather than crashing a run.",
+    "text": "Conditional Annotations\nAn annotation can depend on a previous annotation. Lab evaluates the condition row by row and skips inactive fields. Here a checkbox parent (annotation_1) gates a dropdown child (annotation_2): the model is only asked for a stance when the text is marked evaluative.\n{\n  \"annotation_1\": {\n    \"name\": \"Is evaluative\",\n    \"type\": \"checkbox\",\n    \"tooltip\": \"Tick if the text expresses a stance toward the policy.\"\n  },\n  \"annotation_2\": {\n    \"name\": \"Stance\",\n    \"type\": \"dropdown\",\n    \"options\": [\"Positive\", \"Negative\"],\n    \"condition\": {\n      \"section_key\": \"section_1\",\n      \"annotation_key\": \"annotation_1\",\n      \"value\": \"Yes\"\n    }\n  }\n}\nThe condition value is normalized the same way as the parent’s response, so for a checkbox parent \"Yes\", true, and 1 are all equivalent triggers.\nA condition is met when the parent’s answer equals the condition’s value. Lab checks this row by row, using the model’s own answer to the parent. If the condition isn’t met, Lab doesn’t send the child question to the model and stores a blank. If the parent was itself skipped, its children are skipped too, so conditions can be chained.\nOrder matters. Lab asks questions in codebook order: sections in order, then questions by the number in their key. A parent must come before its children. A condition that points to a question further down the codebook is never met at the time the child is asked, so the child is always skipped. Conditions can point to a question in an earlier section.\nHow conditional questions are scored. A child question is scored only on rows where the human answer to the parent meets the condition, because those are the rows where a correct annotation has an answer. On those rows:\n\nIf the model answered the parent the same way, its answer to the child is compared as usual.\nIf the model answered the parent differently, it skipped the child, and that blank counts as an error.\n\nRows where the human skipped the child are left out of the child’s scores, whatever the model did. Mistakes on a parent therefore show up twice: in the parent’s own scores and in its children’s.\nIf a condition points to a question that doesn’t exist, or conditions form a loop, Lab treats the child as always applicable instead of stopping the run. Studio only offers checkbox, dropdown and Likert questions as parents.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -782,7 +804,7 @@
     "href": "conditionals-retries.html#retry-strategies",
     "title": "Conditionals And Retries",
     "section": "Retry Strategies",
-    "text": "Retry Strategies\nrun_annotation() supports invalid-response retries:\nfrom codebook_lab import run_annotation\n\nannotation = run_annotation(\n    model=\"gemma3:270m\",\n    csv_path=\"texts.csv\",\n    codebook_path=\"codebook.json\",\n    output_path=\"outputs/model-labels.csv\",\n    experiment_directory=\"outputs/run-001\",\n    country_iso_code=\"IRL\",\n    retries=2,\n    retry_strategy=\"reprompt\",\n)\nAvailable strategies:\n\nidentical\n\nRe-run the same prompt and model configuration. This is the default.\n\nreprompt\n\nAppend a short format reminder to the prompt before retrying.\n\ntemperature\n\nRetry with a second model chain at retry_temperature, useful when the main run is deterministic.\n\n\nannotation = run_annotation(\n    model=\"gemma3:270m\",\n    csv_path=\"texts.csv\",\n    codebook_path=\"codebook.json\",\n    output_path=\"outputs/model-labels.csv\",\n    experiment_directory=\"outputs/run-001\",\n    retries=1,\n    retry_strategy=\"temperature\",\n    retry_temperature=0.3,\n)\nExperiment runs currently expose retry behavior through the lower-level run_annotation() path. run_experiment() uses the package defaults when it calls annotation internally.",
+    "text": "Retry Strategies\nrun_annotation() supports invalid-response retries:\nfrom codebook_lab import run_annotation\n\nannotation = run_annotation(\n    model=\"gemma3:270m\",\n    csv_path=\"texts.csv\",\n    codebook_path=\"codebook.json\",\n    output_path=\"outputs/model-labels.csv\",\n    experiment_directory=\"outputs/run-001\",\n    country_iso_code=\"IRL\",\n    retries=2,\n    retry_strategy=\"reprompt\",\n)\nAvailable strategies:\n\nidentical\n\nRe-run the same prompt and model configuration.\n\nreprompt\n\nAppend a short format reminder to the prompt before retrying. This is the default.\n\ntemperature\n\nRetry with a second model chain at retry_temperature, useful when the main run is deterministic.\n\n\nannotation = run_annotation(\n    model=\"gemma3:270m\",\n    csv_path=\"texts.csv\",\n    codebook_path=\"codebook.json\",\n    output_path=\"outputs/model-labels.csv\",\n    experiment_directory=\"outputs/run-001\",\n    retries=1,\n    retry_strategy=\"temperature\",\n    retry_temperature=0.3,\n)\nrun_annotation() defaults to retries=1 and retry_strategy=\"reprompt\". ExperimentSpec has no retry settings, so every run started with run_experiment() or run_experiment_grid() uses those defaults: one retry with a format reminder, then a blank cell. To change retries, call run_annotation() and then run_metrics() yourself, as in Running Without Ground Truth.\nRetries add model calls. They are included in the run’s query count, timing and energy figures, so a model that often needs retries looks slower and costlier per item, as in the Examples benchmark.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -794,7 +816,7 @@
     "href": "studio.html",
     "title": "CodeBook Studio",
     "section": "",
-    "text": "CodeBook Studio is the browser-based annotation tool that pairs with CodeBook Lab. You define a codebook once — with sections, instructions, tooltips, and worked examples — annotate texts in the browser, and export a codebook and labelled dataset that drop straight into Lab for benchmarking against your human labels. The same codebook drives both human annotation and LLM prompting, so model outputs can be compared directly against the human labels.",
+    "text": "CodeBook Studio is a web app for writing a codebook and annotating texts by hand. You upload a CSV of texts, define the questions coders answer (with sections, instructions, guidance and worked examples), annotate in the browser, and download the codebook and your labels. Those two files are a ready-made CodeBook Lab task: Lab sends the same codebook to language models and scores their answers against your labels.",
     "crumbs": [
       "Studio",
       "CodeBook Studio"
@@ -805,7 +827,7 @@
     "href": "studio.html#getting-started",
     "title": "CodeBook Studio",
     "section": "Getting started",
-    "text": "Getting started\nThe landing page is where every task begins. You can:\n\nUpload a CSV of texts to annotate.\nUpload an existing codebook.json alongside it to reuse an annotation scheme, continue on new data, or resume a task definition.\nTry a demo — bundled tasks (policy_sentiment, discrete_emotions, campaign_rhetoric, migration_framing) load instantly so you can explore the whole workflow with no data of your own.\nResume a session — Studio autosaves your work to the browser, so if you return later you can pick Resume Session to continue, or Start Fresh.\n\nWhat the main action button does depends on what you uploaded:\n\nCSV only → Create CodeBook (design a task from scratch).\nCSV + codebook → choose Annotate data or Adjudicate disagreements, then Start Annotating.\n\n\nThe landing page: CSV uploader, optional codebook uploader, demo tasks, and the context-dependent main action button.",
+    "text": "Getting started\nThe landing page is where every task begins. You can:\n\nUpload a CSV of texts to annotate.\nUpload an existing codebook.json alongside it to reuse an annotation scheme, continue on new data, or resume a task definition.\nTry a demo. Four ready-made tasks (policy sentiment, discrete emotions, campaign rhetoric and migration framing) open straight into the annotation workspace with a codebook already set up, so you can explore the whole workflow with no data of your own. Use Edit CodeBook to see how each one is built.\nResume a session — Studio autosaves your work to the browser, so if you return later you can pick Resume Session to continue, or Start Fresh.\n\nWhat the main action button does depends on what you uploaded:\n\nCSV only → Create CodeBook (design a task from scratch).\nCSV + codebook → choose Annotate data or Adjudicate disagreements, then Start Annotating.\n\n\nThe landing page: CSV uploader, optional codebook uploader, demo tasks, and the context-dependent main action button.",
     "crumbs": [
       "Studio",
       "CodeBook Studio"
@@ -816,7 +838,7 @@
     "href": "studio.html#preparing-your-data",
     "title": "CodeBook Studio",
     "section": "Preparing your data",
-    "text": "Preparing your data\nStudio works with any CSV and does not require fixed column names. You need one row per text unit and one column containing the text to annotate. A short header/title column is optional but makes navigation easier when texts are long or similar. You do not add annotation columns yourself — Studio creates them from the codebook when you start annotating, named &lt;section name&gt;_&lt;annotation name&gt;. The sample files in the app’s data/ folder are good for a first try.",
+    "text": "Preparing your data\nStudio works with any CSV and does not require fixed column names. You need one row per text unit and one column containing the text to annotate. A short header/title column is optional but makes navigation easier when texts are long or similar. You do not add annotation columns yourself: Studio creates them from the codebook when you start annotating, named &lt;section name&gt;_&lt;annotation name&gt;.\nAdd an ID column (for example sample_id) if more than one person will annotate the same texts. Studio doesn’t create one, and CodeBook Lab needs it to match each item across coders’ files (see Human Reliability).",
     "crumbs": [
       "Studio",
       "CodeBook Studio"
@@ -827,7 +849,7 @@
     "href": "studio.html#the-codebook-editor",
     "title": "CodeBook Studio",
     "section": "The codebook editor",
-    "text": "The codebook editor\nChoosing Create CodeBook opens the editor, where a codebook is built up from:\n\nHeader and text columns — selected at the top. The text column is the content annotators read; the header column is the short label shown above it.\nMetadata columns — optional columns (e.g. document ID, date, speaker) that are not annotated but are carried through to the output and shown to annotators for context as a labelled chip strip above the text.\nSections — groups of related annotations (e.g. Sentiment, Policy Position, Moral Foundations). Use Add New Section / Delete Section to manage them. Each section carries a section instruction that appears in the annotation interface and is folded into the LLM prompt automatically.\nAnnotation items — one or more per section, each with a name, a tooltip (the guidance annotators see), a type, and type-specific settings.\n\nA live Annotation Workflow Preview sits alongside the builder and updates as you edit — use it as your QA surface to catch the wrong text column, unclear section names, over-long instructions, or confusing examples before any annotation happens. You can leave and re-enter the editor at any time with Edit CodeBook.\n\nThe codebook editor: header/text column selectors on the left, the section and annotation builder in the centre, and the live workflow preview.",
+    "text": "The codebook editor\nChoosing Create CodeBook opens the editor, where a codebook is built up from:\n\nHeader and text columns — selected at the top. The text column is the content annotators read; the header column is the short label shown above it.\nMetadata columns — optional columns (e.g. document ID, date, speaker) that are not annotated but are carried through to the output and shown to annotators for context as a labelled chip strip above the text.\nSections — groups of related annotations (e.g. Sentiment, Policy Position, Moral Foundations). Use Add New Section / Delete Section to manage them. Each section carries a section instruction that appears in the annotation interface and is folded into the LLM prompt automatically.\nAnnotation items — one or more per section, each with a name, a tooltip (the guidance annotators see), a type, and type-specific settings. The section and item names become the CSV column names, so renaming either one after you have started annotating starts a new column: labels made under the old name stay in the old column, which the renamed codebook no longer uses.\n\nA live Annotation Workflow Preview sits alongside the builder and updates as you edit — use it as your QA surface to catch the wrong text column, unclear section names, over-long instructions, or confusing examples before any annotation happens. You can leave and re-enter the editor at any time with Edit CodeBook.\n\nThe codebook editor: header/text column selectors on the left, the section and annotation builder in the centre, and the live workflow preview.",
     "crumbs": [
       "Studio",
       "CodeBook Studio"
@@ -860,7 +882,7 @@
     "href": "studio.html#worked-examples",
     "title": "CodeBook Studio",
     "section": "Worked examples",
-    "text": "Worked examples\nEach annotation can carry worked examples. In the editor, examples come after the annotation is defined — this is deliberate, so the valid response space is fixed first and examples can only use valid responses: checkbox examples use Yes/No, dropdown examples use the listed options, Likert examples stay inside the configured scale, and span examples highlight phrases. Use Add Example / Delete Example to manage them. Keeping examples consistent with the response rules makes them more reliable both for human coders and for few-shot LLM prompting in Lab.",
+    "text": "Worked examples\nEach annotation can carry worked examples. Coders see them under the question, and Lab adds them to the model’s prompt when examples are switched on (the default). In the editor, examples come after the annotation is defined — this is deliberate, so the valid response space is fixed first and examples can only use valid responses: checkbox examples use Yes/No, dropdown examples use the listed options, Likert examples stay inside the configured scale, and span examples highlight phrases. Use Add Example / Delete Example to manage them. Keeping examples consistent with the response rules makes them more reliable both for human coders and for few-shot LLM prompting in Lab.",
     "crumbs": [
       "Studio",
       "CodeBook Studio"
@@ -882,7 +904,7 @@
     "href": "studio.html#previewing-llm-prompts",
     "title": "CodeBook Studio",
     "section": "Previewing LLM prompts",
-    "text": "Previewing LLM prompts\nPreview LLM Prompts shows exactly what an LLM would receive for each annotation in your codebook — the section instruction, the question and tooltip, the response instructions appropriate to the type (e.g. “Respond with a whole number from 1 to 5” for Likert, the option list for dropdown), and any worked examples, wrapped around the text. Because this is the same prompt construction CodeBook Lab uses, the preview lets you sanity-check and refine prompt wording before committing to a benchmarking run.\n\nThe LLM prompt preview, showing the fully assembled prompt for a selected annotation as the model would see it.",
+    "text": "Previewing LLM prompts\nPreview LLM Prompts shows exactly what an LLM would receive for each annotation in your codebook — the section instruction, the question and tooltip, the response instructions appropriate to the type (e.g. “Respond with a whole number from 1 to 5” for Likert, the option list for dropdown), and any worked examples, wrapped around the text. It builds prompts the same way CodeBook Lab does for Lab’s three built-in prompt wrappers (standard, persona and CoT), so you can check and refine the wording before a benchmarking run. Custom wrappers registered in Lab can’t be previewed here. See What the model sees for how Lab uses these prompts.\n\nThe LLM prompt preview, showing the fully assembled prompt for a selected annotation as the model would see it.",
     "crumbs": [
       "Studio",
       "CodeBook Studio"
@@ -893,7 +915,7 @@
     "href": "studio.html#annotating-in-the-browser",
     "title": "CodeBook Studio",
     "section": "Annotating in the browser",
-    "text": "Annotating in the browser\nClicking Start Annotating creates the annotation columns and opens the workspace — a compact two-column layout with the text on the left and the active annotation section on the right, with any metadata columns shown as a labelled chip strip above the text for context. A top bar shows the current item, progress through the dataset, and Prev / Next navigation. Within the section, annotators work through the instruction, the annotation widgets, and any examples; span annotations are made by highlighting phrases directly in the text. Session state autosaves as you move through the data, so you can close the tab and Resume Session later. The consistent interface gives a team of coders the same annotation experience.\n\nThe annotation workspace: text on the left, the active annotation section with its widgets on the right, and the progress/navigation bar on top.",
+    "text": "Annotating in the browser\nClicking Start Annotating (or choosing a demo) creates the annotation columns and opens the workspace — a compact two-column layout with the text on the left and the active annotation section on the right, with any metadata columns shown as a labelled chip strip above the text for context. A top bar shows the current item, progress through the dataset, and Prev / Next navigation. Within the section, annotators work through the instruction, the annotation widgets, and any examples; span annotations are made by highlighting phrases directly in the text. A checkbox you leave unticked on an item you have visited is saved as 0 (“no”). Session state autosaves as you move through the data, so you can close the tab and Resume Session later. The consistent interface gives a team of coders the same annotation experience.\n\nThe annotation workspace: text on the left, the active annotation section with its widgets on the right, and the progress/navigation bar on top.",
     "crumbs": [
       "Studio",
       "CodeBook Studio"
@@ -904,7 +926,7 @@
     "href": "studio.html#exporting-your-work",
     "title": "CodeBook Studio",
     "section": "Exporting your work",
-    "text": "Exporting your work\nFrom the annotation flow, Download CodeBook produces a codebook.zip containing:\n\ncodebook.json — the machine-readable codebook that CodeBook Lab reads.\ncodebook.md — a Markdown rendering of the scheme for documentation.\ncodebook.tex — a LaTeX rendering for paper appendices.\n\nBoth the Markdown and LaTeX exports lay out every section, its instruction, each annotation with its response type and worked examples, and any conditional logic in plain language — ready to paste into a methods appendix. Download Annotated Data saves your human labels as ground-truth.csv. The JSON and CSV are exactly what Lab needs; the Markdown and LaTeX are for reporting.\n\nThe export panel with the codebook bundle (JSON / Markdown / LaTeX) and the annotated-data download.",
+    "text": "Exporting your work\nBoth downloads are in the Utilities panel below the annotation workspace. Download CodeBook produces a codebook.zip containing:\n\ncodebook.json — the machine-readable codebook that CodeBook Lab reads.\ncodebook.md — a Markdown rendering of the scheme for documentation.\ncodebook.tex — a LaTeX rendering for paper appendices.\n\nBoth the Markdown and LaTeX exports lay out every section, its instruction, each annotation with its response type and worked examples, and any conditional logic in plain language — ready to paste into a methods appendix. Download Annotated Data saves your human labels as ground-truth.csv. It contains every row of your CSV, including rows nobody has annotated yet, which have blank label cells. Before using the file as a Lab task, finish annotating or remove the unannotated rows: Lab scores every row, so a blank human label would count against the model. The JSON and CSV are exactly what Lab needs; the Markdown and LaTeX are for reporting.\n\nThe export panel with the codebook bundle (JSON / Markdown / LaTeX) and the annotated-data download.",
     "crumbs": [
       "Studio",
       "CodeBook Studio"
@@ -926,7 +948,7 @@
     "href": "studio.html#data-security-and-persistence",
     "title": "CodeBook Studio",
     "section": "Data security and persistence",
-    "text": "Data security and persistence\nCodeBook Studio runs entirely in your browser. There is no database and no server-side storage — your texts, codebook, and annotations stay in the browser session and are cached only in your browser’s local storage, which is what lets you close the tab and Resume Session later.\nThis is private by design, but it is not a failsafe backup. Your work lives in one browser on one device, so it will not be there in a different browser, on another device, or in a private/incognito window, and clearing your browsing data removes it. For anything you cannot afford to lose, export regularly (Download CodeBook and Download Annotated Data) and keep the files yourself — and prefer running locally when data sensitivity means nothing should leave your machine.",
+    "text": "Data security and persistence\nCodeBook Studio runs entirely in your browser. There is no database and no server-side storage — your texts, codebook, and annotations stay in the browser session and are cached only in your browser’s local storage, which is what lets you close the tab and Resume Session later.\nThis is private by design, but it is not a failsafe backup. Your work lives in one browser on one device, so it will not be there in a different browser, on another device, or in a private/incognito window, and clearing your browsing data removes it. Saved codebook versions are stored the same way. Studio warns you if a session grows beyond 5 MB, which some browsers can’t store. For anything you cannot afford to lose, export regularly (Download CodeBook and Download Annotated Data) and keep the files yourself — and prefer running locally when data sensitivity means nothing should leave your machine.",
     "crumbs": [
       "Studio",
       "CodeBook Studio"
@@ -937,7 +959,7 @@
     "href": "studio.html#running-locally",
     "title": "CodeBook Studio",
     "section": "Running locally",
-    "text": "Running locally\nThe hosted app is the simplest option, but you can run Studio on your own machine — useful for customization or when data sensitivity means everything should stay local:\npython3 -m venv .venv\nsource .venv/bin/activate\npip install --upgrade pip\npip install -r requirements.txt\nstreamlit run text_annotation_app.py\nThe app opens in your browser at a local Streamlit URL. See the CodeBook Studio repository for details.",
+    "text": "Running locally\nThe hosted app is the simplest option, but you can run Studio on your own machine — useful for customization or when data sensitivity means everything should stay local:\ngit clone https://github.com/LorcanMcLaren/codebook-studio.git\ncd codebook-studio\npython3 -m venv .venv\nsource .venv/bin/activate\npython -m pip install --upgrade pip\npython -m pip install -r requirements.txt\nstreamlit run text_annotation_app.py\nThe app opens in your browser at a local Streamlit URL. See the CodeBook Studio repository for details.",
     "crumbs": [
       "Studio",
       "CodeBook Studio"
@@ -948,7 +970,7 @@
     "href": "studio.html#hand-off-to-codebook-lab",
     "title": "CodeBook Studio",
     "section": "Hand off to CodeBook Lab",
-    "text": "Hand off to CodeBook Lab\nDrop the two exported files into a task folder and you are ready to benchmark:\ntasks/&lt;task&gt;/\n  codebook.json\n  ground-truth.csv\nFrom there, follow Tasks for the expected layout and Examples for an end-to-end run against your human labels.",
+    "text": "Hand off to CodeBook Lab\nUnzip codebook.zip and put codebook.json and ground-truth.csv together in a task folder named after your task:\ntasks/&lt;task&gt;/\n  codebook.json\n  ground-truth.csv\nFrom there, follow Tasks for the expected layout and Examples for an end-to-end run against your human labels.",
     "crumbs": [
       "Studio",
       "CodeBook Studio"
@@ -989,7 +1011,7 @@
     "href": "examples.html#run-one-experiment",
     "title": "Examples",
     "section": "2. Run one experiment",
-    "text": "2. Run one experiment\nfrom codebook_lab import ExperimentSpec, run_experiment\n\nresult = run_experiment(\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:270m\",\n        use_examples=False,\n        prompt_type=\"standard\",\n        process_textbox=True,\n        country_iso_code=\"IRL\",\n    ),\n    task_root=\"tasks\",\n)\n\nprint(result.experiment_directory)\nprint(result.metrics.summary_text)\nLab strips the human label columns before prompting, runs the model on each row, writes the outputs to a timestamped directory, and scores the predictions against the held-out labels.",
+    "text": "2. Run one experiment\nfrom codebook_lab import ExperimentSpec, run_experiment\n\nresult = run_experiment(\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:270m\",\n        use_examples=False,\n        prompt_type=\"standard\",\n        process_textbox=True,\n        country_iso_code=\"IRL\",\n    ),\n    task_root=\"tasks\",\n)\n\nprint(result.experiment_directory)\nprint(result.metrics.summary_text)\nLab strips the human label columns before prompting, runs the model on each row, writes the outputs to a new folder named by run ID, and scores the predictions against the held-out labels. Textbox scores need the optional dependencies.",
     "crumbs": [
       "Examples"
     ]
@@ -999,7 +1021,7 @@
     "href": "examples.html#inspect-the-row-level-output",
     "title": "Examples",
     "section": "3. Inspect the row-level output",
-    "text": "3. Inspect the row-level output\noutput.csv keeps the metadata and text, with the model’s predictions in the same annotation columns (illustrative):\n\n\n\n\n\n\n\n\n\n\ndoc_id\nPolicy Sentiment_Explicit evaluation\nPolicy Sentiment_Direction\nPolicy Sentiment_Intensity\nPolicy Sentiment_Evidence\n\n\n\n\nps_001\n1\npositive\n5\n“sensible compromise”\n\n\nps_002\n1\nnegative\n2\n“financing assumptions are unrealistic”\n\n\nps_003\n0\nno clear sentiment\n3\n“”\n\n\n\nBecause the columns match the codebook, you can merge output.csv back against ground-truth.csv on doc_id to inspect individual disagreements.",
+    "text": "3. Inspect the row-level output\noutput.csv keeps the metadata and text, with the model’s predictions in the same annotation columns (illustrative):\n\n\n\n\n\n\n\n\n\n\ndoc_id\nPolicy Sentiment_Explicit evaluation\nPolicy Sentiment_Direction\nPolicy Sentiment_Intensity\nPolicy Sentiment_Evidence\n\n\n\n\nps_001\n1\npositive\n5\n“sensible compromise”\n\n\nps_002\n1\nnegative\n2\n“financing assumptions are unrealistic”\n\n\nps_003\n0\nno clear sentiment\n3\n“”\n\n\n\nBecause the columns match the codebook, you can merge output.csv back against ground-truth.csv on doc_id to inspect individual disagreements. (Lab’s own scoring matches rows by position, so it doesn’t need doc_id.)",
     "crumbs": [
       "Examples"
     ]
@@ -1009,7 +1031,7 @@
     "href": "examples.html#read-the-metrics",
     "title": "Examples",
     "section": "4. Read the metrics",
-    "text": "4. Read the metrics\nresult.metrics.summary_text prints a quick overview, and the full results land in the tidy metrics tables under outputs/metrics/ (illustrative):\noutputs/metrics/policy-sentiment_metrics_log.csv\n\n\n\nrun_id\ncolumn\nmetric\nvalue\n\n\n\n\nrun_a1b2\nPolicy Sentiment_Direction\nf1_macro\n0.71\n\n\nrun_a1b2\nPolicy Sentiment_Direction\npercentage_agreement\n0.80\n\n\nrun_a1b2\nPolicy Sentiment_Intensity\nquadratic_kappa\n0.66\n\n\nrun_a1b2\nPolicy Sentiment_Evidence\nnorm_levenshtein\n0.52\n\n\n\nThe companion policy-sentiment_metrics_log_runs.csv carries one row per run with the model, prompt, and sampling configuration alongside runtime, character counts, energy, and emissions — joined back to the metrics via run_id. See Outputs & Metrics for the full field list and guidance on choosing metrics.",
+    "text": "4. Read the metrics\nresult.metrics.summary_text prints a quick overview, and the full results land in the tidy metrics tables under outputs/metrics/ (illustrative):\noutputs/metrics/policy-sentiment_metrics_log.csv\n\n\n\n\n\n\n\n\n\nrun_id\ncolumn\nmetric\nvalue\n\n\n\n\nrun_2026-06-26_14-00-08_5224b29a\nPolicy Sentiment_Direction\nf1\n0.71\n\n\nrun_2026-06-26_14-00-08_5224b29a\nPolicy Sentiment_Direction\npercentage_agreement\n0.80\n\n\nrun_2026-06-26_14-00-08_5224b29a\nPolicy Sentiment_Intensity\nquadratic_kappa\n0.66\n\n\nrun_2026-06-26_14-00-08_5224b29a\nPolicy Sentiment_Evidence\nnorm_levenshtein\n0.52\n\n\n\nThe companion policy-sentiment_metrics_log_runs.csv carries one row per run with the model, prompt, and sampling configuration alongside runtime, character counts, energy, and emissions — joined back to the metrics via run_id. See Outputs & Metrics for the full field list and guidance on choosing metrics.",
     "crumbs": [
       "Examples"
     ]
@@ -1534,7 +1556,7 @@
     "href": "annotation-types.html",
     "title": "Annotation Types",
     "section": "",
-    "text": "CodeBook Lab reads annotation definitions from the CodeBook Studio codebook.json format. It currently supports five annotation types.",
+    "text": "CodeBook Lab reads annotation definitions from the CodeBook Studio codebook.json format and supports five annotation types. For each type, this page shows the codebook definition, what the model is asked to return, and how its answer is checked and scored.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -1546,7 +1568,7 @@
     "href": "annotation-types.html#checkbox",
     "title": "Annotation Types",
     "section": "Checkbox",
-    "text": "Checkbox\nCheckbox annotations are binary yes/no judgements. Lab stores them as 1 for yes and 0 for no.\n{\n  \"name\": \"Explicit evaluation\",\n  \"type\": \"checkbox\",\n  \"tooltip\": \"Tick this if the text clearly expresses an evaluative stance.\"\n}\nValid model responses include JSON booleans, 1/0, and common yes/no strings. Invalid responses are retried and then stored as blank if no valid answer is found.",
+    "text": "Checkbox\nCheckbox annotations are binary yes/no judgements. Lab stores them as 1 for yes and 0 for no.\n{\n  \"name\": \"Explicit evaluation\",\n  \"type\": \"checkbox\",\n  \"tooltip\": \"Tick this if the text clearly expresses an evaluative stance.\"\n}\nThe model is asked to respond with 1 for yes or 0 for no. Lab also accepts JSON booleans and yes/no or true/false strings. Invalid responses are retried and then stored as blank.\nWhen scoring, a blank checkbox counts as 0, on both the human and the model side. So a model that never gives a valid answer is scored as answering “no” every time, not as missing. Check output.csv for blanks if checkbox scores look suspiciously close to the share of “no” labels.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -1558,7 +1580,7 @@
     "href": "annotation-types.html#dropdown",
     "title": "Annotation Types",
     "section": "Dropdown",
-    "text": "Dropdown\nDropdown annotations require one value from a fixed option set.\n{\n  \"name\": \"Direction\",\n  \"type\": \"dropdown\",\n  \"options\": [\"positive\", \"negative\", \"mixed\", \"no clear sentiment\"]\n}\nLab normalizes dropdown responses case-insensitively against the configured options. A model response such as \" Positive \" is stored as positive if that is the exact option in the codebook.",
+    "text": "Dropdown\nDropdown annotations require one value from a fixed option set.\n{\n  \"name\": \"Direction\",\n  \"type\": \"dropdown\",\n  \"options\": [\"positive\", \"negative\", \"mixed\", \"no clear sentiment\"]\n}\nThe model is asked to respond with one of the listed options. Lab matches its answer to the options ignoring case and surrounding spaces or backticks, so a response such as \" Positive \" is stored as positive if that is how the option is spelled in the codebook. Anything that isn’t one of the options is invalid and retried.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -1570,7 +1592,7 @@
     "href": "annotation-types.html#likert",
     "title": "Annotation Types",
     "section": "Likert",
-    "text": "Likert\nLikert annotations require a whole number inside a configured range.\n{\n  \"name\": \"Intensity\",\n  \"type\": \"likert\",\n  \"min_value\": 1,\n  \"max_value\": 5\n}\nJSON numeric responses are converted to integers and clamped to the configured range. If a non-JSON response contains an in-range number, Lab can recover that number; otherwise the response is invalid and eligible for retry.",
+    "text": "Likert\nLikert annotations require a whole number inside a configured range.\n{\n  \"name\": \"Intensity\",\n  \"type\": \"likert\",\n  \"min_value\": 1,\n  \"max_value\": 5\n}\nThe model is asked for a whole number in the range. Numeric answers are converted to whole numbers by dropping any decimals (so 3.7 becomes 3) and then clamped to the range (so 7 on a 1–5 scale becomes 5). If the answer isn’t valid JSON but contains a number inside the range, Lab uses that number. Otherwise the answer is invalid and retried.\nLikert fields are scored twice: as categories (accuracy, F1, kappa, as for dropdowns) and as ordered values (Spearman correlation and quadratic weighted kappa), so near misses can be told apart from answers at the wrong end of the scale.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -1582,7 +1604,7 @@
     "href": "annotation-types.html#textbox",
     "title": "Annotation Types",
     "section": "Textbox",
-    "text": "Textbox\nTextbox annotations store short free-text responses.\n{\n  \"name\": \"Evidence\",\n  \"type\": \"textbox\",\n  \"tooltip\": \"Provide a short phrase from the text that supports the judgement.\"\n}\nTextbox generation and scoring are opt-in because the optional metrics can be heavier:\nExperimentSpec(\n    task=\"policy-sentiment\",\n    model=\"gemma3:270m\",\n    process_textbox=True,\n)\nInstall codebook-lab[textbox] for the full textbox metric suite.",
+    "text": "Textbox\nTextbox annotations store short free-text responses.\n{\n  \"name\": \"Evidence\",\n  \"type\": \"textbox\",\n  \"tooltip\": \"Provide a short phrase from the text that supports the judgement.\"\n}\nThe model is asked for a brief text answer. An empty answer is invalid and retried.\nTextbox generation and scoring are off by default, because the similarity metrics need optional dependencies. Turn them on per run:\nExperimentSpec(\n    task=\"policy-sentiment\",\n    model=\"gemma3:270m\",\n    process_textbox=True,\n)\nInstall codebook-lab[textbox] to score them (see Installation). Answers are lowercased and trimmed before comparison. Percentage agreement counts exact matches only, so the similarity metrics are the more useful scores for free text.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -1594,7 +1616,7 @@
     "href": "annotation-types.html#span",
     "title": "Annotation Types",
     "section": "Span",
-    "text": "Span\nSpan annotations store character offsets into the original text. They can be unlabelled highlights or labelled spans.\nUnlabelled span:\n{\n  \"name\": \"Evidence\",\n  \"type\": \"span\",\n  \"tooltip\": \"Highlight the phrase that supports your judgement.\",\n  \"label_options\": []\n}\nLabelled span:\n{\n  \"name\": \"Emotion markers\",\n  \"type\": \"span\",\n  \"tooltip\": \"Tag each highlight with the emotion it conveys.\",\n  \"label_options\": [\"joy\", \"sadness\", \"anger\", \"fear\", \"surprise\", \"disgust\"]\n}\nSpan generation and scoring are opt-in:\nExperimentSpec(\n    task=\"discrete-emotions\",\n    model=\"gemma3:270m\",\n    process_span=True,\n)\nSpan cells are CSV-safe JSON strings:\n[\n  {\"start\": 38, \"end\": 55, \"text\": \"her heart pounded\", \"label\": \"fear\"}\n]\nLab validates offsets, drops out-of-range spans, fills missing text from the source string when possible, and strips labels that are not in label_options.",
+    "text": "Span\nSpan annotations store character offsets into the original text. They can be unlabelled highlights or labelled spans.\nUnlabelled span:\n{\n  \"name\": \"Evidence\",\n  \"type\": \"span\",\n  \"tooltip\": \"Highlight the phrase that supports your judgement.\",\n  \"label_options\": []\n}\nLabelled span:\n{\n  \"name\": \"Emotion markers\",\n  \"type\": \"span\",\n  \"tooltip\": \"Tag each highlight with the emotion it conveys.\",\n  \"label_options\": [\"joy\", \"sadness\", \"anger\", \"fear\", \"surprise\", \"disgust\"]\n}\nThe model is asked for a JSON list of {\"start\", \"end\", \"text\"} objects (plus \"label\" for labelled spans), using 0-indexed character offsets into the text, or [] if nothing applies.\nSpan generation and scoring are off by default. Turn them on per run:\nExperimentSpec(\n    task=\"discrete-emotions\",\n    model=\"gemma3:270m\",\n    process_span=True,\n)\nSpan cells are CSV-safe JSON strings:\n[\n  {\"start\": 38, \"end\": 55, \"text\": \"her heart pounded\", \"label\": \"fear\"}\n]\nLab validates the offsets and drops spans that fall outside the text or end before they start. It then fills each span’s text from the source using the offsets, so the stored text always matches the offsets even if the model quoted something else. Labels that are not in label_options are removed, leaving an unlabelled span.\nAn empty list ([], “nothing to highlight”) is stored as a blank cell, the same as an answer that could not be parsed at all. The difference only shows up in the run’s logs: an unparseable answer is retried, an empty list is not.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -1618,7 +1640,7 @@
     "href": "outputs-metrics.html",
     "title": "Outputs And Metrics",
     "section": "",
-    "text": "Each run creates a directory named by a short run ID under outputs/&lt;task&gt;/&lt;run_id&gt;/. Run-ID folders keep paths compact; the full set of choices for the run lives in config.json and in the runs metrics table.",
+    "text": "Each run creates a folder outputs/&lt;task&gt;/&lt;run_id&gt;/. The run ID is the start time plus a random suffix, such as run_2026-06-26_14-00-08_5224b29a, so runs sort by time and never overwrite each other. The run’s settings are stored in config.json and in the runs table.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -1630,7 +1652,7 @@
     "href": "outputs-metrics.html#per-run-files",
     "title": "Outputs And Metrics",
     "section": "Per-Run Files",
-    "text": "Per-Run Files\n\noutput.csv\n\nRow-level model annotations.\n\nconfig.json\n\nThe full run configuration — model, prompt, sampling, chat mode, reasoning, and task paths — so a run-ID folder can always be traced back to its settings.\n\nclassification_reports.txt\n\nHuman-readable evaluation summaries by annotation field.\n\nemissions.csv\n\nCodeCarbon energy and emissions output.\n\ntiming_data.json\n\nTotal inference time, average inference time, and request counts.\n\nchar_counts.json\n\nTotal input and output characters sent to and returned from the model.\n\nreasoning_traces.jsonl\n\nOne record per query capturing the model’s reasoning content, when the model returns it (see Model reasoning).",
+    "text": "Per-Run Files\n\noutput.csv\n\nThe input rows with the model’s answers in the annotation columns. Every non-label column from ground-truth.csv is kept. Blank cells are skipped conditional questions or answers that stayed invalid after retries. The file is rewritten after each row, so an interrupted run keeps the rows it finished.\n\nconfig.json\n\nThe run’s settings: model, prompt wrapper, examples, temperature, top-p, chat mode, reasoning, textbox and span switches, country code, task name and retry settings.\n\nclassification_reports.txt\n\nHuman-readable evaluation summaries by annotation field.\n\nemissions.csv\n\nCodeCarbon energy and emissions output.\n\ntiming_data.json\n\nTotal inference time, average inference time, and request counts.\n\nchar_counts.json\n\nTotal input and output characters sent to and returned from the model.\n\nreasoning_traces.jsonl\n\nOne record per query with the model’s reasoning, written only when the model returns reasoning (see Model reasoning).",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -1642,7 +1664,31 @@
     "href": "outputs-metrics.html#tidy-metrics-tables",
     "title": "Outputs And Metrics",
     "section": "Tidy Metrics Tables",
-    "text": "Tidy Metrics Tables\nAggregate metrics are written as two linked tidy tables:\n\n&lt;task&gt;_metrics_log.csv\n\nThe long table — one row per (run_id, annotation column, annotation type, metric) with the metric value.\n\n&lt;task&gt;_metrics_log_runs.csv\n\nThe runs table — one row per run_id with model, prompt, sampling, chat mode, and reasoning configuration, task paths, inference counts, character counts, energy use, emissions, CPU/GPU metadata, and per-query averages.\n\n\nThis split keeps metric values long and analysis-friendly while avoiding repeated run metadata on every metric row.\nDepending on the annotation types in your codebook, metrics can include:\n\naccuracy, precision, recall, F1, and percentage agreement\nCohen’s kappa and Krippendorff’s alpha\nSpearman correlation and quadratic weighted kappa for Likert fields\nnormalized Levenshtein similarity and BLEU for textbox fields\nROUGE, embedding cosine similarity, and BERTScore when optional textbox extras are installed\ntoken F1, exact-match F1, and character IoU for span fields\ntotal inference time, average inference time, number of queries, character counts, energy use, and emissions",
+    "text": "Tidy Metrics Tables\nAggregate metrics are written as two linked tidy tables:\n\n&lt;task&gt;_metrics_log.csv\n\nThe long table — one row per (run_id, annotation column, annotation type, metric) with the metric value.\n\n&lt;task&gt;_metrics_log_runs.csv\n\nThe runs table — one row per run_id with model, prompt, sampling, chat mode, and reasoning configuration, task paths, inference counts, character counts, energy use, emissions, CPU/GPU metadata, and per-query averages.\n\n\nThis split keeps metric values long and analysis-friendly while avoiding repeated run metadata on every metric row. Both files are appended to, never overwritten, so every run of a task accumulates in the same two tables. The runs table also has a model_id column that combines the main settings in one label, such as gemma3:4b_temp0.0_examples_standard.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Outputs And Metrics"
+    ]
+  },
+  {
+    "objectID": "outputs-metrics.html#metric-names",
+    "href": "outputs-metrics.html#metric-names",
+    "title": "Outputs And Metrics",
+    "section": "Metric Names",
+    "text": "Metric Names\nThe metric column uses these names:\n\n\n\n\n\n\n\nQuestion type\nMetrics\n\n\n\n\nCheckbox, dropdown\npercentage_agreement, accuracy, precision, recall, f1, cohen_kappa, krippendorff_alpha\n\n\nLikert\nthe above, plus spearman_corr and quadratic_kappa\n\n\nTextbox\npercentage_agreement, norm_levenshtein, bleu, rouge1_f, rouge2_f, rougeL_f, cosine_similarity, bertscore_precision, bertscore_recall, bertscore_f1\n\n\nSpan\ntoken_f1, exact_match_f1, char_iou\n\n\n\nprecision, recall and f1 are macro-averaged: computed for each answer category and then averaged, so rare categories count as much as common ones. Per-category figures are in classification_reports.txt.\nTextbox and span metrics are only computed when those questions are switched on for the run, and textbox similarity metrics need the optional dependencies. Metrics that weren’t computed are left blank.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Outputs And Metrics"
+    ]
+  },
+  {
+    "objectID": "outputs-metrics.html#how-rows-and-blanks-are-scored",
+    "href": "outputs-metrics.html#how-rows-and-blanks-are-scored",
+    "title": "Outputs And Metrics",
+    "section": "How Rows And Blanks Are Scored",
+    "text": "How Rows And Blanks Are Scored\n\nRows are matched by position. Row n of output.csv is scored against row n of ground-truth.csv. Don’t reorder either file between annotation and scoring.\nConditional questions are scored only on rows where the human answer to the parent meets the condition (see Conditional Annotations).\nBlank answers count as wrong answers. For dropdown and Likert questions, a blank model answer is compared with the human label like any other value, so it lowers accuracy and F1.\nBlank checkboxes count as “no”, on both sides. See Checkbox.\n\nDepending on the annotation types in your codebook, metrics can include:\n\naccuracy, precision, recall, F1, and percentage agreement\nCohen’s kappa and Krippendorff’s alpha\nSpearman correlation and quadratic weighted kappa for Likert fields\nnormalized Levenshtein similarity and BLEU for textbox fields\nROUGE, embedding cosine similarity, and BERTScore when optional textbox extras are installed\ntoken F1, exact-match F1, and character IoU for span fields\ntotal inference time, average inference time, number of queries, character counts, energy use, and emissions",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -1654,7 +1700,7 @@
     "href": "outputs-metrics.html#linking-the-two-tables",
     "title": "Outputs And Metrics",
     "section": "Linking the two tables",
-    "text": "Linking the two tables\nrun_id is the key shared by both tables, so you can join metric values to the configuration that produced them with a single merge:\nimport pandas as pd\n\nmetrics = pd.read_csv(\"outputs/metrics/policy-sentiment_metrics_log.csv\")\nruns = pd.read_csv(\"outputs/metrics/policy-sentiment_metrics_log_runs.csv\")\n\njoined = metrics.merge(runs, on=\"run_id\")\n\n# e.g. macro-F1 on Direction by model and chat mode\nview = joined[\n    (joined[\"column\"] == \"Policy Sentiment_Direction\")\n    & (joined[\"metric\"] == \"f1_macro\")\n]\nprint(view[[\"model_id\", \"chat_mode\", \"reasoning\", \"use_examples\", \"value\"]])\nBecause every metric row carries a run_id, you can pivot, group, and compare runs along any configuration dimension — model, prompt, examples, chat mode, reasoning, or sampling — all scored against the same human labels.",
+    "text": "Linking the two tables\nrun_id is the key shared by both tables, so you can join metric values to the configuration that produced them with a single merge:\nimport pandas as pd\n\nmetrics = pd.read_csv(\"outputs/metrics/policy-sentiment_metrics_log.csv\")\nruns = pd.read_csv(\"outputs/metrics/policy-sentiment_metrics_log_runs.csv\")\n\njoined = metrics.merge(runs, on=\"run_id\")\n\n# e.g. macro-averaged F1 on Direction by model and chat mode\nview = joined[\n    (joined[\"column\"] == \"Policy Sentiment_Direction\")\n    & (joined[\"metric\"] == \"f1\")\n]\nprint(view[[\"model_id\", \"chat_mode\", \"reasoning\", \"use_examples\", \"value\"]])\nBecause every metric row carries a run_id, you can pivot, group, and compare runs along any configuration dimension — model, prompt, examples, chat mode, reasoning, or sampling — all scored against the same human labels.",
     "crumbs": [
       "Get Started",
       "Concepts",
@@ -1666,7 +1712,7 @@
     "href": "outputs-metrics.html#choosing-metrics",
     "title": "Outputs And Metrics",
     "section": "Choosing Metrics",
-    "text": "Choosing Metrics\nFor checkbox and dropdown annotations, start with F1 and percentage agreement. For imbalanced labels, inspect per-class precision and recall in classification_reports.txt.\nFor Likert annotations, report ordinal-aware metrics alongside exact agreement. A model that predicts adjacent categories may be less wrong than one that jumps from one end of the scale to the other.\nFor textbox annotations, treat similarity metrics as diagnostics rather than a single ground-truth measure. Short evidence extracts can be semantically equivalent while using different words.\nFor span annotations, token_f1 is the headline score for most comparisons because it rewards overlap at the token level. Use exact_match_f1 when boundary precision matters and char_iou when near misses should still be visible.",
+    "text": "Choosing Metrics\nFor checkbox and dropdown annotations, start with macro F1 and percentage agreement. For imbalanced labels, inspect per-class precision and recall in classification_reports.txt.\nFor Likert annotations, report ordinal-aware metrics alongside exact agreement. A model that predicts adjacent categories may be less wrong than one that jumps from one end of the scale to the other.\nFor textbox annotations, treat similarity metrics as diagnostics rather than a single ground-truth measure. Short evidence extracts can be semantically equivalent while using different words.\nFor span annotations, token_f1 is the headline score for most comparisons because it rewards overlap at the token level. Use exact_match_f1 when boundary precision matters and char_iou when near misses should still be visible.",
     "crumbs": [
       "Get Started",
       "Concepts",

@@ -466,7 +466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.experiment_directory)</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.metrics.summary_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Lab strips the human label columns before prompting, runs the model on each row, writes the outputs to a timestamped directory, and scores the predictions against the held-out labels.</p>
+<p>Lab strips the human label columns before prompting, runs the model on each row, writes the outputs to a new folder named by run ID, and scores the predictions against the held-out labels. Textbox scores need the <a href="./install.html#python-environment">optional dependencies</a>.</p>
 </section>
 <section id="inspect-the-row-level-output" class="level2">
 <h2 class="anchored" data-anchor-id="inspect-the-row-level-output">3. Inspect the row-level output</h2>
@@ -512,13 +512,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>Because the columns match the codebook, you can merge <code>output.csv</code> back against <code>ground-truth.csv</code> on <code>doc_id</code> to inspect individual disagreements.</p>
+<p>Because the columns match the codebook, you can merge <code>output.csv</code> back against <code>ground-truth.csv</code> on <code>doc_id</code> to inspect individual disagreements. (Lab’s own scoring matches rows by position, so it doesn’t need <code>doc_id</code>.)</p>
 </section>
 <section id="read-the-metrics" class="level2">
 <h2 class="anchored" data-anchor-id="read-the-metrics">4. Read the metrics</h2>
 <p><code>result.metrics.summary_text</code> prints a quick overview, and the full results land in the tidy metrics tables under <code>outputs/metrics/</code> (illustrative):</p>
 <pre class="text"><code>outputs/metrics/policy-sentiment_metrics_log.csv</code></pre>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>run_id</th>
@@ -529,25 +535,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>run_a1b2</td>
+<td>run_2026-06-26_14-00-08_5224b29a</td>
 <td>Policy Sentiment_Direction</td>
-<td>f1_macro</td>
+<td>f1</td>
 <td>0.71</td>
 </tr>
 <tr class="even">
-<td>run_a1b2</td>
+<td>run_2026-06-26_14-00-08_5224b29a</td>
 <td>Policy Sentiment_Direction</td>
 <td>percentage_agreement</td>
 <td>0.80</td>
 </tr>
 <tr class="odd">
-<td>run_a1b2</td>
+<td>run_2026-06-26_14-00-08_5224b29a</td>
 <td>Policy Sentiment_Intensity</td>
 <td>quadratic_kappa</td>
 <td>0.66</td>
 </tr>
 <tr class="even">
-<td>run_a1b2</td>
+<td>run_2026-06-26_14-00-08_5224b29a</td>
 <td>Policy Sentiment_Evidence</td>
 <td>norm_levenshtein</td>
 <td>0.52</td>

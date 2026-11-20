@@ -360,8 +360,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html#what-the-package-does" class="sidebar-item-text sidebar-link">
- <span class="menu-text">What the package does</span></a>
+  <a href="./index.html#how-studio-and-lab-fit-together" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How Studio and Lab fit together</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html#what-lab-does-in-a-run" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">What Lab does in a run</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -626,7 +632,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Newer CodeBook Lab workflows support conditional annotations and invalid-response retries. These features make Lab closer to CodeBook Studio’s annotation behavior while keeping model outputs auditable.</p>
+<p>Some questions only make sense after a particular answer to an earlier one, and models sometimes return answers Lab can’t use. This page covers how Lab handles both: conditional questions, which it asks only when they apply, and invalid answers, which it retries and then records as blank.</p>
 <section id="conditional-annotations" class="level2">
 <h2 class="anchored" data-anchor-id="conditional-annotations">Conditional Annotations</h2>
 <p>An annotation can depend on a previous annotation. Lab evaluates the condition row by row and skips inactive fields. Here a checkbox parent (<code>annotation_1</code>) gates a dropdown child (<code>annotation_2</code>): the model is only asked for a stance when the text is marked evaluative.</p>
@@ -648,8 +654,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The condition <code>value</code> is normalized the same way as the parent’s response, so for a checkbox parent <code>"Yes"</code>, <code>true</code>, and <code>1</code> are all equivalent triggers.</p>
-<p>If the parent annotation does not satisfy the condition, Lab stores a blank value for the child field and does not send the child prompt to the model. Metrics also ignore rows where the field is not applicable, so skipped conditionals do not count as model errors.</p>
-<p>Conditions can point across sections and are evaluated in codebook order. If a condition target is missing or cyclic, Lab falls back to permissive behavior rather than crashing a run.</p>
+<p>A condition is met when the parent’s answer equals the condition’s <code>value</code>. Lab checks this row by row, using the model’s own answer to the parent. If the condition isn’t met, Lab doesn’t send the child question to the model and stores a blank. If the parent was itself skipped, its children are skipped too, so conditions can be chained.</p>
+<p><strong>Order matters.</strong> Lab asks questions in codebook order: sections in order, then questions by the number in their key. A parent must come before its children. A condition that points to a question further down the codebook is never met at the time the child is asked, so the child is always skipped. Conditions can point to a question in an earlier section.</p>
+<p><strong>How conditional questions are scored.</strong> A child question is scored only on rows where the <em>human</em> answer to the parent meets the condition, because those are the rows where a correct annotation has an answer. On those rows:</p>
+<ul>
+<li>If the model answered the parent the same way, its answer to the child is compared as usual.</li>
+<li>If the model answered the parent differently, it skipped the child, and that blank counts as an error.</li>
+</ul>
+<p>Rows where the human skipped the child are left out of the child’s scores, whatever the model did. Mistakes on a parent therefore show up twice: in the parent’s own scores and in its children’s.</p>
+<p>If a condition points to a question that doesn’t exist, or conditions form a loop, Lab treats the child as always applicable instead of stopping the run. Studio only offers checkbox, dropdown and Likert questions as parents.</p>
 </section>
 <section id="response-validation" class="level2">
 <h2 class="anchored" data-anchor-id="response-validation">Response Validation</h2>
@@ -682,11 +695,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl>
 <dt><code>identical</code></dt>
 <dd>
-Re-run the same prompt and model configuration. This is the default.
+Re-run the same prompt and model configuration.
 </dd>
 <dt><code>reprompt</code></dt>
 <dd>
-Append a short format reminder to the prompt before retrying.
+Append a short format reminder to the prompt before retrying. This is the default.
 </dd>
 <dt><code>temperature</code></dt>
 <dd>
@@ -703,7 +716,8 @@ Retry with a second model chain at <code>retry_temperature</code>, useful when t
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    retry_strategy<span class="op">=</span><span class="st">"temperature"</span>,</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    retry_temperature<span class="op">=</span><span class="fl">0.3</span>,</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Experiment runs currently expose retry behavior through the lower-level <code>run_annotation()</code> path. <code>run_experiment()</code> uses the package defaults when it calls annotation internally.</p>
+<p><code>run_annotation()</code> defaults to <code>retries=1</code> and <code>retry_strategy="reprompt"</code>. <code>ExperimentSpec</code> has no retry settings, so every run started with <code>run_experiment()</code> or <code>run_experiment_grid()</code> uses those defaults: one retry with a format reminder, then a blank cell. To change retries, call <code>run_annotation()</code> and then <code>run_metrics()</code> yourself, as in <a href="./experiments.html#running-without-ground-truth">Running Without Ground Truth</a>.</p>
+<p>Retries add model calls. They are included in the run’s query count, timing and energy figures, so a model that often needs retries looks slower and costlier per item, as in the <a href="./examples.html#compare-configurations">Examples</a> benchmark.</p>
 
 
 </section>

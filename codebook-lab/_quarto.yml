@@ -48,8 +48,10 @@ website:
         - section: "Overview"
           href: index.qmd
           contents:
-            - text: "What the package does"
-              href: index.qmd#what-the-package-does
+            - text: "How Studio and Lab fit together"
+              href: index.qmd#how-studio-and-lab-fit-together
+            - text: "What Lab does in a run"
+              href: index.qmd#what-lab-does-in-a-run
             - text: "Where to start"
               href: index.qmd#where-to-start
         - section: "Installation"

@@ -366,6 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#single-run" id="toc-single-run" class="nav-link active" data-scroll-target="#single-run">Single Run</a></li>
+  <li><a href="#what-the-model-sees" id="toc-what-the-model-sees" class="nav-link" data-scroll-target="#what-the-model-sees">What The Model Sees</a></li>
   <li><a href="#parameter-sweep" id="toc-parameter-sweep" class="nav-link" data-scroll-target="#parameter-sweep">Parameter Sweep</a></li>
   <li><a href="#prompt-wrappers" id="toc-prompt-wrappers" class="nav-link" data-scroll-target="#prompt-wrappers">Prompt Wrappers</a></li>
   <li><a href="#chat-continuation-modes" id="toc-chat-continuation-modes" class="nav-link" data-scroll-target="#chat-continuation-modes">Chat continuation modes</a></li>
@@ -438,52 +439,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    output_root<span class="op">=</span><span class="st">"outputs"</span>,</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The defaults are <code>temperature=0.0</code>, <code>use_examples=True</code>, <code>prompt_type="standard"</code>, <code>chat_mode="per_text"</code>, <code>reasoning=None</code>, and <code>country_iso_code="USA"</code>. Invalid model responses are retried with the <code>reprompt</code> strategy by default (see <a href="./conditionals-retries.html#retry-strategies">Conditionals &amp; Retries</a>).</p>
-<p><code>run_experiment()</code> uses the high-level end-to-end path: annotation first, metrics second. It resolves the task directory, checks that <code>codebook.json</code> and <code>ground-truth.csv</code> exist, optionally pulls the Ollama model, writes per-run sidecar files, and appends tidy metrics rows.</p>
+<p><code>run_experiment()</code> runs annotation and then scoring. It finds the task folder (see <a href="./tasks.html#bundled-example-tasks">Tasks</a> for how), checks that <code>codebook.json</code> and <code>ground-truth.csv</code> exist, pulls the model with Ollama unless you pass <code>pull_model=False</code>, writes the run’s files to a new folder, and appends its scores to the <a href="./outputs-metrics.html">metrics tables</a>. Retry behaviour can’t be set in <code>ExperimentSpec</code>; see <a href="./conditionals-retries.html#retry-strategies">Retry Strategies</a>.</p>
+</section>
+<section id="what-the-model-sees" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-model-sees">What The Model Sees</h2>
+<p>Lab sends one prompt per question per text. With the default <code>standard</code> wrapper and examples switched off, the <code>Direction</code> question from the bundled <code>policy-sentiment</code> task looks like this:</p>
+<pre class="text"><code>Policy Sentiment
+Read the short text and assess whether it expresses an evaluative stance toward a public policy, proposal, or political decision.
+
+Direction
+If the text expresses a stance, identify whether the overall direction is positive, negative, or mixed. Use 'no clear sentiment' only when the text does not convey an evaluative stance.
+
+Respond only with one of the following options: "positive", or "negative", or "mixed", or "no clear sentiment".
+
+Return your response in JSON format, with the key "response".
+
+---
+
+Text: 
+"The housing plan has an admirable goal, but its financing assumptions are unrealistic and the burden on municipalities is far too high."
+
+Response: </code></pre>
+<p>The prompt is built from the codebook in this order: section name and instruction, question name and tooltip, a response instruction for the question type, and a request for JSON. Then come the worked examples, when used, and finally the text. Nothing else from the CSV row is included.</p>
+<p>Some details that affect results:</p>
+<ul>
+<li><strong>Examples are on by default</strong> (<code>use_examples=True</code>). Each question’s <code>example</code> field, a block of worked <code>Text:</code> / <code>Response:</code> pairs written in Studio, is added after the JSON request. An <code>example</code> field that doesn’t contain <code>Text:</code> is treated as extra guidance and added even when <code>use_examples=False</code>.</li>
+<li><strong>Answers are constrained to JSON.</strong> Lab asks Ollama for structured output matching <code>{"response": ...}</code> (a list of span objects for span questions). The model’s visible answer is only that JSON. The <code>CoT</code> wrapper asks the model to reason step by step, but that reasoning cannot appear in the answer. To capture reasoning, use a model with a thinking mode and set <code>reasoning=True</code> (see <a href="#model-reasoning">Model reasoning</a>).</li>
+<li><strong>Questions about the same text share a chat by default</strong> (<code>chat_mode="per_text"</code>), so when the model reaches a question it has already seen its earlier prompts and answers for that text. See <a href="#chat-continuation-modes">Chat continuation modes</a>.</li>
+</ul>
+<p>CodeBook Studio’s <strong>Preview LLM Prompts</strong> shows the same prompts for the built-in wrappers, so you can check the wording before running anything.</p>
 </section>
 <section id="parameter-sweep" class="level2">
 <h2 class="anchored" data-anchor-id="parameter-sweep">Parameter Sweep</h2>
 <p>Use <code>run_experiment_grid()</code> when you want a Cartesian-product sweep across multiple settings.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> run_experiment_grid</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> run_experiment_grid(</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    param_grid<span class="op">=</span>{</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"country_iso_code"</span>: <span class="st">"IRL"</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tasks"</span>: [<span class="st">"policy-sentiment"</span>],</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"models"</span>: [<span class="st">"gemma3:270m"</span>, <span class="st">"llama3.2:3b"</span>],</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"use_examples"</span>: [<span class="va">False</span>, <span class="va">True</span>],</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"prompt_types"</span>: [<span class="st">"standard"</span>, <span class="st">"persona"</span>],</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"temperatures"</span>: [<span class="fl">0.0</span>, <span class="fl">0.2</span>],</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"top_ps"</span>: [<span class="va">None</span>],</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"chat_modes"</span>: [<span class="st">"per_text"</span>],</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"reasoning"</span>: [<span class="va">None</span>],</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"process_textboxes"</span>: [<span class="va">True</span>],</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"process_spans"</span>: [<span class="va">False</span>],</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    output_root<span class="op">=</span><span class="st">"outputs"</span>,</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Completed </span><span class="sc">{</span><span class="bu">len</span>(results)<span class="sc">}</span><span class="ss"> runs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> run_experiment_grid</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> run_experiment_grid(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    param_grid<span class="op">=</span>{</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"country_iso_code"</span>: <span class="st">"IRL"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tasks"</span>: [<span class="st">"policy-sentiment"</span>],</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"models"</span>: [<span class="st">"gemma3:270m"</span>, <span class="st">"llama3.2:3b"</span>],</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"use_examples"</span>: [<span class="va">False</span>, <span class="va">True</span>],</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"prompt_types"</span>: [<span class="st">"standard"</span>, <span class="st">"persona"</span>],</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"temperatures"</span>: [<span class="fl">0.0</span>, <span class="fl">0.2</span>],</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"top_ps"</span>: [<span class="va">None</span>],</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"chat_modes"</span>: [<span class="st">"per_text"</span>],</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"reasoning"</span>: [<span class="va">None</span>],</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"process_textboxes"</span>: [<span class="va">True</span>],</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"process_spans"</span>: [<span class="va">False</span>],</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    output_root<span class="op">=</span><span class="st">"outputs"</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Completed </span><span class="sc">{</span><span class="bu">len</span>(results)<span class="sc">}</span><span class="ss"> runs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For a quick smoke test, keep one small model and one value in each field. For a benchmark, add one experimental dimension at a time so results are easier to interpret.</p>
 <p>The grid accepts Python booleans and <code>None</code> values directly. CLI-style strings such as <code>"true"</code>, <code>"false"</code>, and <code>"None"</code> are normalized internally, which is helpful when experiment grids come from config files.</p>
 </section>
 <section id="prompt-wrappers" class="level2">
 <h2 class="anchored" data-anchor-id="prompt-wrappers">Prompt Wrappers</h2>
 <p>Built-in prompt wrappers include <code>standard</code>, <code>persona</code>, and <code>CoT</code>. You can inspect available wrappers from Python:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> list_prompt_wrappers</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(list_prompt_wrappers())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You can register a custom wrapper without editing package internals:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> PromptContext, register_prompt_wrapper</span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> list_prompt_wrappers</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> concise_wrapper(context: PromptContext) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Annotate the text as carefully as possible.</span><span class="ch">\n\n</span><span class="st">"</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>context<span class="sc">.</span>core_prompt<span class="sc">}</span><span class="ch">\n\n</span><span class="ss">"</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'Text:</span><span class="ch">\n</span><span class="ss">"</span><span class="sc">{</span>context<span class="sc">.</span>text<span class="sc">}</span><span class="ss">"</span><span class="ch">\n\n</span><span class="ss">'</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Response:</span><span class="ch">\n</span><span class="st">"</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>register_prompt_wrapper(<span class="st">"concise"</span>, concise_wrapper)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(list_prompt_wrappers())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can register a custom wrapper without editing package internals:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> PromptContext, register_prompt_wrapper</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> concise_wrapper(context: PromptContext) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Annotate the text as carefully as possible.</span><span class="ch">\n\n</span><span class="st">"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>context<span class="sc">.</span>core_prompt<span class="sc">}</span><span class="ch">\n\n</span><span class="ss">"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'Text:</span><span class="ch">\n</span><span class="ss">"</span><span class="sc">{</span>context<span class="sc">.</span>text<span class="sc">}</span><span class="ss">"</span><span class="ch">\n\n</span><span class="ss">'</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Response:</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>register_prompt_wrapper(<span class="st">"concise"</span>, concise_wrapper)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then pass <code>prompt_type="concise"</code> in the experiment spec.</p>
 </section>
 <section id="chat-continuation-modes" class="level2">
@@ -503,7 +532,7 @@ A fresh chat for every annotation query — each judgement is made independently
 A single chat for the whole run, carrying history across every text and annotation.
 </dd>
 </dl>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ExperimentSpec(task<span class="op">=</span><span class="st">"policy-sentiment"</span>, model<span class="op">=</span><span class="st">"gemma3:270m"</span>, chat_mode<span class="op">=</span><span class="st">"per_query"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ExperimentSpec(task<span class="op">=</span><span class="st">"policy-sentiment"</span>, model<span class="op">=</span><span class="st">"gemma3:270m"</span>, chat_mode<span class="op">=</span><span class="st">"per_query"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Sweep it like any other dimension with <code>"chat_modes": ["per_text", "per_query"]</code> in a parameter grid. The chosen mode is recorded in the runs metrics table.</p>
 </section>
 <section id="model-reasoning" class="level2">
@@ -512,23 +541,42 @@ A single chat for the whole run, carrying history across every text and annotati
 <ul>
 <li><code>reasoning=None</code> (default) keeps the model’s own default behaviour.</li>
 <li><code>reasoning=True</code> enables reasoning; <code>reasoning=False</code> disables it.</li>
+<li>Other values, such as <code>"low"</code>, <code>"medium"</code> or <code>"high"</code> for models that support reasoning levels, are passed to Ollama unchanged.</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ExperimentSpec(task<span class="op">=</span><span class="st">"policy-sentiment"</span>, model<span class="op">=</span><span class="st">"qwen3:8b"</span>, reasoning<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ExperimentSpec(task<span class="op">=</span><span class="st">"policy-sentiment"</span>, model<span class="op">=</span><span class="st">"qwen3:8b"</span>, reasoning<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The value is passed through to <code>ChatOllama</code>. When the model returns reasoning, Lab captures it — reading the structured <code>reasoning_content</code> when available and otherwise parsing a <code>&lt;think&gt;…&lt;/think&gt;</code> block — and writes one record per query to <code>reasoning_traces.jsonl</code> in the run directory, so you can audit how the model arrived at each label. The chosen mode is recorded in the runs metrics table.</p>
 </section>
 <section id="running-without-ground-truth" class="level2">
 <h2 class="anchored" data-anchor-id="running-without-ground-truth">Running Without Ground Truth</h2>
-<p>If you are still designing a task and do not yet have human-coded labels, use <code>run_annotation()</code> directly on an unlabeled CSV. Later, add a <code>ground-truth.csv</code> and score the outputs with <code>run_metrics()</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> run_annotation</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>annotation <span class="op">=</span> run_annotation(</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"gemma3:270m"</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    csv_path<span class="op">=</span><span class="st">"texts.csv"</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    codebook_path<span class="op">=</span><span class="st">"codebook.json"</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    output_path<span class="op">=</span><span class="st">"outputs/model-labels.csv"</span>,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    experiment_directory<span class="op">=</span><span class="st">"outputs/run-001"</span>,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    country_iso_code<span class="op">=</span><span class="st">"IRL"</span>,</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To annotate texts that have no human labels yet, or to change settings <code>ExperimentSpec</code> doesn’t cover (such as retries), call <code>run_annotation()</code> directly. It writes the model’s labels and the run files, but doesn’t score them.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> run_annotation</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>annotation <span class="op">=</span> run_annotation(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"gemma3:270m"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    csv_path<span class="op">=</span><span class="st">"texts.csv"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    codebook_path<span class="op">=</span><span class="st">"codebook.json"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    output_path<span class="op">=</span><span class="st">"outputs/model-labels.csv"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    experiment_directory<span class="op">=</span><span class="st">"outputs/run-001"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    country_iso_code<span class="op">=</span><span class="st">"IRL"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Once you have human labels for the same rows, in the same order, score the run with <code>run_metrics()</code>. Pass the run’s sidecar files to include timing, character counts and energy in the runs table:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> run_metrics</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>metrics <span class="op">=</span> run_metrics(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    ground_truth_csv<span class="op">=</span><span class="st">"ground-truth.csv"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    llm_output_csv<span class="op">=</span><span class="st">"outputs/model-labels.csv"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    codebook_path<span class="op">=</span><span class="st">"codebook.json"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"my-task"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    model_id<span class="op">=</span><span class="st">"gemma3:270m"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    output_csv<span class="op">=</span><span class="st">"outputs/metrics/my-task_metrics_log.csv"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    report_file<span class="op">=</span><span class="st">"outputs/run-001/classification_reports.txt"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    timing_file<span class="op">=</span><span class="st">"outputs/run-001/timing_data.json"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    char_counts_file<span class="op">=</span><span class="st">"outputs/run-001/char_counts.json"</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    emissions_file<span class="op">=</span><span class="st">"outputs/run-001/emissions.csv"</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    experiment_directory<span class="op">=</span><span class="st">"outputs/run-001"</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(metrics.summary_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Add <code>process_textbox=True</code> or <code>process_span=True</code> to score those questions. The configuration columns of the runs table (temperature, prompt wrapper and so on) are only filled in if you pass them to <code>run_metrics()</code> too. <code>run_experiment()</code> does this for you.</p>
 
 
 </section>

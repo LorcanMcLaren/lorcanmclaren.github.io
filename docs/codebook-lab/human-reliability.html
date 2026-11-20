@@ -360,8 +360,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html#what-the-package-does" class="sidebar-item-text sidebar-link">
- <span class="menu-text">What the package does</span></a>
+  <a href="./index.html#how-studio-and-lab-fit-together" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How Studio and Lab fit together</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html#what-lab-does-in-a-run" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">What Lab does in a run</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -626,7 +632,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>CodeBook Lab can validate multiple human coder CSVs, calculate inter-coder reliability, surface disagreements, and build a consensus <code>ground-truth.csv</code>.</p>
+<p>When several people annotate the same texts, CodeBook Lab can check their files, measure how far they agree, list their disagreements, and combine their labels into a single <code>ground-truth.csv</code> for benchmarking models.</p>
+<p>Each coder annotates in CodeBook Studio and downloads their labelled CSV. Studio doesn’t add an item ID column, so <strong>give your CSV a unique ID column before coders start</strong> (named <code>sample_id</code> by default). Lab uses it to match the same item across coders’ files.</p>
 <section id="calculate-reliability" class="level2">
 <h2 class="anchored" data-anchor-id="calculate-reliability">Calculate Reliability</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> calculate_human_reliability</span>
@@ -644,34 +651,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reliability.summary_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>coder_csvs</code> can also be a list of paths, in which case each coder is named after their file (<code>coder1.csv</code> becomes <code>coder1</code>). Pass <code>id_column="..."</code> if your ID column isn’t called <code>sample_id</code>.</p>
 <p>Outputs include:</p>
-<ul>
-<li><code>validation_issues.csv</code></li>
-<li><code>pairwise_icr.csv</code></li>
-<li><code>multirater_icr.csv</code></li>
-<li><code>disagreements.csv</code></li>
-<li><code>summary.md</code></li>
-</ul>
-<p>Each coder CSV must contain a stable item identifier column. The default is <code>sample_id</code>; pass <code>id_column="..."</code> if your data uses a different identifier.</p>
-<p>Validation catches duplicate coder-item rows, missing assigned items, unexpected items, unexpected coder assignments, invalid labels, missing required fields, and filled child fields whose condition is not satisfied.</p>
+<dl>
+<dt><code>validation_issues.csv</code></dt>
+<dd>
+Problems found in the coder files (see below), one row per issue.
+</dd>
+<dt><code>pairwise_icr.csv</code></dt>
+<dd>
+For each question and each pair of coders: the number of items both coded, percentage agreement and Cohen’s kappa.
+</dd>
+<dt><code>multirater_icr.csv</code></dt>
+<dd>
+For each question across all coders: Krippendorff’s alpha, Fleiss’ kappa, the share of items where all coders agreed (unanimity rate) and the share where more than half agreed (majority agreement rate). Fleiss’ kappa is only reported when every item has the same number of coders.
+</dd>
+<dt><code>disagreements.csv</code></dt>
+<dd>
+Every item and question where coders gave different labels.
+</dd>
+<dt><code>summary.md</code></dt>
+<dd>
+A readable summary of all of the above.
+</dd>
+</dl>
+<p>Every question type is included. Labels are compared as categories: Likert ratings count as agreement only when identical, and textbox answers only when they match exactly after trimming spaces. Krippendorff’s alpha uses the nominal level, so a 4 versus a 5 counts as the same disagreement as a 1 versus a 5. For conditional questions, an item counts only when the parent answer makes the question apply for the coders being compared.</p>
+<p>Validation catches duplicate coder-item rows, missing assigned items, unexpected items, unexpected coder assignments, invalid labels, missing required fields, and filled child fields whose condition is not satisfied. Invalid labels are treated as missing in the calculations, so check <code>validation_issues.csv</code> before relying on the scores.</p>
 </section>
 <section id="assignments" class="level2">
 <h2 class="anchored" data-anchor-id="assignments">Assignments</h2>
-<p>By default, Lab infers coder assignments from the submitted files. To validate expected coverage, pass an assignment CSV.</p>
+<p>By default, Lab assumes each coder was meant to code exactly the items in their file. To check that everyone coded what they were assigned, pass an assignment CSV with <code>assignment_csv="assignments.csv"</code>, in either of these formats:</p>
 <p>Long format:</p>
 <pre class="csv"><code>sample_id,coder_id
 001,coder1
 001,coder2
 002,coder2
 002,coder3</code></pre>
-<p>Wide format:</p>
+<p>Wide format, with columns named <code>ra_1</code>, <code>ra_2</code>, … or <code>coder_1</code>, <code>coder_2</code>, …:</p>
 <pre class="csv"><code>sample_id,ra_1,ra_2
 001,coder1,coder2
 002,coder2,coder3</code></pre>
 </section>
 <section id="build-ground-truth" class="level2">
 <h2 class="anchored" data-anchor-id="build-ground-truth">Build Ground Truth</h2>
-<p>Use <code>build_human_ground_truth()</code> to create a consensus label file. Rows without a strict majority are written to an adjudication queue.</p>
+<p>Use <code>build_human_ground_truth()</code> to combine the coders’ labels into one file. Each question on each item is decided separately: a label is used when <strong>more than half</strong> of the coders who answered gave it. With two coders, that means any disagreement is unresolved. With three, two out of three is enough.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> build_human_ground_truth</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ground_truth <span class="op">=</span> build_human_ground_truth(</span>
@@ -680,18 +703,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    output_dir<span class="op">=</span><span class="st">"outputs/ground_truth"</span>,</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Outputs include:</p>
-<ul>
-<li><code>ground-truth.csv</code></li>
-<li><code>adjudication_queue.csv</code></li>
-<li><code>validation_issues.csv</code></li>
-</ul>
-<p>Open <code>adjudication_queue.csv</code> in CodeBook Studio’s adjudication mode, fill unresolved blanks, export the completed queue, then rebuild:</p>
+<dl>
+<dt><code>ground-truth.csv</code></dt>
+<dd>
+One row per item, with the consensus label for each question. Unresolved questions are blank for now.
+</dd>
+<dt><code>adjudication_queue.csv</code></dt>
+<dd>
+Only the items with at least one unresolved question. Resolved questions are already filled in, and the unresolved ones are blank.
+</dd>
+<dt><code>validation_issues.csv</code></dt>
+<dd>
+The same checks as for reliability.
+</dd>
+</dl>
+<p>Conditional questions follow the consensus answers: if the agreed parent answer doesn’t trigger a child question, the child is left blank and isn’t sent for adjudication.</p>
+<p>Open <code>adjudication_queue.csv</code> in CodeBook Studio together with the codebook, choose <strong>Adjudicate disagreements</strong>, fill in the blank cells, and download the completed queue. Then rebuild with it:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>resolved <span class="op">=</span> build_human_ground_truth(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    codebook_path<span class="op">=</span><span class="st">"codebook.json"</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    coder_csvs<span class="op">=</span>coder_csvs,</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    adjudications_csv<span class="op">=</span><span class="st">"adjudication_queue.csv"</span>,</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    output_dir<span class="op">=</span><span class="st">"outputs/ground_truth_resolved"</span>,</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Labels in the adjudications file override the majority vote. Blank cells in it are ignored, and an adjudicated label that isn’t valid for its question stops the build with an error naming the item and question. The final <code>ground-truth.csv</code> can go straight into a <a href="./tasks.html">task folder</a>.</p>
 
 
 </section>

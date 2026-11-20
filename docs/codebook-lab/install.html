@@ -360,8 +360,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html#what-the-package-does" class="sidebar-item-text sidebar-link">
- <span class="menu-text">What the package does</span></a>
+  <a href="./index.html#how-studio-and-lab-fit-together" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How Studio and Lab fit together</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html#what-lab-does-in-a-run" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">What Lab does in a run</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -633,33 +639,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install codebook-lab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If you plan to generate or score textbox annotations, install the optional textbox dependencies:</p>
+<p>If you plan to score textbox annotations, install the optional textbox dependencies:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="st">"codebook-lab[textbox]"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Those extras enable ROUGE, embedding-based cosine similarity, and BERTScore. Normalized Levenshtein similarity and BLEU are available without the optional extras.</p>
+<p>Every textbox metric needs these extras: normalized Levenshtein similarity (<code>python-Levenshtein</code>), BLEU (<code>nltk</code>), ROUGE (<code>rouge-score</code>), embedding cosine similarity (<code>sentence-transformers</code>) and BERTScore (<code>bert-score</code>, <code>torch</code>). Without them, textbox fields are still generated and get a percentage-agreement score, but their similarity metrics are left blank and <code>classification_reports.txt</code> lists the missing packages. The extras include PyTorch, so they are a large download. Checkbox, dropdown, Likert and span metrics need nothing extra.</p>
 </section>
 <section id="ollama" class="level2">
 <h2 class="anchored" data-anchor-id="ollama">Ollama</h2>
-<p>CodeBook Lab runs local models through Ollama. Install Ollama, then make sure the server is available:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> serve</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Experiment runs try to start the default local Ollama server when needed, and pull the requested model automatically before the first run — so you do not need to <code>ollama pull</code> it yourself:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> ExperimentSpec, run_experiment</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> run_experiment(</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    ExperimentSpec(</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        task<span class="op">=</span><span class="st">"policy-sentiment"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"gemma3:270m"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        country_iso_code<span class="op">=</span><span class="st">"IRL"</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The <code>country_iso_code</code> value should be the three-letter ISO 3166-1 alpha-3 code for where the computation physically runs, such as <code>IRL</code>, <code>USA</code>, or <code>DEU</code>. CodeCarbon uses this to estimate emissions from energy consumption.</p>
+<p>CodeBook Lab runs models through <a href="https://ollama.com/download">Ollama</a>, which you install separately. Once it is installed, you don’t need to start it or download models yourself:</p>
+<ul>
+<li><strong>Starting the server.</strong> If Ollama isn’t running, each run starts it in the background with <code>ollama serve</code>. This only happens for a server on the default local address (<code>http://127.0.0.1:11434</code>). To use Ollama on another machine, set the <code>OLLAMA_HOST</code> environment variable to its address and start that server yourself.</li>
+<li><strong>Downloading models.</strong> <code>run_experiment()</code> calls <code>ollama pull</code> for the model before every run. For a model you already have, this only checks for updates, which is usually quick but needs an internet connection: if the pull fails, the run stops with an error. Pass <code>pull_model=False</code> (or <code>pull_models=False</code> for a sweep) to skip the check, for example when working offline or to keep a model version fixed during a benchmark.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> codebook_lab <span class="im">import</span> ExperimentSpec, run_experiment</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> run_experiment(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    ExperimentSpec(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        task<span class="op">=</span><span class="st">"policy-sentiment"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"gemma3:270m"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        country_iso_code<span class="op">=</span><span class="st">"IRL"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>country_iso_code</code> is the three-letter ISO 3166-1 alpha-3 code for where the computation physically runs, such as <code>IRL</code>, <code>USA</code> or <code>DEU</code>. CodeCarbon uses it to look up the electricity grid’s carbon intensity when converting energy use to emissions. It defaults to <code>USA</code>, so set it whenever you run elsewhere, or the emissions estimates will be wrong. Energy use itself is measured on your machine and does not depend on this setting.</p>
 </section>
 <section id="development-install" class="level2">
 <h2 class="anchored" data-anchor-id="development-install">Development Install</h2>
 <p>For package development, clone the repository and install it in editable mode:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/LorcanMcLaren/codebook-lab.git</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> codebook-lab</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-e</span> <span class="st">".[dev]"</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pytest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/LorcanMcLaren/codebook-lab.git</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> codebook-lab</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-e</span> <span class="st">".[dev]"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pytest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Use <code>python -m pip install -e ".[all,dev]"</code> if you also want the optional textbox metric dependencies in the development environment.</p>
 
 

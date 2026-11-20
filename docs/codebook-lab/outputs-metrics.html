@@ -360,8 +360,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html#what-the-package-does" class="sidebar-item-text sidebar-link">
- <span class="menu-text">What the package does</span></a>
+  <a href="./index.html#how-studio-and-lab-fit-together" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How Studio and Lab fit together</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html#what-lab-does-in-a-run" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">What Lab does in a run</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -599,6 +605,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#per-run-files" id="toc-per-run-files" class="nav-link active" data-scroll-target="#per-run-files">Per-Run Files</a></li>
   <li><a href="#tidy-metrics-tables" id="toc-tidy-metrics-tables" class="nav-link" data-scroll-target="#tidy-metrics-tables">Tidy Metrics Tables</a></li>
+  <li><a href="#metric-names" id="toc-metric-names" class="nav-link" data-scroll-target="#metric-names">Metric Names</a></li>
+  <li><a href="#how-rows-and-blanks-are-scored" id="toc-how-rows-and-blanks-are-scored" class="nav-link" data-scroll-target="#how-rows-and-blanks-are-scored">How Rows And Blanks Are Scored</a></li>
   <li><a href="#linking-the-two-tables" id="toc-linking-the-two-tables" class="nav-link" data-scroll-target="#linking-the-two-tables">Linking the two tables</a></li>
   <li><a href="#choosing-metrics" id="toc-choosing-metrics" class="nav-link" data-scroll-target="#choosing-metrics">Choosing Metrics</a></li>
   </ul>
@@ -627,10 +635,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Each run creates a directory named by a short <strong>run ID</strong> under <code>outputs/&lt;task&gt;/&lt;run_id&gt;/</code>. Run-ID folders keep paths compact; the full set of choices for the run lives in <code>config.json</code> and in the runs metrics table.</p>
+<p>Each run creates a folder <code>outputs/&lt;task&gt;/&lt;run_id&gt;/</code>. The run ID is the start time plus a random suffix, such as <code>run_2026-06-26_14-00-08_5224b29a</code>, so runs sort by time and never overwrite each other. The run’s settings are stored in <code>config.json</code> and in the runs table.</p>
 <pre class="text"><code>outputs/
   policy-sentiment/
-    a1b2c3d4/
+    run_2026-06-26_14-00-08_5224b29a/
       output.csv
       config.json
       classification_reports.txt
@@ -646,11 +654,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl>
 <dt><code>output.csv</code></dt>
 <dd>
-Row-level model annotations.
+The input rows with the model’s answers in the annotation columns. Every non-label column from <code>ground-truth.csv</code> is kept. Blank cells are skipped conditional questions or answers that stayed invalid after retries. The file is rewritten after each row, so an interrupted run keeps the rows it finished.
 </dd>
 <dt><code>config.json</code></dt>
 <dd>
-The full run configuration — model, prompt, sampling, chat mode, reasoning, and task paths — so a run-ID folder can always be traced back to its settings.
+The run’s settings: model, prompt wrapper, examples, temperature, top-p, chat mode, reasoning, textbox and span switches, country code, task name and retry settings.
 </dd>
 <dt><code>classification_reports.txt</code></dt>
 <dd>
@@ -670,7 +678,7 @@ Total input and output characters sent to and returned from the model.
 </dd>
 <dt><code>reasoning_traces.jsonl</code></dt>
 <dd>
-One record per query capturing the model’s reasoning content, when the model returns it (see <a href="./experiments.html#model-reasoning">Model reasoning</a>).
+One record per query with the model’s reasoning, written only when the model returns reasoning (see <a href="./experiments.html#model-reasoning">Model reasoning</a>).
 </dd>
 </dl>
 </section>
@@ -687,7 +695,52 @@ The long table — one row per <code>(run_id, annotation column, annotation type
 The runs table — one row per <code>run_id</code> with model, prompt, sampling, <strong>chat mode, and reasoning</strong> configuration, task paths, inference counts, character counts, energy use, emissions, CPU/GPU metadata, and per-query averages.
 </dd>
 </dl>
-<p>This split keeps metric values long and analysis-friendly while avoiding repeated run metadata on every metric row.</p>
+<p>This split keeps metric values long and analysis-friendly while avoiding repeated run metadata on every metric row. Both files are appended to, never overwritten, so every run of a task accumulates in the same two tables. The runs table also has a <code>model_id</code> column that combines the main settings in one label, such as <code>gemma3:4b_temp0.0_examples_standard</code>.</p>
+</section>
+<section id="metric-names" class="level2">
+<h2 class="anchored" data-anchor-id="metric-names">Metric Names</h2>
+<p>The <code>metric</code> column uses these names:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question type</th>
+<th>Metrics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Checkbox, dropdown</td>
+<td><code>percentage_agreement</code>, <code>accuracy</code>, <code>precision</code>, <code>recall</code>, <code>f1</code>, <code>cohen_kappa</code>, <code>krippendorff_alpha</code></td>
+</tr>
+<tr class="even">
+<td>Likert</td>
+<td>the above, plus <code>spearman_corr</code> and <code>quadratic_kappa</code></td>
+</tr>
+<tr class="odd">
+<td>Textbox</td>
+<td><code>percentage_agreement</code>, <code>norm_levenshtein</code>, <code>bleu</code>, <code>rouge1_f</code>, <code>rouge2_f</code>, <code>rougeL_f</code>, <code>cosine_similarity</code>, <code>bertscore_precision</code>, <code>bertscore_recall</code>, <code>bertscore_f1</code></td>
+</tr>
+<tr class="even">
+<td>Span</td>
+<td><code>token_f1</code>, <code>exact_match_f1</code>, <code>char_iou</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>precision</code>, <code>recall</code> and <code>f1</code> are macro-averaged: computed for each answer category and then averaged, so rare categories count as much as common ones. Per-category figures are in <code>classification_reports.txt</code>.</p>
+<p>Textbox and span metrics are only computed when those questions are switched on for the run, and textbox similarity metrics need the <a href="./install.html#python-environment">optional dependencies</a>. Metrics that weren’t computed are left blank.</p>
+</section>
+<section id="how-rows-and-blanks-are-scored" class="level2">
+<h2 class="anchored" data-anchor-id="how-rows-and-blanks-are-scored">How Rows And Blanks Are Scored</h2>
+<ul>
+<li><strong>Rows are matched by position.</strong> Row <em>n</em> of <code>output.csv</code> is scored against row <em>n</em> of <code>ground-truth.csv</code>. Don’t reorder either file between annotation and scoring.</li>
+<li><strong>Conditional questions</strong> are scored only on rows where the human answer to the parent meets the condition (see <a href="./conditionals-retries.html#conditional-annotations">Conditional Annotations</a>).</li>
+<li><strong>Blank answers count as wrong answers.</strong> For dropdown and Likert questions, a blank model answer is compared with the human label like any other value, so it lowers accuracy and F1.</li>
+<li><strong>Blank checkboxes count as “no”</strong>, on both sides. See <a href="./annotation-types.html#checkbox">Checkbox</a>.</li>
+</ul>
 <p>Depending on the annotation types in your codebook, metrics can include:</p>
 <ul>
 <li>accuracy, precision, recall, F1, and percentage agreement</li>
@@ -709,17 +762,17 @@ The runs table — one row per <code>run_id</code> with model, prompt, sampling,
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>joined <span class="op">=</span> metrics.merge(runs, on<span class="op">=</span><span class="st">"run_id"</span>)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># e.g. macro-F1 on Direction by model and chat mode</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># e.g. macro-averaged F1 on Direction by model and chat mode</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>view <span class="op">=</span> joined[</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    (joined[<span class="st">"column"</span>] <span class="op">==</span> <span class="st">"Policy Sentiment_Direction"</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">&amp;</span> (joined[<span class="st">"metric"</span>] <span class="op">==</span> <span class="st">"f1_macro"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">&amp;</span> (joined[<span class="st">"metric"</span>] <span class="op">==</span> <span class="st">"f1"</span>)</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>]</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(view[[<span class="st">"model_id"</span>, <span class="st">"chat_mode"</span>, <span class="st">"reasoning"</span>, <span class="st">"use_examples"</span>, <span class="st">"value"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Because every metric row carries a <code>run_id</code>, you can pivot, group, and compare runs along any configuration dimension — model, prompt, examples, chat mode, reasoning, or sampling — all scored against the same human labels.</p>
 </section>
 <section id="choosing-metrics" class="level2">
 <h2 class="anchored" data-anchor-id="choosing-metrics">Choosing Metrics</h2>
-<p>For checkbox and dropdown annotations, start with F1 and percentage agreement. For imbalanced labels, inspect per-class precision and recall in <code>classification_reports.txt</code>.</p>
+<p>For checkbox and dropdown annotations, start with macro F1 and percentage agreement. For imbalanced labels, inspect per-class precision and recall in <code>classification_reports.txt</code>.</p>
 <p>For Likert annotations, report ordinal-aware metrics alongside exact agreement. A model that predicts adjacent categories may be less wrong than one that jumps from one end of the scale to the other.</p>
 <p>For textbox annotations, treat similarity metrics as diagnostics rather than a single ground-truth measure. Short evidence extracts can be semantically equivalent while using different words.</p>
 <p>For span annotations, <code>token_f1</code> is the headline score for most comparisons because it rewards overlap at the token level. Use <code>exact_match_f1</code> when boundary precision matters and <code>char_iou</code> when near misses should still be visible.</p>

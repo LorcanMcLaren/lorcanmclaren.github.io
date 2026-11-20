@@ -2,10 +2,10 @@
 title: "Tasks"
 ---
 
-A CodeBook Lab task is a folder with two files:
+A CodeBook Lab task is a folder with exactly two files, named exactly as shown:
 
 - `codebook.json`: the annotation scheme exported from CodeBook Studio
-- `ground-truth.csv`: the same items with human annotation columns filled in
+- `ground-truth.csv`: the texts, with the human labels filled in
 
 For example:
 
@@ -18,7 +18,7 @@ my_tasks/
 
 ## Codebook Fields
 
-The codebook tells Lab which column contains the text, which metadata columns should be preserved, and which annotation fields should be generated:
+The codebook names the column that holds the text and defines the questions, grouped into sections:
 
 ```json
 {
@@ -39,9 +39,20 @@ The codebook tells Lab which column contains the text, which metadata columns sh
 }
 ```
 
-Annotation output columns are named from the section and annotation names. In this example, the output column is `Policy Sentiment_Direction`.
+The top-level keys do different jobs in Studio and Lab:
 
-`metadata_columns` is optional. Lab preserves non-annotation columns in output files either way, but explicit metadata is useful when coordinating with CodeBook Studio and human-reliability workflows.
+`text_column`
+: The column with the text to annotate. This is the only column the model sees: each prompt contains the codebook instructions and this text, nothing else from the row.
+
+`header_column`
+: A short title Studio shows above each text. Lab ignores it.
+
+`metadata_columns`
+: Optional columns Studio shows to coders for context. Lab ignores this list too. Every non-label column in your CSV, listed here or not, is copied to the model's output file unchanged, but none of them are sent to the model.
+
+Sections are the keys that start with `section_`, and Lab processes them in order. Within a section, questions are ordered by the number at the end of their key (`annotation_1`, `annotation_2`, …), the same order Studio shows them in. This order matters for [conditional questions](conditionals-retries.qmd#conditional-annotations) and, in the default chat mode, for what the model has already answered about a text when it reaches each question.
+
+Each question's column is named `<section name>_<question name>`. In this example the column is `Policy Sentiment_Direction`. Names are matched exactly, including spaces and capitalisation. If you rename a section or question in Studio after annotating, export the labels again so the column names in `ground-truth.csv` match the codebook.
 
 ## Ground Truth CSV
 
@@ -53,7 +64,9 @@ ps_001,Carbon Border Reform,The reform is a sensible compromise.,positive
 ps_002,Housing Plan Criticism,The plan has an admirable goal but unrealistic financing.,negative
 ```
 
-When Lab runs annotation, it drops the human label columns before prompting the model. This prevents the model from seeing the answers it will later be scored against.
+When Lab runs annotation, it drops the human label columns before prompting the model, so the model never sees the answers it will be scored against.
+
+Lab matches each model answer to its human label **by row position**, not by an ID column: row 1 of the output is scored against row 1 of `ground-truth.csv`, and so on. Lab keeps rows in their original order, so this works as long as you don't sort, filter or edit `ground-truth.csv` between running and scoring. A stable ID column (such as `doc_id` or `sample_id`) is still worth keeping: it is copied to the output, it lets you inspect individual disagreements, and Lab's [human reliability](human-reliability.qmd) tools require one.
 
 ## Bundled Example Tasks
 
@@ -66,7 +79,7 @@ print(list_example_tasks())
 copy_example_task("policy-sentiment", "./my_tasks", overwrite=True)
 ```
 
-Then point an experiment at the copied task root:
+Then point an experiment at the folder that contains your task folders:
 
 ```python
 from codebook_lab import ExperimentSpec, run_experiment
@@ -81,6 +94,8 @@ result = run_experiment(
 )
 ```
 
+Lab looks for a task in `task_root` first. If it isn't there, Lab falls back to a bundled example task with the same name, if one exists. So a mistyped `task_root` with `task="policy-sentiment"` silently runs the bundled copy instead of yours. The `codebook_path` column of the [runs table](outputs-metrics.qmd#tidy-metrics-tables) shows which copy each run used.
+
 ## Custom Task Checklist
 
 Before running a custom task, check:
@@ -93,3 +108,5 @@ Before running a custom task, check:
 - Likert values are inside the configured numeric range
 - span values are JSON lists of `start`, `end`, `text`, and optional `label` objects
 - conditional child fields are blank when the parent condition is not satisfied
+- a parent question comes before any question that depends on it
+- rows are in the same order you will score them in, ideally with an ID column

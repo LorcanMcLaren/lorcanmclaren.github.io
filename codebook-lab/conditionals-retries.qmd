@@ -2,7 +2,7 @@
 title: "Conditionals And Retries"
 ---
 
-Newer CodeBook Lab workflows support conditional annotations and invalid-response retries. These features make Lab closer to CodeBook Studio's annotation behavior while keeping model outputs auditable.
+Some questions only make sense after a particular answer to an earlier one, and models sometimes return answers Lab can't use. This page covers how Lab handles both: conditional questions, which it asks only when they apply, and invalid answers, which it retries and then records as blank.
 
 ## Conditional Annotations
 
@@ -30,9 +30,18 @@ An annotation can depend on a previous annotation. Lab evaluates the condition r
 
 The condition `value` is normalized the same way as the parent's response, so for a checkbox parent `"Yes"`, `true`, and `1` are all equivalent triggers.
 
-If the parent annotation does not satisfy the condition, Lab stores a blank value for the child field and does not send the child prompt to the model. Metrics also ignore rows where the field is not applicable, so skipped conditionals do not count as model errors.
+A condition is met when the parent's answer equals the condition's `value`. Lab checks this row by row, using the model's own answer to the parent. If the condition isn't met, Lab doesn't send the child question to the model and stores a blank. If the parent was itself skipped, its children are skipped too, so conditions can be chained.
 
-Conditions can point across sections and are evaluated in codebook order. If a condition target is missing or cyclic, Lab falls back to permissive behavior rather than crashing a run.
+**Order matters.** Lab asks questions in codebook order: sections in order, then questions by the number in their key. A parent must come before its children. A condition that points to a question further down the codebook is never met at the time the child is asked, so the child is always skipped. Conditions can point to a question in an earlier section.
+
+**How conditional questions are scored.** A child question is scored only on rows where the *human* answer to the parent meets the condition, because those are the rows where a correct annotation has an answer. On those rows:
+
+- If the model answered the parent the same way, its answer to the child is compared as usual.
+- If the model answered the parent differently, it skipped the child, and that blank counts as an error.
+
+Rows where the human skipped the child are left out of the child's scores, whatever the model did. Mistakes on a parent therefore show up twice: in the parent's own scores and in its children's.
+
+If a condition points to a question that doesn't exist, or conditions form a loop, Lab treats the child as always applicable instead of stopping the run. Studio only offers checkbox, dropdown and Likert questions as parents.
 
 ## Response Validation
 
@@ -68,10 +77,10 @@ annotation = run_annotation(
 Available strategies:
 
 `identical`
-: Re-run the same prompt and model configuration. This is the default.
+: Re-run the same prompt and model configuration.
 
 `reprompt`
-: Append a short format reminder to the prompt before retrying.
+: Append a short format reminder to the prompt before retrying. This is the default.
 
 `temperature`
 : Retry with a second model chain at `retry_temperature`, useful when the main run is deterministic.
@@ -89,5 +98,7 @@ annotation = run_annotation(
 )
 ```
 
-Experiment runs currently expose retry behavior through the lower-level `run_annotation()` path. `run_experiment()` uses the package defaults when it calls annotation internally.
+`run_annotation()` defaults to `retries=1` and `retry_strategy="reprompt"`. `ExperimentSpec` has no retry settings, so every run started with `run_experiment()` or `run_experiment_grid()` uses those defaults: one retry with a format reminder, then a blank cell. To change retries, call `run_annotation()` and then `run_metrics()` yourself, as in [Running Without Ground Truth](experiments.qmd#running-without-ground-truth).
+
+Retries add model calls. They are included in the run's query count, timing and energy figures, so a model that often needs retries looks slower and costlier per item, as in the [Examples](examples.qmd#compare-configurations) benchmark.
 

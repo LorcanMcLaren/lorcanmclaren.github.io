@@ -413,3 +413,10 @@ main.content td a:hover {
   font-weight: 600;
   border-left-color: rgba(255, 205, 40, 0.95) !important;
 }
+
+/* Three cards side by side when there is room, stacked on narrow screens. */
+@media (min-width: 700px) {
+  .doc-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

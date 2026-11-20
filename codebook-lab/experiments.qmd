@@ -56,7 +56,40 @@ The defaults are `temperature=0.0`, `use_examples=True`, `prompt_type="standard"
 model responses are retried with the `reprompt` strategy by default (see
 [Conditionals & Retries](conditionals-retries.qmd#retry-strategies)).
 
-`run_experiment()` uses the high-level end-to-end path: annotation first, metrics second. It resolves the task directory, checks that `codebook.json` and `ground-truth.csv` exist, optionally pulls the Ollama model, writes per-run sidecar files, and appends tidy metrics rows.
+`run_experiment()` runs annotation and then scoring. It finds the task folder (see [Tasks](tasks.qmd#bundled-example-tasks) for how), checks that `codebook.json` and `ground-truth.csv` exist, pulls the model with Ollama unless you pass `pull_model=False`, writes the run's files to a new folder, and appends its scores to the [metrics tables](outputs-metrics.qmd). Retry behaviour can't be set in `ExperimentSpec`; see [Retry Strategies](conditionals-retries.qmd#retry-strategies).
+
+## What The Model Sees
+
+Lab sends one prompt per question per text. With the default `standard` wrapper and examples switched off, the `Direction` question from the bundled `policy-sentiment` task looks like this:
+
+```text
+Policy Sentiment
+Read the short text and assess whether it expresses an evaluative stance toward a public policy, proposal, or political decision.
+
+Direction
+If the text expresses a stance, identify whether the overall direction is positive, negative, or mixed. Use 'no clear sentiment' only when the text does not convey an evaluative stance.
+
+Respond only with one of the following options: "positive", or "negative", or "mixed", or "no clear sentiment".
+
+Return your response in JSON format, with the key "response".
+
+---
+
+Text: 
+"The housing plan has an admirable goal, but its financing assumptions are unrealistic and the burden on municipalities is far too high."
+
+Response: 
+```
+
+The prompt is built from the codebook in this order: section name and instruction, question name and tooltip, a response instruction for the question type, and a request for JSON. Then come the worked examples, when used, and finally the text. Nothing else from the CSV row is included.
+
+Some details that affect results:
+
+- **Examples are on by default** (`use_examples=True`). Each question's `example` field, a block of worked `Text:` / `Response:` pairs written in Studio, is added after the JSON request. An `example` field that doesn't contain `Text:` is treated as extra guidance and added even when `use_examples=False`.
+- **Answers are constrained to JSON.** Lab asks Ollama for structured output matching `{"response": ...}` (a list of span objects for span questions). The model's visible answer is only that JSON. The `CoT` wrapper asks the model to reason step by step, but that reasoning cannot appear in the answer. To capture reasoning, use a model with a thinking mode and set `reasoning=True` (see [Model reasoning](#model-reasoning)).
+- **Questions about the same text share a chat by default** (`chat_mode="per_text"`), so when the model reaches a question it has already seen its earlier prompts and answers for that text. See [Chat continuation modes](#chat-continuation-modes).
+
+CodeBook Studio's **Preview LLM Prompts** shows the same prompts for the built-in wrappers, so you can check the wording before running anything.
 
 ## Parameter Sweep
 
@@ -149,6 +182,7 @@ controls whether it is used:
 
 - `reasoning=None` (default) keeps the model's own default behaviour.
 - `reasoning=True` enables reasoning; `reasoning=False` disables it.
+- Other values, such as `"low"`, `"medium"` or `"high"` for models that support reasoning levels, are passed to Ollama unchanged.
 
 ```python
 ExperimentSpec(task="policy-sentiment", model="qwen3:8b", reasoning=True)
@@ -162,7 +196,7 @@ arrived at each label. The chosen mode is recorded in the runs metrics table.
 
 ## Running Without Ground Truth
 
-If you are still designing a task and do not yet have human-coded labels, use `run_annotation()` directly on an unlabeled CSV. Later, add a `ground-truth.csv` and score the outputs with `run_metrics()`.
+To annotate texts that have no human labels yet, or to change settings `ExperimentSpec` doesn't cover (such as retries), call `run_annotation()` directly. It writes the model's labels and the run files, but doesn't score them.
 
 ```python
 from codebook_lab import run_annotation
@@ -176,3 +210,26 @@ annotation = run_annotation(
     country_iso_code="IRL",
 )
 ```
+
+Once you have human labels for the same rows, in the same order, score the run with `run_metrics()`. Pass the run's sidecar files to include timing, character counts and energy in the runs table:
+
+```python
+from codebook_lab import run_metrics
+
+metrics = run_metrics(
+    ground_truth_csv="ground-truth.csv",
+    llm_output_csv="outputs/model-labels.csv",
+    codebook_path="codebook.json",
+    label="my-task",
+    model_id="gemma3:270m",
+    output_csv="outputs/metrics/my-task_metrics_log.csv",
+    report_file="outputs/run-001/classification_reports.txt",
+    timing_file="outputs/run-001/timing_data.json",
+    char_counts_file="outputs/run-001/char_counts.json",
+    emissions_file="outputs/run-001/emissions.csv",
+    experiment_directory="outputs/run-001",
+)
+print(metrics.summary_text)
+```
+
+Add `process_textbox=True` or `process_span=True` to score those questions. The configuration columns of the runs table (temperature, prompt wrapper and so on) are only filled in if you pass them to `run_metrics()` too. `run_experiment()` does this for you.
