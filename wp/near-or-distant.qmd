@@ -2,6 +2,7 @@
 title: "Near or Distant? Elite Climate Rhetoric and Public Opinion in Ireland"
 date: "2026"
 date-format: "YYYY"
+order: 4
 paper-status: "Pre-registered"
 coauthors:
   - name: "James P. Cross"

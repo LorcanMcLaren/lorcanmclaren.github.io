@@ -26,8 +26,6 @@ website:
         text: Projects
       - href: "#teaching"
         text: Teaching
-      - href: "#contact"
-        text: Contact
       - href: ./cv
         text: CV
   search: false

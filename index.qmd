@@ -4,9 +4,9 @@ toc: false
 listing: # this determines different lists with respective options. These are accessed in the below with the :::{#id}::: syntax.
   - id: wp
     contents: "wp/*.qmd" # from which folder to take the contents. Here, take all .qmd files from the wp folder.
-    sort: "date desc" # how to sort the contents.
+    sort: "order" # manual order: set `order:` in each wp/*.qmd (1 = top)
     template: ejs/wp.ejs  # how to display contents. Here, use the customized wp.ejs in the ejs folder.
-    fields: [title, date, abstract, coauthors, paper-status, wplink, slideslink, videolink, applink, packagelink, codelink, image, note]
+    fields: [title, date, order, abstract, coauthors, paper-status, wplink, slideslink, videolink, applink, packagelink, codelink, image, note]
   - id: pub
     sort: 
       - "date desc"
@@ -26,7 +26,7 @@ listing: # this determines different lists with respective options. These are ac
 ![](images/profile.jpg){.round-image .centre width=250}
 <div style="text-align: center; font-family: 'Lora', serif;">
   <span style="font-weight: 600">Lorcan McLaren</span><br>
-  <span style="font-weight: 400">PhD Researcher</span><br>
+  <span style="font-weight: 400">PhD Researcher in Computational Social Science</span><br>
   <span style="font-weight: 400">[University College Dublin](https://www.ucd.ie/)</span>
 
 <span class="paper-links bio-links"><a href="https://www.linkedin.com/in/lorcanmclaren/">LinkedIn</a><a href="https://github.com/LorcanMcLaren">GitHub</a><a href="https://scholar.google.com/citations?user=vnNon38AAAAJ&hl=en&oi=ao">Scholar</a><a href="mailto:lorcan.mclaren@ucdconnect.ie">Email</a></span>
@@ -61,8 +61,3 @@ Prior to my doctoral studies, I completed a BA in Computer Science, Linguistics 
 #### Teaching Assistant
 - Introduction to EU Politics, Undergraduate (Autumn 2023, 2024)
 - Research Methods in Political Science, Undergraduate (Spring 2024)
-
-
-## Contact
-
-For inquiries, collaboration opportunities, or to discuss my work, feel free to reach out via [email](mailto:lorcan.mclaren@ucdconnect.ie).

@@ -2,6 +2,7 @@
 title: "What to Compare and When to Stop: LLM Pipelines for Text Annotation in Political Science"
 date: "2026"
 date-format: "YYYY"
+order: 1
 paper-status: "Revise & Resubmit, Political Analysis"
 wplink: "https://arxiv.org/abs/2603.26898"
 # codelink: "https://github.com/"

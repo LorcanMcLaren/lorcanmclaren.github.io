@@ -2,6 +2,7 @@
 title: "When Climate Change Hits Home: Extreme Weather and Climate Rhetoric in the European Parliament"
 date: "2026"
 date-format: "YYYY"
+order: 3
 paper-status: "Draft Available"
 # wplink: "../files/climate-disasters.pdf"
 # codelink: "https://github.com/"
