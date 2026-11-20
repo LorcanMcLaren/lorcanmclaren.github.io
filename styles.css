@@ -612,6 +612,7 @@ body.nav-fixed {
   border-radius: 6px;
   object-fit: cover;
   object-position: top;
+  filter: grayscale(1);
 }
 
 .hero-name {
