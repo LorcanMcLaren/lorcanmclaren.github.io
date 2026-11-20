@@ -1,14 +1,18 @@
 :root {
-  --inline-code-color: #4a3a40;
-  --inline-code-bg: rgba(95, 59, 74, 0.08);
-  --inline-code-border: rgba(122, 90, 101, 0.22);
-  --doc-card-bg: #f4ece6;
-  --doc-card-border: #ddcbbf;
-  --doc-accent: #8a5945;
-  --doc-accent-soft: #f4ece6;
-  --doc-accent-warmer: #efe4dc;
-  --doc-accent-strong: #6f4636;
-  --doc-muted: #6f625c;
+  --inline-code-color: #2b2b2e;
+  --inline-code-bg: rgba(29, 29, 31, 0.06);
+  --inline-code-border: rgba(29, 29, 31, 0.14);
+  /* Palette shared with lorcanmclaren.com: ink on white, highlighter accents. */
+  --doc-ink: #1d1d1f;
+  --doc-bg: #ffffff;
+  --doc-card-bg: rgba(29, 29, 31, 0.025);
+  --doc-card-border: rgba(29, 29, 31, 0.14);
+  --doc-accent: #1d1d1f;
+  --doc-accent-soft: rgba(255, 205, 40, 0.22);
+  --doc-accent-warmer: rgba(255, 205, 40, 0.55);
+  --doc-accent-strong: #1d1d1f;
+  --doc-muted: #55555a;
+  --doc-link-underline: rgba(200, 150, 0, 0.85);
 }
 
 p code,
@@ -45,7 +49,7 @@ blockquote code {
   background: var(--doc-card-bg);
   padding: 0;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(111, 70, 54, 0.05);
+  box-shadow: none;
 }
 
 /* Keep the centre footer line (name · year · license) from wrapping. */
@@ -62,9 +66,10 @@ body:has(#quarto-sidebar .sidebar-link.active[href*="/reference/"]) #quarto-marg
 .doc-card h3 {
   margin: 0;
   padding: 0.55rem 0.85rem;
-  background: var(--doc-accent);
-  color: #f9f6f1;
-  font-family: "Lora", serif;
+  background: var(--doc-accent-warmer);
+  color: var(--doc-ink);
+  font-family: "Schibsted Grotesk", sans-serif;
+  font-weight: 600;
   font-size: 1.05rem;
 }
 
@@ -106,7 +111,7 @@ body:has(#quarto-sidebar .sidebar-link.active[href*="/reference/"]) #quarto-marg
 }
 
 .hero-note {
-  border-left: 4px solid var(--doc-accent);
+  border-left: 4px solid rgba(255, 205, 40, 0.9);
   background: var(--doc-accent-soft);
   border-radius: 0 8px 8px 0;
   padding: 0.85rem 1rem;
@@ -147,13 +152,13 @@ body:has(#quarto-sidebar .sidebar-link.active[href*="/reference/"]) #quarto-marg
 }
 
 .navbar {
-  font-family: "Lora", serif !important;
+  font-family: "Schibsted Grotesk", sans-serif !important;
   letter-spacing: 0;
 }
 
 .navbar-brand .navbar-title {
   color: var(--doc-accent-strong);
-  font-family: "Lora", serif !important;
+  font-family: "Schibsted Grotesk", sans-serif !important;
   font-weight: 700 !important;
 }
 
@@ -163,10 +168,10 @@ body:has(#quarto-sidebar .sidebar-link.active[href*="/reference/"]) #quarto-marg
   margin-left: 0.6rem;
   padding: 0.1rem 0.45rem;
   border: 1px solid var(--doc-card-border);
-  border-radius: 999px;
-  color: var(--doc-accent-strong);
+  border-radius: 3px;
+  color: var(--doc-ink);
   background: var(--doc-accent-soft);
-  font-family: "Lora", serif;
+  font-family: "Schibsted Grotesk", sans-serif;
   font-size: 0.68rem;
   font-weight: 600;
   line-height: 1.2;
@@ -179,7 +184,7 @@ body:has(#quarto-sidebar .sidebar-link.active[href*="/reference/"]) #quarto-marg
 .navbar-brand::after {
   content: var(--pkg-version, "");
   margin-left: 0.5rem;
-  font-family: "Libre Franklin", sans-serif;
+  font-family: "Schibsted Grotesk", sans-serif;
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -189,7 +194,7 @@ body:has(#quarto-sidebar .sidebar-link.active[href*="/reference/"]) #quarto-marg
 
 .navbar-nav .nav-link,
 .navbar-nav .dropdown-item {
-  font-family: "Lora", serif !important;
+  font-family: "Schibsted Grotesk", sans-serif !important;
   font-weight: 400 !important;
 }
 
@@ -208,7 +213,7 @@ body:has(#quarto-sidebar .sidebar-link.active[href*="/reference/"]) #quarto-marg
 .navbar .dropdown-menu {
   border-color: var(--doc-card-border);
   border-radius: 8px;
-  background: #fffdf8;
+  background: var(--doc-bg);
   padding: 0.3rem;
 }
 
@@ -227,8 +232,8 @@ body:has(#quarto-sidebar .sidebar-link.active[href*="/reference/"]) #quarto-marg
 
 .navbar .dropdown-menu .dropdown-item.active,
 .navbar .dropdown-menu .dropdown-item:active {
-  background-color: var(--doc-accent) !important;
-  color: #f9f6f1 !important;
+  background-color: var(--doc-accent-warmer) !important;
+  color: var(--doc-ink) !important;
 }
 
 /* Left sidebar (quartodoc API reference navigation). */
@@ -245,14 +250,14 @@ body:has(#quarto-sidebar .sidebar-link.active[href*="/reference/"]) #quarto-marg
 /* Section labels ("Experiment Types", "Prompts", ...) get the brand serif and
    accent colour so the sidebar reads as grouped sections, not a flat list. */
 .sidebar-navigation .sidebar-item-section > .sidebar-item-container .sidebar-item-text {
-  font-family: "Lora", serif;
+  font-family: "Schibsted Grotesk", sans-serif;
   font-weight: 600;
   color: var(--doc-accent-strong);
   letter-spacing: 0.01em;
 }
 
 .sidebar-navigation .sidebar-item-section > .sidebar-item-container .sidebar-item-toggle .bi {
-  color: var(--doc-accent);
+  color: var(--doc-muted);
 }
 
 .toc-actions a,
@@ -300,30 +305,24 @@ main.content .doc-section-returns td:nth-child(2) {
 }
 
 .quarto-dark {
-  --inline-code-color: #d7e6f3;
-  --inline-code-bg: #13212d;
-  --inline-code-border: rgba(183, 208, 228, 0.18);
-  --code-block-bg: #111a28;
-  --code-block-color: #e7edf5;
-  --code-block-border: rgba(164, 194, 217, 0.24);
-  --doc-card-bg: rgba(255, 255, 255, 0.05);
-  --doc-card-border: rgba(196, 216, 232, 0.22);
-  /* The light-mode brown accent looks incongruous on the dark-blue theme, so
-     match the main site and use its desaturated blue accent in dark mode. */
-  --doc-accent: #8fb4d0;
-  --doc-accent-soft: rgba(143, 180, 208, 0.18);
-  --doc-accent-warmer: rgba(143, 180, 208, 0.28);
-  --doc-accent-strong: #c4d8e8;
-  --doc-muted: #aab7c2;
+  --inline-code-color: #e4e4e6;
+  --inline-code-bg: rgba(255, 255, 255, 0.08);
+  --inline-code-border: rgba(255, 255, 255, 0.14);
+  --code-block-bg: #202226;
+  --code-block-color: #ececec;
+  --code-block-border: rgba(255, 255, 255, 0.14);
+  --doc-ink: #ececec;
+  --doc-bg: #17181b;
+  --doc-card-bg: rgba(255, 255, 255, 0.04);
+  --doc-card-border: rgba(236, 236, 236, 0.16);
+  --doc-accent: #ececec;
+  --doc-accent-soft: rgba(255, 205, 40, 0.14);
+  --doc-accent-warmer: rgba(255, 205, 40, 0.30);
+  --doc-accent-strong: #ececec;
+  --doc-muted: #a8a8ad;
+  --doc-link-underline: rgba(255, 205, 40, 0.75);
 }
 
-.quarto-dark .doc-card h3 {
-  color: #1a1a2e;
-}
-
-.quarto-dark .navbar .dropdown-menu {
-  background: #1a1a2e;
-}
 
 .quarto-dark div.sourceCode,
 .quarto-dark div.sourceCode pre.sourceCode {
@@ -351,4 +350,66 @@ main.content .doc-section-returns td:nth-child(2) {
   background: transparent;
   border: 0;
   padding: 0;
+}
+
+/* ---- shared look with lorcanmclaren.com ---- */
+body {
+  line-height: 1.65;
+}
+
+h1, h2, h3, h4, h5, .title {
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/* Links in running text: ink with a highlighter-coloured underline. */
+main.content p a,
+main.content li a,
+main.content td a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--doc-link-underline);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+main.content p a:hover,
+main.content li a:hover,
+main.content td a:hover {
+  background: var(--doc-accent-soft);
+  text-decoration: none;
+}
+
+/* Navbar: no heavy border; the current section gets the highlighter mark. */
+.navbar {
+  border-bottom: 1px solid var(--doc-card-border) !important;
+  box-shadow: none !important;
+}
+
+.navbar-nav .nav-link {
+  color: inherit !important;
+}
+
+.navbar-nav .nav-link.active .menu-text {
+  background: linear-gradient(transparent 55%, var(--doc-accent-warmer) 55%);
+}
+
+.navbar-nav .nav-link:hover .menu-text {
+  background: var(--doc-accent-soft);
+}
+
+/* Sidebar and contents panel: current item highlighted, not coloured. */
+.sidebar-navigation .sidebar-link.active {
+  color: inherit !important;
+  font-weight: 600;
+}
+
+.sidebar-navigation .sidebar-link.active .menu-text {
+  background: linear-gradient(transparent 55%, var(--doc-accent-warmer) 55%);
+}
+
+#TOC a.active {
+  color: inherit !important;
+  font-weight: 600;
+  border-left-color: rgba(255, 205, 40, 0.95) !important;
 }

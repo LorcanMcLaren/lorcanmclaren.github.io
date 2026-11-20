@@ -1,566 +1,167 @@
 [
   {
-    "objectID": "annotation-types.html",
-    "href": "annotation-types.html",
-    "title": "Annotation Types",
+    "objectID": "install.html",
+    "href": "install.html",
+    "title": "Installation",
     "section": "",
-    "text": "CodeBook Lab reads annotation definitions from the CodeBook Studio codebook.json format. It currently supports five annotation types.",
+    "text": "CodeBook Lab supports Python 3.10 and newer. A virtual environment keeps package dependencies separate from the rest of your system.\npython3 -m venv .venv\nsource .venv/bin/activate\npython -m pip install --upgrade pip\npython -m pip install codebook-lab\nIf you plan to generate or score textbox annotations, install the optional textbox dependencies:\npython -m pip install \"codebook-lab[textbox]\"\nThose extras enable ROUGE, embedding-based cosine similarity, and BERTScore. Normalized Levenshtein similarity and BLEU are available without the optional extras.",
     "crumbs": [
       "Get Started",
-      "Concepts",
-      "Annotation Types"
+      "Installation"
     ]
   },
   {
-    "objectID": "annotation-types.html#checkbox",
-    "href": "annotation-types.html#checkbox",
-    "title": "Annotation Types",
-    "section": "Checkbox",
-    "text": "Checkbox\nCheckbox annotations are binary yes/no judgements. Lab stores them as 1 for yes and 0 for no.\n{\n  \"name\": \"Explicit evaluation\",\n  \"type\": \"checkbox\",\n  \"tooltip\": \"Tick this if the text clearly expresses an evaluative stance.\"\n}\nValid model responses include JSON booleans, 1/0, and common yes/no strings. Invalid responses are retried and then stored as blank if no valid answer is found.",
+    "objectID": "install.html#python-environment",
+    "href": "install.html#python-environment",
+    "title": "Installation",
+    "section": "",
+    "text": "CodeBook Lab supports Python 3.10 and newer. A virtual environment keeps package dependencies separate from the rest of your system.\npython3 -m venv .venv\nsource .venv/bin/activate\npython -m pip install --upgrade pip\npython -m pip install codebook-lab\nIf you plan to generate or score textbox annotations, install the optional textbox dependencies:\npython -m pip install \"codebook-lab[textbox]\"\nThose extras enable ROUGE, embedding-based cosine similarity, and BERTScore. Normalized Levenshtein similarity and BLEU are available without the optional extras.",
     "crumbs": [
       "Get Started",
-      "Concepts",
-      "Annotation Types"
+      "Installation"
     ]
   },
   {
-    "objectID": "annotation-types.html#dropdown",
-    "href": "annotation-types.html#dropdown",
-    "title": "Annotation Types",
-    "section": "Dropdown",
-    "text": "Dropdown\nDropdown annotations require one value from a fixed option set.\n{\n  \"name\": \"Direction\",\n  \"type\": \"dropdown\",\n  \"options\": [\"positive\", \"negative\", \"mixed\", \"no clear sentiment\"]\n}\nLab normalizes dropdown responses case-insensitively against the configured options. A model response such as \" Positive \" is stored as positive if that is the exact option in the codebook.",
+    "objectID": "install.html#ollama",
+    "href": "install.html#ollama",
+    "title": "Installation",
+    "section": "Ollama",
+    "text": "Ollama\nCodeBook Lab runs local models through Ollama. Install Ollama, then make sure the server is available:\nollama serve\nExperiment runs try to start the default local Ollama server when needed, and pull the requested model automatically before the first run — so you do not need to ollama pull it yourself:\nfrom codebook_lab import ExperimentSpec, run_experiment\n\nresult = run_experiment(\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:270m\",\n        country_iso_code=\"IRL\",\n    )\n)\nThe country_iso_code value should be the three-letter ISO 3166-1 alpha-3 code for where the computation physically runs, such as IRL, USA, or DEU. CodeCarbon uses this to estimate emissions from energy consumption.",
     "crumbs": [
       "Get Started",
-      "Concepts",
-      "Annotation Types"
+      "Installation"
     ]
   },
   {
-    "objectID": "annotation-types.html#likert",
-    "href": "annotation-types.html#likert",
-    "title": "Annotation Types",
-    "section": "Likert",
-    "text": "Likert\nLikert annotations require a whole number inside a configured range.\n{\n  \"name\": \"Intensity\",\n  \"type\": \"likert\",\n  \"min_value\": 1,\n  \"max_value\": 5\n}\nJSON numeric responses are converted to integers and clamped to the configured range. If a non-JSON response contains an in-range number, Lab can recover that number; otherwise the response is invalid and eligible for retry.",
+    "objectID": "install.html#development-install",
+    "href": "install.html#development-install",
+    "title": "Installation",
+    "section": "Development Install",
+    "text": "Development Install\nFor package development, clone the repository and install it in editable mode:\ngit clone https://github.com/LorcanMcLaren/codebook-lab.git\ncd codebook-lab\npython -m pip install -e \".[dev]\"\npytest\nUse python -m pip install -e \".[all,dev]\" if you also want the optional textbox metric dependencies in the development environment.",
     "crumbs": [
       "Get Started",
-      "Concepts",
-      "Annotation Types"
+      "Installation"
     ]
   },
   {
-    "objectID": "annotation-types.html#textbox",
-    "href": "annotation-types.html#textbox",
-    "title": "Annotation Types",
-    "section": "Textbox",
-    "text": "Textbox\nTextbox annotations store short free-text responses.\n{\n  \"name\": \"Evidence\",\n  \"type\": \"textbox\",\n  \"tooltip\": \"Provide a short phrase from the text that supports the judgement.\"\n}\nTextbox generation and scoring are opt-in because the optional metrics can be heavier:\nExperimentSpec(\n    task=\"policy-sentiment\",\n    model=\"gemma3:270m\",\n    process_textbox=True,\n)\nInstall codebook-lab[textbox] for the full textbox metric suite.",
+    "objectID": "experiments.html",
+    "href": "experiments.html",
+    "title": "Experiments",
+    "section": "",
+    "text": "CodeBook Lab experiments are controlled from Python. The main object is ExperimentSpec, which describes one model/task configuration.",
+    "crumbs": [
+      "Tutorials",
+      "Experiments"
+    ]
+  },
+  {
+    "objectID": "experiments.html#single-run",
+    "href": "experiments.html#single-run",
+    "title": "Experiments",
+    "section": "Single Run",
+    "text": "Single Run\nfrom codebook_lab import ExperimentSpec, run_experiment\n\nresult = run_experiment(\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:270m\",\n        use_examples=False,\n        prompt_type=\"standard\",\n        temperature=None,\n        top_p=None,\n        process_textbox=True,\n        country_iso_code=\"IRL\",\n    ),\n    output_root=\"outputs\",\n)\n\nprint(result.experiment_directory)\nprint(result.metrics.summary_text)\nImportant fields:\n\ntask: task folder name, such as policy-sentiment\nmodel: Ollama model identifier, such as gemma3:270m\nuse_examples: include worked examples from the codebook prompt\nprompt_type: one of the registered prompt wrappers\ntemperature: optional sampling temperature\ntop_p: optional nucleus sampling value\nchat_mode: how annotation calls share chat history — see Chat continuation modes\nreasoning: enable, disable, or defer to the model’s reasoning mode\nprocess_textbox: generate and score textbox annotations\nprocess_span: generate and score span annotations\ncountry_iso_code: three-letter country code for CodeCarbon emissions estimates\n\nOnly task and model are required — the rest fall back to sensible classification defaults, so the example above can be as short as:\nresult = run_experiment(\n    ExperimentSpec(task=\"policy-sentiment\", model=\"gemma3:270m\"),\n    output_root=\"outputs\",\n)\nThe defaults are temperature=0.0, use_examples=True, prompt_type=\"standard\", chat_mode=\"per_text\", reasoning=None, and country_iso_code=\"USA\". Invalid model responses are retried with the reprompt strategy by default (see Conditionals & Retries).\nrun_experiment() uses the high-level end-to-end path: annotation first, metrics second. It resolves the task directory, checks that codebook.json and ground-truth.csv exist, optionally pulls the Ollama model, writes per-run sidecar files, and appends tidy metrics rows.",
+    "crumbs": [
+      "Tutorials",
+      "Experiments"
+    ]
+  },
+  {
+    "objectID": "experiments.html#parameter-sweep",
+    "href": "experiments.html#parameter-sweep",
+    "title": "Experiments",
+    "section": "Parameter Sweep",
+    "text": "Parameter Sweep\nUse run_experiment_grid() when you want a Cartesian-product sweep across multiple settings.\nfrom codebook_lab import run_experiment_grid\n\nresults = run_experiment_grid(\n    param_grid={\n        \"country_iso_code\": \"IRL\",\n        \"tasks\": [\"policy-sentiment\"],\n        \"models\": [\"gemma3:270m\", \"llama3.2:3b\"],\n        \"use_examples\": [False, True],\n        \"prompt_types\": [\"standard\", \"persona\"],\n        \"temperatures\": [0.0, 0.2],\n        \"top_ps\": [None],\n        \"chat_modes\": [\"per_text\"],\n        \"reasoning\": [None],\n        \"process_textboxes\": [True],\n        \"process_spans\": [False],\n    },\n    output_root=\"outputs\",\n)\n\nprint(f\"Completed {len(results)} runs\")\nFor a quick smoke test, keep one small model and one value in each field. For a benchmark, add one experimental dimension at a time so results are easier to interpret.\nThe grid accepts Python booleans and None values directly. CLI-style strings such as \"true\", \"false\", and \"None\" are normalized internally, which is helpful when experiment grids come from config files.",
+    "crumbs": [
+      "Tutorials",
+      "Experiments"
+    ]
+  },
+  {
+    "objectID": "experiments.html#prompt-wrappers",
+    "href": "experiments.html#prompt-wrappers",
+    "title": "Experiments",
+    "section": "Prompt Wrappers",
+    "text": "Prompt Wrappers\nBuilt-in prompt wrappers include standard, persona, and CoT. You can inspect available wrappers from Python:\nfrom codebook_lab import list_prompt_wrappers\n\nprint(list_prompt_wrappers())\nYou can register a custom wrapper without editing package internals:\nfrom codebook_lab import PromptContext, register_prompt_wrapper\n\ndef concise_wrapper(context: PromptContext) -&gt; str:\n    return (\n        \"Annotate the text as carefully as possible.\\n\\n\"\n        f\"{context.core_prompt}\\n\\n\"\n        f'Text:\\n\"{context.text}\"\\n\\n'\n        \"Response:\\n\"\n    )\n\nregister_prompt_wrapper(\"concise\", concise_wrapper)\nThen pass prompt_type=\"concise\" in the experiment spec.",
+    "crumbs": [
+      "Tutorials",
+      "Experiments"
+    ]
+  },
+  {
+    "objectID": "experiments.html#chat-continuation-modes",
+    "href": "experiments.html#chat-continuation-modes",
+    "title": "Experiments",
+    "section": "Chat continuation modes",
+    "text": "Chat continuation modes\nchat_mode controls how much chat history is shared across the annotation calls within a run — a dimension that can change how a model behaves when a text has several annotations.\n\nper_text\n\nOne chat per text row, shared across that row’s annotations, so later annotations can see earlier answers for the same text. This is the default.\n\nper_query\n\nA fresh chat for every annotation query — each judgement is made independently, with no memory of other answers.\n\ncontinuous\n\nA single chat for the whole run, carrying history across every text and annotation.\n\n\nExperimentSpec(task=\"policy-sentiment\", model=\"gemma3:270m\", chat_mode=\"per_query\")\nSweep it like any other dimension with \"chat_modes\": [\"per_text\", \"per_query\"] in a parameter grid. The chosen mode is recorded in the runs metrics table.",
+    "crumbs": [
+      "Tutorials",
+      "Experiments"
+    ]
+  },
+  {
+    "objectID": "experiments.html#model-reasoning",
+    "href": "experiments.html#model-reasoning",
+    "title": "Experiments",
+    "section": "Model reasoning",
+    "text": "Model reasoning\nFor models that support a reasoning/thinking mode through Ollama, reasoning controls whether it is used:\n\nreasoning=None (default) keeps the model’s own default behaviour.\nreasoning=True enables reasoning; reasoning=False disables it.\n\nExperimentSpec(task=\"policy-sentiment\", model=\"qwen3:8b\", reasoning=True)\nThe value is passed through to ChatOllama. When the model returns reasoning, Lab captures it — reading the structured reasoning_content when available and otherwise parsing a &lt;think&gt;…&lt;/think&gt; block — and writes one record per query to reasoning_traces.jsonl in the run directory, so you can audit how the model arrived at each label. The chosen mode is recorded in the runs metrics table.",
+    "crumbs": [
+      "Tutorials",
+      "Experiments"
+    ]
+  },
+  {
+    "objectID": "experiments.html#running-without-ground-truth",
+    "href": "experiments.html#running-without-ground-truth",
+    "title": "Experiments",
+    "section": "Running Without Ground Truth",
+    "text": "Running Without Ground Truth\nIf you are still designing a task and do not yet have human-coded labels, use run_annotation() directly on an unlabeled CSV. Later, add a ground-truth.csv and score the outputs with run_metrics().\nfrom codebook_lab import run_annotation\n\nannotation = run_annotation(\n    model=\"gemma3:270m\",\n    csv_path=\"texts.csv\",\n    codebook_path=\"codebook.json\",\n    output_path=\"outputs/model-labels.csv\",\n    experiment_directory=\"outputs/run-001\",\n    country_iso_code=\"IRL\",\n)",
+    "crumbs": [
+      "Tutorials",
+      "Experiments"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CodeBook Lab",
+    "section": "",
+    "text": "CodeBook Lab is a Python package for running local LLM annotation experiments against human-coded benchmark data. It takes a CodeBook Studio codebook and labelled CSV, removes the human labels before annotation, runs one or more Ollama models, and scores the model outputs against the held-out human labels.\nThe package is built for computational social science workflows where the core question is not simply “can a model label this text?”, but which model, prompt, examples, and sampling settings reproduce a human codebook most reliably.",
     "crumbs": [
       "Get Started",
-      "Concepts",
-      "Annotation Types"
+      "Overview"
     ]
   },
   {
-    "objectID": "annotation-types.html#span",
-    "href": "annotation-types.html#span",
-    "title": "Annotation Types",
-    "section": "Span",
-    "text": "Span\nSpan annotations store character offsets into the original text. They can be unlabelled highlights or labelled spans.\nUnlabelled span:\n{\n  \"name\": \"Evidence\",\n  \"type\": \"span\",\n  \"tooltip\": \"Highlight the phrase that supports your judgement.\",\n  \"label_options\": []\n}\nLabelled span:\n{\n  \"name\": \"Emotion markers\",\n  \"type\": \"span\",\n  \"tooltip\": \"Tag each highlight with the emotion it conveys.\",\n  \"label_options\": [\"joy\", \"sadness\", \"anger\", \"fear\", \"surprise\", \"disgust\"]\n}\nSpan generation and scoring are opt-in:\nExperimentSpec(\n    task=\"discrete-emotions\",\n    model=\"gemma3:270m\",\n    process_span=True,\n)\nSpan cells are CSV-safe JSON strings:\n[\n  {\"start\": 38, \"end\": 55, \"text\": \"her heart pounded\", \"label\": \"fear\"}\n]\nLab validates offsets, drops out-of-range spans, fills missing text from the source string when possible, and strips labels that are not in label_options.",
+    "objectID": "index.html#what-the-package-does",
+    "href": "index.html#what-the-package-does",
+    "title": "CodeBook Lab",
+    "section": "What The Package Does",
+    "text": "What The Package Does\nCodeBook Lab gives you a reproducible path from human-coded data to model evaluation:\n\nLoad a task folder containing codebook.json and ground-truth.csv.\nStrip annotation columns from the input before sending text to the model.\nPrompt a local Ollama model for each applicable annotation field.\nSave row-level model outputs and run metadata.\nCompare model labels with human labels using metrics appropriate to each annotation type.\nLog aggregate quality, runtime, energy, and emissions metrics for comparison across runs.\n\nSupported annotation types include checkbox, dropdown, Likert, textbox, and span annotations. Lab also respects conditional annotations, validates model responses before storing them, retries invalid answers, and keeps skipped conditional fields out of metric denominators.\nCategorical and ordinal fields receive classification and agreement metrics; textbox fields can receive lexical and embedding-based similarity metrics; span fields receive token F1, exact-match F1, and character IoU.",
     "crumbs": [
       "Get Started",
-      "Concepts",
-      "Annotation Types"
+      "Overview"
     ]
   },
   {
-    "objectID": "annotation-types.html#built-in-example-coverage",
-    "href": "annotation-types.html#built-in-example-coverage",
-    "title": "Annotation Types",
-    "section": "Built-In Example Coverage",
-    "text": "Built-In Example Coverage\nThe bundled policy-sentiment task exercises checkbox, dropdown, Likert, and textbox annotations. The bundled discrete-emotions task exercises dropdown, Likert, unlabelled span, and labelled span annotations.",
+    "objectID": "index.html#where-to-start",
+    "href": "index.html#where-to-start",
+    "title": "CodeBook Lab",
+    "section": "Where To Start",
+    "text": "Where To Start\nIf you want the shortest path, begin with Installation, then run the bundled policy-sentiment task in Experiments. If you already have CodeBook Studio exports, go straight to Tasks and Annotation Types to check the expected codebook and CSV formats.\nThe upstream annotation workflow — designing a codebook and labelling data — is covered in the CodeBook Studio guide.",
     "crumbs": [
       "Get Started",
-      "Concepts",
-      "Annotation Types"
+      "Overview"
     ]
   },
   {
-    "objectID": "reference/HumanReliabilityResult.html",
-    "href": "reference/HumanReliabilityResult.html",
-    "title": "HumanReliabilityResult",
-    "section": "",
-    "text": "HumanReliabilityResult(\n    validation_issues,\n    pairwise_icr,\n    multirater_icr,\n    disagreements,\n    summary_text,\n    output_dir,\n)\nResult returned by calculate_human_reliability.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nvalidation_issues\npd.DataFrame\nDataFrame of coder-file and label validation issues.\n\n\npairwise_icr\npd.DataFrame\nPairwise inter-coder reliability metrics.\n\n\nmultirater_icr\npd.DataFrame\nMulti-rater reliability metrics.\n\n\ndisagreements\npd.DataFrame\nItem/field rows where coders supplied different labels.\n\n\nsummary_text\nstr\nMarkdown summary of validation, reliability, and disagreements.\n\n\noutput_dir\nPath | None\nDirectory where outputs were written, or None if no output directory was requested.",
-    "crumbs": [
-      "Reference",
-      "Experiment Types",
-      "HumanReliabilityResult"
-    ]
-  },
-  {
-    "objectID": "reference/HumanReliabilityResult.html#attributes",
-    "href": "reference/HumanReliabilityResult.html#attributes",
-    "title": "HumanReliabilityResult",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nvalidation_issues\npd.DataFrame\nDataFrame of coder-file and label validation issues.\n\n\npairwise_icr\npd.DataFrame\nPairwise inter-coder reliability metrics.\n\n\nmultirater_icr\npd.DataFrame\nMulti-rater reliability metrics.\n\n\ndisagreements\npd.DataFrame\nItem/field rows where coders supplied different labels.\n\n\nsummary_text\nstr\nMarkdown summary of validation, reliability, and disagreements.\n\n\noutput_dir\nPath | None\nDirectory where outputs were written, or None if no output directory was requested.",
-    "crumbs": [
-      "Reference",
-      "Experiment Types",
-      "HumanReliabilityResult"
-    ]
-  },
-  {
-    "objectID": "reference/run_experiment.html",
-    "href": "reference/run_experiment.html",
-    "title": "run_experiment",
-    "section": "",
-    "text": "run_experiment(\n    spec,\n    *,\n    task_root=None,\n    output_root='outputs',\n    metrics_output_root=None,\n    timestamp=None,\n    pull_model=True,\n    start_ollama_if_needed=True,\n    quantization_type=None,\n)\nRun one end-to-end experiment and evaluate it against ground truth.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nspec\nExperimentSpec\nConcrete experiment specification to execute.\nrequired\n\n\ntask_root\nstr | Path | None\nOptional directory containing user-defined task folders with codebook.json and ground-truth.csv. If omitted, bundled example tasks are used when the task name matches one shipped with the package.\nNone\n\n\noutput_root\nstr | Path\nRoot directory where per-run outputs should be created.\n'outputs'\n\n\nmetrics_output_root\nstr | Path | None\nDirectory for aggregate metrics CSV files. Defaults to output_root / \"metrics\".\nNone\n\n\ntimestamp\nstr | None\nOptional timestamp string to control output folder naming.\nNone\n\n\npull_model\nbool\nIf True, run ollama pull for spec.model before execution. Defaults to True so experiment runs ensure the requested model is available.\nTrue\n\n\nstart_ollama_if_needed\nbool\nIf True, try to auto-start a local Ollama server when the default local host is not already reachable. Defaults to True so experiment runs can bring up local Ollama automatically when needed.\nTrue\n\n\nquantization_type\nstr | None\nOptional metadata field written to the metrics CSV.\nNone\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\n\nExperimentRunResult containing both annotation and metrics results.",
-    "crumbs": [
-      "Reference",
-      "Experiment Functions",
-      "run_experiment"
-    ]
-  },
-  {
-    "objectID": "reference/run_experiment.html#parameters",
-    "href": "reference/run_experiment.html#parameters",
-    "title": "run_experiment",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nspec\nExperimentSpec\nConcrete experiment specification to execute.\nrequired\n\n\ntask_root\nstr | Path | None\nOptional directory containing user-defined task folders with codebook.json and ground-truth.csv. If omitted, bundled example tasks are used when the task name matches one shipped with the package.\nNone\n\n\noutput_root\nstr | Path\nRoot directory where per-run outputs should be created.\n'outputs'\n\n\nmetrics_output_root\nstr | Path | None\nDirectory for aggregate metrics CSV files. Defaults to output_root / \"metrics\".\nNone\n\n\ntimestamp\nstr | None\nOptional timestamp string to control output folder naming.\nNone\n\n\npull_model\nbool\nIf True, run ollama pull for spec.model before execution. Defaults to True so experiment runs ensure the requested model is available.\nTrue\n\n\nstart_ollama_if_needed\nbool\nIf True, try to auto-start a local Ollama server when the default local host is not already reachable. Defaults to True so experiment runs can bring up local Ollama automatically when needed.\nTrue\n\n\nquantization_type\nstr | None\nOptional metadata field written to the metrics CSV.\nNone",
-    "crumbs": [
-      "Reference",
-      "Experiment Functions",
-      "run_experiment"
-    ]
-  },
-  {
-    "objectID": "reference/run_experiment.html#returns",
-    "href": "reference/run_experiment.html#returns",
-    "title": "run_experiment",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\n\nExperimentRunResult containing both annotation and metrics results.",
-    "crumbs": [
-      "Reference",
-      "Experiment Functions",
-      "run_experiment"
-    ]
-  },
-  {
-    "objectID": "reference/ExperimentSpec.html",
-    "href": "reference/ExperimentSpec.html",
-    "title": "ExperimentSpec",
-    "section": "",
-    "text": "ExperimentSpec(\n    task,\n    model,\n    use_examples=DEFAULT_USE_EXAMPLES,\n    prompt_type=DEFAULT_PROMPT_TYPE,\n    temperature=DEFAULT_TEMPERATURE,\n    top_p=DEFAULT_TOP_P,\n    chat_mode=DEFAULT_CHAT_MODE,\n    reasoning=DEFAULT_REASONING,\n    process_textbox=False,\n    process_span=False,\n    country_iso_code=DEFAULT_COUNTRY_ISO_CODE,\n)\nDeclarative specification for one experiment run in a sweep.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\ntask\nstr\nTask folder name under tasks/, for example \"policy-sentiment\".\n\n\nmodel\nstr\nOllama model identifier, such as \"gemma3:270m\".\n\n\nuse_examples\nbool\nWhether to include worked examples from the codebook.\n\n\nprompt_type\nstr\nRegistered prompt wrapper name, for example \"standard\".\n\n\ntemperature\nfloat | None\nOptional sampling temperature as None, string, or float.\n\n\ntop_p\nfloat | None\nOptional nucleus-sampling value as None, string, or float.\n\n\nchat_mode\nstr\nHow annotation calls share chat history. Supported values are \"per_text\", \"per_query\", and \"continuous\".\n\n\nreasoning\nbool | str | None\nOllama reasoning mode passed to ChatOllama. None keeps the model default, True enables it, and False disables it.\n\n\nprocess_textbox\nbool\nWhether textbox annotations should be generated and scored.\n\n\nprocess_span\nbool\nWhether span annotations should be generated and scored.\n\n\ncountry_iso_code\nstr\nThree-letter ISO 3166-1 alpha-3 code for CodeCarbon.",
-    "crumbs": [
-      "Reference",
-      "Experiment Types",
-      "ExperimentSpec"
-    ]
-  },
-  {
-    "objectID": "reference/ExperimentSpec.html#attributes",
-    "href": "reference/ExperimentSpec.html#attributes",
-    "title": "ExperimentSpec",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\ntask\nstr\nTask folder name under tasks/, for example \"policy-sentiment\".\n\n\nmodel\nstr\nOllama model identifier, such as \"gemma3:270m\".\n\n\nuse_examples\nbool\nWhether to include worked examples from the codebook.\n\n\nprompt_type\nstr\nRegistered prompt wrapper name, for example \"standard\".\n\n\ntemperature\nfloat | None\nOptional sampling temperature as None, string, or float.\n\n\ntop_p\nfloat | None\nOptional nucleus-sampling value as None, string, or float.\n\n\nchat_mode\nstr\nHow annotation calls share chat history. Supported values are \"per_text\", \"per_query\", and \"continuous\".\n\n\nreasoning\nbool | str | None\nOllama reasoning mode passed to ChatOllama. None keeps the model default, True enables it, and False disables it.\n\n\nprocess_textbox\nbool\nWhether textbox annotations should be generated and scored.\n\n\nprocess_span\nbool\nWhether span annotations should be generated and scored.\n\n\ncountry_iso_code\nstr\nThree-letter ISO 3166-1 alpha-3 code for CodeCarbon.",
-    "crumbs": [
-      "Reference",
-      "Experiment Types",
-      "ExperimentSpec"
-    ]
-  },
-  {
-    "objectID": "reference/list_example_tasks.html",
-    "href": "reference/list_example_tasks.html",
-    "title": "list_example_tasks",
-    "section": "",
-    "text": "list_example_tasks()\nList bundled example task names shipped with the package.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nlist[str]\nSorted list of task directory names available under the package’s\n\n\n\nlist[str]\nbundled tasks data folder.",
-    "crumbs": [
-      "Reference",
-      "Example Tasks",
-      "list_example_tasks"
-    ]
-  },
-  {
-    "objectID": "reference/list_example_tasks.html#returns",
-    "href": "reference/list_example_tasks.html#returns",
-    "title": "list_example_tasks",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nlist[str]\nSorted list of task directory names available under the package’s\n\n\n\nlist[str]\nbundled tasks data folder.",
-    "crumbs": [
-      "Reference",
-      "Example Tasks",
-      "list_example_tasks"
-    ]
-  },
-  {
-    "objectID": "reference/ExperimentRunResult.html",
-    "href": "reference/ExperimentRunResult.html",
-    "title": "ExperimentRunResult",
-    "section": "",
-    "text": "ExperimentRunResult(\n    spec,\n    experiment_directory,\n    model_id,\n    label,\n    annotation,\n    metrics,\n    run_id=None,\n)\nCombined result returned by run_experiment.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nspec\nExperimentSpec\nThe experiment specification that was executed.\n\n\nexperiment_directory\nPath\nDirectory containing this run’s outputs.\n\n\nmodel_id\nstr\nStable model/config identifier used in the metrics log.\n\n\nlabel\nstr\nTask label written to the metrics CSV.\n\n\nrun_id\nstr | None\nIdentifier linking this run’s output directory and aggregate metrics.\n\n\nannotation\nAnnotationRunResult\nResult object returned by run_annotation.\n\n\nmetrics\nMetricsRunResult\nResult object returned by run_metrics.",
-    "crumbs": [
-      "Reference",
-      "Experiment Types",
-      "ExperimentRunResult"
-    ]
-  },
-  {
-    "objectID": "reference/ExperimentRunResult.html#attributes",
-    "href": "reference/ExperimentRunResult.html#attributes",
-    "title": "ExperimentRunResult",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nspec\nExperimentSpec\nThe experiment specification that was executed.\n\n\nexperiment_directory\nPath\nDirectory containing this run’s outputs.\n\n\nmodel_id\nstr\nStable model/config identifier used in the metrics log.\n\n\nlabel\nstr\nTask label written to the metrics CSV.\n\n\nrun_id\nstr | None\nIdentifier linking this run’s output directory and aggregate metrics.\n\n\nannotation\nAnnotationRunResult\nResult object returned by run_annotation.\n\n\nmetrics\nMetricsRunResult\nResult object returned by run_metrics.",
-    "crumbs": [
-      "Reference",
-      "Experiment Types",
-      "ExperimentRunResult"
-    ]
-  },
-  {
-    "objectID": "reference/run_experiment_grid.html",
-    "href": "reference/run_experiment_grid.html",
-    "title": "run_experiment_grid",
-    "section": "",
-    "text": "run_experiment_grid(\n    specs=None,\n    param_grid=None,\n    task_root=None,\n    output_root='outputs',\n    metrics_output_root=None,\n    pull_models=True,\n    start_ollama_if_needed=True,\n)\nRun a whole parameter sweep from a grid or a prebuilt spec list.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nspecs\nlist[ExperimentSpec] | None\nOptional pre-expanded list of ExperimentSpec objects.\nNone\n\n\nparam_grid\ndict | None\nOptional in-memory parameter grid dictionary.\nNone\n\n\ntask_root\nstr | Path | None\nOptional directory containing user-defined task folders.\nNone\n\n\noutput_root\nstr | Path\nRoot directory for per-run outputs.\n'outputs'\n\n\nmetrics_output_root\nstr | Path | None\nDirectory for aggregate metrics CSV files.\nNone\n\n\npull_models\nbool\nIf True, pull each Ollama model before its first run. Defaults to True so sweep runs ensure requested models are available.\nTrue\n\n\nstart_ollama_if_needed\nbool\nIf True, try to auto-start a local Ollama server before each run when needed. Defaults to True.\nTrue\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nlist[ExperimentRunResult]\nList of ExperimentRunResult objects, one per completed run.",
-    "crumbs": [
-      "Reference",
-      "Experiment Functions",
-      "run_experiment_grid"
-    ]
-  },
-  {
-    "objectID": "reference/run_experiment_grid.html#parameters",
-    "href": "reference/run_experiment_grid.html#parameters",
-    "title": "run_experiment_grid",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nspecs\nlist[ExperimentSpec] | None\nOptional pre-expanded list of ExperimentSpec objects.\nNone\n\n\nparam_grid\ndict | None\nOptional in-memory parameter grid dictionary.\nNone\n\n\ntask_root\nstr | Path | None\nOptional directory containing user-defined task folders.\nNone\n\n\noutput_root\nstr | Path\nRoot directory for per-run outputs.\n'outputs'\n\n\nmetrics_output_root\nstr | Path | None\nDirectory for aggregate metrics CSV files.\nNone\n\n\npull_models\nbool\nIf True, pull each Ollama model before its first run. Defaults to True so sweep runs ensure requested models are available.\nTrue\n\n\nstart_ollama_if_needed\nbool\nIf True, try to auto-start a local Ollama server before each run when needed. Defaults to True.\nTrue",
-    "crumbs": [
-      "Reference",
-      "Experiment Functions",
-      "run_experiment_grid"
-    ]
-  },
-  {
-    "objectID": "reference/run_experiment_grid.html#returns",
-    "href": "reference/run_experiment_grid.html#returns",
-    "title": "run_experiment_grid",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nlist[ExperimentRunResult]\nList of ExperimentRunResult objects, one per completed run.",
-    "crumbs": [
-      "Reference",
-      "Experiment Functions",
-      "run_experiment_grid"
-    ]
-  },
-  {
-    "objectID": "reference/get_prompt_wrapper.html",
-    "href": "reference/get_prompt_wrapper.html",
-    "title": "get_prompt_wrapper",
-    "section": "",
-    "text": "get_prompt_wrapper(name)\nReturn a registered prompt wrapper by name.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nname\nstr\nPrompt wrapper key, for example \"standard\" or a custom name.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nPromptWrapper\nThe callable prompt wrapper registered under name.",
-    "crumbs": [
-      "Reference",
-      "Prompts",
-      "get_prompt_wrapper"
-    ]
-  },
-  {
-    "objectID": "reference/get_prompt_wrapper.html#parameters",
-    "href": "reference/get_prompt_wrapper.html#parameters",
-    "title": "get_prompt_wrapper",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nname\nstr\nPrompt wrapper key, for example \"standard\" or a custom name.\nrequired",
-    "crumbs": [
-      "Reference",
-      "Prompts",
-      "get_prompt_wrapper"
-    ]
-  },
-  {
-    "objectID": "reference/get_prompt_wrapper.html#returns",
-    "href": "reference/get_prompt_wrapper.html#returns",
-    "title": "get_prompt_wrapper",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nPromptWrapper\nThe callable prompt wrapper registered under name.",
-    "crumbs": [
-      "Reference",
-      "Prompts",
-      "get_prompt_wrapper"
-    ]
-  },
-  {
-    "objectID": "reference/annotate.extract_json_response.html",
-    "href": "reference/annotate.extract_json_response.html",
-    "title": "annotate.extract_json_response",
-    "section": "",
-    "text": "annotate.extract_json_response(\n    response,\n    annotation_type,\n    min_value=None,\n    max_value=None,\n    options=None,\n    label_options=None,\n    text=None,\n)\nExtract and validate JSON response based on annotation type\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nresponse\n\nRaw model response text that should contain a JSON object.\nrequired\n\n\nannotation_type\n\nAnnotation type string such as \"dropdown\" or \"likert\".\nrequired\n\n\nmin_value\n\nOptional integer lower bound for Likert annotations.\nNone\n\n\nmax_value\n\nOptional integer upper bound for Likert annotations.\nNone\n\n\noptions\n\nOptional dropdown option list used to normalize categorical labels.\nNone\n\n\nlabel_options\n\nAllowed labels for span annotations.\nNone\n\n\ntext\n\nSource text for span annotations (used to validate offsets).\nNone\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\n\nParsed response value coerced into the expected annotation format. For\n\n\n\n\nannotation_type == \"span\" this is a list of span dicts.",
-    "crumbs": [
-      "Reference",
-      "Validation and Retry Helpers",
-      "annotate.extract_json_response"
-    ]
-  },
-  {
-    "objectID": "reference/annotate.extract_json_response.html#parameters",
-    "href": "reference/annotate.extract_json_response.html#parameters",
-    "title": "annotate.extract_json_response",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nresponse\n\nRaw model response text that should contain a JSON object.\nrequired\n\n\nannotation_type\n\nAnnotation type string such as \"dropdown\" or \"likert\".\nrequired\n\n\nmin_value\n\nOptional integer lower bound for Likert annotations.\nNone\n\n\nmax_value\n\nOptional integer upper bound for Likert annotations.\nNone\n\n\noptions\n\nOptional dropdown option list used to normalize categorical labels.\nNone\n\n\nlabel_options\n\nAllowed labels for span annotations.\nNone\n\n\ntext\n\nSource text for span annotations (used to validate offsets).\nNone",
-    "crumbs": [
-      "Reference",
-      "Validation and Retry Helpers",
-      "annotate.extract_json_response"
-    ]
-  },
-  {
-    "objectID": "reference/annotate.extract_json_response.html#returns",
-    "href": "reference/annotate.extract_json_response.html#returns",
-    "title": "annotate.extract_json_response",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\n\nParsed response value coerced into the expected annotation format. For\n\n\n\n\nannotation_type == \"span\" this is a list of span dicts.",
-    "crumbs": [
-      "Reference",
-      "Validation and Retry Helpers",
-      "annotate.extract_json_response"
-    ]
-  },
-  {
-    "objectID": "reference/get_ollama_base_url.html",
-    "href": "reference/get_ollama_base_url.html",
-    "title": "get_ollama_base_url",
-    "section": "",
-    "text": "get_ollama_base_url()\nReturn the Ollama base URL used for connectivity checks.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nstr\nBase URL string, defaulting to http://127.0.0.1:11434 when\n\n\n\nstr\nOLLAMA_HOST is not set.",
-    "crumbs": [
-      "Reference",
-      "Ollama Helpers",
-      "get_ollama_base_url"
-    ]
-  },
-  {
-    "objectID": "reference/get_ollama_base_url.html#returns",
-    "href": "reference/get_ollama_base_url.html#returns",
-    "title": "get_ollama_base_url",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nstr\nBase URL string, defaulting to http://127.0.0.1:11434 when\n\n\n\nstr\nOLLAMA_HOST is not set.",
-    "crumbs": [
-      "Reference",
-      "Ollama Helpers",
-      "get_ollama_base_url"
-    ]
-  },
-  {
-    "objectID": "reference/register_prompt_wrapper.html",
-    "href": "reference/register_prompt_wrapper.html",
-    "title": "register_prompt_wrapper",
-    "section": "",
-    "text": "register_prompt_wrapper(name, wrapper, overwrite=False)\nRegister a prompt wrapper for use in Python and CLI experiment configs.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nname\nstr\nString key users will pass as prompt_type such as \"concise\".\nrequired\n\n\nwrapper\nPromptWrapper\nCallable accepting a PromptContext and returning a full prompt string.\nrequired\n\n\noverwrite\nbool\nSet to True to replace an existing wrapper with the same name.\nFalse",
-    "crumbs": [
-      "Reference",
-      "Prompts",
-      "register_prompt_wrapper"
-    ]
-  },
-  {
-    "objectID": "reference/register_prompt_wrapper.html#parameters",
-    "href": "reference/register_prompt_wrapper.html#parameters",
-    "title": "register_prompt_wrapper",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nname\nstr\nString key users will pass as prompt_type such as \"concise\".\nrequired\n\n\nwrapper\nPromptWrapper\nCallable accepting a PromptContext and returning a full prompt string.\nrequired\n\n\noverwrite\nbool\nSet to True to replace an existing wrapper with the same name.\nFalse",
-    "crumbs": [
-      "Reference",
-      "Prompts",
-      "register_prompt_wrapper"
-    ]
-  },
-  {
-    "objectID": "reference/ensure_ollama_available.html",
-    "href": "reference/ensure_ollama_available.html",
-    "title": "ensure_ollama_available",
-    "section": "",
-    "text": "ensure_ollama_available(\n    timeout=2.0,\n    start_if_needed=False,\n    startup_timeout=10.0,\n)\nCheck that the Ollama server is reachable, optionally starting it locally.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntimeout\nfloat\nTimeout in seconds for each connectivity probe.\n2.0\n\n\nstart_if_needed\nbool\nIf True, try to start ollama serve when the default local server is not reachable.\nFalse\n\n\nstartup_timeout\nfloat\nMaximum seconds to wait after auto-starting the server.\n10.0\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nstr\nBase URL string for the reachable Ollama server.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nRuntimeError\nIf Ollama is not reachable and cannot be started.",
-    "crumbs": [
-      "Reference",
-      "Ollama Helpers",
-      "ensure_ollama_available"
-    ]
-  },
-  {
-    "objectID": "reference/ensure_ollama_available.html#parameters",
-    "href": "reference/ensure_ollama_available.html#parameters",
-    "title": "ensure_ollama_available",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntimeout\nfloat\nTimeout in seconds for each connectivity probe.\n2.0\n\n\nstart_if_needed\nbool\nIf True, try to start ollama serve when the default local server is not reachable.\nFalse\n\n\nstartup_timeout\nfloat\nMaximum seconds to wait after auto-starting the server.\n10.0",
-    "crumbs": [
-      "Reference",
-      "Ollama Helpers",
-      "ensure_ollama_available"
-    ]
-  },
-  {
-    "objectID": "reference/ensure_ollama_available.html#returns",
-    "href": "reference/ensure_ollama_available.html#returns",
-    "title": "ensure_ollama_available",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nstr\nBase URL string for the reachable Ollama server.",
-    "crumbs": [
-      "Reference",
-      "Ollama Helpers",
-      "ensure_ollama_available"
-    ]
-  },
-  {
-    "objectID": "reference/ensure_ollama_available.html#raises",
-    "href": "reference/ensure_ollama_available.html#raises",
-    "title": "ensure_ollama_available",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nRuntimeError\nIf Ollama is not reachable and cannot be started.",
-    "crumbs": [
-      "Reference",
-      "Ollama Helpers",
-      "ensure_ollama_available"
-    ]
-  },
-  {
-    "objectID": "reference/annotate.normalize_retry_strategy.html",
-    "href": "reference/annotate.normalize_retry_strategy.html",
-    "title": "annotate.normalize_retry_strategy",
-    "section": "",
-    "text": "annotate.normalize_retry_strategy\nannotate.normalize_retry_strategy(strategy)\nReturn a supported retry strategy, falling back to \"identical\".",
-    "crumbs": [
-      "Reference",
-      "Validation and Retry Helpers",
-      "annotate.normalize_retry_strategy"
-    ]
-  },
-  {
-    "objectID": "reference/calculate_human_reliability.html",
-    "href": "reference/calculate_human_reliability.html",
-    "title": "calculate_human_reliability",
-    "section": "",
-    "text": "calculate_human_reliability\ncalculate_human_reliability(\n    codebook_path,\n    coder_csvs,\n    output_dir=None,\n    id_column=DEFAULT_ID_COLUMN,\n    assignment_csv=None,\n)\nValidate human coder CSVs and calculate inter-coder reliability metrics.",
-    "crumbs": [
-      "Reference",
-      "Lower-Level Workflow",
-      "calculate_human_reliability"
-    ]
-  },
-  {
-    "objectID": "reference/list_prompt_wrappers.html",
-    "href": "reference/list_prompt_wrappers.html",
-    "title": "list_prompt_wrappers",
-    "section": "",
-    "text": "list_prompt_wrappers\nlist_prompt_wrappers()\nReturn the sorted names of all registered prompt wrappers.",
-    "crumbs": [
-      "Reference",
-      "Prompts",
-      "list_prompt_wrappers"
-    ]
-  },
-  {
-    "objectID": "outputs-metrics.html",
-    "href": "outputs-metrics.html",
-    "title": "Outputs And Metrics",
-    "section": "",
-    "text": "Each run creates a directory named by a short run ID under outputs/&lt;task&gt;/&lt;run_id&gt;/. Run-ID folders keep paths compact; the full set of choices for the run lives in config.json and in the runs metrics table.",
+    "objectID": "index.html#license-developers",
+    "href": "index.html#license-developers",
+    "title": "CodeBook Lab",
+    "section": "License & Developers",
+    "text": "License & Developers\n\n  \n    License\n    GNU AGPL v3.0 — a strong copyleft license. You may use, modify, and distribute CodeBook Lab, including over a network, provided derivative works remain under the same license.\n  \n  \n    Developers\n    Lorcan McLaren \n      \n        \n        \n        \n        \n      \n     — author, maintainer\n  \n\nTo cite CodeBook Lab in research, see the Citation page.",
     "crumbs": [
       "Get Started",
-      "Concepts",
-      "Outputs And Metrics"
-    ]
-  },
-  {
-    "objectID": "outputs-metrics.html#per-run-files",
-    "href": "outputs-metrics.html#per-run-files",
-    "title": "Outputs And Metrics",
-    "section": "Per-Run Files",
-    "text": "Per-Run Files\n\noutput.csv\n\nRow-level model annotations.\n\nconfig.json\n\nThe full run configuration — model, prompt, sampling, chat mode, reasoning, and task paths — so a run-ID folder can always be traced back to its settings.\n\nclassification_reports.txt\n\nHuman-readable evaluation summaries by annotation field.\n\nemissions.csv\n\nCodeCarbon energy and emissions output.\n\ntiming_data.json\n\nTotal inference time, average inference time, and request counts.\n\nchar_counts.json\n\nTotal input and output characters sent to and returned from the model.\n\nreasoning_traces.jsonl\n\nOne record per query capturing the model’s reasoning content, when the model returns it (see Model reasoning).",
-    "crumbs": [
-      "Get Started",
-      "Concepts",
-      "Outputs And Metrics"
-    ]
-  },
-  {
-    "objectID": "outputs-metrics.html#tidy-metrics-tables",
-    "href": "outputs-metrics.html#tidy-metrics-tables",
-    "title": "Outputs And Metrics",
-    "section": "Tidy Metrics Tables",
-    "text": "Tidy Metrics Tables\nAggregate metrics are written as two linked tidy tables:\n\n&lt;task&gt;_metrics_log.csv\n\nThe long table — one row per (run_id, annotation column, annotation type, metric) with the metric value.\n\n&lt;task&gt;_metrics_log_runs.csv\n\nThe runs table — one row per run_id with model, prompt, sampling, chat mode, and reasoning configuration, task paths, inference counts, character counts, energy use, emissions, CPU/GPU metadata, and per-query averages.\n\n\nThis split keeps metric values long and analysis-friendly while avoiding repeated run metadata on every metric row.\nDepending on the annotation types in your codebook, metrics can include:\n\naccuracy, precision, recall, F1, and percentage agreement\nCohen’s kappa and Krippendorff’s alpha\nSpearman correlation and quadratic weighted kappa for Likert fields\nnormalized Levenshtein similarity and BLEU for textbox fields\nROUGE, embedding cosine similarity, and BERTScore when optional textbox extras are installed\ntoken F1, exact-match F1, and character IoU for span fields\ntotal inference time, average inference time, number of queries, character counts, energy use, and emissions",
-    "crumbs": [
-      "Get Started",
-      "Concepts",
-      "Outputs And Metrics"
-    ]
-  },
-  {
-    "objectID": "outputs-metrics.html#linking-the-two-tables",
-    "href": "outputs-metrics.html#linking-the-two-tables",
-    "title": "Outputs And Metrics",
-    "section": "Linking the two tables",
-    "text": "Linking the two tables\nrun_id is the key shared by both tables, so you can join metric values to the configuration that produced them with a single merge:\nimport pandas as pd\n\nmetrics = pd.read_csv(\"outputs/metrics/policy-sentiment_metrics_log.csv\")\nruns = pd.read_csv(\"outputs/metrics/policy-sentiment_metrics_log_runs.csv\")\n\njoined = metrics.merge(runs, on=\"run_id\")\n\n# e.g. macro-F1 on Direction by model and chat mode\nview = joined[\n    (joined[\"column\"] == \"Policy Sentiment_Direction\")\n    & (joined[\"metric\"] == \"f1_macro\")\n]\nprint(view[[\"model_id\", \"chat_mode\", \"reasoning\", \"use_examples\", \"value\"]])\nBecause every metric row carries a run_id, you can pivot, group, and compare runs along any configuration dimension — model, prompt, examples, chat mode, reasoning, or sampling — all scored against the same human labels.",
-    "crumbs": [
-      "Get Started",
-      "Concepts",
-      "Outputs And Metrics"
-    ]
-  },
-  {
-    "objectID": "outputs-metrics.html#choosing-metrics",
-    "href": "outputs-metrics.html#choosing-metrics",
-    "title": "Outputs And Metrics",
-    "section": "Choosing Metrics",
-    "text": "Choosing Metrics\nFor checkbox and dropdown annotations, start with F1 and percentage agreement. For imbalanced labels, inspect per-class precision and recall in classification_reports.txt.\nFor Likert annotations, report ordinal-aware metrics alongside exact agreement. A model that predicts adjacent categories may be less wrong than one that jumps from one end of the scale to the other.\nFor textbox annotations, treat similarity metrics as diagnostics rather than a single ground-truth measure. Short evidence extracts can be semantically equivalent while using different words.\nFor span annotations, token_f1 is the headline score for most comparisons because it rewards overlap at the token level. Use exact_match_f1 when boundary precision matters and char_iou when near misses should still be visible.",
-    "crumbs": [
-      "Get Started",
-      "Concepts",
-      "Outputs And Metrics"
-    ]
-  },
-  {
-    "objectID": "human-reliability.html",
-    "href": "human-reliability.html",
-    "title": "Human Reliability",
-    "section": "",
-    "text": "CodeBook Lab can validate multiple human coder CSVs, calculate inter-coder reliability, surface disagreements, and build a consensus ground-truth.csv.",
-    "crumbs": [
-      "Get Started",
-      "Concepts",
-      "Human Reliability"
-    ]
-  },
-  {
-    "objectID": "human-reliability.html#calculate-reliability",
-    "href": "human-reliability.html#calculate-reliability",
-    "title": "Human Reliability",
-    "section": "Calculate Reliability",
-    "text": "Calculate Reliability\nfrom codebook_lab import calculate_human_reliability\n\ncoder_csvs = {\n    \"coder1\": \"annotations/coder1.csv\",\n    \"coder2\": \"annotations/coder2.csv\",\n    \"coder3\": \"annotations/coder3.csv\",\n}\n\nreliability = calculate_human_reliability(\n    codebook_path=\"codebook.json\",\n    coder_csvs=coder_csvs,\n    output_dir=\"outputs/human_reliability\",\n)\n\nprint(reliability.summary_text)\nOutputs include:\n\nvalidation_issues.csv\npairwise_icr.csv\nmultirater_icr.csv\ndisagreements.csv\nsummary.md\n\nEach coder CSV must contain a stable item identifier column. The default is sample_id; pass id_column=\"...\" if your data uses a different identifier.\nValidation catches duplicate coder-item rows, missing assigned items, unexpected items, unexpected coder assignments, invalid labels, missing required fields, and filled child fields whose condition is not satisfied.",
-    "crumbs": [
-      "Get Started",
-      "Concepts",
-      "Human Reliability"
-    ]
-  },
-  {
-    "objectID": "human-reliability.html#assignments",
-    "href": "human-reliability.html#assignments",
-    "title": "Human Reliability",
-    "section": "Assignments",
-    "text": "Assignments\nBy default, Lab infers coder assignments from the submitted files. To validate expected coverage, pass an assignment CSV.\nLong format:\nsample_id,coder_id\n001,coder1\n001,coder2\n002,coder2\n002,coder3\nWide format:\nsample_id,ra_1,ra_2\n001,coder1,coder2\n002,coder2,coder3",
-    "crumbs": [
-      "Get Started",
-      "Concepts",
-      "Human Reliability"
-    ]
-  },
-  {
-    "objectID": "human-reliability.html#build-ground-truth",
-    "href": "human-reliability.html#build-ground-truth",
-    "title": "Human Reliability",
-    "section": "Build Ground Truth",
-    "text": "Build Ground Truth\nUse build_human_ground_truth() to create a consensus label file. Rows without a strict majority are written to an adjudication queue.\nfrom codebook_lab import build_human_ground_truth\n\nground_truth = build_human_ground_truth(\n    codebook_path=\"codebook.json\",\n    coder_csvs=coder_csvs,\n    output_dir=\"outputs/ground_truth\",\n)\nOutputs include:\n\nground-truth.csv\nadjudication_queue.csv\nvalidation_issues.csv\n\nOpen adjudication_queue.csv in CodeBook Studio’s adjudication mode, fill unresolved blanks, export the completed queue, then rebuild:\nresolved = build_human_ground_truth(\n    codebook_path=\"codebook.json\",\n    coder_csvs=coder_csvs,\n    adjudications_csv=\"adjudication_queue.csv\",\n    output_dir=\"outputs/ground_truth_resolved\",\n)",
-    "crumbs": [
-      "Get Started",
-      "Concepts",
-      "Human Reliability"
+      "Overview"
     ]
   },
   {
@@ -613,127 +214,471 @@
     "text": "1.0.0\n2026-03-23\n\nNew features\n\nInitial release: codebook-driven LLM annotation and benchmarking against human labels. run_experiment() and run_experiment_grid() sweep model, prompt style, examples, and sampling settings; classification, agreement, and textbox metrics; built-in standard, persona, and CoT prompt wrappers; and the bundled policy-sentiment task."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "CodeBook Lab",
+    "objectID": "reference/HumanGroundTruthResult.html",
+    "href": "reference/HumanGroundTruthResult.html",
+    "title": "HumanGroundTruthResult",
     "section": "",
-    "text": "CodeBook Lab is a Python package for running local LLM annotation experiments against human-coded benchmark data. It takes a CodeBook Studio codebook and labelled CSV, removes the human labels before annotation, runs one or more Ollama models, and scores the model outputs against the held-out human labels.\nThe package is built for computational social science workflows where the core question is not simply “can a model label this text?”, but which model, prompt, examples, and sampling settings reproduce a human codebook most reliably.",
+    "text": "HumanGroundTruthResult(\n    ground_truth,\n    adjudication_queue,\n    validation_issues,\n    output_dir,\n)\nResult returned by build_human_ground_truth.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nground_truth\npd.DataFrame\nFinal or provisional human consensus labels.\n\n\nadjudication_queue\npd.DataFrame\nRows that still need adjudication.\n\n\nvalidation_issues\npd.DataFrame\nDataFrame of coder-file and label validation issues.\n\n\noutput_dir\nPath | None\nDirectory where outputs were written, or None if no output directory was requested.",
     "crumbs": [
-      "Get Started",
-      "Overview"
+      "Reference",
+      "Experiment Types",
+      "HumanGroundTruthResult"
     ]
   },
   {
-    "objectID": "index.html#what-the-package-does",
-    "href": "index.html#what-the-package-does",
-    "title": "CodeBook Lab",
-    "section": "What The Package Does",
-    "text": "What The Package Does\nCodeBook Lab gives you a reproducible path from human-coded data to model evaluation:\n\nLoad a task folder containing codebook.json and ground-truth.csv.\nStrip annotation columns from the input before sending text to the model.\nPrompt a local Ollama model for each applicable annotation field.\nSave row-level model outputs and run metadata.\nCompare model labels with human labels using metrics appropriate to each annotation type.\nLog aggregate quality, runtime, energy, and emissions metrics for comparison across runs.\n\nSupported annotation types include checkbox, dropdown, Likert, textbox, and span annotations. Lab also respects conditional annotations, validates model responses before storing them, retries invalid answers, and keeps skipped conditional fields out of metric denominators.\nCategorical and ordinal fields receive classification and agreement metrics; textbox fields can receive lexical and embedding-based similarity metrics; span fields receive token F1, exact-match F1, and character IoU.",
-    "crumbs": [
-      "Get Started",
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "index.html#where-to-start",
-    "href": "index.html#where-to-start",
-    "title": "CodeBook Lab",
-    "section": "Where To Start",
-    "text": "Where To Start\nIf you want the shortest path, begin with Installation, then run the bundled policy-sentiment task in Experiments. If you already have CodeBook Studio exports, go straight to Tasks and Annotation Types to check the expected codebook and CSV formats.\nThe upstream annotation workflow — designing a codebook and labelling data — is covered in the CodeBook Studio guide.",
-    "crumbs": [
-      "Get Started",
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "index.html#license-developers",
-    "href": "index.html#license-developers",
-    "title": "CodeBook Lab",
-    "section": "License & Developers",
-    "text": "License & Developers\n\n  \n    License\n    GNU AGPL v3.0 — a strong copyleft license. You may use, modify, and distribute CodeBook Lab, including over a network, provided derivative works remain under the same license.\n  \n  \n    Developers\n    Lorcan McLaren \n      \n        \n        \n        \n        \n      \n     — author, maintainer\n  \n\nTo cite CodeBook Lab in research, see the Citation page.",
-    "crumbs": [
-      "Get Started",
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "examples.html",
-    "href": "examples.html",
-    "title": "Examples",
+    "objectID": "reference/HumanGroundTruthResult.html#attributes",
+    "href": "reference/HumanGroundTruthResult.html#attributes",
+    "title": "HumanGroundTruthResult",
     "section": "",
-    "text": "A worked, end-to-end run on the bundled policy-sentiment task: get the data, run a model, read the row-level output, score it against the human labels, and compare multiple configurations. Everything here works against the task shipped with the package, so you can follow along before plugging in your own data.",
+    "text": "Name\nType\nDescription\n\n\n\n\nground_truth\npd.DataFrame\nFinal or provisional human consensus labels.\n\n\nadjudication_queue\npd.DataFrame\nRows that still need adjudication.\n\n\nvalidation_issues\npd.DataFrame\nDataFrame of coder-file and label validation issues.\n\n\noutput_dir\nPath | None\nDirectory where outputs were written, or None if no output directory was requested.",
     "crumbs": [
-      "Examples"
+      "Reference",
+      "Experiment Types",
+      "HumanGroundTruthResult"
     ]
   },
   {
-    "objectID": "examples.html#the-policy-sentiment-task",
-    "href": "examples.html#the-policy-sentiment-task",
-    "title": "Examples",
-    "section": "The policy-sentiment task",
-    "text": "The policy-sentiment task\npolicy-sentiment asks four questions about short political texts, one of each annotation type:\n\n\n\n\n\n\n\n\nField\nType\nValues\n\n\n\n\nPolicy Sentiment_Explicit evaluation\ncheckbox\n1 / 0\n\n\nPolicy Sentiment_Direction\ndropdown\npositive · negative · mixed · no clear sentiment\n\n\nPolicy Sentiment_Intensity\nLikert\n1–5\n\n\nPolicy Sentiment_Evidence\ntextbox\nshort free text\n\n\n\nThe ground-truth.csv holds the human labels in those columns, plus metadata (doc_id, title, topic, speaker_type) and the text to annotate.",
+    "objectID": "reference/run_metrics.html",
+    "href": "reference/run_metrics.html",
+    "title": "run_metrics",
+    "section": "",
+    "text": "run_metrics(\n    ground_truth_csv,\n    llm_output_csv,\n    label,\n    output_csv,\n    model_id,\n    codebook_path,\n    report_file,\n    columns=None,\n    quantization_type=None,\n    temperature=None,\n    top_p=None,\n    prompt_type=None,\n    use_examples=None,\n    chat_mode=None,\n    reasoning=None,\n    process_textbox=False,\n    process_span=False,\n    emissions_file=None,\n    experiment_directory=None,\n    timestamp=None,\n    timing_file=None,\n    char_counts_file=None,\n    run_id=None,\n)\nEvaluate one model-output CSV against ground truth and persist the results.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nground_truth_csv\n\nPath to the human-labeled reference CSV.\nrequired\n\n\nllm_output_csv\n\nPath to the model-generated annotation CSV.\nrequired\n\n\nlabel\n\nExperiment label written to the metrics CSV, usually the task name.\nrequired\n\n\noutput_csv\n\nPath to the aggregate metrics CSV to create or update.\nrequired\n\n\nmodel_id\n\nStable identifier for the model and prompt configuration.\nrequired\n\n\ncodebook_path\n\nPath to the codebook used for the run.\nrequired\n\n\nreport_file\n\nPath to the per-column report text file.\nrequired\n\n\ncolumns\n\nOptional subset of annotation column names to evaluate.\nNone\n\n\nquantization_type\n\nOptional quantization metadata string.\nNone\n\n\ntemperature\n\nOptional temperature metadata value.\nNone\n\n\ntop_p\n\nOptional top-p metadata value.\nNone\n\n\nprompt_type\n\nOptional prompt wrapper name stored as metadata.\nNone\n\n\nuse_examples\n\nOptional boolean-like metadata flag.\nNone\n\n\nchat_mode\n\nOptional chat-history policy stored as metadata.\nNone\n\n\nreasoning\n\nOptional Ollama reasoning mode stored as metadata.\nNone\n\n\nprocess_textbox\n\nWhether textbox metrics should be computed.\nFalse\n\n\nemissions_file\n\nOptional path to emissions.csv.\nNone\n\n\nexperiment_directory\n\nOptional path to the per-run output directory.\nNone\n\n\ntimestamp\n\nOptional timestamp string.\nNone\n\n\ntiming_file\n\nOptional path to timing_data.json.\nNone\n\n\nchar_counts_file\n\nOptional path to char_counts.json.\nNone\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\n\ncodebook_lab.types.MetricsRunResult for the completed evaluation.",
     "crumbs": [
-      "Examples"
+      "Reference",
+      "Lower-Level Workflow",
+      "run_metrics"
     ]
   },
   {
-    "objectID": "examples.html#get-the-task",
-    "href": "examples.html#get-the-task",
-    "title": "Examples",
-    "section": "1. Get the task",
-    "text": "1. Get the task\nCopy the bundled task into a local folder you control:\nfrom codebook_lab import copy_example_task\n\ncopy_example_task(\"policy-sentiment\", \"tasks\")\nThis writes tasks/policy-sentiment/codebook.json and tasks/policy-sentiment/ground-truth.csv.",
+    "objectID": "reference/run_metrics.html#parameters",
+    "href": "reference/run_metrics.html#parameters",
+    "title": "run_metrics",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nground_truth_csv\n\nPath to the human-labeled reference CSV.\nrequired\n\n\nllm_output_csv\n\nPath to the model-generated annotation CSV.\nrequired\n\n\nlabel\n\nExperiment label written to the metrics CSV, usually the task name.\nrequired\n\n\noutput_csv\n\nPath to the aggregate metrics CSV to create or update.\nrequired\n\n\nmodel_id\n\nStable identifier for the model and prompt configuration.\nrequired\n\n\ncodebook_path\n\nPath to the codebook used for the run.\nrequired\n\n\nreport_file\n\nPath to the per-column report text file.\nrequired\n\n\ncolumns\n\nOptional subset of annotation column names to evaluate.\nNone\n\n\nquantization_type\n\nOptional quantization metadata string.\nNone\n\n\ntemperature\n\nOptional temperature metadata value.\nNone\n\n\ntop_p\n\nOptional top-p metadata value.\nNone\n\n\nprompt_type\n\nOptional prompt wrapper name stored as metadata.\nNone\n\n\nuse_examples\n\nOptional boolean-like metadata flag.\nNone\n\n\nchat_mode\n\nOptional chat-history policy stored as metadata.\nNone\n\n\nreasoning\n\nOptional Ollama reasoning mode stored as metadata.\nNone\n\n\nprocess_textbox\n\nWhether textbox metrics should be computed.\nFalse\n\n\nemissions_file\n\nOptional path to emissions.csv.\nNone\n\n\nexperiment_directory\n\nOptional path to the per-run output directory.\nNone\n\n\ntimestamp\n\nOptional timestamp string.\nNone\n\n\ntiming_file\n\nOptional path to timing_data.json.\nNone\n\n\nchar_counts_file\n\nOptional path to char_counts.json.\nNone",
     "crumbs": [
-      "Examples"
+      "Reference",
+      "Lower-Level Workflow",
+      "run_metrics"
     ]
   },
   {
-    "objectID": "examples.html#run-one-experiment",
-    "href": "examples.html#run-one-experiment",
-    "title": "Examples",
-    "section": "2. Run one experiment",
-    "text": "2. Run one experiment\nfrom codebook_lab import ExperimentSpec, run_experiment\n\nresult = run_experiment(\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:270m\",\n        use_examples=False,\n        prompt_type=\"standard\",\n        process_textbox=True,\n        country_iso_code=\"IRL\",\n    ),\n    task_root=\"tasks\",\n)\n\nprint(result.experiment_directory)\nprint(result.metrics.summary_text)\nLab strips the human label columns before prompting, runs the model on each row, writes the outputs to a timestamped directory, and scores the predictions against the held-out labels.",
+    "objectID": "reference/run_metrics.html#returns",
+    "href": "reference/run_metrics.html#returns",
+    "title": "run_metrics",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\n\ncodebook_lab.types.MetricsRunResult for the completed evaluation.",
     "crumbs": [
-      "Examples"
+      "Reference",
+      "Lower-Level Workflow",
+      "run_metrics"
     ]
   },
   {
-    "objectID": "examples.html#inspect-the-row-level-output",
-    "href": "examples.html#inspect-the-row-level-output",
-    "title": "Examples",
-    "section": "3. Inspect the row-level output",
-    "text": "3. Inspect the row-level output\noutput.csv keeps the metadata and text, with the model’s predictions in the same annotation columns (illustrative):\n\n\n\n\n\n\n\n\n\n\ndoc_id\nPolicy Sentiment_Explicit evaluation\nPolicy Sentiment_Direction\nPolicy Sentiment_Intensity\nPolicy Sentiment_Evidence\n\n\n\n\nps_001\n1\npositive\n5\n“sensible compromise”\n\n\nps_002\n1\nnegative\n2\n“financing assumptions are unrealistic”\n\n\nps_003\n0\nno clear sentiment\n3\n“”\n\n\n\nBecause the columns match the codebook, you can merge output.csv back against ground-truth.csv on doc_id to inspect individual disagreements.",
+    "objectID": "reference/get_prompt_wrapper.html",
+    "href": "reference/get_prompt_wrapper.html",
+    "title": "get_prompt_wrapper",
+    "section": "",
+    "text": "get_prompt_wrapper(name)\nReturn a registered prompt wrapper by name.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nname\nstr\nPrompt wrapper key, for example \"standard\" or a custom name.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nPromptWrapper\nThe callable prompt wrapper registered under name.",
     "crumbs": [
-      "Examples"
+      "Reference",
+      "Prompts",
+      "get_prompt_wrapper"
     ]
   },
   {
-    "objectID": "examples.html#read-the-metrics",
-    "href": "examples.html#read-the-metrics",
-    "title": "Examples",
-    "section": "4. Read the metrics",
-    "text": "4. Read the metrics\nresult.metrics.summary_text prints a quick overview, and the full results land in the tidy metrics tables under outputs/metrics/ (illustrative):\noutputs/metrics/policy-sentiment_metrics_log.csv\n\n\n\nrun_id\ncolumn\nmetric\nvalue\n\n\n\n\nrun_a1b2\nPolicy Sentiment_Direction\nf1_macro\n0.71\n\n\nrun_a1b2\nPolicy Sentiment_Direction\npercentage_agreement\n0.80\n\n\nrun_a1b2\nPolicy Sentiment_Intensity\nquadratic_kappa\n0.66\n\n\nrun_a1b2\nPolicy Sentiment_Evidence\nnorm_levenshtein\n0.52\n\n\n\nThe companion policy-sentiment_metrics_log_runs.csv carries one row per run with the model, prompt, and sampling configuration alongside runtime, character counts, energy, and emissions — joined back to the metrics via run_id. See Outputs & Metrics for the full field list and guidance on choosing metrics.",
+    "objectID": "reference/get_prompt_wrapper.html#parameters",
+    "href": "reference/get_prompt_wrapper.html#parameters",
+    "title": "get_prompt_wrapper",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nname\nstr\nPrompt wrapper key, for example \"standard\" or a custom name.\nrequired",
     "crumbs": [
-      "Examples"
+      "Reference",
+      "Prompts",
+      "get_prompt_wrapper"
     ]
   },
   {
-    "objectID": "examples.html#compare-configurations",
-    "href": "examples.html#compare-configurations",
-    "title": "Examples",
-    "section": "5. Compare configurations",
-    "text": "5. Compare configurations\nThe point of CodeBook Lab is comparison. Because the codebook and labels stay fixed, you can isolate one variable at a time – here, model choice and zero-shot versus few-shot prompting.\nThis example runs the full 20-row bundled task with two recent 4B local models: qwen3:4b and gemma3:4b. It disables textbox generation so the benchmark focuses on the checkbox, dropdown, and Likert fields while still using the real metrics and efficiency pipeline. The code below assumes the models are already available locally in Ollama. If needed, run ollama pull qwen3:4b and ollama pull gemma3:4b first.\nfrom codebook_lab import ExperimentSpec, copy_example_task, run_experiment\n\ncopy_example_task(\"policy-sentiment\", \"tasks\")\n\nspecs = [\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"qwen3:4b\",\n        use_examples=False,\n        reasoning=False,\n        process_textbox=False,\n        country_iso_code=\"IRL\",\n    ),\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"qwen3:4b\",\n        use_examples=True,\n        reasoning=False,\n        process_textbox=False,\n        country_iso_code=\"IRL\",\n    ),\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:4b\",\n        use_examples=False,\n        process_textbox=False,\n        country_iso_code=\"IRL\",\n    ),\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:4b\",\n        use_examples=True,\n        process_textbox=False,\n        country_iso_code=\"IRL\",\n    ),\n]\n\nfor spec in specs:\n    run_experiment(\n        spec,\n        task_root=\"tasks\",\n        output_root=\"outputs\",\n        pull_model=False,\n    )\nEach run appends to the same two linked metrics tables:\nimport pandas as pd\n\nmetrics = pd.read_csv(\"outputs/metrics/policy-sentiment_metrics_log.csv\")\nruns = pd.read_csv(\"outputs/metrics/policy-sentiment_metrics_log_runs.csv\")\n\njoined = metrics.merge(runs, on=\"run_id\")\n\nfield_f1 = joined[\n    (\n        joined[\"column\"].isin(\n            [\n                \"Policy Sentiment_Explicit evaluation\",\n                \"Policy Sentiment_Direction\",\n                \"Policy Sentiment_Intensity\",\n            ]\n        )\n    )\n    & (joined[\"metric\"] == \"f1\")\n]\n\nefficiency = runs[\n    [\n        \"run_id\",\n        \"model_id\",\n        \"use_examples\",\n        \"n_queries\",\n        \"avg_inference_time_per_query_s\",\n        \"avg_output_chars_per_query\",\n        \"avg_energy_kwh_per_query\",\n    ]\n]\nThese are real figures from the full benchmark, run locally with Ollama on an Apple M2. Your exact numbers will vary by machine, model build, and model response validity. The plots are produced from the joined tables with ggplot2 and theme_classic().\n\n\n\nRun\nExplicit evaluation F1\nDirection F1\nIntensity F1\n\n\n\n\nQwen 3 4B, zero-shot\n0.812\n0.896\n0.000\n\n\nQwen 3 4B, examples\n0.913\n0.896\n0.000\n\n\nGemma 3 4B, zero-shot\n1.000\n0.949\n0.575\n\n\nGemma 3 4B, examples\n1.000\n0.908\n0.647\n\n\n\n\n\n\nField-level F1 scores for four policy-sentiment benchmark runs.\n\n\n\n\n\n\n\n\n\n\n\nRun\nAvg seconds/query\nAvg output chars/query\nAvg energy/query (kWh)\n\n\n\n\nQwen 3 4B, zero-shot\n2.52\n110\n0.00000777\n\n\nQwen 3 4B, examples\n3.00\n71\n0.00000620\n\n\nGemma 3 4B, zero-shot\n2.06\n19\n0.00000373\n\n\nGemma 3 4B, examples\n2.62\n20\n0.00000500\n\n\n\n\n\n\nEfficiency measures for the same four policy-sentiment benchmark runs.\n\n\nThe tradeoff is visible: qwen3:4b scores well on explicit evaluation and direction, but in this run it did not return valid Likert values for intensity, which triggered retries and raised the query count to 80. gemma3:4b completed the same task in 60 model calls and handled all three scored fields. Adding examples improved Qwen’s explicit-evaluation F1 and Gemma’s intensity F1, but it also increased average inference time and prompt size.\nThe CSVs used for the tables and plots are included with these docs:\n\nField-level F1 metrics\nRun configuration and efficiency metrics\n\nThe important pattern is the same for larger benchmarks: join on run_id, pick the field and metric you care about, then compare those values against the run configuration and efficiency columns.",
+    "objectID": "reference/get_prompt_wrapper.html#returns",
+    "href": "reference/get_prompt_wrapper.html#returns",
+    "title": "get_prompt_wrapper",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nPromptWrapper\nThe callable prompt wrapper registered under name.",
     "crumbs": [
-      "Examples"
+      "Reference",
+      "Prompts",
+      "get_prompt_wrapper"
     ]
   },
   {
-    "objectID": "examples.html#next-steps",
-    "href": "examples.html#next-steps",
-    "title": "Examples",
-    "section": "Next steps",
-    "text": "Next steps\n\nTasks — the codebook.json / ground-truth.csv format for your own data.\nAnnotation Types — checkbox, dropdown, Likert, textbox, and span fields.\nExperiments — single runs, sweeps, custom prompt wrappers, and running without ground truth.\nCodeBook Studio — designing a codebook and annotating in the browser.",
+    "objectID": "reference/get_ollama_base_url.html",
+    "href": "reference/get_ollama_base_url.html",
+    "title": "get_ollama_base_url",
+    "section": "",
+    "text": "get_ollama_base_url()\nReturn the Ollama base URL used for connectivity checks.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nstr\nBase URL string, defaulting to http://127.0.0.1:11434 when\n\n\n\nstr\nOLLAMA_HOST is not set.",
     "crumbs": [
-      "Examples"
+      "Reference",
+      "Ollama Helpers",
+      "get_ollama_base_url"
+    ]
+  },
+  {
+    "objectID": "reference/get_ollama_base_url.html#returns",
+    "href": "reference/get_ollama_base_url.html#returns",
+    "title": "get_ollama_base_url",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nstr\nBase URL string, defaulting to http://127.0.0.1:11434 when\n\n\n\nstr\nOLLAMA_HOST is not set.",
+    "crumbs": [
+      "Reference",
+      "Ollama Helpers",
+      "get_ollama_base_url"
+    ]
+  },
+  {
+    "objectID": "reference/copy_example_task.html",
+    "href": "reference/copy_example_task.html",
+    "title": "copy_example_task",
+    "section": "",
+    "text": "copy_example_task(task_name, destination, overwrite=False)\nCopy a bundled example task to a user-controlled directory.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntask_name\nstr\nBundled task directory name.\nrequired\n\n\ndestination\nstr | Path\nDirectory where the example task folder should be copied.\nrequired\n\n\noverwrite\nbool\nIf True, replace an existing destination task folder.\nFalse\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nPath\nPath to the copied task directory inside destination.",
+    "crumbs": [
+      "Reference",
+      "Example Tasks",
+      "copy_example_task"
+    ]
+  },
+  {
+    "objectID": "reference/copy_example_task.html#parameters",
+    "href": "reference/copy_example_task.html#parameters",
+    "title": "copy_example_task",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntask_name\nstr\nBundled task directory name.\nrequired\n\n\ndestination\nstr | Path\nDirectory where the example task folder should be copied.\nrequired\n\n\noverwrite\nbool\nIf True, replace an existing destination task folder.\nFalse",
+    "crumbs": [
+      "Reference",
+      "Example Tasks",
+      "copy_example_task"
+    ]
+  },
+  {
+    "objectID": "reference/copy_example_task.html#returns",
+    "href": "reference/copy_example_task.html#returns",
+    "title": "copy_example_task",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nPath\nPath to the copied task directory inside destination.",
+    "crumbs": [
+      "Reference",
+      "Example Tasks",
+      "copy_example_task"
+    ]
+  },
+  {
+    "objectID": "reference/get_example_task_files.html",
+    "href": "reference/get_example_task_files.html",
+    "title": "get_example_task_files",
+    "section": "",
+    "text": "get_example_task_files(task_name)\nReturn the standard file paths for a bundled example task.\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntask_name\nstr\nBundled task directory name.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\ndict[str, Path]\nDictionary containing task_dir, codebook_path, and\n\n\n\ndict[str, Path]\nground_truth_csv paths.",
+    "crumbs": [
+      "Reference",
+      "Example Tasks",
+      "get_example_task_files"
+    ]
+  },
+  {
+    "objectID": "reference/get_example_task_files.html#parameters",
+    "href": "reference/get_example_task_files.html#parameters",
+    "title": "get_example_task_files",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntask_name\nstr\nBundled task directory name.\nrequired",
+    "crumbs": [
+      "Reference",
+      "Example Tasks",
+      "get_example_task_files"
+    ]
+  },
+  {
+    "objectID": "reference/get_example_task_files.html#returns",
+    "href": "reference/get_example_task_files.html#returns",
+    "title": "get_example_task_files",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\ndict[str, Path]\nDictionary containing task_dir, codebook_path, and\n\n\n\ndict[str, Path]\nground_truth_csv paths.",
+    "crumbs": [
+      "Reference",
+      "Example Tasks",
+      "get_example_task_files"
+    ]
+  },
+  {
+    "objectID": "reference/list_example_tasks.html",
+    "href": "reference/list_example_tasks.html",
+    "title": "list_example_tasks",
+    "section": "",
+    "text": "list_example_tasks()\nList bundled example task names shipped with the package.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nlist[str]\nSorted list of task directory names available under the package’s\n\n\n\nlist[str]\nbundled tasks data folder.",
+    "crumbs": [
+      "Reference",
+      "Example Tasks",
+      "list_example_tasks"
+    ]
+  },
+  {
+    "objectID": "reference/list_example_tasks.html#returns",
+    "href": "reference/list_example_tasks.html#returns",
+    "title": "list_example_tasks",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nlist[str]\nSorted list of task directory names available under the package’s\n\n\n\nlist[str]\nbundled tasks data folder.",
+    "crumbs": [
+      "Reference",
+      "Example Tasks",
+      "list_example_tasks"
+    ]
+  },
+  {
+    "objectID": "reference/annotate.classify_text.html",
+    "href": "reference/annotate.classify_text.html",
+    "title": "annotate.classify_text",
+    "section": "",
+    "text": "annotate.classify_text(\n    chain,\n    text,\n    codebook,\n    prompt_type='standard',\n    use_examples=False,\n    char_counts=None,\n    timing_data=None,\n    process_textbox=False,\n    row_num=None,\n    progress_bar=None,\n    total_rows=None,\n    process_span=False,\n    retries=1,\n    retry_strategy='identical',\n    retry_chain=None,\n    chat_session=None,\n    reasoning_traces=None,\n    chat_mode=None,\n)\nAnnotate one text row across all sections in a codebook.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nchain\n\nRunnable returned by setup_model.\nrequired\n\n\ntext\n\nRaw source text to annotate.\nrequired\n\n\ncodebook\n\nParsed codebook dictionary.\nrequired\n\n\nprompt_type\n\nRegistered prompt wrapper name or callable wrapper.\n'standard'\n\n\nuse_examples\n\nWhether codebook examples should be included in prompts.\nFalse\n\n\nchar_counts\n\nOptional mutable counter dict for prompt/response characters.\nNone\n\n\ntiming_data\n\nOptional mutable timing dict for inference statistics.\nNone\n\n\nprocess_textbox\n\nWhether textbox annotations should be generated.\nFalse\n\n\nrow_num\n\nOptional 1-based row number for progress logging.\nNone\n\n\nprogress_bar\n\nOptional progress-bar helper updated after each annotation.\nNone\n\n\ntotal_rows\n\nOptional total row count for progress rendering.\nNone\n\n\nchat_session\n\nOptional retained chat history for this text or run.\nNone\n\n\nreasoning_traces\n\nOptional list that receives per-query reasoning records.\nNone\n\n\nchat_mode\n\nNormalized chat-history policy for trace metadata.\nNone\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\n\nTuple of (responses, char_counts, timing_data).",
+    "crumbs": [
+      "Reference",
+      "Validation and Retry Helpers",
+      "annotate.classify_text"
+    ]
+  },
+  {
+    "objectID": "reference/annotate.classify_text.html#parameters",
+    "href": "reference/annotate.classify_text.html#parameters",
+    "title": "annotate.classify_text",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nchain\n\nRunnable returned by setup_model.\nrequired\n\n\ntext\n\nRaw source text to annotate.\nrequired\n\n\ncodebook\n\nParsed codebook dictionary.\nrequired\n\n\nprompt_type\n\nRegistered prompt wrapper name or callable wrapper.\n'standard'\n\n\nuse_examples\n\nWhether codebook examples should be included in prompts.\nFalse\n\n\nchar_counts\n\nOptional mutable counter dict for prompt/response characters.\nNone\n\n\ntiming_data\n\nOptional mutable timing dict for inference statistics.\nNone\n\n\nprocess_textbox\n\nWhether textbox annotations should be generated.\nFalse\n\n\nrow_num\n\nOptional 1-based row number for progress logging.\nNone\n\n\nprogress_bar\n\nOptional progress-bar helper updated after each annotation.\nNone\n\n\ntotal_rows\n\nOptional total row count for progress rendering.\nNone\n\n\nchat_session\n\nOptional retained chat history for this text or run.\nNone\n\n\nreasoning_traces\n\nOptional list that receives per-query reasoning records.\nNone\n\n\nchat_mode\n\nNormalized chat-history policy for trace metadata.\nNone",
+    "crumbs": [
+      "Reference",
+      "Validation and Retry Helpers",
+      "annotate.classify_text"
+    ]
+  },
+  {
+    "objectID": "reference/annotate.classify_text.html#returns",
+    "href": "reference/annotate.classify_text.html#returns",
+    "title": "annotate.classify_text",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\n\nTuple of (responses, char_counts, timing_data).",
+    "crumbs": [
+      "Reference",
+      "Validation and Retry Helpers",
+      "annotate.classify_text"
+    ]
+  },
+  {
+    "objectID": "reference/build_human_ground_truth.html",
+    "href": "reference/build_human_ground_truth.html",
+    "title": "build_human_ground_truth",
+    "section": "",
+    "text": "build_human_ground_truth\nbuild_human_ground_truth(\n    codebook_path,\n    coder_csvs,\n    output_dir=None,\n    id_column=DEFAULT_ID_COLUMN,\n    assignment_csv=None,\n    adjudications_csv=None,\n)\nBuild consensus human ground truth from coder CSVs and optional adjudications.",
+    "crumbs": [
+      "Reference",
+      "Lower-Level Workflow",
+      "build_human_ground_truth"
+    ]
+  },
+  {
+    "objectID": "reference/ExperimentSpec.html",
+    "href": "reference/ExperimentSpec.html",
+    "title": "ExperimentSpec",
+    "section": "",
+    "text": "ExperimentSpec(\n    task,\n    model,\n    use_examples=DEFAULT_USE_EXAMPLES,\n    prompt_type=DEFAULT_PROMPT_TYPE,\n    temperature=DEFAULT_TEMPERATURE,\n    top_p=DEFAULT_TOP_P,\n    chat_mode=DEFAULT_CHAT_MODE,\n    reasoning=DEFAULT_REASONING,\n    process_textbox=False,\n    process_span=False,\n    country_iso_code=DEFAULT_COUNTRY_ISO_CODE,\n)\nDeclarative specification for one experiment run in a sweep.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\ntask\nstr\nTask folder name under tasks/, for example \"policy-sentiment\".\n\n\nmodel\nstr\nOllama model identifier, such as \"gemma3:270m\".\n\n\nuse_examples\nbool\nWhether to include worked examples from the codebook.\n\n\nprompt_type\nstr\nRegistered prompt wrapper name, for example \"standard\".\n\n\ntemperature\nfloat | None\nOptional sampling temperature as None, string, or float.\n\n\ntop_p\nfloat | None\nOptional nucleus-sampling value as None, string, or float.\n\n\nchat_mode\nstr\nHow annotation calls share chat history. Supported values are \"per_text\", \"per_query\", and \"continuous\".\n\n\nreasoning\nbool | str | None\nOllama reasoning mode passed to ChatOllama. None keeps the model default, True enables it, and False disables it.\n\n\nprocess_textbox\nbool\nWhether textbox annotations should be generated and scored.\n\n\nprocess_span\nbool\nWhether span annotations should be generated and scored.\n\n\ncountry_iso_code\nstr\nThree-letter ISO 3166-1 alpha-3 code for CodeCarbon.",
+    "crumbs": [
+      "Reference",
+      "Experiment Types",
+      "ExperimentSpec"
+    ]
+  },
+  {
+    "objectID": "reference/ExperimentSpec.html#attributes",
+    "href": "reference/ExperimentSpec.html#attributes",
+    "title": "ExperimentSpec",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\ntask\nstr\nTask folder name under tasks/, for example \"policy-sentiment\".\n\n\nmodel\nstr\nOllama model identifier, such as \"gemma3:270m\".\n\n\nuse_examples\nbool\nWhether to include worked examples from the codebook.\n\n\nprompt_type\nstr\nRegistered prompt wrapper name, for example \"standard\".\n\n\ntemperature\nfloat | None\nOptional sampling temperature as None, string, or float.\n\n\ntop_p\nfloat | None\nOptional nucleus-sampling value as None, string, or float.\n\n\nchat_mode\nstr\nHow annotation calls share chat history. Supported values are \"per_text\", \"per_query\", and \"continuous\".\n\n\nreasoning\nbool | str | None\nOllama reasoning mode passed to ChatOllama. None keeps the model default, True enables it, and False disables it.\n\n\nprocess_textbox\nbool\nWhether textbox annotations should be generated and scored.\n\n\nprocess_span\nbool\nWhether span annotations should be generated and scored.\n\n\ncountry_iso_code\nstr\nThree-letter ISO 3166-1 alpha-3 code for CodeCarbon.",
+    "crumbs": [
+      "Reference",
+      "Experiment Types",
+      "ExperimentSpec"
+    ]
+  },
+  {
+    "objectID": "reference/HumanReliabilityResult.html",
+    "href": "reference/HumanReliabilityResult.html",
+    "title": "HumanReliabilityResult",
+    "section": "",
+    "text": "HumanReliabilityResult(\n    validation_issues,\n    pairwise_icr,\n    multirater_icr,\n    disagreements,\n    summary_text,\n    output_dir,\n)\nResult returned by calculate_human_reliability.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nvalidation_issues\npd.DataFrame\nDataFrame of coder-file and label validation issues.\n\n\npairwise_icr\npd.DataFrame\nPairwise inter-coder reliability metrics.\n\n\nmultirater_icr\npd.DataFrame\nMulti-rater reliability metrics.\n\n\ndisagreements\npd.DataFrame\nItem/field rows where coders supplied different labels.\n\n\nsummary_text\nstr\nMarkdown summary of validation, reliability, and disagreements.\n\n\noutput_dir\nPath | None\nDirectory where outputs were written, or None if no output directory was requested.",
+    "crumbs": [
+      "Reference",
+      "Experiment Types",
+      "HumanReliabilityResult"
+    ]
+  },
+  {
+    "objectID": "reference/HumanReliabilityResult.html#attributes",
+    "href": "reference/HumanReliabilityResult.html#attributes",
+    "title": "HumanReliabilityResult",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\nvalidation_issues\npd.DataFrame\nDataFrame of coder-file and label validation issues.\n\n\npairwise_icr\npd.DataFrame\nPairwise inter-coder reliability metrics.\n\n\nmultirater_icr\npd.DataFrame\nMulti-rater reliability metrics.\n\n\ndisagreements\npd.DataFrame\nItem/field rows where coders supplied different labels.\n\n\nsummary_text\nstr\nMarkdown summary of validation, reliability, and disagreements.\n\n\noutput_dir\nPath | None\nDirectory where outputs were written, or None if no output directory was requested.",
+    "crumbs": [
+      "Reference",
+      "Experiment Types",
+      "HumanReliabilityResult"
+    ]
+  },
+  {
+    "objectID": "reference/resolve_task_dir.html",
+    "href": "reference/resolve_task_dir.html",
+    "title": "resolve_task_dir",
+    "section": "",
+    "text": "resolve_task_dir(task, task_root=None)\nResolve a task directory from either a user path or bundled examples.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntask\nstr\nTask directory name such as \"policy-sentiment\".\nrequired\n\n\ntask_root\nstr | Path | None\nOptional directory containing user-defined task folders.\nNone\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nPath\nFilesystem path to the resolved task directory.",
+    "crumbs": [
+      "Reference",
+      "Experiment Functions",
+      "resolve_task_dir"
+    ]
+  },
+  {
+    "objectID": "reference/resolve_task_dir.html#parameters",
+    "href": "reference/resolve_task_dir.html#parameters",
+    "title": "resolve_task_dir",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntask\nstr\nTask directory name such as \"policy-sentiment\".\nrequired\n\n\ntask_root\nstr | Path | None\nOptional directory containing user-defined task folders.\nNone",
+    "crumbs": [
+      "Reference",
+      "Experiment Functions",
+      "resolve_task_dir"
+    ]
+  },
+  {
+    "objectID": "reference/resolve_task_dir.html#returns",
+    "href": "reference/resolve_task_dir.html#returns",
+    "title": "resolve_task_dir",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nPath\nFilesystem path to the resolved task directory.",
+    "crumbs": [
+      "Reference",
+      "Experiment Functions",
+      "resolve_task_dir"
+    ]
+  },
+  {
+    "objectID": "reference/annotate.extract_json_response.html",
+    "href": "reference/annotate.extract_json_response.html",
+    "title": "annotate.extract_json_response",
+    "section": "",
+    "text": "annotate.extract_json_response(\n    response,\n    annotation_type,\n    min_value=None,\n    max_value=None,\n    options=None,\n    label_options=None,\n    text=None,\n)\nExtract and validate JSON response based on annotation type\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nresponse\n\nRaw model response text that should contain a JSON object.\nrequired\n\n\nannotation_type\n\nAnnotation type string such as \"dropdown\" or \"likert\".\nrequired\n\n\nmin_value\n\nOptional integer lower bound for Likert annotations.\nNone\n\n\nmax_value\n\nOptional integer upper bound for Likert annotations.\nNone\n\n\noptions\n\nOptional dropdown option list used to normalize categorical labels.\nNone\n\n\nlabel_options\n\nAllowed labels for span annotations.\nNone\n\n\ntext\n\nSource text for span annotations (used to validate offsets).\nNone\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\n\nParsed response value coerced into the expected annotation format. For\n\n\n\n\nannotation_type == \"span\" this is a list of span dicts.",
+    "crumbs": [
+      "Reference",
+      "Validation and Retry Helpers",
+      "annotate.extract_json_response"
+    ]
+  },
+  {
+    "objectID": "reference/annotate.extract_json_response.html#parameters",
+    "href": "reference/annotate.extract_json_response.html#parameters",
+    "title": "annotate.extract_json_response",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nresponse\n\nRaw model response text that should contain a JSON object.\nrequired\n\n\nannotation_type\n\nAnnotation type string such as \"dropdown\" or \"likert\".\nrequired\n\n\nmin_value\n\nOptional integer lower bound for Likert annotations.\nNone\n\n\nmax_value\n\nOptional integer upper bound for Likert annotations.\nNone\n\n\noptions\n\nOptional dropdown option list used to normalize categorical labels.\nNone\n\n\nlabel_options\n\nAllowed labels for span annotations.\nNone\n\n\ntext\n\nSource text for span annotations (used to validate offsets).\nNone",
+    "crumbs": [
+      "Reference",
+      "Validation and Retry Helpers",
+      "annotate.extract_json_response"
+    ]
+  },
+  {
+    "objectID": "reference/annotate.extract_json_response.html#returns",
+    "href": "reference/annotate.extract_json_response.html#returns",
+    "title": "annotate.extract_json_response",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\n\nParsed response value coerced into the expected annotation format. For\n\n\n\n\nannotation_type == \"span\" this is a list of span dicts.",
+    "crumbs": [
+      "Reference",
+      "Validation and Retry Helpers",
+      "annotate.extract_json_response"
+    ]
+  },
+  {
+    "objectID": "reference/expand_param_grid.html",
+    "href": "reference/expand_param_grid.html",
+    "title": "expand_param_grid",
+    "section": "",
+    "text": "expand_param_grid(param_grid)\nExpand a parameter grid into concrete ExperimentSpec runs.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nparam_grid\ndict\nIn-memory grid dictionary describing the Cartesian-product sweep. Expected keys include tasks, models, use_examples, prompt_types, temperatures, top_ps, process_textboxes, process_spans, chat_modes, reasoning, and country_iso_code.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nlist[ExperimentSpec]\nA list of experiment specifications, one per Cartesian-product combination.",
+    "crumbs": [
+      "Reference",
+      "Experiment Functions",
+      "expand_param_grid"
+    ]
+  },
+  {
+    "objectID": "reference/expand_param_grid.html#parameters",
+    "href": "reference/expand_param_grid.html#parameters",
+    "title": "expand_param_grid",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nparam_grid\ndict\nIn-memory grid dictionary describing the Cartesian-product sweep. Expected keys include tasks, models, use_examples, prompt_types, temperatures, top_ps, process_textboxes, process_spans, chat_modes, reasoning, and country_iso_code.\nrequired",
+    "crumbs": [
+      "Reference",
+      "Experiment Functions",
+      "expand_param_grid"
+    ]
+  },
+  {
+    "objectID": "reference/expand_param_grid.html#returns",
+    "href": "reference/expand_param_grid.html#returns",
+    "title": "expand_param_grid",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nlist[ExperimentSpec]\nA list of experiment specifications, one per Cartesian-product combination.",
+    "crumbs": [
+      "Reference",
+      "Experiment Functions",
+      "expand_param_grid"
+    ]
+  },
+  {
+    "objectID": "human-reliability.html",
+    "href": "human-reliability.html",
+    "title": "Human Reliability",
+    "section": "",
+    "text": "CodeBook Lab can validate multiple human coder CSVs, calculate inter-coder reliability, surface disagreements, and build a consensus ground-truth.csv.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Human Reliability"
+    ]
+  },
+  {
+    "objectID": "human-reliability.html#calculate-reliability",
+    "href": "human-reliability.html#calculate-reliability",
+    "title": "Human Reliability",
+    "section": "Calculate Reliability",
+    "text": "Calculate Reliability\nfrom codebook_lab import calculate_human_reliability\n\ncoder_csvs = {\n    \"coder1\": \"annotations/coder1.csv\",\n    \"coder2\": \"annotations/coder2.csv\",\n    \"coder3\": \"annotations/coder3.csv\",\n}\n\nreliability = calculate_human_reliability(\n    codebook_path=\"codebook.json\",\n    coder_csvs=coder_csvs,\n    output_dir=\"outputs/human_reliability\",\n)\n\nprint(reliability.summary_text)\nOutputs include:\n\nvalidation_issues.csv\npairwise_icr.csv\nmultirater_icr.csv\ndisagreements.csv\nsummary.md\n\nEach coder CSV must contain a stable item identifier column. The default is sample_id; pass id_column=\"...\" if your data uses a different identifier.\nValidation catches duplicate coder-item rows, missing assigned items, unexpected items, unexpected coder assignments, invalid labels, missing required fields, and filled child fields whose condition is not satisfied.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Human Reliability"
+    ]
+  },
+  {
+    "objectID": "human-reliability.html#assignments",
+    "href": "human-reliability.html#assignments",
+    "title": "Human Reliability",
+    "section": "Assignments",
+    "text": "Assignments\nBy default, Lab infers coder assignments from the submitted files. To validate expected coverage, pass an assignment CSV.\nLong format:\nsample_id,coder_id\n001,coder1\n001,coder2\n002,coder2\n002,coder3\nWide format:\nsample_id,ra_1,ra_2\n001,coder1,coder2\n002,coder2,coder3",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Human Reliability"
+    ]
+  },
+  {
+    "objectID": "human-reliability.html#build-ground-truth",
+    "href": "human-reliability.html#build-ground-truth",
+    "title": "Human Reliability",
+    "section": "Build Ground Truth",
+    "text": "Build Ground Truth\nUse build_human_ground_truth() to create a consensus label file. Rows without a strict majority are written to an adjudication queue.\nfrom codebook_lab import build_human_ground_truth\n\nground_truth = build_human_ground_truth(\n    codebook_path=\"codebook.json\",\n    coder_csvs=coder_csvs,\n    output_dir=\"outputs/ground_truth\",\n)\nOutputs include:\n\nground-truth.csv\nadjudication_queue.csv\nvalidation_issues.csv\n\nOpen adjudication_queue.csv in CodeBook Studio’s adjudication mode, fill unresolved blanks, export the completed queue, then rebuild:\nresolved = build_human_ground_truth(\n    codebook_path=\"codebook.json\",\n    coder_csvs=coder_csvs,\n    adjudications_csv=\"adjudication_queue.csv\",\n    output_dir=\"outputs/ground_truth_resolved\",\n)",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Human Reliability"
     ]
   },
   {
@@ -797,32 +742,52 @@
     ]
   },
   {
-    "objectID": "citation.html",
-    "href": "citation.html",
-    "title": "Citation",
+    "objectID": "conditionals-retries.html",
+    "href": "conditionals-retries.html",
+    "title": "Conditionals And Retries",
     "section": "",
-    "text": "If you use CodeBook Lab or CodeBook Studio in research, please cite the relevant software. If you use the full validation workflow, cite both tools. The associated preprint can be cited for the methodological framework and validation-first approach."
+    "text": "Newer CodeBook Lab workflows support conditional annotations and invalid-response retries. These features make Lab closer to CodeBook Studio’s annotation behavior while keeping model outputs auditable.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Conditionals And Retries"
+    ]
   },
   {
-    "objectID": "citation.html#software",
-    "href": "citation.html#software",
-    "title": "Citation",
-    "section": "Software",
-    "text": "Software\nAPSR style:\nMcLaren, Lorcan. 2026. CodeBook Lab (Version v1.4.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19185921.\nBibTeX:\n@software{mclaren_codebook_lab_2026,\n  author = {McLaren, Lorcan},\n  title = {CodeBook Lab},\n  year = {2026},\n  version = {v1.4.0},\n  doi = {10.5281/zenodo.19185921},\n  url = {https://doi.org/10.5281/zenodo.19185921}\n}"
+    "objectID": "conditionals-retries.html#conditional-annotations",
+    "href": "conditionals-retries.html#conditional-annotations",
+    "title": "Conditionals And Retries",
+    "section": "Conditional Annotations",
+    "text": "Conditional Annotations\nAn annotation can depend on a previous annotation. Lab evaluates the condition row by row and skips inactive fields. Here a checkbox parent (annotation_1) gates a dropdown child (annotation_2): the model is only asked for a stance when the text is marked evaluative.\n{\n  \"annotation_1\": {\n    \"name\": \"Is evaluative\",\n    \"type\": \"checkbox\",\n    \"tooltip\": \"Tick if the text expresses a stance toward the policy.\"\n  },\n  \"annotation_2\": {\n    \"name\": \"Stance\",\n    \"type\": \"dropdown\",\n    \"options\": [\"Positive\", \"Negative\"],\n    \"condition\": {\n      \"section_key\": \"section_1\",\n      \"annotation_key\": \"annotation_1\",\n      \"value\": \"Yes\"\n    }\n  }\n}\nThe condition value is normalized the same way as the parent’s response, so for a checkbox parent \"Yes\", true, and 1 are all equivalent triggers.\nIf the parent annotation does not satisfy the condition, Lab stores a blank value for the child field and does not send the child prompt to the model. Metrics also ignore rows where the field is not applicable, so skipped conditionals do not count as model errors.\nConditions can point across sections and are evaluated in codebook order. If a condition target is missing or cyclic, Lab falls back to permissive behavior rather than crashing a run.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Conditionals And Retries"
+    ]
   },
   {
-    "objectID": "citation.html#preprint",
-    "href": "citation.html#preprint",
-    "title": "Citation",
-    "section": "Preprint",
-    "text": "Preprint\nAPSR style:\nMcLaren, Lorcan, James P. Cross, Zuzanna Krakowska, Robin Rauner, and Martijn Schoonvelde. 2026. Magic Words or Methodical Work? Challenging Conventional Wisdom in LLM-Based Political Text Annotation. arXiv preprint arXiv:2603.26898. https://arxiv.org/abs/2603.26898.\nBibTeX:\n@misc{mclaren_magic_words_2026,\n  author = {McLaren, Lorcan and Cross, James P. and Krakowska, Zuzanna and Rauner, Robin and Schoonvelde, Martijn},\n  title = {Magic Words or Methodical Work? Challenging Conventional Wisdom in LLM-Based Political Text Annotation},\n  year = {2026},\n  eprint = {2603.26898},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.CL},\n  doi = {10.48550/arXiv.2603.26898},\n  url = {https://arxiv.org/abs/2603.26898}\n}"
+    "objectID": "conditionals-retries.html#response-validation",
+    "href": "conditionals-retries.html#response-validation",
+    "title": "Conditionals And Retries",
+    "section": "Response Validation",
+    "text": "Response Validation\nLab does not silently invent defaults for invalid model responses.\n\ndropdown values must match a configured option after normalization\ncheckbox values must parse to yes/no or 1/0\nLikert values must parse to a number in the configured scale\ntextbox values must be non-empty\nspan values must parse to a JSON array or {\"response\": [...]} object with valid offsets\n\nIf no valid value can be extracted, Lab records a blank cell after retry attempts are exhausted.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Conditionals And Retries"
+    ]
   },
   {
-    "objectID": "citation.html#license",
-    "href": "citation.html#license",
-    "title": "Citation",
-    "section": "License",
-    "text": "License\nCodeBook Lab and CodeBook Studio are released under the GNU Affero General Public License v3.0. You are free to use, modify, and distribute them — including over a network — provided derivative works remain under the same terms.\n\nCodeBook Lab license\nCodeBook Studio license"
+    "objectID": "conditionals-retries.html#retry-strategies",
+    "href": "conditionals-retries.html#retry-strategies",
+    "title": "Conditionals And Retries",
+    "section": "Retry Strategies",
+    "text": "Retry Strategies\nrun_annotation() supports invalid-response retries:\nfrom codebook_lab import run_annotation\n\nannotation = run_annotation(\n    model=\"gemma3:270m\",\n    csv_path=\"texts.csv\",\n    codebook_path=\"codebook.json\",\n    output_path=\"outputs/model-labels.csv\",\n    experiment_directory=\"outputs/run-001\",\n    country_iso_code=\"IRL\",\n    retries=2,\n    retry_strategy=\"reprompt\",\n)\nAvailable strategies:\n\nidentical\n\nRe-run the same prompt and model configuration. This is the default.\n\nreprompt\n\nAppend a short format reminder to the prompt before retrying.\n\ntemperature\n\nRetry with a second model chain at retry_temperature, useful when the main run is deterministic.\n\n\nannotation = run_annotation(\n    model=\"gemma3:270m\",\n    csv_path=\"texts.csv\",\n    codebook_path=\"codebook.json\",\n    output_path=\"outputs/model-labels.csv\",\n    experiment_directory=\"outputs/run-001\",\n    retries=1,\n    retry_strategy=\"temperature\",\n    retry_temperature=0.3,\n)\nExperiment runs currently expose retry behavior through the lower-level run_annotation() path. run_experiment() uses the package defaults when it calls annotation internally.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Conditionals And Retries"
+    ]
   },
   {
     "objectID": "studio.html",
@@ -990,340 +955,191 @@
     ]
   },
   {
-    "objectID": "install.html",
-    "href": "install.html",
-    "title": "Installation",
+    "objectID": "examples.html",
+    "href": "examples.html",
+    "title": "Examples",
     "section": "",
-    "text": "CodeBook Lab supports Python 3.10 and newer. A virtual environment keeps package dependencies separate from the rest of your system.\npython3 -m venv .venv\nsource .venv/bin/activate\npython -m pip install --upgrade pip\npython -m pip install codebook-lab\nIf you plan to generate or score textbox annotations, install the optional textbox dependencies:\npython -m pip install \"codebook-lab[textbox]\"\nThose extras enable ROUGE, embedding-based cosine similarity, and BERTScore. Normalized Levenshtein similarity and BLEU are available without the optional extras.",
+    "text": "A worked, end-to-end run on the bundled policy-sentiment task: get the data, run a model, read the row-level output, score it against the human labels, and compare multiple configurations. Everything here works against the task shipped with the package, so you can follow along before plugging in your own data.",
     "crumbs": [
-      "Get Started",
-      "Installation"
+      "Examples"
     ]
   },
   {
-    "objectID": "install.html#python-environment",
-    "href": "install.html#python-environment",
-    "title": "Installation",
+    "objectID": "examples.html#the-policy-sentiment-task",
+    "href": "examples.html#the-policy-sentiment-task",
+    "title": "Examples",
+    "section": "The policy-sentiment task",
+    "text": "The policy-sentiment task\npolicy-sentiment asks four questions about short political texts, one of each annotation type:\n\n\n\n\n\n\n\n\nField\nType\nValues\n\n\n\n\nPolicy Sentiment_Explicit evaluation\ncheckbox\n1 / 0\n\n\nPolicy Sentiment_Direction\ndropdown\npositive · negative · mixed · no clear sentiment\n\n\nPolicy Sentiment_Intensity\nLikert\n1–5\n\n\nPolicy Sentiment_Evidence\ntextbox\nshort free text\n\n\n\nThe ground-truth.csv holds the human labels in those columns, plus metadata (doc_id, title, topic, speaker_type) and the text to annotate.",
+    "crumbs": [
+      "Examples"
+    ]
+  },
+  {
+    "objectID": "examples.html#get-the-task",
+    "href": "examples.html#get-the-task",
+    "title": "Examples",
+    "section": "1. Get the task",
+    "text": "1. Get the task\nCopy the bundled task into a local folder you control:\nfrom codebook_lab import copy_example_task\n\ncopy_example_task(\"policy-sentiment\", \"tasks\")\nThis writes tasks/policy-sentiment/codebook.json and tasks/policy-sentiment/ground-truth.csv.",
+    "crumbs": [
+      "Examples"
+    ]
+  },
+  {
+    "objectID": "examples.html#run-one-experiment",
+    "href": "examples.html#run-one-experiment",
+    "title": "Examples",
+    "section": "2. Run one experiment",
+    "text": "2. Run one experiment\nfrom codebook_lab import ExperimentSpec, run_experiment\n\nresult = run_experiment(\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:270m\",\n        use_examples=False,\n        prompt_type=\"standard\",\n        process_textbox=True,\n        country_iso_code=\"IRL\",\n    ),\n    task_root=\"tasks\",\n)\n\nprint(result.experiment_directory)\nprint(result.metrics.summary_text)\nLab strips the human label columns before prompting, runs the model on each row, writes the outputs to a timestamped directory, and scores the predictions against the held-out labels.",
+    "crumbs": [
+      "Examples"
+    ]
+  },
+  {
+    "objectID": "examples.html#inspect-the-row-level-output",
+    "href": "examples.html#inspect-the-row-level-output",
+    "title": "Examples",
+    "section": "3. Inspect the row-level output",
+    "text": "3. Inspect the row-level output\noutput.csv keeps the metadata and text, with the model’s predictions in the same annotation columns (illustrative):\n\n\n\n\n\n\n\n\n\n\ndoc_id\nPolicy Sentiment_Explicit evaluation\nPolicy Sentiment_Direction\nPolicy Sentiment_Intensity\nPolicy Sentiment_Evidence\n\n\n\n\nps_001\n1\npositive\n5\n“sensible compromise”\n\n\nps_002\n1\nnegative\n2\n“financing assumptions are unrealistic”\n\n\nps_003\n0\nno clear sentiment\n3\n“”\n\n\n\nBecause the columns match the codebook, you can merge output.csv back against ground-truth.csv on doc_id to inspect individual disagreements.",
+    "crumbs": [
+      "Examples"
+    ]
+  },
+  {
+    "objectID": "examples.html#read-the-metrics",
+    "href": "examples.html#read-the-metrics",
+    "title": "Examples",
+    "section": "4. Read the metrics",
+    "text": "4. Read the metrics\nresult.metrics.summary_text prints a quick overview, and the full results land in the tidy metrics tables under outputs/metrics/ (illustrative):\noutputs/metrics/policy-sentiment_metrics_log.csv\n\n\n\nrun_id\ncolumn\nmetric\nvalue\n\n\n\n\nrun_a1b2\nPolicy Sentiment_Direction\nf1_macro\n0.71\n\n\nrun_a1b2\nPolicy Sentiment_Direction\npercentage_agreement\n0.80\n\n\nrun_a1b2\nPolicy Sentiment_Intensity\nquadratic_kappa\n0.66\n\n\nrun_a1b2\nPolicy Sentiment_Evidence\nnorm_levenshtein\n0.52\n\n\n\nThe companion policy-sentiment_metrics_log_runs.csv carries one row per run with the model, prompt, and sampling configuration alongside runtime, character counts, energy, and emissions — joined back to the metrics via run_id. See Outputs & Metrics for the full field list and guidance on choosing metrics.",
+    "crumbs": [
+      "Examples"
+    ]
+  },
+  {
+    "objectID": "examples.html#compare-configurations",
+    "href": "examples.html#compare-configurations",
+    "title": "Examples",
+    "section": "5. Compare configurations",
+    "text": "5. Compare configurations\nThe point of CodeBook Lab is comparison. Because the codebook and labels stay fixed, you can isolate one variable at a time – here, model choice and zero-shot versus few-shot prompting.\nThis example runs the full 20-row bundled task with two recent 4B local models: qwen3:4b and gemma3:4b. It disables textbox generation so the benchmark focuses on the checkbox, dropdown, and Likert fields while still using the real metrics and efficiency pipeline. The code below assumes the models are already available locally in Ollama. If needed, run ollama pull qwen3:4b and ollama pull gemma3:4b first.\nfrom codebook_lab import ExperimentSpec, copy_example_task, run_experiment\n\ncopy_example_task(\"policy-sentiment\", \"tasks\")\n\nspecs = [\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"qwen3:4b\",\n        use_examples=False,\n        reasoning=False,\n        process_textbox=False,\n        country_iso_code=\"IRL\",\n    ),\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"qwen3:4b\",\n        use_examples=True,\n        reasoning=False,\n        process_textbox=False,\n        country_iso_code=\"IRL\",\n    ),\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:4b\",\n        use_examples=False,\n        process_textbox=False,\n        country_iso_code=\"IRL\",\n    ),\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:4b\",\n        use_examples=True,\n        process_textbox=False,\n        country_iso_code=\"IRL\",\n    ),\n]\n\nfor spec in specs:\n    run_experiment(\n        spec,\n        task_root=\"tasks\",\n        output_root=\"outputs\",\n        pull_model=False,\n    )\nEach run appends to the same two linked metrics tables:\nimport pandas as pd\n\nmetrics = pd.read_csv(\"outputs/metrics/policy-sentiment_metrics_log.csv\")\nruns = pd.read_csv(\"outputs/metrics/policy-sentiment_metrics_log_runs.csv\")\n\njoined = metrics.merge(runs, on=\"run_id\")\n\nfield_f1 = joined[\n    (\n        joined[\"column\"].isin(\n            [\n                \"Policy Sentiment_Explicit evaluation\",\n                \"Policy Sentiment_Direction\",\n                \"Policy Sentiment_Intensity\",\n            ]\n        )\n    )\n    & (joined[\"metric\"] == \"f1\")\n]\n\nefficiency = runs[\n    [\n        \"run_id\",\n        \"model_id\",\n        \"use_examples\",\n        \"n_queries\",\n        \"avg_inference_time_per_query_s\",\n        \"avg_output_chars_per_query\",\n        \"avg_energy_kwh_per_query\",\n    ]\n]\nThese are real figures from the full benchmark, run locally with Ollama on an Apple M2. Your exact numbers will vary by machine, model build, and model response validity. The plots are produced from the joined tables with ggplot2 and theme_classic().\n\n\n\nRun\nExplicit evaluation F1\nDirection F1\nIntensity F1\n\n\n\n\nQwen 3 4B, zero-shot\n0.812\n0.896\n0.000\n\n\nQwen 3 4B, examples\n0.913\n0.896\n0.000\n\n\nGemma 3 4B, zero-shot\n1.000\n0.949\n0.575\n\n\nGemma 3 4B, examples\n1.000\n0.908\n0.647\n\n\n\n\n\n\nField-level F1 scores for four policy-sentiment benchmark runs.\n\n\n\n\n\n\n\n\n\n\n\nRun\nAvg seconds/query\nAvg output chars/query\nAvg energy/query (kWh)\n\n\n\n\nQwen 3 4B, zero-shot\n2.52\n110\n0.00000777\n\n\nQwen 3 4B, examples\n3.00\n71\n0.00000620\n\n\nGemma 3 4B, zero-shot\n2.06\n19\n0.00000373\n\n\nGemma 3 4B, examples\n2.62\n20\n0.00000500\n\n\n\n\n\n\nEfficiency measures for the same four policy-sentiment benchmark runs.\n\n\nThe tradeoff is visible: qwen3:4b scores well on explicit evaluation and direction, but in this run it did not return valid Likert values for intensity, which triggered retries and raised the query count to 80. gemma3:4b completed the same task in 60 model calls and handled all three scored fields. Adding examples improved Qwen’s explicit-evaluation F1 and Gemma’s intensity F1, but it also increased average inference time and prompt size.\nThe CSVs used for the tables and plots are included with these docs:\n\nField-level F1 metrics\nRun configuration and efficiency metrics\n\nThe important pattern is the same for larger benchmarks: join on run_id, pick the field and metric you care about, then compare those values against the run configuration and efficiency columns.",
+    "crumbs": [
+      "Examples"
+    ]
+  },
+  {
+    "objectID": "examples.html#next-steps",
+    "href": "examples.html#next-steps",
+    "title": "Examples",
+    "section": "Next steps",
+    "text": "Next steps\n\nTasks — the codebook.json / ground-truth.csv format for your own data.\nAnnotation Types — checkbox, dropdown, Likert, textbox, and span fields.\nExperiments — single runs, sweeps, custom prompt wrappers, and running without ground truth.\nCodeBook Studio — designing a codebook and annotating in the browser.",
+    "crumbs": [
+      "Examples"
+    ]
+  },
+  {
+    "objectID": "reference/MetricsRunResult.html",
+    "href": "reference/MetricsRunResult.html",
+    "title": "MetricsRunResult",
     "section": "",
-    "text": "CodeBook Lab supports Python 3.10 and newer. A virtual environment keeps package dependencies separate from the rest of your system.\npython3 -m venv .venv\nsource .venv/bin/activate\npython -m pip install --upgrade pip\npython -m pip install codebook-lab\nIf you plan to generate or score textbox annotations, install the optional textbox dependencies:\npython -m pip install \"codebook-lab[textbox]\"\nThose extras enable ROUGE, embedding-based cosine similarity, and BERTScore. Normalized Levenshtein similarity and BLEU are available without the optional extras.",
-    "crumbs": [
-      "Get Started",
-      "Installation"
-    ]
-  },
-  {
-    "objectID": "install.html#ollama",
-    "href": "install.html#ollama",
-    "title": "Installation",
-    "section": "Ollama",
-    "text": "Ollama\nCodeBook Lab runs local models through Ollama. Install Ollama, then make sure the server is available:\nollama serve\nExperiment runs try to start the default local Ollama server when needed, and pull the requested model automatically before the first run — so you do not need to ollama pull it yourself:\nfrom codebook_lab import ExperimentSpec, run_experiment\n\nresult = run_experiment(\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:270m\",\n        country_iso_code=\"IRL\",\n    )\n)\nThe country_iso_code value should be the three-letter ISO 3166-1 alpha-3 code for where the computation physically runs, such as IRL, USA, or DEU. CodeCarbon uses this to estimate emissions from energy consumption.",
-    "crumbs": [
-      "Get Started",
-      "Installation"
-    ]
-  },
-  {
-    "objectID": "install.html#development-install",
-    "href": "install.html#development-install",
-    "title": "Installation",
-    "section": "Development Install",
-    "text": "Development Install\nFor package development, clone the repository and install it in editable mode:\ngit clone https://github.com/LorcanMcLaren/codebook-lab.git\ncd codebook-lab\npython -m pip install -e \".[dev]\"\npytest\nUse python -m pip install -e \".[all,dev]\" if you also want the optional textbox metric dependencies in the development environment.",
-    "crumbs": [
-      "Get Started",
-      "Installation"
-    ]
-  },
-  {
-    "objectID": "conditionals-retries.html",
-    "href": "conditionals-retries.html",
-    "title": "Conditionals And Retries",
-    "section": "",
-    "text": "Newer CodeBook Lab workflows support conditional annotations and invalid-response retries. These features make Lab closer to CodeBook Studio’s annotation behavior while keeping model outputs auditable.",
-    "crumbs": [
-      "Get Started",
-      "Concepts",
-      "Conditionals And Retries"
-    ]
-  },
-  {
-    "objectID": "conditionals-retries.html#conditional-annotations",
-    "href": "conditionals-retries.html#conditional-annotations",
-    "title": "Conditionals And Retries",
-    "section": "Conditional Annotations",
-    "text": "Conditional Annotations\nAn annotation can depend on a previous annotation. Lab evaluates the condition row by row and skips inactive fields. Here a checkbox parent (annotation_1) gates a dropdown child (annotation_2): the model is only asked for a stance when the text is marked evaluative.\n{\n  \"annotation_1\": {\n    \"name\": \"Is evaluative\",\n    \"type\": \"checkbox\",\n    \"tooltip\": \"Tick if the text expresses a stance toward the policy.\"\n  },\n  \"annotation_2\": {\n    \"name\": \"Stance\",\n    \"type\": \"dropdown\",\n    \"options\": [\"Positive\", \"Negative\"],\n    \"condition\": {\n      \"section_key\": \"section_1\",\n      \"annotation_key\": \"annotation_1\",\n      \"value\": \"Yes\"\n    }\n  }\n}\nThe condition value is normalized the same way as the parent’s response, so for a checkbox parent \"Yes\", true, and 1 are all equivalent triggers.\nIf the parent annotation does not satisfy the condition, Lab stores a blank value for the child field and does not send the child prompt to the model. Metrics also ignore rows where the field is not applicable, so skipped conditionals do not count as model errors.\nConditions can point across sections and are evaluated in codebook order. If a condition target is missing or cyclic, Lab falls back to permissive behavior rather than crashing a run.",
-    "crumbs": [
-      "Get Started",
-      "Concepts",
-      "Conditionals And Retries"
-    ]
-  },
-  {
-    "objectID": "conditionals-retries.html#response-validation",
-    "href": "conditionals-retries.html#response-validation",
-    "title": "Conditionals And Retries",
-    "section": "Response Validation",
-    "text": "Response Validation\nLab does not silently invent defaults for invalid model responses.\n\ndropdown values must match a configured option after normalization\ncheckbox values must parse to yes/no or 1/0\nLikert values must parse to a number in the configured scale\ntextbox values must be non-empty\nspan values must parse to a JSON array or {\"response\": [...]} object with valid offsets\n\nIf no valid value can be extracted, Lab records a blank cell after retry attempts are exhausted.",
-    "crumbs": [
-      "Get Started",
-      "Concepts",
-      "Conditionals And Retries"
-    ]
-  },
-  {
-    "objectID": "conditionals-retries.html#retry-strategies",
-    "href": "conditionals-retries.html#retry-strategies",
-    "title": "Conditionals And Retries",
-    "section": "Retry Strategies",
-    "text": "Retry Strategies\nrun_annotation() supports invalid-response retries:\nfrom codebook_lab import run_annotation\n\nannotation = run_annotation(\n    model=\"gemma3:270m\",\n    csv_path=\"texts.csv\",\n    codebook_path=\"codebook.json\",\n    output_path=\"outputs/model-labels.csv\",\n    experiment_directory=\"outputs/run-001\",\n    country_iso_code=\"IRL\",\n    retries=2,\n    retry_strategy=\"reprompt\",\n)\nAvailable strategies:\n\nidentical\n\nRe-run the same prompt and model configuration. This is the default.\n\nreprompt\n\nAppend a short format reminder to the prompt before retrying.\n\ntemperature\n\nRetry with a second model chain at retry_temperature, useful when the main run is deterministic.\n\n\nannotation = run_annotation(\n    model=\"gemma3:270m\",\n    csv_path=\"texts.csv\",\n    codebook_path=\"codebook.json\",\n    output_path=\"outputs/model-labels.csv\",\n    experiment_directory=\"outputs/run-001\",\n    retries=1,\n    retry_strategy=\"temperature\",\n    retry_temperature=0.3,\n)\nExperiment runs currently expose retry behavior through the lower-level run_annotation() path. run_experiment() uses the package defaults when it calls annotation internally.",
-    "crumbs": [
-      "Get Started",
-      "Concepts",
-      "Conditionals And Retries"
-    ]
-  },
-  {
-    "objectID": "experiments.html",
-    "href": "experiments.html",
-    "title": "Experiments",
-    "section": "",
-    "text": "CodeBook Lab experiments are controlled from Python. The main object is ExperimentSpec, which describes one model/task configuration.",
-    "crumbs": [
-      "Tutorials",
-      "Experiments"
-    ]
-  },
-  {
-    "objectID": "experiments.html#single-run",
-    "href": "experiments.html#single-run",
-    "title": "Experiments",
-    "section": "Single Run",
-    "text": "Single Run\nfrom codebook_lab import ExperimentSpec, run_experiment\n\nresult = run_experiment(\n    ExperimentSpec(\n        task=\"policy-sentiment\",\n        model=\"gemma3:270m\",\n        use_examples=False,\n        prompt_type=\"standard\",\n        temperature=None,\n        top_p=None,\n        process_textbox=True,\n        country_iso_code=\"IRL\",\n    ),\n    output_root=\"outputs\",\n)\n\nprint(result.experiment_directory)\nprint(result.metrics.summary_text)\nImportant fields:\n\ntask: task folder name, such as policy-sentiment\nmodel: Ollama model identifier, such as gemma3:270m\nuse_examples: include worked examples from the codebook prompt\nprompt_type: one of the registered prompt wrappers\ntemperature: optional sampling temperature\ntop_p: optional nucleus sampling value\nchat_mode: how annotation calls share chat history — see Chat continuation modes\nreasoning: enable, disable, or defer to the model’s reasoning mode\nprocess_textbox: generate and score textbox annotations\nprocess_span: generate and score span annotations\ncountry_iso_code: three-letter country code for CodeCarbon emissions estimates\n\nOnly task and model are required — the rest fall back to sensible classification defaults, so the example above can be as short as:\nresult = run_experiment(\n    ExperimentSpec(task=\"policy-sentiment\", model=\"gemma3:270m\"),\n    output_root=\"outputs\",\n)\nThe defaults are temperature=0.0, use_examples=True, prompt_type=\"standard\", chat_mode=\"per_text\", reasoning=None, and country_iso_code=\"USA\". Invalid model responses are retried with the reprompt strategy by default (see Conditionals & Retries).\nrun_experiment() uses the high-level end-to-end path: annotation first, metrics second. It resolves the task directory, checks that codebook.json and ground-truth.csv exist, optionally pulls the Ollama model, writes per-run sidecar files, and appends tidy metrics rows.",
-    "crumbs": [
-      "Tutorials",
-      "Experiments"
-    ]
-  },
-  {
-    "objectID": "experiments.html#parameter-sweep",
-    "href": "experiments.html#parameter-sweep",
-    "title": "Experiments",
-    "section": "Parameter Sweep",
-    "text": "Parameter Sweep\nUse run_experiment_grid() when you want a Cartesian-product sweep across multiple settings.\nfrom codebook_lab import run_experiment_grid\n\nresults = run_experiment_grid(\n    param_grid={\n        \"country_iso_code\": \"IRL\",\n        \"tasks\": [\"policy-sentiment\"],\n        \"models\": [\"gemma3:270m\", \"llama3.2:3b\"],\n        \"use_examples\": [False, True],\n        \"prompt_types\": [\"standard\", \"persona\"],\n        \"temperatures\": [0.0, 0.2],\n        \"top_ps\": [None],\n        \"chat_modes\": [\"per_text\"],\n        \"reasoning\": [None],\n        \"process_textboxes\": [True],\n        \"process_spans\": [False],\n    },\n    output_root=\"outputs\",\n)\n\nprint(f\"Completed {len(results)} runs\")\nFor a quick smoke test, keep one small model and one value in each field. For a benchmark, add one experimental dimension at a time so results are easier to interpret.\nThe grid accepts Python booleans and None values directly. CLI-style strings such as \"true\", \"false\", and \"None\" are normalized internally, which is helpful when experiment grids come from config files.",
-    "crumbs": [
-      "Tutorials",
-      "Experiments"
-    ]
-  },
-  {
-    "objectID": "experiments.html#prompt-wrappers",
-    "href": "experiments.html#prompt-wrappers",
-    "title": "Experiments",
-    "section": "Prompt Wrappers",
-    "text": "Prompt Wrappers\nBuilt-in prompt wrappers include standard, persona, and CoT. You can inspect available wrappers from Python:\nfrom codebook_lab import list_prompt_wrappers\n\nprint(list_prompt_wrappers())\nYou can register a custom wrapper without editing package internals:\nfrom codebook_lab import PromptContext, register_prompt_wrapper\n\ndef concise_wrapper(context: PromptContext) -&gt; str:\n    return (\n        \"Annotate the text as carefully as possible.\\n\\n\"\n        f\"{context.core_prompt}\\n\\n\"\n        f'Text:\\n\"{context.text}\"\\n\\n'\n        \"Response:\\n\"\n    )\n\nregister_prompt_wrapper(\"concise\", concise_wrapper)\nThen pass prompt_type=\"concise\" in the experiment spec.",
-    "crumbs": [
-      "Tutorials",
-      "Experiments"
-    ]
-  },
-  {
-    "objectID": "experiments.html#chat-continuation-modes",
-    "href": "experiments.html#chat-continuation-modes",
-    "title": "Experiments",
-    "section": "Chat continuation modes",
-    "text": "Chat continuation modes\nchat_mode controls how much chat history is shared across the annotation calls within a run — a dimension that can change how a model behaves when a text has several annotations.\n\nper_text\n\nOne chat per text row, shared across that row’s annotations, so later annotations can see earlier answers for the same text. This is the default.\n\nper_query\n\nA fresh chat for every annotation query — each judgement is made independently, with no memory of other answers.\n\ncontinuous\n\nA single chat for the whole run, carrying history across every text and annotation.\n\n\nExperimentSpec(task=\"policy-sentiment\", model=\"gemma3:270m\", chat_mode=\"per_query\")\nSweep it like any other dimension with \"chat_modes\": [\"per_text\", \"per_query\"] in a parameter grid. The chosen mode is recorded in the runs metrics table.",
-    "crumbs": [
-      "Tutorials",
-      "Experiments"
-    ]
-  },
-  {
-    "objectID": "experiments.html#model-reasoning",
-    "href": "experiments.html#model-reasoning",
-    "title": "Experiments",
-    "section": "Model reasoning",
-    "text": "Model reasoning\nFor models that support a reasoning/thinking mode through Ollama, reasoning controls whether it is used:\n\nreasoning=None (default) keeps the model’s own default behaviour.\nreasoning=True enables reasoning; reasoning=False disables it.\n\nExperimentSpec(task=\"policy-sentiment\", model=\"qwen3:8b\", reasoning=True)\nThe value is passed through to ChatOllama. When the model returns reasoning, Lab captures it — reading the structured reasoning_content when available and otherwise parsing a &lt;think&gt;…&lt;/think&gt; block — and writes one record per query to reasoning_traces.jsonl in the run directory, so you can audit how the model arrived at each label. The chosen mode is recorded in the runs metrics table.",
-    "crumbs": [
-      "Tutorials",
-      "Experiments"
-    ]
-  },
-  {
-    "objectID": "experiments.html#running-without-ground-truth",
-    "href": "experiments.html#running-without-ground-truth",
-    "title": "Experiments",
-    "section": "Running Without Ground Truth",
-    "text": "Running Without Ground Truth\nIf you are still designing a task and do not yet have human-coded labels, use run_annotation() directly on an unlabeled CSV. Later, add a ground-truth.csv and score the outputs with run_metrics().\nfrom codebook_lab import run_annotation\n\nannotation = run_annotation(\n    model=\"gemma3:270m\",\n    csv_path=\"texts.csv\",\n    codebook_path=\"codebook.json\",\n    output_path=\"outputs/model-labels.csv\",\n    experiment_directory=\"outputs/run-001\",\n    country_iso_code=\"IRL\",\n)",
-    "crumbs": [
-      "Tutorials",
-      "Experiments"
-    ]
-  },
-  {
-    "objectID": "reference/annotate.classify_text.html",
-    "href": "reference/annotate.classify_text.html",
-    "title": "annotate.classify_text",
-    "section": "",
-    "text": "annotate.classify_text(\n    chain,\n    text,\n    codebook,\n    prompt_type='standard',\n    use_examples=False,\n    char_counts=None,\n    timing_data=None,\n    process_textbox=False,\n    row_num=None,\n    progress_bar=None,\n    total_rows=None,\n    process_span=False,\n    retries=1,\n    retry_strategy='identical',\n    retry_chain=None,\n    chat_session=None,\n    reasoning_traces=None,\n    chat_mode=None,\n)\nAnnotate one text row across all sections in a codebook.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nchain\n\nRunnable returned by setup_model.\nrequired\n\n\ntext\n\nRaw source text to annotate.\nrequired\n\n\ncodebook\n\nParsed codebook dictionary.\nrequired\n\n\nprompt_type\n\nRegistered prompt wrapper name or callable wrapper.\n'standard'\n\n\nuse_examples\n\nWhether codebook examples should be included in prompts.\nFalse\n\n\nchar_counts\n\nOptional mutable counter dict for prompt/response characters.\nNone\n\n\ntiming_data\n\nOptional mutable timing dict for inference statistics.\nNone\n\n\nprocess_textbox\n\nWhether textbox annotations should be generated.\nFalse\n\n\nrow_num\n\nOptional 1-based row number for progress logging.\nNone\n\n\nprogress_bar\n\nOptional progress-bar helper updated after each annotation.\nNone\n\n\ntotal_rows\n\nOptional total row count for progress rendering.\nNone\n\n\nchat_session\n\nOptional retained chat history for this text or run.\nNone\n\n\nreasoning_traces\n\nOptional list that receives per-query reasoning records.\nNone\n\n\nchat_mode\n\nNormalized chat-history policy for trace metadata.\nNone\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\n\nTuple of (responses, char_counts, timing_data).",
-    "crumbs": [
-      "Reference",
-      "Validation and Retry Helpers",
-      "annotate.classify_text"
-    ]
-  },
-  {
-    "objectID": "reference/annotate.classify_text.html#parameters",
-    "href": "reference/annotate.classify_text.html#parameters",
-    "title": "annotate.classify_text",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nchain\n\nRunnable returned by setup_model.\nrequired\n\n\ntext\n\nRaw source text to annotate.\nrequired\n\n\ncodebook\n\nParsed codebook dictionary.\nrequired\n\n\nprompt_type\n\nRegistered prompt wrapper name or callable wrapper.\n'standard'\n\n\nuse_examples\n\nWhether codebook examples should be included in prompts.\nFalse\n\n\nchar_counts\n\nOptional mutable counter dict for prompt/response characters.\nNone\n\n\ntiming_data\n\nOptional mutable timing dict for inference statistics.\nNone\n\n\nprocess_textbox\n\nWhether textbox annotations should be generated.\nFalse\n\n\nrow_num\n\nOptional 1-based row number for progress logging.\nNone\n\n\nprogress_bar\n\nOptional progress-bar helper updated after each annotation.\nNone\n\n\ntotal_rows\n\nOptional total row count for progress rendering.\nNone\n\n\nchat_session\n\nOptional retained chat history for this text or run.\nNone\n\n\nreasoning_traces\n\nOptional list that receives per-query reasoning records.\nNone\n\n\nchat_mode\n\nNormalized chat-history policy for trace metadata.\nNone",
-    "crumbs": [
-      "Reference",
-      "Validation and Retry Helpers",
-      "annotate.classify_text"
-    ]
-  },
-  {
-    "objectID": "reference/annotate.classify_text.html#returns",
-    "href": "reference/annotate.classify_text.html#returns",
-    "title": "annotate.classify_text",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\n\nTuple of (responses, char_counts, timing_data).",
-    "crumbs": [
-      "Reference",
-      "Validation and Retry Helpers",
-      "annotate.classify_text"
-    ]
-  },
-  {
-    "objectID": "reference/HumanGroundTruthResult.html",
-    "href": "reference/HumanGroundTruthResult.html",
-    "title": "HumanGroundTruthResult",
-    "section": "",
-    "text": "HumanGroundTruthResult(\n    ground_truth,\n    adjudication_queue,\n    validation_issues,\n    output_dir,\n)\nResult returned by build_human_ground_truth.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nground_truth\npd.DataFrame\nFinal or provisional human consensus labels.\n\n\nadjudication_queue\npd.DataFrame\nRows that still need adjudication.\n\n\nvalidation_issues\npd.DataFrame\nDataFrame of coder-file and label validation issues.\n\n\noutput_dir\nPath | None\nDirectory where outputs were written, or None if no output directory was requested.",
+    "text": "MetricsRunResult(\n    output_csv,\n    report_file,\n    columns_to_compare,\n    metrics_by_column,\n    reports,\n    total_inference_time,\n    avg_inference_time,\n    input_chars,\n    output_chars,\n    energy_consumed,\n    emissions,\n    cpu_model,\n    gpu_model,\n    summary_text,\n    run_id=None,\n    runs_csv=None,\n    n_queries=None,\n)\nResult returned by run_metrics.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\noutput_csv\nPath\nFilesystem path to the aggregate metrics CSV that was updated.\n\n\nreport_file\nPath\nFilesystem path to the per-column classification report text file.\n\n\ncolumns_to_compare\nlist[str]\nAnnotation columns included in the evaluation.\n\n\nmetrics_by_column\ndict[str, dict[str, Any]]\nNested dictionary of computed metrics keyed by column name.\n\n\nreports\ndict[str, str]\nHuman-readable report text keyed by annotation column name.\n\n\ntotal_inference_time\nfloat | None\nTotal model inference time in seconds, if available.\n\n\navg_inference_time\nfloat | None\nMean inference time per annotation request in seconds, if available.\n\n\ninput_chars\nint | None\nTotal prompt characters sent to the model, if available.\n\n\noutput_chars\nint | None\nTotal response characters returned by the model, if available.\n\n\nenergy_consumed\nfloat | None\nEnergy consumption in kilowatt-hours, if available.\n\n\nemissions\nfloat | None\nEmissions estimate in kilograms of CO2 equivalent, if available.\n\n\ncpu_model\nstr | None\nCPU metadata recorded by CodeCarbon, if available.\n\n\ngpu_model\nstr | None\nGPU metadata recorded by CodeCarbon, if available.\n\n\nsummary_text\nstr\nPlain-text summary of the main evaluation metrics.\n\n\nrun_id\nstr | None\nIdentifier linking this run’s rows across the runs and metrics tables.\n\n\nruns_csv\nPath | None\nFilesystem path to the per-run efficiency/config table, if written.\n\n\nn_queries\nint | None\nNumber of model inference calls in the annotation run, if available.",
     "crumbs": [
       "Reference",
       "Experiment Types",
-      "HumanGroundTruthResult"
+      "MetricsRunResult"
     ]
   },
   {
-    "objectID": "reference/HumanGroundTruthResult.html#attributes",
-    "href": "reference/HumanGroundTruthResult.html#attributes",
-    "title": "HumanGroundTruthResult",
+    "objectID": "reference/MetricsRunResult.html#attributes",
+    "href": "reference/MetricsRunResult.html#attributes",
+    "title": "MetricsRunResult",
     "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nground_truth\npd.DataFrame\nFinal or provisional human consensus labels.\n\n\nadjudication_queue\npd.DataFrame\nRows that still need adjudication.\n\n\nvalidation_issues\npd.DataFrame\nDataFrame of coder-file and label validation issues.\n\n\noutput_dir\nPath | None\nDirectory where outputs were written, or None if no output directory was requested.",
+    "text": "Name\nType\nDescription\n\n\n\n\noutput_csv\nPath\nFilesystem path to the aggregate metrics CSV that was updated.\n\n\nreport_file\nPath\nFilesystem path to the per-column classification report text file.\n\n\ncolumns_to_compare\nlist[str]\nAnnotation columns included in the evaluation.\n\n\nmetrics_by_column\ndict[str, dict[str, Any]]\nNested dictionary of computed metrics keyed by column name.\n\n\nreports\ndict[str, str]\nHuman-readable report text keyed by annotation column name.\n\n\ntotal_inference_time\nfloat | None\nTotal model inference time in seconds, if available.\n\n\navg_inference_time\nfloat | None\nMean inference time per annotation request in seconds, if available.\n\n\ninput_chars\nint | None\nTotal prompt characters sent to the model, if available.\n\n\noutput_chars\nint | None\nTotal response characters returned by the model, if available.\n\n\nenergy_consumed\nfloat | None\nEnergy consumption in kilowatt-hours, if available.\n\n\nemissions\nfloat | None\nEmissions estimate in kilograms of CO2 equivalent, if available.\n\n\ncpu_model\nstr | None\nCPU metadata recorded by CodeCarbon, if available.\n\n\ngpu_model\nstr | None\nGPU metadata recorded by CodeCarbon, if available.\n\n\nsummary_text\nstr\nPlain-text summary of the main evaluation metrics.\n\n\nrun_id\nstr | None\nIdentifier linking this run’s rows across the runs and metrics tables.\n\n\nruns_csv\nPath | None\nFilesystem path to the per-run efficiency/config table, if written.\n\n\nn_queries\nint | None\nNumber of model inference calls in the annotation run, if available.",
     "crumbs": [
       "Reference",
       "Experiment Types",
-      "HumanGroundTruthResult"
+      "MetricsRunResult"
     ]
   },
   {
-    "objectID": "reference/build_human_ground_truth.html",
-    "href": "reference/build_human_ground_truth.html",
-    "title": "build_human_ground_truth",
+    "objectID": "reference/run_experiment.html",
+    "href": "reference/run_experiment.html",
+    "title": "run_experiment",
     "section": "",
-    "text": "build_human_ground_truth\nbuild_human_ground_truth(\n    codebook_path,\n    coder_csvs,\n    output_dir=None,\n    id_column=DEFAULT_ID_COLUMN,\n    assignment_csv=None,\n    adjudications_csv=None,\n)\nBuild consensus human ground truth from coder CSVs and optional adjudications.",
+    "text": "run_experiment(\n    spec,\n    *,\n    task_root=None,\n    output_root='outputs',\n    metrics_output_root=None,\n    timestamp=None,\n    pull_model=True,\n    start_ollama_if_needed=True,\n    quantization_type=None,\n)\nRun one end-to-end experiment and evaluate it against ground truth.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nspec\nExperimentSpec\nConcrete experiment specification to execute.\nrequired\n\n\ntask_root\nstr | Path | None\nOptional directory containing user-defined task folders with codebook.json and ground-truth.csv. If omitted, bundled example tasks are used when the task name matches one shipped with the package.\nNone\n\n\noutput_root\nstr | Path\nRoot directory where per-run outputs should be created.\n'outputs'\n\n\nmetrics_output_root\nstr | Path | None\nDirectory for aggregate metrics CSV files. Defaults to output_root / \"metrics\".\nNone\n\n\ntimestamp\nstr | None\nOptional timestamp string to control output folder naming.\nNone\n\n\npull_model\nbool\nIf True, run ollama pull for spec.model before execution. Defaults to True so experiment runs ensure the requested model is available.\nTrue\n\n\nstart_ollama_if_needed\nbool\nIf True, try to auto-start a local Ollama server when the default local host is not already reachable. Defaults to True so experiment runs can bring up local Ollama automatically when needed.\nTrue\n\n\nquantization_type\nstr | None\nOptional metadata field written to the metrics CSV.\nNone\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\n\nExperimentRunResult containing both annotation and metrics results.",
+    "crumbs": [
+      "Reference",
+      "Experiment Functions",
+      "run_experiment"
+    ]
+  },
+  {
+    "objectID": "reference/run_experiment.html#parameters",
+    "href": "reference/run_experiment.html#parameters",
+    "title": "run_experiment",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nspec\nExperimentSpec\nConcrete experiment specification to execute.\nrequired\n\n\ntask_root\nstr | Path | None\nOptional directory containing user-defined task folders with codebook.json and ground-truth.csv. If omitted, bundled example tasks are used when the task name matches one shipped with the package.\nNone\n\n\noutput_root\nstr | Path\nRoot directory where per-run outputs should be created.\n'outputs'\n\n\nmetrics_output_root\nstr | Path | None\nDirectory for aggregate metrics CSV files. Defaults to output_root / \"metrics\".\nNone\n\n\ntimestamp\nstr | None\nOptional timestamp string to control output folder naming.\nNone\n\n\npull_model\nbool\nIf True, run ollama pull for spec.model before execution. Defaults to True so experiment runs ensure the requested model is available.\nTrue\n\n\nstart_ollama_if_needed\nbool\nIf True, try to auto-start a local Ollama server when the default local host is not already reachable. Defaults to True so experiment runs can bring up local Ollama automatically when needed.\nTrue\n\n\nquantization_type\nstr | None\nOptional metadata field written to the metrics CSV.\nNone",
+    "crumbs": [
+      "Reference",
+      "Experiment Functions",
+      "run_experiment"
+    ]
+  },
+  {
+    "objectID": "reference/run_experiment.html#returns",
+    "href": "reference/run_experiment.html#returns",
+    "title": "run_experiment",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\n\nExperimentRunResult containing both annotation and metrics results.",
+    "crumbs": [
+      "Reference",
+      "Experiment Functions",
+      "run_experiment"
+    ]
+  },
+  {
+    "objectID": "reference/calculate_human_reliability.html",
+    "href": "reference/calculate_human_reliability.html",
+    "title": "calculate_human_reliability",
+    "section": "",
+    "text": "calculate_human_reliability\ncalculate_human_reliability(\n    codebook_path,\n    coder_csvs,\n    output_dir=None,\n    id_column=DEFAULT_ID_COLUMN,\n    assignment_csv=None,\n)\nValidate human coder CSVs and calculate inter-coder reliability metrics.",
     "crumbs": [
       "Reference",
       "Lower-Level Workflow",
-      "build_human_ground_truth"
+      "calculate_human_reliability"
     ]
   },
   {
-    "objectID": "reference/ensure_ollama_model.html",
-    "href": "reference/ensure_ollama_model.html",
-    "title": "ensure_ollama_model",
+    "objectID": "reference/register_prompt_wrapper.html",
+    "href": "reference/register_prompt_wrapper.html",
+    "title": "register_prompt_wrapper",
     "section": "",
-    "text": "ensure_ollama_model(model)\nPull an Ollama model so it is available locally before a run.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nmodel\nstr\nOllama model identifier such as \"gemma3:270m\".\nrequired",
+    "text": "register_prompt_wrapper(name, wrapper, overwrite=False)\nRegister a prompt wrapper for use in Python and CLI experiment configs.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nname\nstr\nString key users will pass as prompt_type such as \"concise\".\nrequired\n\n\nwrapper\nPromptWrapper\nCallable accepting a PromptContext and returning a full prompt string.\nrequired\n\n\noverwrite\nbool\nSet to True to replace an existing wrapper with the same name.\nFalse",
     "crumbs": [
       "Reference",
-      "Ollama Helpers",
-      "ensure_ollama_model"
+      "Prompts",
+      "register_prompt_wrapper"
     ]
   },
   {
-    "objectID": "reference/ensure_ollama_model.html#parameters",
-    "href": "reference/ensure_ollama_model.html#parameters",
-    "title": "ensure_ollama_model",
+    "objectID": "reference/register_prompt_wrapper.html#parameters",
+    "href": "reference/register_prompt_wrapper.html#parameters",
+    "title": "register_prompt_wrapper",
     "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nmodel\nstr\nOllama model identifier such as \"gemma3:270m\".\nrequired",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nname\nstr\nString key users will pass as prompt_type such as \"concise\".\nrequired\n\n\nwrapper\nPromptWrapper\nCallable accepting a PromptContext and returning a full prompt string.\nrequired\n\n\noverwrite\nbool\nSet to True to replace an existing wrapper with the same name.\nFalse",
     "crumbs": [
       "Reference",
-      "Ollama Helpers",
-      "ensure_ollama_model"
+      "Prompts",
+      "register_prompt_wrapper"
     ]
   },
   {
-    "objectID": "reference/expand_param_grid.html",
-    "href": "reference/expand_param_grid.html",
-    "title": "expand_param_grid",
+    "objectID": "reference/annotate.normalize_retry_strategy.html",
+    "href": "reference/annotate.normalize_retry_strategy.html",
+    "title": "annotate.normalize_retry_strategy",
     "section": "",
-    "text": "expand_param_grid(param_grid)\nExpand a parameter grid into concrete ExperimentSpec runs.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nparam_grid\ndict\nIn-memory grid dictionary describing the Cartesian-product sweep. Expected keys include tasks, models, use_examples, prompt_types, temperatures, top_ps, process_textboxes, process_spans, chat_modes, reasoning, and country_iso_code.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nlist[ExperimentSpec]\nA list of experiment specifications, one per Cartesian-product combination.",
+    "text": "annotate.normalize_retry_strategy\nannotate.normalize_retry_strategy(strategy)\nReturn a supported retry strategy, falling back to \"identical\".",
     "crumbs": [
       "Reference",
-      "Experiment Functions",
-      "expand_param_grid"
-    ]
-  },
-  {
-    "objectID": "reference/expand_param_grid.html#parameters",
-    "href": "reference/expand_param_grid.html#parameters",
-    "title": "expand_param_grid",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nparam_grid\ndict\nIn-memory grid dictionary describing the Cartesian-product sweep. Expected keys include tasks, models, use_examples, prompt_types, temperatures, top_ps, process_textboxes, process_spans, chat_modes, reasoning, and country_iso_code.\nrequired",
-    "crumbs": [
-      "Reference",
-      "Experiment Functions",
-      "expand_param_grid"
-    ]
-  },
-  {
-    "objectID": "reference/expand_param_grid.html#returns",
-    "href": "reference/expand_param_grid.html#returns",
-    "title": "expand_param_grid",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nlist[ExperimentSpec]\nA list of experiment specifications, one per Cartesian-product combination.",
-    "crumbs": [
-      "Reference",
-      "Experiment Functions",
-      "expand_param_grid"
-    ]
-  },
-  {
-    "objectID": "reference/resolve_task_dir.html",
-    "href": "reference/resolve_task_dir.html",
-    "title": "resolve_task_dir",
-    "section": "",
-    "text": "resolve_task_dir(task, task_root=None)\nResolve a task directory from either a user path or bundled examples.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntask\nstr\nTask directory name such as \"policy-sentiment\".\nrequired\n\n\ntask_root\nstr | Path | None\nOptional directory containing user-defined task folders.\nNone\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nPath\nFilesystem path to the resolved task directory.",
-    "crumbs": [
-      "Reference",
-      "Experiment Functions",
-      "resolve_task_dir"
-    ]
-  },
-  {
-    "objectID": "reference/resolve_task_dir.html#parameters",
-    "href": "reference/resolve_task_dir.html#parameters",
-    "title": "resolve_task_dir",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntask\nstr\nTask directory name such as \"policy-sentiment\".\nrequired\n\n\ntask_root\nstr | Path | None\nOptional directory containing user-defined task folders.\nNone",
-    "crumbs": [
-      "Reference",
-      "Experiment Functions",
-      "resolve_task_dir"
-    ]
-  },
-  {
-    "objectID": "reference/resolve_task_dir.html#returns",
-    "href": "reference/resolve_task_dir.html#returns",
-    "title": "resolve_task_dir",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nPath\nFilesystem path to the resolved task directory.",
-    "crumbs": [
-      "Reference",
-      "Experiment Functions",
-      "resolve_task_dir"
+      "Validation and Retry Helpers",
+      "annotate.normalize_retry_strategy"
     ]
   },
   {
@@ -1351,39 +1167,99 @@
     ]
   },
   {
-    "objectID": "reference/get_example_task_dir.html",
-    "href": "reference/get_example_task_dir.html",
-    "title": "get_example_task_dir",
+    "objectID": "reference/AnnotationRunResult.html",
+    "href": "reference/AnnotationRunResult.html",
+    "title": "AnnotationRunResult",
     "section": "",
-    "text": "get_example_task_dir(task_name)\nReturn the filesystem path to a bundled example task.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntask_name\nstr\nBundled task directory name such as \"policy-sentiment\".\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nPath\nFilesystem path to the bundled example task directory.",
+    "text": "AnnotationRunResult(\n    model,\n    output_path,\n    experiment_directory,\n    config,\n    char_counts,\n    timing_data,\n    emissions,\n    dataframe,\n    reasoning_traces=None,\n)\nResult returned by run_annotation.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nmodel\nstr\nOllama model name used for the run, such as \"gemma3:270m\".\n\n\noutput_path\nPath\nFilesystem path to the generated annotation CSV.\n\n\nexperiment_directory\nPath\nDirectory containing run metadata and outputs.\n\n\nconfig\ndict[str, Any]\nSerializable experiment configuration written to config.json.\n\n\nchar_counts\ndict[str, Any]\nPrompt and response character counts collected during the run.\n\n\ntiming_data\ndict[str, Any]\nInference timing summary, including total and average seconds.\n\n\nemissions\nfloat | None\nCodeCarbon estimate in kilograms of CO2 equivalent, or None.\n\n\ndataframe\npd.DataFrame\nPandas DataFrame containing the annotated rows written to disk.\n\n\nreasoning_traces\nlist[dict[str, Any]] | None\nPer-query reasoning records captured from models that expose them.",
     "crumbs": [
       "Reference",
-      "Example Tasks",
-      "get_example_task_dir"
+      "Experiment Types",
+      "AnnotationRunResult"
     ]
   },
   {
-    "objectID": "reference/get_example_task_dir.html#parameters",
-    "href": "reference/get_example_task_dir.html#parameters",
-    "title": "get_example_task_dir",
+    "objectID": "reference/AnnotationRunResult.html#attributes",
+    "href": "reference/AnnotationRunResult.html#attributes",
+    "title": "AnnotationRunResult",
     "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntask_name\nstr\nBundled task directory name such as \"policy-sentiment\".\nrequired",
+    "text": "Name\nType\nDescription\n\n\n\n\nmodel\nstr\nOllama model name used for the run, such as \"gemma3:270m\".\n\n\noutput_path\nPath\nFilesystem path to the generated annotation CSV.\n\n\nexperiment_directory\nPath\nDirectory containing run metadata and outputs.\n\n\nconfig\ndict[str, Any]\nSerializable experiment configuration written to config.json.\n\n\nchar_counts\ndict[str, Any]\nPrompt and response character counts collected during the run.\n\n\ntiming_data\ndict[str, Any]\nInference timing summary, including total and average seconds.\n\n\nemissions\nfloat | None\nCodeCarbon estimate in kilograms of CO2 equivalent, or None.\n\n\ndataframe\npd.DataFrame\nPandas DataFrame containing the annotated rows written to disk.\n\n\nreasoning_traces\nlist[dict[str, Any]] | None\nPer-query reasoning records captured from models that expose them.",
     "crumbs": [
       "Reference",
-      "Example Tasks",
-      "get_example_task_dir"
+      "Experiment Types",
+      "AnnotationRunResult"
     ]
   },
   {
-    "objectID": "reference/get_example_task_dir.html#returns",
-    "href": "reference/get_example_task_dir.html#returns",
-    "title": "get_example_task_dir",
+    "objectID": "reference/ExperimentRunResult.html",
+    "href": "reference/ExperimentRunResult.html",
+    "title": "ExperimentRunResult",
     "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nPath\nFilesystem path to the bundled example task directory.",
+    "text": "ExperimentRunResult(\n    spec,\n    experiment_directory,\n    model_id,\n    label,\n    annotation,\n    metrics,\n    run_id=None,\n)\nCombined result returned by run_experiment.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nspec\nExperimentSpec\nThe experiment specification that was executed.\n\n\nexperiment_directory\nPath\nDirectory containing this run’s outputs.\n\n\nmodel_id\nstr\nStable model/config identifier used in the metrics log.\n\n\nlabel\nstr\nTask label written to the metrics CSV.\n\n\nrun_id\nstr | None\nIdentifier linking this run’s output directory and aggregate metrics.\n\n\nannotation\nAnnotationRunResult\nResult object returned by run_annotation.\n\n\nmetrics\nMetricsRunResult\nResult object returned by run_metrics.",
     "crumbs": [
       "Reference",
-      "Example Tasks",
-      "get_example_task_dir"
+      "Experiment Types",
+      "ExperimentRunResult"
+    ]
+  },
+  {
+    "objectID": "reference/ExperimentRunResult.html#attributes",
+    "href": "reference/ExperimentRunResult.html#attributes",
+    "title": "ExperimentRunResult",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\nspec\nExperimentSpec\nThe experiment specification that was executed.\n\n\nexperiment_directory\nPath\nDirectory containing this run’s outputs.\n\n\nmodel_id\nstr\nStable model/config identifier used in the metrics log.\n\n\nlabel\nstr\nTask label written to the metrics CSV.\n\n\nrun_id\nstr | None\nIdentifier linking this run’s output directory and aggregate metrics.\n\n\nannotation\nAnnotationRunResult\nResult object returned by run_annotation.\n\n\nmetrics\nMetricsRunResult\nResult object returned by run_metrics.",
+    "crumbs": [
+      "Reference",
+      "Experiment Types",
+      "ExperimentRunResult"
+    ]
+  },
+  {
+    "objectID": "reference/list_prompt_wrappers.html",
+    "href": "reference/list_prompt_wrappers.html",
+    "title": "list_prompt_wrappers",
+    "section": "",
+    "text": "list_prompt_wrappers\nlist_prompt_wrappers()\nReturn the sorted names of all registered prompt wrappers.",
+    "crumbs": [
+      "Reference",
+      "Prompts",
+      "list_prompt_wrappers"
+    ]
+  },
+  {
+    "objectID": "reference/run_experiment_grid.html",
+    "href": "reference/run_experiment_grid.html",
+    "title": "run_experiment_grid",
+    "section": "",
+    "text": "run_experiment_grid(\n    specs=None,\n    param_grid=None,\n    task_root=None,\n    output_root='outputs',\n    metrics_output_root=None,\n    pull_models=True,\n    start_ollama_if_needed=True,\n)\nRun a whole parameter sweep from a grid or a prebuilt spec list.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nspecs\nlist[ExperimentSpec] | None\nOptional pre-expanded list of ExperimentSpec objects.\nNone\n\n\nparam_grid\ndict | None\nOptional in-memory parameter grid dictionary.\nNone\n\n\ntask_root\nstr | Path | None\nOptional directory containing user-defined task folders.\nNone\n\n\noutput_root\nstr | Path\nRoot directory for per-run outputs.\n'outputs'\n\n\nmetrics_output_root\nstr | Path | None\nDirectory for aggregate metrics CSV files.\nNone\n\n\npull_models\nbool\nIf True, pull each Ollama model before its first run. Defaults to True so sweep runs ensure requested models are available.\nTrue\n\n\nstart_ollama_if_needed\nbool\nIf True, try to auto-start a local Ollama server before each run when needed. Defaults to True.\nTrue\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nlist[ExperimentRunResult]\nList of ExperimentRunResult objects, one per completed run.",
+    "crumbs": [
+      "Reference",
+      "Experiment Functions",
+      "run_experiment_grid"
+    ]
+  },
+  {
+    "objectID": "reference/run_experiment_grid.html#parameters",
+    "href": "reference/run_experiment_grid.html#parameters",
+    "title": "run_experiment_grid",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nspecs\nlist[ExperimentSpec] | None\nOptional pre-expanded list of ExperimentSpec objects.\nNone\n\n\nparam_grid\ndict | None\nOptional in-memory parameter grid dictionary.\nNone\n\n\ntask_root\nstr | Path | None\nOptional directory containing user-defined task folders.\nNone\n\n\noutput_root\nstr | Path\nRoot directory for per-run outputs.\n'outputs'\n\n\nmetrics_output_root\nstr | Path | None\nDirectory for aggregate metrics CSV files.\nNone\n\n\npull_models\nbool\nIf True, pull each Ollama model before its first run. Defaults to True so sweep runs ensure requested models are available.\nTrue\n\n\nstart_ollama_if_needed\nbool\nIf True, try to auto-start a local Ollama server before each run when needed. Defaults to True.\nTrue",
+    "crumbs": [
+      "Reference",
+      "Experiment Functions",
+      "run_experiment_grid"
+    ]
+  },
+  {
+    "objectID": "reference/run_experiment_grid.html#returns",
+    "href": "reference/run_experiment_grid.html#returns",
+    "title": "run_experiment_grid",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nlist[ExperimentRunResult]\nList of ExperimentRunResult objects, one per completed run.",
+    "crumbs": [
+      "Reference",
+      "Experiment Functions",
+      "run_experiment_grid"
     ]
   },
   {
@@ -1475,6 +1351,30 @@
     ]
   },
   {
+    "objectID": "reference/ensure_ollama_model.html",
+    "href": "reference/ensure_ollama_model.html",
+    "title": "ensure_ollama_model",
+    "section": "",
+    "text": "ensure_ollama_model(model)\nPull an Ollama model so it is available locally before a run.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nmodel\nstr\nOllama model identifier such as \"gemma3:270m\".\nrequired",
+    "crumbs": [
+      "Reference",
+      "Ollama Helpers",
+      "ensure_ollama_model"
+    ]
+  },
+  {
+    "objectID": "reference/ensure_ollama_model.html#parameters",
+    "href": "reference/ensure_ollama_model.html#parameters",
+    "title": "ensure_ollama_model",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nmodel\nstr\nOllama model identifier such as \"gemma3:270m\".\nrequired",
+    "crumbs": [
+      "Reference",
+      "Ollama Helpers",
+      "ensure_ollama_model"
+    ]
+  },
+  {
     "objectID": "reference/run_annotation.html",
     "href": "reference/run_annotation.html",
     "title": "run_annotation",
@@ -1511,160 +1411,95 @@
     ]
   },
   {
-    "objectID": "reference/MetricsRunResult.html",
-    "href": "reference/MetricsRunResult.html",
-    "title": "MetricsRunResult",
+    "objectID": "reference/get_example_task_dir.html",
+    "href": "reference/get_example_task_dir.html",
+    "title": "get_example_task_dir",
     "section": "",
-    "text": "MetricsRunResult(\n    output_csv,\n    report_file,\n    columns_to_compare,\n    metrics_by_column,\n    reports,\n    total_inference_time,\n    avg_inference_time,\n    input_chars,\n    output_chars,\n    energy_consumed,\n    emissions,\n    cpu_model,\n    gpu_model,\n    summary_text,\n    run_id=None,\n    runs_csv=None,\n    n_queries=None,\n)\nResult returned by run_metrics.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\noutput_csv\nPath\nFilesystem path to the aggregate metrics CSV that was updated.\n\n\nreport_file\nPath\nFilesystem path to the per-column classification report text file.\n\n\ncolumns_to_compare\nlist[str]\nAnnotation columns included in the evaluation.\n\n\nmetrics_by_column\ndict[str, dict[str, Any]]\nNested dictionary of computed metrics keyed by column name.\n\n\nreports\ndict[str, str]\nHuman-readable report text keyed by annotation column name.\n\n\ntotal_inference_time\nfloat | None\nTotal model inference time in seconds, if available.\n\n\navg_inference_time\nfloat | None\nMean inference time per annotation request in seconds, if available.\n\n\ninput_chars\nint | None\nTotal prompt characters sent to the model, if available.\n\n\noutput_chars\nint | None\nTotal response characters returned by the model, if available.\n\n\nenergy_consumed\nfloat | None\nEnergy consumption in kilowatt-hours, if available.\n\n\nemissions\nfloat | None\nEmissions estimate in kilograms of CO2 equivalent, if available.\n\n\ncpu_model\nstr | None\nCPU metadata recorded by CodeCarbon, if available.\n\n\ngpu_model\nstr | None\nGPU metadata recorded by CodeCarbon, if available.\n\n\nsummary_text\nstr\nPlain-text summary of the main evaluation metrics.\n\n\nrun_id\nstr | None\nIdentifier linking this run’s rows across the runs and metrics tables.\n\n\nruns_csv\nPath | None\nFilesystem path to the per-run efficiency/config table, if written.\n\n\nn_queries\nint | None\nNumber of model inference calls in the annotation run, if available.",
-    "crumbs": [
-      "Reference",
-      "Experiment Types",
-      "MetricsRunResult"
-    ]
-  },
-  {
-    "objectID": "reference/MetricsRunResult.html#attributes",
-    "href": "reference/MetricsRunResult.html#attributes",
-    "title": "MetricsRunResult",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\noutput_csv\nPath\nFilesystem path to the aggregate metrics CSV that was updated.\n\n\nreport_file\nPath\nFilesystem path to the per-column classification report text file.\n\n\ncolumns_to_compare\nlist[str]\nAnnotation columns included in the evaluation.\n\n\nmetrics_by_column\ndict[str, dict[str, Any]]\nNested dictionary of computed metrics keyed by column name.\n\n\nreports\ndict[str, str]\nHuman-readable report text keyed by annotation column name.\n\n\ntotal_inference_time\nfloat | None\nTotal model inference time in seconds, if available.\n\n\navg_inference_time\nfloat | None\nMean inference time per annotation request in seconds, if available.\n\n\ninput_chars\nint | None\nTotal prompt characters sent to the model, if available.\n\n\noutput_chars\nint | None\nTotal response characters returned by the model, if available.\n\n\nenergy_consumed\nfloat | None\nEnergy consumption in kilowatt-hours, if available.\n\n\nemissions\nfloat | None\nEmissions estimate in kilograms of CO2 equivalent, if available.\n\n\ncpu_model\nstr | None\nCPU metadata recorded by CodeCarbon, if available.\n\n\ngpu_model\nstr | None\nGPU metadata recorded by CodeCarbon, if available.\n\n\nsummary_text\nstr\nPlain-text summary of the main evaluation metrics.\n\n\nrun_id\nstr | None\nIdentifier linking this run’s rows across the runs and metrics tables.\n\n\nruns_csv\nPath | None\nFilesystem path to the per-run efficiency/config table, if written.\n\n\nn_queries\nint | None\nNumber of model inference calls in the annotation run, if available.",
-    "crumbs": [
-      "Reference",
-      "Experiment Types",
-      "MetricsRunResult"
-    ]
-  },
-  {
-    "objectID": "reference/get_example_task_files.html",
-    "href": "reference/get_example_task_files.html",
-    "title": "get_example_task_files",
-    "section": "",
-    "text": "get_example_task_files(task_name)\nReturn the standard file paths for a bundled example task.\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntask_name\nstr\nBundled task directory name.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\ndict[str, Path]\nDictionary containing task_dir, codebook_path, and\n\n\n\ndict[str, Path]\nground_truth_csv paths.",
+    "text": "get_example_task_dir(task_name)\nReturn the filesystem path to a bundled example task.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntask_name\nstr\nBundled task directory name such as \"policy-sentiment\".\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nPath\nFilesystem path to the bundled example task directory.",
     "crumbs": [
       "Reference",
       "Example Tasks",
-      "get_example_task_files"
+      "get_example_task_dir"
     ]
   },
   {
-    "objectID": "reference/get_example_task_files.html#parameters",
-    "href": "reference/get_example_task_files.html#parameters",
-    "title": "get_example_task_files",
+    "objectID": "reference/get_example_task_dir.html#parameters",
+    "href": "reference/get_example_task_dir.html#parameters",
+    "title": "get_example_task_dir",
     "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntask_name\nstr\nBundled task directory name.\nrequired",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntask_name\nstr\nBundled task directory name such as \"policy-sentiment\".\nrequired",
     "crumbs": [
       "Reference",
       "Example Tasks",
-      "get_example_task_files"
+      "get_example_task_dir"
     ]
   },
   {
-    "objectID": "reference/get_example_task_files.html#returns",
-    "href": "reference/get_example_task_files.html#returns",
-    "title": "get_example_task_files",
+    "objectID": "reference/get_example_task_dir.html#returns",
+    "href": "reference/get_example_task_dir.html#returns",
+    "title": "get_example_task_dir",
     "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\ndict[str, Path]\nDictionary containing task_dir, codebook_path, and\n\n\n\ndict[str, Path]\nground_truth_csv paths.",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nPath\nFilesystem path to the bundled example task directory.",
     "crumbs": [
       "Reference",
       "Example Tasks",
-      "get_example_task_files"
+      "get_example_task_dir"
     ]
   },
   {
-    "objectID": "reference/run_metrics.html",
-    "href": "reference/run_metrics.html",
-    "title": "run_metrics",
+    "objectID": "reference/ensure_ollama_available.html",
+    "href": "reference/ensure_ollama_available.html",
+    "title": "ensure_ollama_available",
     "section": "",
-    "text": "run_metrics(\n    ground_truth_csv,\n    llm_output_csv,\n    label,\n    output_csv,\n    model_id,\n    codebook_path,\n    report_file,\n    columns=None,\n    quantization_type=None,\n    temperature=None,\n    top_p=None,\n    prompt_type=None,\n    use_examples=None,\n    chat_mode=None,\n    reasoning=None,\n    process_textbox=False,\n    process_span=False,\n    emissions_file=None,\n    experiment_directory=None,\n    timestamp=None,\n    timing_file=None,\n    char_counts_file=None,\n    run_id=None,\n)\nEvaluate one model-output CSV against ground truth and persist the results.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nground_truth_csv\n\nPath to the human-labeled reference CSV.\nrequired\n\n\nllm_output_csv\n\nPath to the model-generated annotation CSV.\nrequired\n\n\nlabel\n\nExperiment label written to the metrics CSV, usually the task name.\nrequired\n\n\noutput_csv\n\nPath to the aggregate metrics CSV to create or update.\nrequired\n\n\nmodel_id\n\nStable identifier for the model and prompt configuration.\nrequired\n\n\ncodebook_path\n\nPath to the codebook used for the run.\nrequired\n\n\nreport_file\n\nPath to the per-column report text file.\nrequired\n\n\ncolumns\n\nOptional subset of annotation column names to evaluate.\nNone\n\n\nquantization_type\n\nOptional quantization metadata string.\nNone\n\n\ntemperature\n\nOptional temperature metadata value.\nNone\n\n\ntop_p\n\nOptional top-p metadata value.\nNone\n\n\nprompt_type\n\nOptional prompt wrapper name stored as metadata.\nNone\n\n\nuse_examples\n\nOptional boolean-like metadata flag.\nNone\n\n\nchat_mode\n\nOptional chat-history policy stored as metadata.\nNone\n\n\nreasoning\n\nOptional Ollama reasoning mode stored as metadata.\nNone\n\n\nprocess_textbox\n\nWhether textbox metrics should be computed.\nFalse\n\n\nemissions_file\n\nOptional path to emissions.csv.\nNone\n\n\nexperiment_directory\n\nOptional path to the per-run output directory.\nNone\n\n\ntimestamp\n\nOptional timestamp string.\nNone\n\n\ntiming_file\n\nOptional path to timing_data.json.\nNone\n\n\nchar_counts_file\n\nOptional path to char_counts.json.\nNone\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\n\ncodebook_lab.types.MetricsRunResult for the completed evaluation.",
+    "text": "ensure_ollama_available(\n    timeout=2.0,\n    start_if_needed=False,\n    startup_timeout=10.0,\n)\nCheck that the Ollama server is reachable, optionally starting it locally.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntimeout\nfloat\nTimeout in seconds for each connectivity probe.\n2.0\n\n\nstart_if_needed\nbool\nIf True, try to start ollama serve when the default local server is not reachable.\nFalse\n\n\nstartup_timeout\nfloat\nMaximum seconds to wait after auto-starting the server.\n10.0\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nstr\nBase URL string for the reachable Ollama server.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nRuntimeError\nIf Ollama is not reachable and cannot be started.",
     "crumbs": [
       "Reference",
-      "Lower-Level Workflow",
-      "run_metrics"
+      "Ollama Helpers",
+      "ensure_ollama_available"
     ]
   },
   {
-    "objectID": "reference/run_metrics.html#parameters",
-    "href": "reference/run_metrics.html#parameters",
-    "title": "run_metrics",
+    "objectID": "reference/ensure_ollama_available.html#parameters",
+    "href": "reference/ensure_ollama_available.html#parameters",
+    "title": "ensure_ollama_available",
     "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nground_truth_csv\n\nPath to the human-labeled reference CSV.\nrequired\n\n\nllm_output_csv\n\nPath to the model-generated annotation CSV.\nrequired\n\n\nlabel\n\nExperiment label written to the metrics CSV, usually the task name.\nrequired\n\n\noutput_csv\n\nPath to the aggregate metrics CSV to create or update.\nrequired\n\n\nmodel_id\n\nStable identifier for the model and prompt configuration.\nrequired\n\n\ncodebook_path\n\nPath to the codebook used for the run.\nrequired\n\n\nreport_file\n\nPath to the per-column report text file.\nrequired\n\n\ncolumns\n\nOptional subset of annotation column names to evaluate.\nNone\n\n\nquantization_type\n\nOptional quantization metadata string.\nNone\n\n\ntemperature\n\nOptional temperature metadata value.\nNone\n\n\ntop_p\n\nOptional top-p metadata value.\nNone\n\n\nprompt_type\n\nOptional prompt wrapper name stored as metadata.\nNone\n\n\nuse_examples\n\nOptional boolean-like metadata flag.\nNone\n\n\nchat_mode\n\nOptional chat-history policy stored as metadata.\nNone\n\n\nreasoning\n\nOptional Ollama reasoning mode stored as metadata.\nNone\n\n\nprocess_textbox\n\nWhether textbox metrics should be computed.\nFalse\n\n\nemissions_file\n\nOptional path to emissions.csv.\nNone\n\n\nexperiment_directory\n\nOptional path to the per-run output directory.\nNone\n\n\ntimestamp\n\nOptional timestamp string.\nNone\n\n\ntiming_file\n\nOptional path to timing_data.json.\nNone\n\n\nchar_counts_file\n\nOptional path to char_counts.json.\nNone",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntimeout\nfloat\nTimeout in seconds for each connectivity probe.\n2.0\n\n\nstart_if_needed\nbool\nIf True, try to start ollama serve when the default local server is not reachable.\nFalse\n\n\nstartup_timeout\nfloat\nMaximum seconds to wait after auto-starting the server.\n10.0",
     "crumbs": [
       "Reference",
-      "Lower-Level Workflow",
-      "run_metrics"
+      "Ollama Helpers",
+      "ensure_ollama_available"
     ]
   },
   {
-    "objectID": "reference/run_metrics.html#returns",
-    "href": "reference/run_metrics.html#returns",
-    "title": "run_metrics",
+    "objectID": "reference/ensure_ollama_available.html#returns",
+    "href": "reference/ensure_ollama_available.html#returns",
+    "title": "ensure_ollama_available",
     "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\n\ncodebook_lab.types.MetricsRunResult for the completed evaluation.",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nstr\nBase URL string for the reachable Ollama server.",
     "crumbs": [
       "Reference",
-      "Lower-Level Workflow",
-      "run_metrics"
+      "Ollama Helpers",
+      "ensure_ollama_available"
     ]
   },
   {
-    "objectID": "reference/AnnotationRunResult.html",
-    "href": "reference/AnnotationRunResult.html",
-    "title": "AnnotationRunResult",
+    "objectID": "reference/ensure_ollama_available.html#raises",
+    "href": "reference/ensure_ollama_available.html#raises",
+    "title": "ensure_ollama_available",
     "section": "",
-    "text": "AnnotationRunResult(\n    model,\n    output_path,\n    experiment_directory,\n    config,\n    char_counts,\n    timing_data,\n    emissions,\n    dataframe,\n    reasoning_traces=None,\n)\nResult returned by run_annotation.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nmodel\nstr\nOllama model name used for the run, such as \"gemma3:270m\".\n\n\noutput_path\nPath\nFilesystem path to the generated annotation CSV.\n\n\nexperiment_directory\nPath\nDirectory containing run metadata and outputs.\n\n\nconfig\ndict[str, Any]\nSerializable experiment configuration written to config.json.\n\n\nchar_counts\ndict[str, Any]\nPrompt and response character counts collected during the run.\n\n\ntiming_data\ndict[str, Any]\nInference timing summary, including total and average seconds.\n\n\nemissions\nfloat | None\nCodeCarbon estimate in kilograms of CO2 equivalent, or None.\n\n\ndataframe\npd.DataFrame\nPandas DataFrame containing the annotated rows written to disk.\n\n\nreasoning_traces\nlist[dict[str, Any]] | None\nPer-query reasoning records captured from models that expose them.",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nRuntimeError\nIf Ollama is not reachable and cannot be started.",
     "crumbs": [
       "Reference",
-      "Experiment Types",
-      "AnnotationRunResult"
+      "Ollama Helpers",
+      "ensure_ollama_available"
     ]
   },
   {
-    "objectID": "reference/AnnotationRunResult.html#attributes",
-    "href": "reference/AnnotationRunResult.html#attributes",
-    "title": "AnnotationRunResult",
+    "objectID": "citation.html",
+    "href": "citation.html",
+    "title": "Citation",
     "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nmodel\nstr\nOllama model name used for the run, such as \"gemma3:270m\".\n\n\noutput_path\nPath\nFilesystem path to the generated annotation CSV.\n\n\nexperiment_directory\nPath\nDirectory containing run metadata and outputs.\n\n\nconfig\ndict[str, Any]\nSerializable experiment configuration written to config.json.\n\n\nchar_counts\ndict[str, Any]\nPrompt and response character counts collected during the run.\n\n\ntiming_data\ndict[str, Any]\nInference timing summary, including total and average seconds.\n\n\nemissions\nfloat | None\nCodeCarbon estimate in kilograms of CO2 equivalent, or None.\n\n\ndataframe\npd.DataFrame\nPandas DataFrame containing the annotated rows written to disk.\n\n\nreasoning_traces\nlist[dict[str, Any]] | None\nPer-query reasoning records captured from models that expose them.",
-    "crumbs": [
-      "Reference",
-      "Experiment Types",
-      "AnnotationRunResult"
-    ]
-  },
-  {
-    "objectID": "reference/copy_example_task.html",
-    "href": "reference/copy_example_task.html",
-    "title": "copy_example_task",
-    "section": "",
-    "text": "copy_example_task(task_name, destination, overwrite=False)\nCopy a bundled example task to a user-controlled directory.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntask_name\nstr\nBundled task directory name.\nrequired\n\n\ndestination\nstr | Path\nDirectory where the example task folder should be copied.\nrequired\n\n\noverwrite\nbool\nIf True, replace an existing destination task folder.\nFalse\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nPath\nPath to the copied task directory inside destination.",
-    "crumbs": [
-      "Reference",
-      "Example Tasks",
-      "copy_example_task"
-    ]
-  },
-  {
-    "objectID": "reference/copy_example_task.html#parameters",
-    "href": "reference/copy_example_task.html#parameters",
-    "title": "copy_example_task",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntask_name\nstr\nBundled task directory name.\nrequired\n\n\ndestination\nstr | Path\nDirectory where the example task folder should be copied.\nrequired\n\n\noverwrite\nbool\nIf True, replace an existing destination task folder.\nFalse",
-    "crumbs": [
-      "Reference",
-      "Example Tasks",
-      "copy_example_task"
-    ]
-  },
-  {
-    "objectID": "reference/copy_example_task.html#returns",
-    "href": "reference/copy_example_task.html#returns",
-    "title": "copy_example_task",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nPath\nPath to the copied task directory inside destination.",
-    "crumbs": [
-      "Reference",
-      "Example Tasks",
-      "copy_example_task"
-    ]
+    "text": "If you use CodeBook Lab or CodeBook Studio in research, please cite the relevant software. If you use the full validation workflow, cite both tools. The associated preprint can be cited for the methodological framework and validation-first approach."
   },
   {
     "objectID": "citation.html#codebook-lab",
@@ -1679,5 +1514,163 @@
     "title": "Citation",
     "section": "CodeBook Studio",
     "text": "CodeBook Studio\nAPSR style:\nMcLaren, Lorcan. 2026. CodeBook Studio (Version v1.2.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19185938.\nBibTeX:\n@software{mclaren_codebook_studio_2026,\n  author = {McLaren, Lorcan},\n  title = {CodeBook Studio},\n  year = {2026},\n  version = {v1.2.1},\n  doi = {10.5281/zenodo.19185938},\n  url = {https://doi.org/10.5281/zenodo.19185938}\n}"
+  },
+  {
+    "objectID": "citation.html#preprint",
+    "href": "citation.html#preprint",
+    "title": "Citation",
+    "section": "Preprint",
+    "text": "Preprint\nAPSR style:\nMcLaren, Lorcan, James P. Cross, Zuzanna Krakowska, Robin Rauner, and Martijn Schoonvelde. 2026. Magic Words or Methodical Work? Challenging Conventional Wisdom in LLM-Based Political Text Annotation. arXiv preprint arXiv:2603.26898. https://arxiv.org/abs/2603.26898.\nBibTeX:\n@misc{mclaren_magic_words_2026,\n  author = {McLaren, Lorcan and Cross, James P. and Krakowska, Zuzanna and Rauner, Robin and Schoonvelde, Martijn},\n  title = {Magic Words or Methodical Work? Challenging Conventional Wisdom in LLM-Based Political Text Annotation},\n  year = {2026},\n  eprint = {2603.26898},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.CL},\n  doi = {10.48550/arXiv.2603.26898},\n  url = {https://arxiv.org/abs/2603.26898}\n}"
+  },
+  {
+    "objectID": "citation.html#license",
+    "href": "citation.html#license",
+    "title": "Citation",
+    "section": "License",
+    "text": "License\nCodeBook Lab and CodeBook Studio are released under the GNU Affero General Public License v3.0. You are free to use, modify, and distribute them — including over a network — provided derivative works remain under the same terms.\n\nCodeBook Lab license\nCodeBook Studio license"
+  },
+  {
+    "objectID": "annotation-types.html",
+    "href": "annotation-types.html",
+    "title": "Annotation Types",
+    "section": "",
+    "text": "CodeBook Lab reads annotation definitions from the CodeBook Studio codebook.json format. It currently supports five annotation types.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Annotation Types"
+    ]
+  },
+  {
+    "objectID": "annotation-types.html#checkbox",
+    "href": "annotation-types.html#checkbox",
+    "title": "Annotation Types",
+    "section": "Checkbox",
+    "text": "Checkbox\nCheckbox annotations are binary yes/no judgements. Lab stores them as 1 for yes and 0 for no.\n{\n  \"name\": \"Explicit evaluation\",\n  \"type\": \"checkbox\",\n  \"tooltip\": \"Tick this if the text clearly expresses an evaluative stance.\"\n}\nValid model responses include JSON booleans, 1/0, and common yes/no strings. Invalid responses are retried and then stored as blank if no valid answer is found.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Annotation Types"
+    ]
+  },
+  {
+    "objectID": "annotation-types.html#dropdown",
+    "href": "annotation-types.html#dropdown",
+    "title": "Annotation Types",
+    "section": "Dropdown",
+    "text": "Dropdown\nDropdown annotations require one value from a fixed option set.\n{\n  \"name\": \"Direction\",\n  \"type\": \"dropdown\",\n  \"options\": [\"positive\", \"negative\", \"mixed\", \"no clear sentiment\"]\n}\nLab normalizes dropdown responses case-insensitively against the configured options. A model response such as \" Positive \" is stored as positive if that is the exact option in the codebook.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Annotation Types"
+    ]
+  },
+  {
+    "objectID": "annotation-types.html#likert",
+    "href": "annotation-types.html#likert",
+    "title": "Annotation Types",
+    "section": "Likert",
+    "text": "Likert\nLikert annotations require a whole number inside a configured range.\n{\n  \"name\": \"Intensity\",\n  \"type\": \"likert\",\n  \"min_value\": 1,\n  \"max_value\": 5\n}\nJSON numeric responses are converted to integers and clamped to the configured range. If a non-JSON response contains an in-range number, Lab can recover that number; otherwise the response is invalid and eligible for retry.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Annotation Types"
+    ]
+  },
+  {
+    "objectID": "annotation-types.html#textbox",
+    "href": "annotation-types.html#textbox",
+    "title": "Annotation Types",
+    "section": "Textbox",
+    "text": "Textbox\nTextbox annotations store short free-text responses.\n{\n  \"name\": \"Evidence\",\n  \"type\": \"textbox\",\n  \"tooltip\": \"Provide a short phrase from the text that supports the judgement.\"\n}\nTextbox generation and scoring are opt-in because the optional metrics can be heavier:\nExperimentSpec(\n    task=\"policy-sentiment\",\n    model=\"gemma3:270m\",\n    process_textbox=True,\n)\nInstall codebook-lab[textbox] for the full textbox metric suite.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Annotation Types"
+    ]
+  },
+  {
+    "objectID": "annotation-types.html#span",
+    "href": "annotation-types.html#span",
+    "title": "Annotation Types",
+    "section": "Span",
+    "text": "Span\nSpan annotations store character offsets into the original text. They can be unlabelled highlights or labelled spans.\nUnlabelled span:\n{\n  \"name\": \"Evidence\",\n  \"type\": \"span\",\n  \"tooltip\": \"Highlight the phrase that supports your judgement.\",\n  \"label_options\": []\n}\nLabelled span:\n{\n  \"name\": \"Emotion markers\",\n  \"type\": \"span\",\n  \"tooltip\": \"Tag each highlight with the emotion it conveys.\",\n  \"label_options\": [\"joy\", \"sadness\", \"anger\", \"fear\", \"surprise\", \"disgust\"]\n}\nSpan generation and scoring are opt-in:\nExperimentSpec(\n    task=\"discrete-emotions\",\n    model=\"gemma3:270m\",\n    process_span=True,\n)\nSpan cells are CSV-safe JSON strings:\n[\n  {\"start\": 38, \"end\": 55, \"text\": \"her heart pounded\", \"label\": \"fear\"}\n]\nLab validates offsets, drops out-of-range spans, fills missing text from the source string when possible, and strips labels that are not in label_options.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Annotation Types"
+    ]
+  },
+  {
+    "objectID": "annotation-types.html#built-in-example-coverage",
+    "href": "annotation-types.html#built-in-example-coverage",
+    "title": "Annotation Types",
+    "section": "Built-In Example Coverage",
+    "text": "Built-In Example Coverage\nThe bundled policy-sentiment task exercises checkbox, dropdown, Likert, and textbox annotations. The bundled discrete-emotions task exercises dropdown, Likert, unlabelled span, and labelled span annotations.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Annotation Types"
+    ]
+  },
+  {
+    "objectID": "outputs-metrics.html",
+    "href": "outputs-metrics.html",
+    "title": "Outputs And Metrics",
+    "section": "",
+    "text": "Each run creates a directory named by a short run ID under outputs/&lt;task&gt;/&lt;run_id&gt;/. Run-ID folders keep paths compact; the full set of choices for the run lives in config.json and in the runs metrics table.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Outputs And Metrics"
+    ]
+  },
+  {
+    "objectID": "outputs-metrics.html#per-run-files",
+    "href": "outputs-metrics.html#per-run-files",
+    "title": "Outputs And Metrics",
+    "section": "Per-Run Files",
+    "text": "Per-Run Files\n\noutput.csv\n\nRow-level model annotations.\n\nconfig.json\n\nThe full run configuration — model, prompt, sampling, chat mode, reasoning, and task paths — so a run-ID folder can always be traced back to its settings.\n\nclassification_reports.txt\n\nHuman-readable evaluation summaries by annotation field.\n\nemissions.csv\n\nCodeCarbon energy and emissions output.\n\ntiming_data.json\n\nTotal inference time, average inference time, and request counts.\n\nchar_counts.json\n\nTotal input and output characters sent to and returned from the model.\n\nreasoning_traces.jsonl\n\nOne record per query capturing the model’s reasoning content, when the model returns it (see Model reasoning).",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Outputs And Metrics"
+    ]
+  },
+  {
+    "objectID": "outputs-metrics.html#tidy-metrics-tables",
+    "href": "outputs-metrics.html#tidy-metrics-tables",
+    "title": "Outputs And Metrics",
+    "section": "Tidy Metrics Tables",
+    "text": "Tidy Metrics Tables\nAggregate metrics are written as two linked tidy tables:\n\n&lt;task&gt;_metrics_log.csv\n\nThe long table — one row per (run_id, annotation column, annotation type, metric) with the metric value.\n\n&lt;task&gt;_metrics_log_runs.csv\n\nThe runs table — one row per run_id with model, prompt, sampling, chat mode, and reasoning configuration, task paths, inference counts, character counts, energy use, emissions, CPU/GPU metadata, and per-query averages.\n\n\nThis split keeps metric values long and analysis-friendly while avoiding repeated run metadata on every metric row.\nDepending on the annotation types in your codebook, metrics can include:\n\naccuracy, precision, recall, F1, and percentage agreement\nCohen’s kappa and Krippendorff’s alpha\nSpearman correlation and quadratic weighted kappa for Likert fields\nnormalized Levenshtein similarity and BLEU for textbox fields\nROUGE, embedding cosine similarity, and BERTScore when optional textbox extras are installed\ntoken F1, exact-match F1, and character IoU for span fields\ntotal inference time, average inference time, number of queries, character counts, energy use, and emissions",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Outputs And Metrics"
+    ]
+  },
+  {
+    "objectID": "outputs-metrics.html#linking-the-two-tables",
+    "href": "outputs-metrics.html#linking-the-two-tables",
+    "title": "Outputs And Metrics",
+    "section": "Linking the two tables",
+    "text": "Linking the two tables\nrun_id is the key shared by both tables, so you can join metric values to the configuration that produced them with a single merge:\nimport pandas as pd\n\nmetrics = pd.read_csv(\"outputs/metrics/policy-sentiment_metrics_log.csv\")\nruns = pd.read_csv(\"outputs/metrics/policy-sentiment_metrics_log_runs.csv\")\n\njoined = metrics.merge(runs, on=\"run_id\")\n\n# e.g. macro-F1 on Direction by model and chat mode\nview = joined[\n    (joined[\"column\"] == \"Policy Sentiment_Direction\")\n    & (joined[\"metric\"] == \"f1_macro\")\n]\nprint(view[[\"model_id\", \"chat_mode\", \"reasoning\", \"use_examples\", \"value\"]])\nBecause every metric row carries a run_id, you can pivot, group, and compare runs along any configuration dimension — model, prompt, examples, chat mode, reasoning, or sampling — all scored against the same human labels.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Outputs And Metrics"
+    ]
+  },
+  {
+    "objectID": "outputs-metrics.html#choosing-metrics",
+    "href": "outputs-metrics.html#choosing-metrics",
+    "title": "Outputs And Metrics",
+    "section": "Choosing Metrics",
+    "text": "Choosing Metrics\nFor checkbox and dropdown annotations, start with F1 and percentage agreement. For imbalanced labels, inspect per-class precision and recall in classification_reports.txt.\nFor Likert annotations, report ordinal-aware metrics alongside exact agreement. A model that predicts adjacent categories may be less wrong than one that jumps from one end of the scale to the other.\nFor textbox annotations, treat similarity metrics as diagnostics rather than a single ground-truth measure. Short evidence extracts can be semantically equivalent while using different words.\nFor span annotations, token_f1 is the headline score for most comparisons because it rewards overlap at the token level. Use exact_match_f1 when boundary precision matters and char_iou when near misses should still be visible.",
+    "crumbs": [
+      "Get Started",
+      "Concepts",
+      "Outputs And Metrics"
+    ]
   }
 ]

@@ -1,15 +1,16 @@
 /*-- scss:defaults --*/
-$font-family-sans-serif: "Libre Franklin", sans-serif;
-$headings-font-family: "Lora", serif;
+$font-family-sans-serif: "Literata", serif;
+$headings-font-family: "Schibsted Grotesk", sans-serif;
 
-$body-bg: #f9f6f1;
-$body-color: #333333;
-$primary: #8a5945;
-$link-color: #8a5945;
-$sidebar-bg: #f9f6f1;
+$body-bg: #ffffff;
+$body-color: #1d1d1f;
+$primary: #1d1d1f;
+$link-color: #1d1d1f;
+$sidebar-bg: #ffffff;
 
 /*-- scss:rules --*/
 .sidebar-title {
-    font-family: "Lora", serif;
+    font-family: "Schibsted Grotesk", sans-serif;
     font-weight: 700;
+    letter-spacing: -0.015em;
 }
