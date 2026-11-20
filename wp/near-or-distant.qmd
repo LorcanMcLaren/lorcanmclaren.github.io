@@ -1,0 +1,16 @@
+---
+title: "Near or Distant? Elite Climate Rhetoric and Public Opinion in Ireland"
+date: "2026"
+date-format: "YYYY"
+paper-status: "Pre-registered"
+coauthors:
+  - name: "James P. Cross"
+    link: "https://scholar.google.com/citations?user=Tx3mu9kAAAAJ&hl=en"
+abstract: "Elite rhetoric varies systematically in how near or distant it portrays climate impacts. This pre-registered two-stage survey experiment, fielded to a nationally representative panel of adults in Ireland, tests how such portrayals, in messages attributed to Members of the European Parliament, affect public climate opinion. Stage 1 is a between-subjects framing experiment that estimates the effect of a near versus distant portrayal of climate change on support for mitigation policy, registered as an equivalence test given the small effects reported in prior work. Stage 2 is a forced-choice conjoint that decomposes which framing features (discussing impacts, describing them specifically, and locating them proximately) and which messenger attributes (gender, political position and nationality) shape perceived persuasiveness."
+
+format:
+  html:
+    page-layout: article
+    template-partials:
+      - "../partials/title-block.html"
+---

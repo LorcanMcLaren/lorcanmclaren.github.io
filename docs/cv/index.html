@@ -296,6 +296,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#industry-experience" id="toc-industry-experience" class="nav-link" data-scroll-target="#industry-experience">Industry Experience</a></li>
   <li><a href="#working-papers" id="toc-working-papers" class="nav-link" data-scroll-target="#working-papers">Working Papers</a></li>
   <li><a href="#peer-reviewed-publications" id="toc-peer-reviewed-publications" class="nav-link" data-scroll-target="#peer-reviewed-publications">Peer-Reviewed Publications</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
   <li><a href="#presentations" id="toc-presentations" class="nav-link" data-scroll-target="#presentations">Presentations</a></li>
   <li><a href="#teaching" id="toc-teaching" class="nav-link" data-scroll-target="#teaching">Teaching</a></li>
   <li><a href="#scholarships-grants" id="toc-scholarships-grants" class="nav-link" data-scroll-target="#scholarships-grants">Scholarships &amp; Grants</a></li>
@@ -341,7 +342,7 @@ by cv.lua (in this folder). Building blocks:
 
   ::: {.cv-entry title="Organisation" position="Role" date="Dates"}   + optional bullet list
   ::: {.cv-rows}      a table of  date | detail  (| amount)
-                      add total="Label" to sum the amounts column
+  ::: {.cv-total label="..."}   sum of the amounts column across all cv-rows tables
   ::: {.cv-pubs}      one paragraph per publication
 -->
 <section id="education" class="level2">
@@ -475,12 +476,17 @@ across multiple jurisdictions in a variety of languages</li>
 <h2 class="anchored" data-anchor-id="working-papers">Working Papers</h2>
 <div class="cv-pubs">
   <p class="cv-pub"><strong>McLaren, L.</strong>, Cross, J.P., Krakowska, Z., Rauner, R. and
-Schoonvelde, M. (2025) ‘Magic Words or Methodical Work? Challenging
-Conventional Wisdom in LLM-Based Political Text Annotation’.</p>
-  <p class="cv-pub"><strong>McLaren, L.</strong> (2025) ‘When Climate Change Hits Home:
-Natural Disasters and Climate Rhetoric in the European Parliament’.</p>
+Schoonvelde, M. (2026) ‘What to Compare and When to Stop: LLM Pipelines
+for Text Annotation in Political Science’. <em>Revise &amp; resubmit,
+Political Analysis.</em> [<a href="https://arxiv.org/abs/2603.26898">Preprint, earlier version</a>]</p>
   <p class="cv-pub"><strong>McLaren, L.</strong> (2024) ‘Here and Now or There and Then? The
-Psychological Distance of Climate Change in Parliamentary Speech’.</p>
+Psychological Distance of Climate Change in Parliamentary Speech’.
+<em>Under review.</em></p>
+  <p class="cv-pub"><strong>McLaren, L.</strong> (2026) ‘When Climate Change Hits Home:
+Extreme Weather and Climate Rhetoric in the European Parliament’.</p>
+  <p class="cv-pub"><strong>McLaren, L.</strong> and Cross, J.P. (2026) ‘Near or Distant?
+Elite Climate Rhetoric and Public Opinion in Ireland’.
+<em>Pre-registered survey experiment.</em></p>
 </div>
 </section>
 <section id="peer-reviewed-publications" class="level2">
@@ -494,6 +500,17 @@ Cognitive Infocommunications</em>, pp.&nbsp;55–60.</p>
 ‘Gaze, Dominance and Dialogue Role in the MULTISIMO Corpus’, in <em>2020
 11th IEEE International Conference on Cognitive Infocommunications</em>,
 pp.&nbsp;83–88.</p>
+</div>
+</section>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<div class="cv-pubs">
+  <p class="cv-pub"><strong>CodeBook Lab</strong> (2026). Python package for benchmarking
+local LLM annotation pipelines against human labels across models,
+prompts and inference settings. [<a href="https://pypi.org/project/codebook-lab/">PyPI</a> · <a href="https://lorcanmclaren.com/codebook-lab/">Docs</a>]</p>
+  <p class="cv-pub"><strong>CodeBook Studio</strong> (2026). Browser-based tool for codebook
+development, human annotation and adjudication, with export to CodeBook
+Lab. [<a href="https://codebook.streamlit.app/">App</a> · <a href="https://lorcanmclaren.com/codebook-lab/studio.html">Docs</a>]</p>
 </div>
 </section>
 <section id="presentations" class="level2">
@@ -527,6 +544,8 @@ Association of Ireland Postgraduate Conference, Dublin</span>
 </section>
 <section id="teaching" class="level2">
 <h2 class="anchored" data-anchor-id="teaching">Teaching</h2>
+<section id="modules" class="level3">
+<h3 class="anchored" data-anchor-id="modules">Modules</h3>
 <div class="cv-honors">
   <div class="cv-honor-row">
     <span class="cv-honor-date">Spring 2025, 2026</span>
@@ -545,9 +564,23 @@ Teaching Assistant</span>
   </div>
 </div>
 </section>
+<section id="workshops-short-courses" class="level3">
+<h3 class="anchored" data-anchor-id="workshops-short-courses">Workshops &amp; Short Courses</h3>
+<div class="cv-honors">
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">October 2026</span>
+    <span class="cv-honor-detail"><strong>LLMs for Text Annotation in Political Science</strong>,
+Political Studies Association of Ireland Annual Conference
+pre-conference workshop, Cork, Instructor</span>
+  </div>
+</div>
+</section>
+</section>
 <section id="scholarships-grants" class="level2">
 <h2 class="anchored" data-anchor-id="scholarships-grants">Scholarships &amp; Grants</h2>
-<p class="cv-funding-total">Total funding attracted: <strong>€213,840</strong></p>
+<p class="cv-funding-total">Total funding attracted: <strong>€217,090</strong></p>
+<section id="scholarships-fellowships" class="level3">
+<h3 class="anchored" data-anchor-id="scholarships-fellowships">Scholarships &amp; Fellowships</h3>
 <div class="cv-honors">
   <div class="cv-honor-row">
     <span class="cv-honor-date">2025 – 2027</span>
@@ -555,21 +588,9 @@ Teaching Assistant</span>
     <span class="cv-honor-amount">€68,000</span>
   </div>
   <div class="cv-honor-row">
-    <span class="cv-honor-date">2025</span>
-    <span class="cv-honor-detail"><strong>PEC Travel Funding</strong>, Political Studies Association of
-Ireland</span>
-    <span class="cv-honor-amount">€400</span>
-  </div>
-  <div class="cv-honor-row">
     <span class="cv-honor-date">2024 – 2025</span>
     <span class="cv-honor-detail"><strong>Climate Fellowship</strong>, UCD Earth Institute</span>
     <span class="cv-honor-amount">€1,000</span>
-  </div>
-  <div class="cv-honor-row">
-    <span class="cv-honor-date">2023 – 2025</span>
-    <span class="cv-honor-detail"><strong>SPIRe Research Committee Funding</strong>, UCD School of
-Politics &amp; International Relations</span>
-    <span class="cv-honor-amount">€3,000</span>
   </div>
   <div class="cv-honor-row">
     <span class="cv-honor-date">2023 – 2027</span>
@@ -583,6 +604,30 @@ Politics &amp; International Relations</span>
     <span class="cv-honor-amount">€17,250</span>
   </div>
 </div>
+</section>
+<section id="research-travel-grants" class="level3">
+<h3 class="anchored" data-anchor-id="research-travel-grants">Research &amp; Travel Grants</h3>
+<div class="cv-honors">
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">2026</span>
+    <span class="cv-honor-detail"><strong>Specialist Group Funding</strong>, Political Studies Association
+of Ireland</span>
+    <span class="cv-honor-amount">€2,500</span>
+  </div>
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">2023 – 2026</span>
+    <span class="cv-honor-detail"><strong>SPIRe Research Committee Funding</strong>, UCD School of
+Politics &amp; International Relations</span>
+    <span class="cv-honor-amount">€3,750</span>
+  </div>
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">2025</span>
+    <span class="cv-honor-detail"><strong>PEC Travel Funding</strong>, Political Studies Association of
+Ireland</span>
+    <span class="cv-honor-amount">€400</span>
+  </div>
+</div>
+</section>
 </section>
 <section id="awards" class="level2">
 <h2 class="anchored" data-anchor-id="awards">Awards</h2>
@@ -600,7 +645,7 @@ Cognitive Infocommunications</span>
 <h3 class="anchored" data-anchor-id="service-leadership">Service &amp; Leadership</h3>
 <div class="cv-honors">
   <div class="cv-honor-row">
-    <span class="cv-honor-date">since 2024</span>
+    <span class="cv-honor-date">2024 – 2026</span>
     <span class="cv-honor-detail"><strong>Convenor</strong>, PSAI Computational Methods Specialist Group</span>
   </div>
   <div class="cv-honor-row">
@@ -616,6 +661,19 @@ Statistics</span>
     <span class="cv-honor-date">2016 – 2017</span>
     <span class="cv-honor-detail"><strong>Student Convenor</strong>, TCD School of Linguistic, Speech
 &amp; Communication Sciences</span>
+  </div>
+</div>
+</section>
+<section id="peer-review" class="level3">
+<h3 class="anchored" data-anchor-id="peer-review">Peer Review</h3>
+<div class="cv-honors">
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">Journals</span>
+    <span class="cv-honor-detail"><em>Humanities and Social Sciences Communications</em></span>
+  </div>
+  <div class="cv-honor-row">
+    <span class="cv-honor-date">Workshops</span>
+    <span class="cv-honor-detail">MultiDems Workshop, EACL 2027</span>
   </div>
 </div>
 </section>

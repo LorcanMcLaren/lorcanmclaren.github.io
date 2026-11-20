@@ -5,8 +5,9 @@ HTML (classes in styles.css) or as LaTeX for the PDF.
   Header      -> built from the `cv:` block in the front matter
   ::: {.cv-entry title="..." position="..." date="..."}   (title optional)
   ::: {.cv-rows}  containing a pipe table: date | detail [| amount]
-      add total="Label" to print the summed amounts above the rows
       extra classes (e.g. .cv-presentations) are passed through to the HTML
+  ::: {.cv-total label="..."}  prints the sum of the amount column of every
+      cv-rows table in the document
   ::: {.cv-pubs}  one paragraph per publication
 ]]
 
@@ -144,23 +145,10 @@ local function rows(div)
     end
   end
 
-  local total
-  if div.attributes.total then
-    total = 0
-    for _, r in ipairs(data) do
-      if r[3] then
-        total = total + (tonumber((pandoc.utils.stringify(r[3]):gsub("[^%d]", ""))) or 0)
-      end
-    end
-  end
   local ncols = #tbl.colspecs
 
   if is_html then
     local h = {}
-    if total then
-      table.insert(h, '<p class="cv-funding-total">' .. div.attributes.total ..
-        ': <strong>' .. format_euro(total) .. '</strong></p>')
-    end
     local classes = { "cv-honors" }
     for _, c in ipairs(div.classes) do
       if c ~= "cv-rows" then table.insert(classes, c) end
@@ -179,10 +167,6 @@ local function rows(div)
     return pandoc.RawBlock("html", table.concat(h, "\n"))
   elseif is_pdf then
     local h = {}
-    if total then
-      table.insert(h, "\\begin{center}\n\\textit{" .. div.attributes.total .. ": " ..
-        format_euro(total) .. "}\n\\end{center}\n")
-    end
     local spec = ncols >= 3 and "@{}lXr@{}" or "@{}lX@{}"
     table.insert(h, "\\noindent\\begin{tabularx}{\\textwidth}{" .. spec .. "}")
     for i, r in ipairs(data) do
@@ -221,18 +205,56 @@ local function pubs(div)
   end
 end
 
+---------------------------------------------------------------- funding total
+
+local function amount_total(doc)
+  local sum = 0
+  doc:walk({
+    Div = function(div)
+      if not div.classes:includes("cv-rows") then return nil end
+      for _, b in ipairs(div.content) do
+        if b.t == "Table" and #b.colspecs >= 3 then
+          for _, body in ipairs(b.bodies) do
+            for _, row in ipairs(body.body) do
+              local c = row.cells[3]
+              if c then
+                local digits = pandoc.utils.stringify(c.contents):gsub("[^%d]", "")
+                sum = sum + (tonumber(digits) or 0)
+              end
+            end
+          end
+        end
+      end
+    end,
+  })
+  return sum
+end
+
+local function total_block(div, sum)
+  local label = div.attributes.label or "Total"
+  if is_html then
+    return pandoc.RawBlock("html", '<p class="cv-funding-total">' .. label ..
+      ': <strong>' .. format_euro(sum) .. '</strong></p>')
+  elseif is_pdf then
+    return pandoc.RawBlock("latex", "\\begin{center}\n\\textit{" .. label .. ": " ..
+      format_euro(sum) .. "}\n\\end{center}")
+  end
+end
+
 ---------------------------------------------------------------- dispatch
 
 return {
   {
-    Div = function(div)
-      if div.classes:includes("cv-entry") then return entry(div) end
-      if div.classes:includes("cv-rows") then return rows(div) end
-      if div.classes:includes("cv-pubs") then return pubs(div) end
-    end,
-  },
-  {
     Pandoc = function(doc)
+      local sum = amount_total(doc)
+      doc = doc:walk({
+        Div = function(div)
+          if div.classes:includes("cv-total") then return total_block(div, sum) end
+          if div.classes:includes("cv-entry") then return entry(div) end
+          if div.classes:includes("cv-rows") then return rows(div) end
+          if div.classes:includes("cv-pubs") then return pubs(div) end
+        end,
+      })
       local h = header(doc.meta)
       if h then doc.blocks:insert(1, h) end
       return doc

@@ -51,7 +51,7 @@ by cv.lua (in this folder). Building blocks:
 
   ::: {.cv-entry title="Organisation" position="Role" date="Dates"}   + optional bullet list
   ::: {.cv-rows}      a table of  date | detail  (| amount)
-                      add total="Label" to sum the amounts column
+  ::: {.cv-total label="..."}   sum of the amounts column across all cv-rows tables
   ::: {.cv-pubs}      one paragraph per publication
 -->
 
@@ -101,11 +101,13 @@ by cv.lua (in this folder). Building blocks:
 ## Working Papers
 
 ::: {.cv-pubs}
-**McLaren, L.**, Cross, J.P., Krakowska, Z., Rauner, R. and Schoonvelde, M. (2025) 'Magic Words or Methodical Work? Challenging Conventional Wisdom in LLM-Based Political Text Annotation'.
+**McLaren, L.**, Cross, J.P., Krakowska, Z., Rauner, R. and Schoonvelde, M. (2026) 'What to Compare and When to Stop: LLM Pipelines for Text Annotation in Political Science'. *Revise & resubmit, Political Analysis.* [[Preprint, earlier version](https://arxiv.org/abs/2603.26898)]
 
-**McLaren, L.** (2025) 'When Climate Change Hits Home: Natural Disasters and Climate Rhetoric in the European Parliament'.
+**McLaren, L.** (2024) 'Here and Now or There and Then? The Psychological Distance of Climate Change in Parliamentary Speech'. *Under review.*
 
-**McLaren, L.** (2024) 'Here and Now or There and Then? The Psychological Distance of Climate Change in Parliamentary Speech'.
+**McLaren, L.** (2026) 'When Climate Change Hits Home: Extreme Weather and Climate Rhetoric in the European Parliament'.
+
+**McLaren, L.** and Cross, J.P. (2026) 'Near or Distant? Elite Climate Rhetoric and Public Opinion in Ireland'. *Pre-registered survey experiment.*
 :::
 
 ## Peer-Reviewed Publications
@@ -114,6 +116,14 @@ by cv.lua (in this folder). Building blocks:
 **McLaren, L.**, Koutsombogera, M. and Vogel, C. (2020) 'A Heuristic Method for Automatic Gaze Detection in Constrained Multi-Modal Dialogue Corpora', in *2020 11th IEEE International Conference on Cognitive Infocommunications*, pp. 55–60.
 
 **McLaren, L.**, Koutsombogera, M. and Vogel, C. (2020) 'Gaze, Dominance and Dialogue Role in the MULTISIMO Corpus', in *2020 11th IEEE International Conference on Cognitive Infocommunications*, pp. 83–88.
+:::
+
+## Software
+
+::: {.cv-pubs}
+**CodeBook Lab** (2026). Python package for benchmarking local LLM annotation pipelines against human labels across models, prompts and inference settings. [[PyPI](https://pypi.org/project/codebook-lab/) · [Docs](https://lorcanmclaren.com/codebook-lab/)]
+
+**CodeBook Studio** (2026). Browser-based tool for codebook development, human annotation and adjudication, with export to CodeBook Lab. [[App](https://codebook.streamlit.app/) · [Docs](https://lorcanmclaren.com/codebook-lab/studio.html)]
 :::
 
 ## Presentations
@@ -130,6 +140,8 @@ by cv.lua (in this folder). Building blocks:
 
 ## Teaching
 
+### Modules
+
 ::: {.cv-rows}
 | | |
 |:--|:--|
@@ -138,17 +150,38 @@ by cv.lua (in this folder). Building blocks:
 | Spring 2024 | **Research Methods in Political Science**, Undergraduate, Teaching Assistant |
 :::
 
+### Workshops & Short Courses
+
+::: {.cv-rows}
+| | |
+|:--|:--|
+| October 2026 | **LLMs for Text Annotation in Political Science**, Political Studies Association of Ireland Annual Conference pre-conference workshop, Cork, Instructor |
+:::
+
 ## Scholarships & Grants
 
-::: {.cv-rows total="Total funding attracted"}
+::: {.cv-total label="Total funding attracted"}
+:::
+
+### Scholarships & Fellowships
+
+::: {.cv-rows}
 | | | |
 |:--|:--|--:|
 | 2025 – 2027 | **Government of Ireland Scholarship**, Research Ireland | €68,000 |
-| 2025 | **PEC Travel Funding**, Political Studies Association of Ireland | €400 |
 | 2024 – 2025 | **Climate Fellowship**, UCD Earth Institute | €1,000 |
-| 2023 – 2025 | **SPIRe Research Committee Funding**, UCD School of Politics & International Relations | €3,000 |
 | 2023 – 2027 | **Iseult Honohan Scholarship**, UCD School of Politics & International Relations | €124,190 |
 | 2020 | **Erasmus Mundus Scholarship**, European Commission | €17,250 |
+:::
+
+### Research & Travel Grants
+
+::: {.cv-rows}
+| | | |
+|:--|:--|--:|
+| 2026 | **Specialist Group Funding**, Political Studies Association of Ireland | €2,500 |
+| 2023 – 2026 | **SPIRe Research Committee Funding**, UCD School of Politics & International Relations | €3,750 |
+| 2025 | **PEC Travel Funding**, Political Studies Association of Ireland | €400 |
 :::
 
 ## Awards
@@ -166,10 +199,19 @@ by cv.lua (in this folder). Building blocks:
 ::: {.cv-rows}
 | | |
 |:--|:--|
-| since 2024 | **Convenor**, PSAI Computational Methods Specialist Group |
+| 2024 – 2026 | **Convenor**, PSAI Computational Methods Specialist Group |
 | 2017 – 2018 | **Student Convenor**, TCD School of Computer Science & Statistics |
 | | **Deputy Chair**, TCD Students' Union Lobby Group |
 | 2016 – 2017 | **Student Convenor**, TCD School of Linguistic, Speech & Communication Sciences |
+:::
+
+### Peer Review
+
+::: {.cv-rows}
+| | |
+|:--|:--|
+| Journals | *Humanities and Social Sciences Communications* |
+| Workshops | MultiDems Workshop, EACL 2027 |
 :::
 
 ### Professional Memberships
